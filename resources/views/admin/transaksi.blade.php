@@ -42,6 +42,7 @@ Transaksi
                 <th>Email</th>
                 <th>Tgl Berangkat</th>
                 <th>Nama Bus</th>
+                <th>Status</th>
                 <th>Detail</th>
               </tr>
             </thead>
@@ -51,6 +52,7 @@ Transaksi
                 <td>baco@gmail.com</td>
                 <td>1 januari 1990</td>
                 <td>Bintang Prima</td>
+                <td>Ragu - Ragu</td>
                 <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail">show</button> </td>
               </tr>
             </tbody>
@@ -59,7 +61,7 @@ Transaksi
               <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Detal Transaksi (Nama Customer)</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>

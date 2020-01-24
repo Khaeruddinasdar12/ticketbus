@@ -21,3 +21,4 @@ Auth::routes();
 Route::get('/home', 'Dashboard@index')->name('home');
 Route::get('/managemen-bus', 'ManagemenBus@index');
 Route::get('/jadwal', 'Jadwal@index');
+Route::get('/transaksi', 'Transaksi@index');

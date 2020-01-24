@@ -16,12 +16,12 @@ class CreateBusTable extends Migration
         Schema::create('bus', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->bigInteger('tipe')->unsigned();
+            $table->bigInteger('id_tipebus')->unsigned();
             $table->string('deskripsi');
             $table->integer('jumlah_kursi');
             $table->integer('harga');
             $table->timestamps();
-            $table->foreign('tipe')->references('id')->on('tipebus');
+            $table->foreign('id_tipebus')->references('id')->on('tipebus');
         });
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJadwalsTable extends Migration
+class PivotBusRute extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateJadwalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('jadwals', function (Blueprint $table) {
+        Schema::create('pivot_bus_rutes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('id_bus')->unsigned();
-            $table->date('tanggal');
-            $table->string('jam');
-            $table->enum('status', ['belum', 'perjalanan', 'selesai']);
-            $table->bigInteger('created_by')->unsigned();
+            $table->bigInteger('id_rute')->unsigned();
             $table->timestamps();
             $table->foreign('id_bus')->references('id')->on('bus');
-            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('id_rute')->references('id')->on('rutes');
         });
     }
 
@@ -33,6 +30,6 @@ class CreateJadwalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jadwals');
+        Schema::dropIfExists('pivot_bus_rutes');
     }
 }

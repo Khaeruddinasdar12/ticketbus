@@ -44,9 +44,7 @@ Transaksi
               <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link active" id="vert-tabs-add-tab" data-toggle="pill" href="#vert-tabs-add" role="tab" aria-controls="vert-tabs-add" aria-selected="true">Tambah Data Customer</a>
                 <a class="nav-link" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-home" role="tab" aria-controls="vert-tabs-home" aria-selected="false">Belum Bayar</a>
-                <a class="nav-link" id="vert-tabs-profile-tab" data-toggle="pill" href="#vert-tabs-profile" role="tab" aria-controls="vert-tabs-profile" aria-selected="false">Proses Admin</a>
                 <a class="nav-link" id="vert-tabs-messages-tab" data-toggle="pill" href="#vert-tabs-messages" role="tab" aria-controls="vert-tabs-messages" aria-selected="false">Sudah Bayar</a>
-                <a class="nav-link" id="vert-tabs-settings-tab" data-toggle="pill" href="#vert-tabs-settings" role="tab" aria-controls="vert-tabs-settings" aria-selected="false">Verified</a>
               </div>
             </div>
             <div class="col-7 col-sm-9">
@@ -124,7 +122,6 @@ Transaksi
                     <thead>
                       <tr>
                         <th>Nama Customer</th>
-                        <th>Email</th>
                         <th>Tgl Berangkat</th>
                         <th>Nama Bus</th>
                         <th>Status</th>
@@ -134,16 +131,15 @@ Transaksi
                     <tbody>
                       <tr>
                         <td>Baco</td>
-                        <td>baco@gmail.com</td>
                         <td>1 januari 1990</td>
                         <td>Bintang Prima</td>
-                        <td>Belum Bayar</td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail">show</button> </td>
+                        <td> <button class="btn btn-danger" data-toggle="modal" data-target="#verif">Belum Bayar</button> </td>
+                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail1">Show</button> </td>
                       </tr>
                     </tbody>
                     <!-- Modal -->
-                    <div class="modal fade" id="showdetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal fade" id="verif" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Detal Transaksi (Nama Customer)</h5>
@@ -154,84 +150,27 @@ Transaksi
                           <div class="modal-body">
                             <div class="container">
                               <div class="row">
-                                <div class="col-md-4" style="border-right: 1px solid #c7c9ca">
+                                <div class="col-md-12">
                                   <h6>Order Code</h6>
                                   <h5>123456 - example</h5>
                                   <hr>
-                                  <h6>BarCode</h6>
-                                  <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" alt="">
-                                </div>
-                                <div class="col-md-7 offset-md-1" style="margin: auto">
-                                  <div class="row">
-
-                                    <div class="col-md-5">
-                                      <h6>Nama Customer</h6>
-                                      <h6>Email</h6>
-                                      <h6>Tanggal Berangkat</h6>
-                                      <h6>Jam Berangkat</h6>
-                                      <h6>Nama Bus</h6>
-                                      <h6>Harga</h6>
-                                      <h6>Type Bus</h6>
-                                      <h6>Status</h6>
-                                    </div>
-
-                                    <div class="col-md-1">
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                      <h6>Baco Baco Becce Becce</h6>
-                                      <h6>Baco@gmail.com</h6>
-                                      <h6>1 januari 1990</h6>
-                                      <h6>Pukul 00:00 WITA</h6>
-                                      <h6>Bintang Prima</h6>
-                                      <h6>Rp. 10.000</h6>
-                                      <h6>Full Stack Bus</h6>
-                                      <h6>Belum Bayar</h6>
-                                    </div>
-
-
+                                  <h6>Bukti Pembayaran</h6>
+                                  <div class="text-center">
+                                    <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" alt="">
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
+                          <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success">Verifikasi Pembayaran</button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </table>
-                </div>
-                <div class="tab-pane fade" id="vert-tabs-profile" role="tabpanel" aria-labelledby="vert-tabs-profile-tab">
-                  <table id="example2" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Nama Customer</th>
-                        <th>Email</th>
-                        <th>Tgl Berangkat</th>
-                        <th>Nama Bus</th>
-                        <th>Status</th>
-                        <th>Detail</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Baco</td>
-                        <td>baco@gmail.com</td>
-                        <td>1 januari 1990</td>
-                        <td>Bintang Prima</td>
-                        <td>Proses Admin</td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail">show</button> </td>
-                      </tr>
-                    </tbody>
-                    <!-- Modal -->
-                    <div class="modal fade" id="showdetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                    <div class="modal fade" id="showdetail1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -259,12 +198,14 @@ Transaksi
                                       <h6>Tanggal Berangkat</h6>
                                       <h6>Jam Berangkat</h6>
                                       <h6>Nama Bus</h6>
+                                      <h6>Nomor Kursi</h6>
                                       <h6>Harga</h6>
                                       <h6>Type Bus</h6>
                                       <h6>Status</h6>
                                     </div>
 
                                     <div class="col-md-1">
+                                      <h6>:</h6>
                                       <h6>:</h6>
                                       <h6>:</h6>
                                       <h6>:</h6>
@@ -281,9 +222,10 @@ Transaksi
                                       <h6>1 januari 1990</h6>
                                       <h6>Pukul 00:00 WITA</h6>
                                       <h6>Bintang Prima</h6>
+                                      <h6>A3</h6>
                                       <h6>Rp. 10.000</h6>
                                       <h6>Full Stack Bus</h6>
-                                      <h6>Proses Admin</h6>
+                                      <h6>Belum Bayar</h6>
                                     </div>
 
 
@@ -302,7 +244,6 @@ Transaksi
                     <thead>
                       <tr>
                         <th>Nama Customer</th>
-                        <th>Email</th>
                         <th>Tgl Berangkat</th>
                         <th>Nama Bus</th>
                         <th>Status</th>
@@ -312,15 +253,14 @@ Transaksi
                     <tbody>
                       <tr>
                         <td>Baco</td>
-                        <td>baco@gmail.com</td>
                         <td>1 januari 1990</td>
                         <td>Bintang Prima</td>
                         <td>Sudah Bayar</td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail">show</button> </td>
+                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail2">show</button> </td>
                       </tr>
                     </tbody>
                     <!-- Modal -->
-                    <div class="modal fade" id="showdetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="showdetail2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -348,12 +288,14 @@ Transaksi
                                       <h6>Tanggal Berangkat</h6>
                                       <h6>Jam Berangkat</h6>
                                       <h6>Nama Bus</h6>
+                                      <h6>Nomor Kursi</h6>
                                       <h6>Harga</h6>
                                       <h6>Type Bus</h6>
                                       <h6>Status</h6>
                                     </div>
 
                                     <div class="col-md-1">
+                                      <h6>:</h6>
                                       <h6>:</h6>
                                       <h6>:</h6>
                                       <h6>:</h6>
@@ -370,98 +312,10 @@ Transaksi
                                       <h6>1 januari 1990</h6>
                                       <h6>Pukul 00:00 WITA</h6>
                                       <h6>Bintang Prima</h6>
+                                      <h6>A3</h6>
                                       <h6>Rp. 10.000</h6>
                                       <h6>Full Stack Bus</h6>
                                       <h6>Sudah Bayar</h6>
-                                    </div>
-
-
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </table>
-                </div>
-                <div class="tab-pane fade" id="vert-tabs-settings" role="tabpanel" aria-labelledby="vert-tabs-settings-tab">
-                  <table id="example4" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Nama Customer</th>
-                        <th>Email</th>
-                        <th>Tgl Berangkat</th>
-                        <th>Nama Bus</th>
-                        <th>Status</th>
-                        <th>Detail</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Baco</td>
-                        <td>baco@gmail.com</td>
-                        <td>1 januari 1990</td>
-                        <td>Bintang Prima</td>
-                        <td>Verified</td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail">show</button> </td>
-                      </tr>
-                    </tbody>
-                    <!-- Modal -->
-                    <div class="modal fade" id="showdetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Detal Transaksi (Nama Customer)</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <div class="container">
-                              <div class="row">
-                                <div class="col-md-4" style="border-right: 1px solid #c7c9ca">
-                                  <h6>Order Code</h6>
-                                  <h5>123456 - example</h5>
-                                  <hr>
-                                  <h6>BarCode</h6>
-                                  <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" alt="">
-                                </div>
-                                <div class="col-md-7 offset-md-1" style="margin: auto">
-                                  <div class="row">
-
-                                    <div class="col-md-5">
-                                      <h6>Nama Customer</h6>
-                                      <h6>Email</h6>
-                                      <h6>Tanggal Berangkat</h6>
-                                      <h6>Jam Berangkat</h6>
-                                      <h6>Nama Bus</h6>
-                                      <h6>Harga</h6>
-                                      <h6>Type Bus</h6>
-                                      <h6>Status</h6>
-                                    </div>
-
-                                    <div class="col-md-1">
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                      <h6>Baco Baco Becce Becce</h6>
-                                      <h6>Baco@gmail.com</h6>
-                                      <h6>1 januari 1990</h6>
-                                      <h6>Pukul 00:00 WITA</h6>
-                                      <h6>Bintang Prima</h6>
-                                      <h6>Rp. 10.000</h6>
-                                      <h6>Full Stack Bus</h6>
-                                      <h6>Verified</h6>
                                     </div>
 
 
@@ -492,7 +346,7 @@ Transaksi
 <script src="{{ asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <script>
   $(function() {
-    $("#example1, #example2, #example3, #example4").DataTable();
+    $("#example1, #example2, #example3").DataTable();
   });
 </script>
 @endsection

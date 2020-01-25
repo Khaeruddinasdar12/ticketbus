@@ -19,7 +19,6 @@ class CreateBusTable extends Migration
             $table->bigInteger('id_tipebus')->unsigned();
             $table->string('deskripsi');
             $table->integer('jumlah_kursi');
-            $table->integer('harga');
             $table->timestamps();
             $table->foreign('id_tipebus')->references('id')->on('tipebus');
         });

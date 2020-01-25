@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PivotBusRute extends Migration
+class CreatePivotBusRutesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,6 +17,7 @@ class PivotBusRute extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('id_bus')->unsigned();
             $table->bigInteger('id_rute')->unsigned();
+            $table->integer('harga');
             $table->timestamps();
             $table->foreign('id_bus')->references('id')->on('bus');
             $table->foreign('id_rute')->references('id')->on('rutes');

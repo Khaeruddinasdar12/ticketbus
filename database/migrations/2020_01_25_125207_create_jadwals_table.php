@@ -15,13 +15,13 @@ class CreateJadwalsTable extends Migration
     {
         Schema::create('jadwals', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('id_bus')->unsigned();
+            $table->bigInteger('id_bus_rute')->unsigned();
             $table->date('tanggal');
             $table->string('jam');
             $table->enum('status', ['belum', 'perjalanan', 'selesai']);
             $table->bigInteger('created_by')->unsigned();
             $table->timestamps();
-            $table->foreign('id_bus')->references('id')->on('bus');
+            $table->foreign('id_bus_rute')->references('id')->on('pivot_bus_rutes');
             $table->foreign('created_by')->references('id')->on('users');
         });
     }

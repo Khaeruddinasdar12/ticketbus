@@ -10,4 +10,9 @@ class Transaksi extends Controller
     {
         return view('admin.transaksi');
     }
+
+    public function riwayat()
+    {
+        return view('admin.riwayatperjalanan');
+    }
 }

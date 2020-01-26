@@ -23,3 +23,4 @@ Route::get('/managemen-bus', 'ManagemenBus@index');
 Route::get('/jadwal', 'Jadwal@index');
 Route::get('/data-transaksi', 'Transaksi@index');
 Route::get('/riwayat-transaksi', 'Transaksi@riwayat');
+Route::get('/managemen-admin', 'Admin@index');

@@ -94,25 +94,16 @@
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
+              <a href="{{ route('index') }}" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
-                  <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="./index.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Dashboard v1</p>
-                  </a>
-                </li>
-              </ul>
             </li>
 
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{{route('index.jadwal')}}" class="nav-link {{ request()->is('managemen-jadwal') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-calendar-alt"></i>
                 <p>
                   Jadwal
@@ -121,7 +112,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{{route('index.bus')}}" class="nav-link {{ request()->is('managemen-bus') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-bus-alt"></i>
                 <p>
                   Manajemen Bus
@@ -138,8 +129,8 @@
               </a>
             </li>
 
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
+            <li class="nav-item {{ request()->is('riwayat-transaksi') || request()->is('data-transaksi') ? 'has-treeview menu-open' : '' }}">
+              <a href="#" class="nav-link {{ request()->is('riwayat-transaksi') || request()->is('data-transaksi') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-handshake"></i>
                 <p>
                   Data Transaksi
@@ -148,11 +139,11 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{route('index.transaksi')}}" class="nav-link {{ request()->is('data-transaksi') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Transaksi Customer</p>
                   </a>
-                  <a href="#" class="nav-link">
+                  <a href="{{route('riwayat.transaksi')}}" class="nav-link {{ request()->is('riwayat-transaksi') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Riwayat Perjalanan</p>
                   </a>
@@ -161,7 +152,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{{route('index.admin')}}" class="nav-link {{ request()->is('managemen-admin') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-user-cog"></i>
                 <p>
                   Admin

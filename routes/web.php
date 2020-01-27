@@ -18,9 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home', 'Dashboard@index')->name('home');
-Route::get('/managemen-bus', 'ManagemenBus@index');
-Route::get('/jadwal', 'Jadwal@index');
-Route::get('/data-transaksi', 'Transaksi@index');
-Route::get('/riwayat-transaksi', 'Transaksi@riwayat');
-Route::get('/managemen-admin', 'ManagemenAdmin@index');
+Route::get('dashboard', 'Dashboard@index')->name('index');
+Route::get('managemen-bus', 'ManagemenBus@index')->name('index.bus');
+Route::get('managemen-jadwal', 'Jadwal@index')->name('index.jadwal');
+Route::get('data-transaksi', 'Transaksi@index')->name('index.transaksi');
+Route::get('riwayat-transaksi', 'Transaksi@riwayat')->name('riwayat.transaksi');
+Route::get('managemen-admin', 'ManagemenAdmin@index')->name('index.admin');
+Route::post('managemen-admin', 'ManagemenAdmin@store')->name('store.admin'); // input data admin

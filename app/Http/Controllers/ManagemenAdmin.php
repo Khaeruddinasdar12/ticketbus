@@ -8,6 +8,7 @@ class ManagemenAdmin extends Controller
 {
     public function index()
     {
-        return view('admin.ManagemenAdmin');
+    	$data = \App\User::select('id', 'name', 'email', 'role')->get();
+        return view('admin.ManagemenAdmin', ['data' => $data]);
     }
 }

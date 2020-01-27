@@ -17,4 +17,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('admin', 'api\User');
+Route::apiResource('admin', 'api\User'); // table users
+Route::apiResource('rute', 'api\Rutes'); //tabel rutes

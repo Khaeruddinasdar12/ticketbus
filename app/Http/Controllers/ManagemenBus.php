@@ -16,6 +16,11 @@ class ManagemenBus extends Controller
         return view('admin.managemenbus');
     }
 
+    public function data()
+    {
+        return view('admin.databus');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

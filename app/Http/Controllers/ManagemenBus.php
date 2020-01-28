@@ -12,35 +12,35 @@ class ManagemenBus extends Controller
     {
 
         $pivotBusRute = DB::table('pivot_bus_rutes')
-                    ->join('bus', 'bus.id', '=', 'pivot_bus_rutes.id_bus')
-                    ->join('rutes', 'rutes.id', '=', 'pivot_bus_rutes.id_rute')
-                    ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
-                    ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
-                    ->get();
-            
-    //     DB::table('products')
-            // ->select('*', DB::raw('COUNT(*) as products_count'))
-            // ->groupBy('category_id')
-            // ->having('products_count', '>' , 1)
-            // ->get();
+            ->join('bus', 'bus.id', '=', 'pivot_bus_rutes.id_bus')
+            ->join('rutes', 'rutes.id', '=', 'pivot_bus_rutes.id_rute')
+            ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
+            ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
+            ->get();
+
+        //     DB::table('products')
+        // ->select('*', DB::raw('COUNT(*) as products_count'))
+        // ->groupBy('category_id')
+        // ->having('products_count', '>' , 1)
+        // ->get();
 
 
 
-        $selectbus = 
+        $selectbus =
 
 
-        $selectrute = DB::table('rutes')
-                    ->whereNotExists(function ($query) {
-                        $query->select(DB::raw(1))
-                                ->from('pivot_bus_rutes')
-                                ->whereRaw('pivot_bus_rutes.id_rute = rutes.id');
-                    })
-                    ->select('rute')
-                    ->get();
+            $selectrute = DB::table('rutes')
+            ->whereNotExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('pivot_bus_rutes')
+                    ->whereRaw('pivot_bus_rutes.id_rute = rutes.id');
+            })
+            ->select('rute')
+            ->get();
 
         // $selectrute = \App\Rute::
         // $selectrute = \App\Rute::find([1,2,3]);
-        return $selectbus;
+        // return $selectbus;
         return view('admin.managemenbus');
     }
 

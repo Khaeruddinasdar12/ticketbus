@@ -10,18 +10,6 @@ class ManagemenBus extends Controller
 
     public function index()
     {
-        // $beasiswa = DB::table('beasiswas')
-        //         ->join('mitras', 'mitras.id', '=', 'beasiswas.id_mitra')
-        //         ->select('beasiswas.*', 'mitras.nama as namamitra')
-        //         ->get();
-
-        // $users = DB::table('users')
-        //    ->whereExists(function ($query) {
-        //        $query->select(DB::raw(1))
-        //              ->from('orders')
-        //              ->whereRaw('orders.user_id = users.id');
-        //    })
-        //    ->get();
 
         $pivotBusRute = DB::table('pivot_bus_rutes')
                     ->join('bus', 'bus.id', '=', 'pivot_bus_rutes.id_bus')
@@ -29,37 +17,30 @@ class ManagemenBus extends Controller
                     ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
                     ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
                     ->get();
-            ->join('bus', 'bus.id', '=', 'pivot_bus_rutes.id_bus')
-            ->join('rutes', 'rutes.id', '=', 'pivot_bus_rutes.id_rute')
-            ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
-            ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
-            ->get();
-        // return $pivotBusRute;
-        $countbus = \App\Bus::count();
-        $countrute = \App\Rute::count();
+            
+    //     DB::table('products')
+            // ->select('*', DB::raw('COUNT(*) as products_count'))
+            // ->groupBy('category_id')
+            // ->having('products_count', '>' , 1)
+            // ->get();
 
-        $selectbus = DB::table('bus')
-                    ->whereNotExists(function ($query) {
-                        $query->select(DB::raw(1))
-                                ->from('pivot_bus_rutes')
-                                ->whereRaw('pivot_bus_rutes.id_bus = bus.id');
-                    })
-                    ->select('nama')
-                    ->get();
+
+
+        $selectbus = 
+
 
         $selectrute = DB::table('rutes')
                     ->whereNotExists(function ($query) {
                         $query->select(DB::raw(1))
                                 ->from('pivot_bus_rutes')
                                 ->whereRaw('pivot_bus_rutes.id_rute = rutes.id');
-                                // ->having('pivot_bus_rutes.id_rute', '=', 4);
-                        // $query->count('id_rute')
-                                // ->count('pivot_bus_rutes.id_rute', '!=', 2);
                     })
-                    // ->limit(1)
-                    // ->select('rute')
+                    ->select('rute')
                     ->get();
-        return $selectrute;
+
+        // $selectrute = \App\Rute::
+        // $selectrute = \App\Rute::find([1,2,3]);
+        return $selectbus;
         return view('admin.managemenbus');
     }
 

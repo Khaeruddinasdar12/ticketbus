@@ -3,82 +3,93 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 class ManagemenBus extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
+        // $beasiswa = DB::table('beasiswas')
+        //         ->join('mitras', 'mitras.id', '=', 'beasiswas.id_mitra')
+        //         ->select('beasiswas.*', 'mitras.nama as namamitra')
+        //         ->get();
+        $pivotBusRute = DB::table('pivot_bus_rutes')
+                    ->join('bus', 'bus.id', '=', 'pivot_bus_rutes.id_bus')
+                    ->join('rutes', 'rutes.id', '=', 'pivot_bus_rutes.id_rute')
+                    ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
+                    ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
+                    ->get();
+        // return $pivotBusRute;
+        $countbus = \App\Bus::count();
+        $countrute= \App\Rute::count();
+
+        // $selectbus = \App\Bus::select('nama')->doesntHave('pivot_bus_rutes')->get();
+        // return $selectbus;
         return view('admin.managemenbus');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function storeTipeBus(Request $request) 
     {
-        //
+        $data = new \App\Tipebus();
+        $data->nama = $request->nama;
+        $data->save();
+
+        return $arrayName = array('status' => 'OK', 'code' => 200, 'message' => 'Berhasil Menambah Data');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function storeBus(Request $request) 
+    {
+        $data = new \App\Bus();
+        $data->nama = $request->nama;
+        $data->id_tipebus = $request->id_tipebus;
+        $data->deskripsi = $request->deskripsi;
+        $data->jumlah_kursi = $request->jumlah_kursi;
+        $data->save();
+
+            for ($i = 1; $i <= $request->jumlah_kursi; $i++) {
+                DB::table('kursis')->insert([
+                    'id_bus' => $data->id,
+                    'kursi' => '' . $i,
+                    'status' => 'kosong'
+                ]);
+            }
+
+        return $arrayName = array('status' => 'OK', 'code' => 200, 'message' => 'Berhasil Menambah Data');
+    }
+
+    public function storePivotBusRute(Request $request) 
+    {
+        $data = new \App\PivotBusRute();
+        $data->id_bus = $request->id_bus;
+        $data->id_rute= $request->id_rute;
+        $data->harga  = $request->harga;
+        $data->save();
+
+        return $arrayName = array('status' => 'OK', 'code' => 200, 'message' => 'Berhasil Menambah Data');
+    }
+
     public function show($id)
     {
-        //
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        
     }
 }

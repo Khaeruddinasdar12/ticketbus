@@ -8,13 +8,27 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests\ApiAdminRequest;
 use API;
+use Auth;
 class User extends Controller
 {
 
     public function index()
     {
-        $data = \App\User::all();
+        $data = \App\Customer::all();
+
+        $data = \App\User::where('role', 'kernet')->get();
+        // $data = 
         return response()->json($data);   
+    }
+
+    public function login(){
+        if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
+            $user = Auth::user();
+            // $success['token'] =  $user->createToken('nApp')->accessToken;
+            return response()->json(['status' => 'Ok', 'message' => 'berhasil login', 'code' => 200]);
+        }else{
+            return response()->json(['error'=>'Unauthorised'], 401);
+        }
     }
 
     public function store(Request $request)

@@ -23,23 +23,30 @@ class ManagemenBus extends Controller
             // ->groupBy('category_id')
             // ->having('products_count', '>' , 1)
             // ->get();
+            // select * from bus where id in (select id_tipebus from pivot_bus_rutes having count(*) = 3)
 
 
 
-        $selectbus = 
-
+        $selectbus = DB::table('bus')
+                    ->whereIn('id', function ($query) {
+                        $query = DB::raw('select id_bus from pivot_bus_rutes group by id_bus having count(*) = 3');
+                        // ->from('pivot_bus_rutes')
+                        // // ->whereRaw('bus.id = pivot_bus_rutes.id_bus');
+                        // ->groupBy('id_bus')
+                        // ->having(DB::raw('count(*)', '=', 3));
+                    })
+                    ->select('nama')
+                    ->get();
 
         $selectrute = DB::table('rutes')
-                    ->whereNotExists(function ($query) {
-                        $query->select(DB::raw(1))
+                    ->whereExists(function ($query) {
+                        $query->select(DB::raw('id_rute'))
                                 ->from('pivot_bus_rutes')
-                                ->whereRaw('pivot_bus_rutes.id_rute = rutes.id');
+                                ->count('id_rute', '>=', 3);
                     })
                     ->select('rute')
                     ->get();
 
-        // $selectrute = \App\Rute::
-        // $selectrute = \App\Rute::find([1,2,3]);
         return $selectbus;
         return view('admin.managemenbus');
     }

@@ -83,6 +83,8 @@ Manajemen Bus
       <!-- right column -->
       <div class="col-md-6">
         <!-- general form elements -->
+
+        <!-- tipe bus form -->
         <div class="row">
           <div class="col-md-12">
             <div class="card card-info">
@@ -116,12 +118,14 @@ Manajemen Bus
             </div>
           </div>
         </div>
+        <!-- end tipe bus form -->
 
+        <!-- rute form -->
         <div class="row">
           <div class="col-md-12">
             <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Tambah Route</h3>
+                <h3 class="card-title">Tambah Rute</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -135,7 +139,7 @@ Manajemen Bus
               <div class="card-body">
                 <form role="form">
                   <div class="form-group">
-                    <label for="namaroute">Nama Route</label>
+                    <label for="namaroute">Nama Rute</label>
                     <input type="text" class="form-control" id="namaroute">
                   </div>
 
@@ -150,7 +154,9 @@ Manajemen Bus
             </div>
           </div>
         </div>
+        <!-- end rute form -->
 
+        <!-- pivot form -->
         <div class="row">
           <div class="col-md-12">
             <div class="card card-info">
@@ -216,6 +222,8 @@ Manajemen Bus
             </div>
           </div>
         </div>
+        <!-- end pivot form -->
+
         <!-- /.card -->
       </div>
       <!--/.col (right) -->

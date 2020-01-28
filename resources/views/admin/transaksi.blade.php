@@ -42,81 +42,143 @@ Transaksi
           <div class="row">
             <div class="col-5 col-sm-3">
               <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
+
                 <a class="nav-link active" id="vert-tabs-add-tab" data-toggle="pill" href="#vert-tabs-add" role="tab" aria-controls="vert-tabs-add" aria-selected="true">Tambah Data Customer</a>
+
                 <a class="nav-link" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-home" role="tab" aria-controls="vert-tabs-home" aria-selected="false">Belum Bayar</a>
+
                 <a class="nav-link" id="vert-tabs-messages-tab" data-toggle="pill" href="#vert-tabs-messages" role="tab" aria-controls="vert-tabs-messages" aria-selected="false">Sudah Bayar</a>
+
               </div>
             </div>
             <div class="col-7 col-sm-9">
               <div class="tab-content" id="vert-tabs-tabContent">
+
                 <div class="tab-pane text-left fade show active" id="vert-tabs-add" role="tabpanel" aria-labelledby="vert-tabs-add-tab">
-                  <form role="form">
-                    <div class="form-group">
-                      <label for="exampleInputName">Nama Customer</label>
-                      <input type="text" class="form-control" id="exampleInputName" placeholder="Masukkan Nama">
-                    </div>
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Rute</th>
+                        <th>Waktu Berangkat</th>
+                        <th>Tanggal Berangkat</th>
+                        <th>Nama Bus</th>
+                        <th>Tipe Bus</th>
+                        <th>Harga Perkursi</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Baco</td>
+                        <td>00:00 WITA</td>
+                        <td>1 januari 1990</td>
+                        <td>Bintang Prima</td>
+                        <td>Bus Jago</td>
+                        <td>Rp 15.000</td>
+                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#pesan" title="pesan kursi"><i class="fas fa-money-check-alt"></i></button> </td>
+                      </tr>
+                    </tbody>
 
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <!-- text input -->
-                        <div class="form-group">
-                          <label>Waktu (jam) Berangkat</label>
-                          <input type="text" class="form-control" placeholder="14.00 WITA">
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label>Tanggal Berangkat</label>
-                          <input type="date" class="form-control">
-                        </div>
-                      </div>
-                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="pesan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Pesan Kursi</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <form action="">
+                            <div class="modal-body">
+                              <div class="container">
+                                <div class="row">
+                                  <div class="col-md-5 offset-md-1" style="border-right: 1px solid #c7c9ca">
+                                    <div class="btn-group-toggle" data-toggle="buttons">
 
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <!-- text input -->
-                        <div class="form-group">
-                          <label for="inputStatus">Tipe Bus</label>
-                          <select class="form-control custom-select">
-                            <option selected disabled>Pilih tipe</option>
-                            <option>Sleeper</option>
-                            <option>Seatbelt</option>
-                            <option>Comfortable</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="inputStatus">Nama Bus</label>
-                          <select class="form-control custom-select">
-                            <option selected disabled>Pilih tipe</option>
-                            <option>Bintang Prima A10</option>
-                            <option>Bintang Prima M70</option>
-                            <option>Bintang Prima C30</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <!-- text input -->
-                        <div class="form-group">
-                          <label for="inputStatus">Nomor Kursi</label>
-                          <select class="form-control custom-select">
-                            <option selected disabled>Pilih kursi</option>
-                            <option>1A</option>
-                            <option>2A</option>
-                            <option>3A</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
+                                      <label class="btn bg-olive">
+                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
+                                      </label>
+                                      <label class="btn bg-olive ml-1">
+                                        <input type="radio" name="options" id="option2" autocomplete="off"> A2
+                                      </label>
 
-                    <div class="form-group">
-                      <!-- <a href="#" class="btn btn-secondary">Cancel</a> -->
-                      <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
-                      <button type="submit" class="btn btn-success float-right"><i class="nav-icon fas fa-plus"></i> Tambah</button>
+                                      <label class="btn bg-olive ml-5">
+                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
+                                      </label>
+                                      <label class="btn bg-olive ml-1">
+                                        <input type="radio" name="options" id="option2" autocomplete="off"> A2
+                                      </label><br><br>
+
+                                      <label class="btn bg-olive">
+                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
+                                      </label>
+                                      <label class="btn bg-olive ml-1">
+                                        <input type="radio" name="options" id="option2" autocomplete="off"> A2
+                                      </label>
+
+                                      <label class="btn bg-olive ml-5">
+                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
+                                      </label>
+                                      <label class="btn bg-olive ml-1">
+                                        <input type="radio" name="options" id="option2" autocomplete="off"> A2
+                                      </label><br><br>
+
+                                      <label class="btn bg-olive">
+                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
+                                      </label>
+                                      <label class="btn bg-olive ml-1">
+                                        <input type="radio" name="options" id="option2" autocomplete="off"> A2
+                                      </label>
+
+                                      <label class="btn bg-olive ml-5">
+                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
+                                      </label>
+                                      <label class="btn bg-olive ml-1">
+                                        <input type="radio" name="options" id="option2" autocomplete="off"> A2
+                                      </label><br><br>
+
+                                      <label class="btn bg-olive">
+                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
+                                      </label>
+                                      <label class="btn bg-olive ml-1">
+                                        <input type="radio" name="options" id="option2" autocomplete="off"> A2
+                                      </label>
+
+                                      <label class="btn bg-olive ml-5">
+                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
+                                      </label>
+                                      <label class="btn bg-olive ml-1">
+                                        <input type="radio" name="options" id="option2" autocomplete="off"> A2
+                                      </label>
+
+                                    </div>
+                                  </div>
+
+                                  <div class="col-md-5 m-auto">
+                                    <div class="form-group">
+                                      <label for="exampleInputEmail1">Nomor Kursi</label>
+                                      <input type="text" class="form-control" id="nmrkursi" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="exampleInputEmail1">Nama Customer</label>
+                                      <input type="text" class="form-control" id="namabus">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Pesan</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
                     </div>
-                  </form>
+                  </table>
                 </div>
+
                 <div class="tab-pane fade show" id="vert-tabs-home" role="tabpanel" aria-labelledby="vert-tabs-home-tab">
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
@@ -147,25 +209,27 @@ Transaksi
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                          <div class="modal-body">
-                            <div class="container">
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <h6>Order Code</h6>
-                                  <h5>123456 - example</h5>
-                                  <hr>
-                                  <h6>Bukti Pembayaran</h6>
-                                  <div class="text-center">
-                                    <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" alt="">
+                          <form action="">
+                            <div class="modal-body">
+                              <div class="container">
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <h6>Order Code</h6>
+                                    <h5>123456 - example</h5>
+                                    <hr>
+                                    <h6>Bukti Pembayaran</h6>
+                                    <div class="text-center">
+                                      <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" alt="">
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                          <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success">Verifikasi Pembayaran</button>
-                          </div>
+                            <div class="modal-footer justify-content-between">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-success">Verifikasi Pembayaran</button>
+                            </div>
+                          </form>
                         </div>
                       </div>
                     </div>
@@ -239,6 +303,7 @@ Transaksi
                     </div>
                   </table>
                 </div>
+
                 <div class="tab-pane fade" id="vert-tabs-messages" role="tabpanel" aria-labelledby="vert-tabs-messages-tab">
                   <table id="example3" class="table table-bordered table-striped">
                     <thead>
@@ -329,6 +394,7 @@ Transaksi
                     </div>
                   </table>
                 </div>
+
               </div>
             </div>
           </div>

@@ -27,9 +27,7 @@ class ManagemenBus extends Controller
         // return $selectbus;
         return view('admin.managemenbus');
     }
-
-<<<<<<< HEAD
-=======
+    
     public function data()
     {
         return view('admin.databus');

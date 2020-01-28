@@ -111,13 +111,28 @@
               </a>
             </li>
 
-            <li class="nav-item">
-              <a href="{{route('index.bus')}}" class="nav-link {{ request()->is('managemen-bus') ? 'active' : '' }}">
+            <li class="nav-item {{ request()->is('managemen-bus') || request()->is('data-bus') ? 'has-treeview menu-open' : '' }}">
+              <a href="#" class="nav-link {{ request()->is('managemen-bus') || request()->is('data-bus') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-bus-alt"></i>
                 <p>
                   Manajemen Bus
+                  <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('index.bus')}}" class="nav-link {{ request()->is('managemen-bus') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                      Tambah Data
+                    </p>
+                  </a>
+                  <a href="{{route('data.bus')}}" class="nav-link {{ request()->is('data-bus') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Data Bus</p>
+                  </a>
+                </li>
+              </ul>
             </li>
 
             <li class="nav-item">

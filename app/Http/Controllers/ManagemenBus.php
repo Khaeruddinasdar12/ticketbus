@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+
 class ManagemenBus extends Controller
 {
 
@@ -28,6 +29,14 @@ class ManagemenBus extends Controller
                     ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
                     ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
                     ->get();
+            ->join('bus', 'bus.id', '=', 'pivot_bus_rutes.id_bus')
+            ->join('rutes', 'rutes.id', '=', 'pivot_bus_rutes.id_rute')
+            ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
+            ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
+            ->get();
+        // return $pivotBusRute;
+        $countbus = \App\Bus::count();
+        $countrute = \App\Rute::count();
 
         $selectbus = DB::table('bus')
                     ->whereNotExists(function ($query) {
@@ -61,10 +70,9 @@ class ManagemenBus extends Controller
 
     public function create()
     {
-        
     }
 
-    public function storeTipeBus(Request $request) 
+    public function storeTipeBus(Request $request)
     {
         $data = new \App\Tipebus();
         $data->nama = $request->nama;
@@ -73,7 +81,7 @@ class ManagemenBus extends Controller
         return $arrayName = array('status' => 'OK', 'code' => 200, 'message' => 'Berhasil Menambah Data');
     }
 
-    public function storeBus(Request $request) 
+    public function storeBus(Request $request)
     {
         $data = new \App\Bus();
         $data->nama = $request->nama;
@@ -82,22 +90,22 @@ class ManagemenBus extends Controller
         $data->jumlah_kursi = $request->jumlah_kursi;
         $data->save();
 
-            for ($i = 1; $i <= $request->jumlah_kursi; $i++) {
-                DB::table('kursis')->insert([
-                    'id_bus' => $data->id,
-                    'kursi' => '' . $i,
-                    'status' => 'kosong'
-                ]);
-            }
+        for ($i = 1; $i <= $request->jumlah_kursi; $i++) {
+            DB::table('kursis')->insert([
+                'id_bus' => $data->id,
+                'kursi' => '' . $i,
+                'status' => 'kosong'
+            ]);
+        }
 
         return $arrayName = array('status' => 'OK', 'code' => 200, 'message' => 'Berhasil Menambah Data');
     }
 
-    public function storePivotBusRute(Request $request) 
+    public function storePivotBusRute(Request $request)
     {
         $data = new \App\PivotBusRute();
         $data->id_bus = $request->id_bus;
-        $data->id_rute= $request->id_rute;
+        $data->id_rute = $request->id_rute;
         $data->harga  = $request->harga;
         $data->save();
 
@@ -106,21 +114,17 @@ class ManagemenBus extends Controller
 
     public function show($id)
     {
-        
     }
 
     public function edit($id)
     {
-        
     }
 
     public function update(Request $request, $id)
     {
-        
     }
 
     public function destroy($id)
     {
-        
     }
 }

@@ -17,66 +17,24 @@ class ManagemenBus extends Controller
                     ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
                     ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
                     ->get();
-            
-    //     DB::table('products')
-            // ->select('*', DB::raw('COUNT(*) as products_count'))
-            // ->groupBy('category_id')
-            // ->having('products_count', '>' , 1)
-            // ->get();
-            // select * from bus where id in (select id_tipebus from pivot_bus_rutes having count(*) = 3)
-
-            ->join('bus', 'bus.id', '=', 'pivot_bus_rutes.id_bus')
-            ->join('rutes', 'rutes.id', '=', 'pivot_bus_rutes.id_rute')
-            ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
-            ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
+        // select * from bus where id in (select id_bus from pivot_bus_rutes group by id_bus having count(*) = 4)
+            // return $pivotBusRute;
+        // $test = DB::table('bus')
+        //     ->whereNotExists('bus.id',DB::raw('COUNT(pivot_bus_rutes.id_bus) as jml_idbus'))
+        //     ->leftJoin('pivot_bus_rutes', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+        //     ->groupBy('bus.nama')
+        //     ->having('jml_idbus', '=' , 3)
+        //     ->get();
+        $test = DB::table('pivot_bus_rutes')
+                        ->select('bus.nama', DB::raw('count(pivot_bus_rutes.id_bus) as jml'))
+                      // ->from('pivot_bus_rutes')
+                        ->rightJoin('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+                        ->groupBy('bus.nama')
+                        ->having('jml', '!=', 3)
+                      // ->whereRaw('bus.id = pivot_bus_rutes.id_bus');
+         
             ->get();
-
-
-        //     DB::table('products')
-        // ->select('*', DB::raw('COUNT(*) as products_count'))
-        // ->groupBy('category_id')
-        // ->having('products_count', '>' , 1)
-        // ->get();
-
-
-        $selectbus = DB::table('bus')
-                    ->whereIn('id', function ($query) {
-                        $query = DB::raw('select id_bus from pivot_bus_rutes group by id_bus having count(*) = 3');
-                        // ->from('pivot_bus_rutes')
-                        // // ->whereRaw('bus.id = pivot_bus_rutes.id_bus');
-                        // ->groupBy('id_bus')
-                        // ->having(DB::raw('count(*)', '=', 3));
-                    })
-                    ->select('nama')
-                    ->get();
-
-        $selectrute = DB::table('rutes')
-                    ->whereExists(function ($query) {
-                        $query->select(DB::raw('id_rute'))
-                                ->from('pivot_bus_rutes')
-                                ->count('id_rute', '>=', 3);
-                    })
-                    ->select('rute')
-                    ->get();
-
-        return $selectbus;
-
-
-        $selectbus =
-
-
-            $selectrute = DB::table('rutes')
-            ->whereNotExists(function ($query) {
-                $query->select(DB::raw(1))
-                    ->from('pivot_bus_rutes')
-                    ->whereRaw('pivot_bus_rutes.id_rute = rutes.id');
-            })
-            ->select('rute')
-            ->get();
-
-        // $selectrute = \App\Rute::
-        // $selectrute = \App\Rute::find([1,2,3]);
-        // return $selectbus;
+        return $test;
 
         return view('admin.managemenbus');
     }

@@ -17,24 +17,14 @@ class ManagemenBus extends Controller
                     ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
                     ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
                     ->get();
-        // select * from bus where id in (select id_bus from pivot_bus_rutes group by id_bus having count(*) = 4)
-            // return $pivotBusRute;
-        // $test = DB::table('bus')
-        //     ->whereNotExists('bus.id',DB::raw('COUNT(pivot_bus_rutes.id_bus) as jml_idbus'))
-        //     ->leftJoin('pivot_bus_rutes', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
-        //     ->groupBy('bus.nama')
-        //     ->having('jml_idbus', '=' , 3)
-        //     ->get();
+                    
         $test = DB::table('pivot_bus_rutes')
                         ->select('bus.nama', DB::raw('count(pivot_bus_rutes.id_bus) as jml'))
-                      // ->from('pivot_bus_rutes')
                         ->rightJoin('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
                         ->groupBy('bus.nama')
                         ->having('jml', '!=', 3)
-                      // ->whereRaw('bus.id = pivot_bus_rutes.id_bus');
-         
-            ->get();
-        return $test;
+                        ->get();
+        // return $test;
 
         return view('admin.managemenbus');
     }

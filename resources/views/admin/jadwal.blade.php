@@ -38,7 +38,7 @@ Jadwal
           <form role="form">
             <div class="form-group">
               <label for="inputStatus">Rute Perjalanan</label>
-              <select class="form-control custom-select">
+              <select class="form-control custom-select" name="id_bus_rute">
                 <option selected disabled>Pilih tipe</option>
                 <option>Makassar - Palopp</option>
                 <option>Makassar - Toraja</option>
@@ -54,13 +54,13 @@ Jadwal
                 <!-- text input -->
                 <div class="form-group">
                   <label>Waktu (jam)</label>
-                  <input type="text" class="form-control" placeholder="14.00 WITA">
+                  <input type="text" class="form-control" placeholder="14.00 WITA" name="jam">
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>Tanggal</label>
-                  <input type="date" class="form-control">
+                  <input type="date" class="form-control" name="tanggal">
                 </div>
               </div>
             </div>
@@ -70,7 +70,7 @@ Jadwal
                 <!-- text input -->
                 <div class="form-group">
                   <label for="inputStatus">Tipe Bus</label>
-                  <select class="form-control custom-select">
+                  <select class="form-control custom-select" name="id_tipebus">
                     <option selected disabled>Pilih tipe</option>
                     <option>Sleeper</option>
                     <option>Seatbelt</option>
@@ -81,7 +81,7 @@ Jadwal
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="inputStatus">Nama Bus</label>
-                  <select class="form-control custom-select">
+                  <select class="form-control custom-select" name="nama">
                     <option selected disabled>Pilih tipe</option>
                     <option>Bintang Prima A10</option>
                     <option>Bintang Prima M70</option>
@@ -93,7 +93,7 @@ Jadwal
 
             <div class="form-group">
               <label>Deskripsi Bus</label>
-              <textarea class="form-control" rows="3" disabled></textarea>
+              <textarea class="form-control" rows="3" disabled name="deskripsi"></textarea>
             </div>
 
             <div class="form-group">
@@ -129,7 +129,7 @@ Jadwal
           <form action="" method="">
             <div class="form-group">
               <label for="inputEstimatedBudget">Rute Perjalanan : </label>
-              <input type="text" name="nama" class="form-control" placeholder="makassar-toraja">
+              <input type="text" name="rute" class="form-control" placeholder="makassar-toraja">
             </div>
 
             <div class="form-group">

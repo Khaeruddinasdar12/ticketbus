@@ -105,7 +105,7 @@ Data Bus
                                   <textarea name="desc" class="form-control" rows="4" readonly></textarea>
                                 </div>
                                 <div class="row">
-                                  <div class="col-md-4">
+                                  <div class="col-md-6">
                                     <div class="form-group">
                                       <label>Tipe Bus</label>
                                       <select class="form-control custom-select" readonly>
@@ -115,16 +115,10 @@ Data Bus
                                       </select>
                                     </div>
                                   </div>
-                                  <div class="col-md-4">
+                                  <div class="col-md-6">
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Jumlah Kursi</label>
                                       <input type="text" class="form-control" id="kursi" readonly>
-                                    </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                    <div class="form-group">
-                                      <label for="exampleInputEmail1">Harga Rp. Per Kursi</label>
-                                      <input type="text" class="form-control" id="harga" readonly>
                                     </div>
                                   </div>
                                 </div>
@@ -157,33 +151,27 @@ Data Bus
                               <form role="form">
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Nama Bus</label>
-                                  <input type="text" class="form-control" id="namabus">
+                                  <input type="text" class="form-control" name="nama">
                                 </div>
                                 <div class="form-group">
                                   <label>Deskripsi Bus</label>
-                                  <textarea name="desc" class="form-control" rows="4"></textarea>
+                                  <textarea name="deskripsi" class="form-control" rows="4"></textarea>
                                 </div>
                                 <div class="row">
-                                  <div class="col-md-4">
+                                  <div class="col-md-6">
                                     <div class="form-group">
                                       <label>Tipe Bus</label>
-                                      <select class="form-control custom-select">
+                                      <select class="form-control custom-select" name="id_tipebus">
                                         <option selected disabled>Pilih Tipe</option>
                                         <option>Tipe 1</option>
                                         <option>Tipe 2</option>
                                       </select>
                                     </div>
                                   </div>
-                                  <div class="col-md-4">
+                                  <div class="col-md-6">
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Jumlah Kursi</label>
-                                      <input type="text" class="form-control" id="kursi">
-                                    </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                    <div class="form-group">
-                                      <label for="exampleInputEmail1">Harga Rp. Per Kursi</label>
-                                      <input type="text" class="form-control" id="harga">
+                                      <input type="text" class="form-control" id="kursi" name="jumlah_kursi">
                                     </div>
                                   </div>
                                 </div>
@@ -239,7 +227,7 @@ Data Bus
                               <form role="form">
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Nama Tipe Bus</label>
-                                  <input type="text" class="form-control" id="namabus">
+                                  <input type="text" class="form-control" name="nama">
                                 </div>
 
                                 <div class="form-group" style="margin-top: 20px;">
@@ -293,7 +281,7 @@ Data Bus
                               <form role="form">
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Nama Rute</label>
-                                  <input type="text" class="form-control" id="namabus">
+                                  <input type="text" class="form-control" name="rute">
                                 </div>
 
                                 <div class="form-group" style="margin-top: 20px;">
@@ -319,6 +307,7 @@ Data Bus
                         <th>Nama Bus</th>
                         <th>Tipe Bus</th>
                         <th>Rute</th>
+                        <th>Harga Rp. Per Kursi</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -327,6 +316,7 @@ Data Bus
                         <td>Baco</td>
                         <td>Bintang Prima</td>
                         <td>Selayar</td>
+                        <td>Rp. 14.000</td>
                         <td>
                           <button class="btn btn-success" data-toggle="modal" data-target="#editpivot" title="edit data"><i class="fas fa-pencil-alt"></i></button>
                           <button class="btn btn-danger" title="hapus data"><i class="fas fa-trash"></i></button>
@@ -348,11 +338,10 @@ Data Bus
                             <div class="container">
                               <form role="form">
                                 <div class="row">
-                                  <div class="col-sm-4">
-                                    <!-- text input -->
+                                  <div class="col-md-6">
                                     <div class="form-group">
                                       <label for="inputStatus">Nama Bus</label>
-                                      <select class="form-control custom-select">
+                                      <select class="form-control custom-select" name="namabus">
                                         <option selected disabled>Pilih tipe</option>
                                         <option>Sleeper</option>
                                         <option>Seatbelt</option>
@@ -360,10 +349,10 @@ Data Bus
                                       </select>
                                     </div>
                                   </div>
-                                  <div class="col-sm-4">
+                                  <div class="col-md-6">
                                     <div class="form-group">
                                       <label for="inputStatus">Tipe Bus</label>
-                                      <select class="form-control custom-select">
+                                      <select class="form-control custom-select" name="tipebus">
                                         <option selected disabled>Pilih tipe</option>
                                         <option>Bintang Prima A10</option>
                                         <option>Bintang Prima M70</option>
@@ -371,22 +360,24 @@ Data Bus
                                       </select>
                                     </div>
                                   </div>
-                                  <div class="col-sm-4">
-                                    <div class="form-group">
-                                      <label for="inputStatus">Route</label>
-                                      <select class="form-control custom-select">
-                                        <option selected disabled>Pilih tipe</option>
-                                        <option>Makassar - Bulukumba</option>
-                                        <option>Bulukumba - Selayar</option>
-                                        <option>Selayar - Maros</option>
-                                      </select>
-                                    </div>
-                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="inputStatus">Route</label>
+                                  <select class="form-control custom-select" name="namarute">
+                                    <option selected disabled>Pilih tipe</option>
+                                    <option>Makassar - Bulukumba</option>
+                                    <option>Bulukumba - Selayar</option>
+                                    <option>Selayar - Maros</option>
+                                  </select>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleInputEmail1">Harga Rp. Per Kursi</label>
+                                  <input type="text" class="form-control" name="harga">
                                 </div>
 
                                 <div class="form-group" style="margin-top: 20px;">
                                   <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
-                                  <button type="submit" class="btn btn-info float-right"><i class="nav-icon fas fa-plus"></i> Tambah</button>
+                                  <button type="submit" class="btn btn-info float-right"><i class="nav-icon fas fa-plus"></i> Update</button>
                                 </div>
 
                               </form>

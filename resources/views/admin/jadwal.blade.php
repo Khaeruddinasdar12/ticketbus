@@ -38,7 +38,7 @@ Jadwal
           <form role="form">
             <div class="form-group">
               <label for="inputStatus">Rute Perjalanan</label>
-              <select class="form-control custom-select" name="id_bus_rute">
+              <select class="form-control custom-select" name="pilihrute">
                 <option selected disabled>Pilih tipe</option>
                 <option>Makassar - Palopp</option>
                 <option>Makassar - Toraja</option>
@@ -70,7 +70,7 @@ Jadwal
                 <!-- text input -->
                 <div class="form-group">
                   <label for="inputStatus">Tipe Bus</label>
-                  <select class="form-control custom-select" name="id_tipebus">
+                  <select class="form-control custom-select" name="pilihtipe">
                     <option selected disabled>Pilih tipe</option>
                     <option>Sleeper</option>
                     <option>Seatbelt</option>
@@ -81,7 +81,7 @@ Jadwal
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="inputStatus">Nama Bus</label>
-                  <select class="form-control custom-select" name="nama">
+                  <select class="form-control custom-select" name="pilihbus">
                     <option selected disabled>Pilih tipe</option>
                     <option>Bintang Prima A10</option>
                     <option>Bintang Prima M70</option>
@@ -98,7 +98,7 @@ Jadwal
 
             <div class="form-group">
               <label for="inputName">Harga Rp. Per kursi</label>
-              <input type="text" class="form-control" disabled>
+              <input type="text" class="form-control" disabled name="harga">
             </div>
 
             <div class="form-group">
@@ -140,11 +140,6 @@ Jadwal
                 <option>Seatbelt</option>
                 <option>Comfortable</option>
               </select>
-            </div>
-
-            <div class="form-group">
-              <label for="inputProjectLeader">Harga Rp. Per kursi</label>
-              <input type="text" name="harga" class="form-control">
             </div>
 
             <div class="form-group">

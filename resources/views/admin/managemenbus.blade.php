@@ -139,11 +139,11 @@ Manajemen Bus
               <!-- form start -->
 
               <div class="card-body">
-                <form role="form">
+                <form role="form" action="{{route('store.rute')}}" method="post">
                   @csrf
                   <div class="form-group">
                     <label for="namaroute">Nama Rute</label>
-                    <input type="text" class="form-control" id="namaroute">
+                    <input type="text" class="form-control" id="namaroute" name="rute">
                   </div>
 
                   <div class="form-group">

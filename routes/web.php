@@ -29,7 +29,8 @@ Route::post('managemen-admin', 'ManagemenAdmin@store')->name('store.admin'); // 
 // RUTE MANAGEMEN ADMIN
 Route::prefix('managemen-bus')->group(function() {	
 	Route::get('/', 'ManagemenBus@index')->name('index.bus');
-	Route::post('store-pivot', 'ManagemenBus@storePivotBusRute');
-	Route::post('store-bus', 'ManagemenBus@storeBus');
-	Route::post('store-tipe-bus', 'ManagemenBus@storeTipeBus');
+	Route::post('store-pivot', 'ManagemenBus@storePivotBusRute')->name('store.pivot');
+	Route::post('store-bus', 'ManagemenBus@storeBus')->name('store.bus');
+	Route::post('store-tipe-bus', 'ManagemenBus@storeTipeBus')->name('store.tipebus');
+	Route::post('store-rute', 'ManagemenBus@storeRute')->name('store.rute');
 });

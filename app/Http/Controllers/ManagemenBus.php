@@ -39,6 +39,7 @@ class ManagemenBus extends Controller
                         ->having('jml', '!=', $countbus)
                         ->get();
 
+
         return view('admin.managemenbus');
     }
 

@@ -42,7 +42,7 @@ Manajemen Bus
           <form action="" method="">
             <div class="form-group">
               <label>Nama Admin</label>
-              <input type="text" name="nama" class="form-control">
+              <input type="text" name="name" class="form-control">
             </div>
             <div class="form-group">
               <label>Username</label>
@@ -53,13 +53,13 @@ Manajemen Bus
                 <!-- text input -->
                 <div class="form-group">
                   <label>Password</label>
-                  <input type="password" name="pass1" class="form-control">
+                  <input type="password" name="password" class="form-control">
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>Ulangi Password</label>
-                  <input type="password" name="pass2" class="form-control">
+                  <input type="password" name="password2" class="form-control">
                 </div>
               </div>
             </div>
@@ -69,7 +69,7 @@ Manajemen Bus
             </div>
             <div class="form-group">
               <label>Role Admin</label>
-              <select class="form-control custom-select">
+              <select class="form-control custom-select" name="role">
                 <option selected disabled>Pilih Role</option>
                 <option>Admin</option>
                 <option>Kernet</option>

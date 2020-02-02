@@ -45,8 +45,11 @@ class ManagemenBus extends Controller
             ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
             ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
             ->get();
+        $bus = \App\Bus::all();
+        $tipebus = \App\TipeBus::select('id', 'nama')->get();
+        $rute = \App\Rute::select('id', 'rute')->get();
 
-        return view('admin.databus');
+        return view('admin.databus', ['pivot' => $pivotBusRute, 'bus' => $bus, 'tipebus' => $tipebus, 'rute' => $rute]);
     }
 
     public function create()

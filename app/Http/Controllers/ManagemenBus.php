@@ -52,6 +52,15 @@ class ManagemenBus extends Controller
     {
     }
 
+    public function storeRute(Request $request)
+    {
+        $data = new \App\Rute();
+        $data->rute = $request->rute;
+        $data->save();
+
+        return $arrayName = array('status' => 'success', 'message' => 'Berhasil Menambah Data');
+    }
+
     public function storeTipeBus(Request $request)
     {
         $data = new \App\Tipebus();

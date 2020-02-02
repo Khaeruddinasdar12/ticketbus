@@ -64,10 +64,6 @@ Manajemen Bus
                 <label for="exampleInputEmail1">Jumlah Kursi</label>
                 <input type="text" class="form-control" id="kursi">
               </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Harga Rp. Per Kursi</label>
-                <input type="text" class="form-control" id="harga">
-              </div>
 
               <div class="form-group" style="margin-top: 45px;">
                 <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
@@ -176,7 +172,11 @@ Manajemen Bus
               <!-- form start -->
 
               <div class="card-body">
+<<<<<<< HEAD
+                <form role="form">
+=======
                 <form role="form" name="{{route('store.pivot')}}" action="post">
+>>>>>>> 004c1d2e7b97392175be9d4f9f547483f57dbd2c
                   @csrf
                   <div class="row">
                     <div class="col-sm-4">

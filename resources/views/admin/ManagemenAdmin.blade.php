@@ -39,7 +39,7 @@ Manajemen Bus
 
         <!-- FORM TAMBAH BUS -->
         <div class="card-body">
-          <form action="" method="POST">
+          <form action="{{route('store.admin')}}" method="POST">
             @csrf
             <div class="form-group">
               <label>Nama Admin</label>
@@ -70,10 +70,10 @@ Manajemen Bus
             </div>
             <div class="form-group">
               <label>Role Admin</label>
-              <select class="form-control custom-select" name="roleadmin">
+              <select class="form-control custom-select" name="role">
                 <option selected disabled>Pilih Role</option>
-                <option>Admin</option>
-                <option>Kernet</option>
+                <option value="superadmin">Admin</option>
+                <option value="kernet">Kernet</option>
               </select>
             </div>
             <div class="form-group">

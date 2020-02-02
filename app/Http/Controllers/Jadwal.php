@@ -13,6 +13,10 @@ class Jadwal extends Controller
      */
     public function index()
     {
+        $rute = \App\Rute::select('id', 'rute')->get();
+        $tipeBus = \App\TipeBus::select('id', 'nama')->get();
+
+
         return view('admin.jadwal');
     }
 

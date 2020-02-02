@@ -54,6 +54,6 @@ class ManagemenAdmin extends Controller
         $data->alamat 	= $request->alamat;
         $data->save();
 
-        return $arrayName = array('status' => 'OK', 'code' => 200, 'message' => 'Berhasil Menambah Data');
+        return $arrayName = array('status' => 'success', 'message' => 'Berhasil Menambah Data');
     }
 }

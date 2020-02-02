@@ -42,7 +42,7 @@ Manajemen Bus
           <!-- form start -->
 
           <div class="card-body">
-            <form role="form">
+            <form role="form" name="{{route('store.pivot')}}" action="post">
               @csrf
               <div class="form-group">
                 <label for="exampleInputEmail1">Nama Bus</label>
@@ -102,7 +102,7 @@ Manajemen Bus
               <!-- form start -->
 
               <div class="card-body">
-                <form role="form">
+                <form role="form" name="{{route('store.tipebus')}}" action="post">
                   @csrf
                   <div class="form-group">
                     <label for="tipebus">Nama Tipe</label>
@@ -176,8 +176,8 @@ Manajemen Bus
               <!-- form start -->
 
               <div class="card-body">
-                <form role="form">
-                  @scrf
+                <form role="form" name="{{route('store.pivot')}}" action="post">
+                  @csrf
                   <div class="row">
                     <div class="col-sm-4">
                       <!-- text input -->

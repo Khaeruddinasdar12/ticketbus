@@ -12,35 +12,39 @@ class ManagemenBus extends Controller
     {
 
         $pivotBusRute = DB::table('pivot_bus_rutes')
-                    ->join('bus', 'bus.id', '=', 'pivot_bus_rutes.id_bus')
-                    ->join('rutes', 'rutes.id', '=', 'pivot_bus_rutes.id_rute')
-                    ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
-                    ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
-                    ->get();
-        
+            ->join('bus', 'bus.id', '=', 'pivot_bus_rutes.id_bus')
+            ->join('rutes', 'rutes.id', '=', 'pivot_bus_rutes.id_rute')
+            ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
+            ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
+            ->get();
+
         $countbus = \App\Bus::count();
-        $countrute= \App\Rute::count();
+        $countrute = \App\Rute::count();
 
         $showtipebus = \App\TipeBus::select('id', 'nama')->get();
 
         $showbus = DB::table('pivot_bus_rutes')
-                        ->select('bus.nama', DB::raw('count(pivot_bus_rutes.id_bus) as jml'))
-                        ->rightJoin('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
-                        ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
-                        ->where('bus.id_tipebus', '=', 1)
-                        ->groupBy('bus.nama')
-                        ->having('jml', '!=', $countrute)
-                        ->get();
+            ->select('bus.nama', DB::raw('count(pivot_bus_rutes.id_bus) as jml'))
+            ->rightJoin('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+            ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+            ->where('bus.id_tipebus', '=', 1)
+            ->groupBy('bus.nama')
+            ->having('jml', '!=', $countrute)
+            ->get();
         $showrute = DB::table('pivot_bus_rutes')
-                        ->select('rutes.rute', DB::raw('count(pivot_bus_rutes.id_rute) as jml'))
-                        ->rightJoin('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
-                        ->groupBy('rutes.rute')
-                        ->having('jml', '!=', $countbus)
-                        ->get();
+            ->select('rutes.rute', DB::raw('count(pivot_bus_rutes.id_rute) as jml'))
+            ->rightJoin('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+            ->groupBy('rutes.rute')
+            ->having('jml', '!=', $countbus)
+            ->get();
 
 
-        return view('admin.managemenbus' , ['rute' => $showrute, 'bus' => $showbus, 'tipebus' => $showtipebus]);
-        
+        return view('admin.managemenbus', ['rute' => $showrute, 'bus' => $showbus, 'tipebus' => $showtipebus]);
+    }
+
+    public function pivot()
+    {
+        return view('admin.pivotbus');
     }
 
     public function data()
@@ -92,11 +96,11 @@ class ManagemenBus extends Controller
 
     public function storePivotBusRute(Request $request)
     {
-        $countData= DB::table('pivot_bus_rutes')
-                    ->where('id_bus', 1)
-                    ->where('id_rute', 1)
-                    ->count();
-        if($countData == 1){
+        $countData = DB::table('pivot_bus_rutes')
+            ->where('id_bus', 1)
+            ->where('id_rute', 1)
+            ->count();
+        if ($countData == 1) {
             return $arrayName = array('status' => 'error', 'message' => 'Data Sudah Ada');
         }
 

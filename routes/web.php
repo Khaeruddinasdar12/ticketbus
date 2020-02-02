@@ -12,13 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::get('dashboard', 'Dashboard@index')->name('index');
+Route::get('pivot-bus', 'ManagemenBus@pivot')->name('pivot.bus');
 Route::get('data-bus', 'ManagemenBus@data')->name('data.bus');
 Route::get('managemen-jadwal', 'Jadwal@index')->name('index.jadwal');
 Route::get('data-transaksi', 'Transaksi@index')->name('index.transaksi');
@@ -27,7 +28,7 @@ Route::get('managemen-admin', 'ManagemenAdmin@index')->name('index.admin');
 Route::post('managemen-admin', 'ManagemenAdmin@store')->name('store.admin'); // input data admin
 
 // RUTE MANAGEMEN ADMIN
-Route::prefix('managemen-bus')->group(function() {	
+Route::prefix('managemen-bus')->group(function () {
 	Route::get('/', 'ManagemenBus@index')->name('index.bus');
 	Route::post('store-pivot', 'ManagemenBus@storePivotBusRute')->name('store.pivot');
 	Route::post('store-bus', 'ManagemenBus@storeBus')->name('store.bus');

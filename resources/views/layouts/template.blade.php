@@ -111,8 +111,8 @@
               </a>
             </li>
 
-            <li class="nav-item {{ request()->is('managemen-bus') || request()->is('data-bus') ? 'has-treeview menu-open' : '' }}">
-              <a href="#" class="nav-link {{ request()->is('managemen-bus') || request()->is('data-bus') ? 'active' : '' }}">
+            <li class="nav-item {{ request()->is('managemen-bus') || request()->is('pivot-bus') || request()->is('data-bus') ? 'has-treeview menu-open' : '' }}">
+              <a href="#" class="nav-link {{ request()->is('managemen-bus') || request()->is('pivot-bus') || request()->is('data-bus') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-bus-alt"></i>
                 <p>
                   Manajemen Bus
@@ -124,7 +124,13 @@
                   <a href="{{route('index.bus')}}" class="nav-link {{ request()->is('managemen-bus') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
-                      Tambah Data
+                      Tambah Data Bus
+                    </p>
+                  </a>
+                  <a href="{{route('pivot.bus')}}" class="nav-link {{ request()->is('pivot-bus') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                      Tambah Pivot Bus
                     </p>
                   </a>
                   <a href="{{route('data.bus')}}" class="nav-link {{ request()->is('data-bus') ? 'active' : '' }}">

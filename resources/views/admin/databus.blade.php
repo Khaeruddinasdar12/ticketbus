@@ -78,7 +78,7 @@ Data Bus
                         <td>{{ $databus->jumlah_kursi }}</td>
                         <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail0" title="lihat detail" data-nama="{{ $databus->nama }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class=" far fa-eye"></i></button> </td>
                         <td>
-                          <button class="btn btn-success" data-toggle="modal" data-target="#editbus" title="edit data"><i class="fas fa-pencil-alt"></i></button>
+                          <button class="btn btn-success" data-toggle="modal" data-target="#editbus" title="edit data" data-nama="{{ $databus->nama }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class="fas fa-pencil-alt"></i></button>
                           <button class="btn btn-danger" title="hapus data"><i class="fas fa-trash"></i></button>
                         </td>
                       </tr>
@@ -138,29 +138,29 @@ Data Bus
                               <form role="form">
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Nama Bus</label>
-                                  <input type="text" class="form-control" name="nama">
-                                </div>
-                                <div class="form-group">
-                                  <label>Deskripsi Bus</label>
-                                  <textarea name="deskripsi" class="form-control" rows="4"></textarea>
+                                  <input type="text" class="form-control" name="nama" id="namabusss">
                                 </div>
                                 <div class="row">
                                   <div class="col-md-6">
                                     <div class="form-group">
                                       <label>Tipe Bus</label>
-                                      <select class="form-control custom-select" name="id_tipebus">
-                                        <option selected disabled>Pilih Tipe</option>
-                                        <option>Tipe 1</option>
-                                        <option>Tipe 2</option>
+                                      <select class="form-control custom-select" name="id_tipebus" id="tipebusss">
+                                        @foreach($tipebus as $tipe)
+                                        <option value="{{ $tipe->id }}"> {{$tipe->nama}} </option>
+                                        @endforeach
                                       </select>
                                     </div>
                                   </div>
                                   <div class="col-md-6">
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Jumlah Kursi</label>
-                                      <input type="text" class="form-control" id="kursi" name="jumlah_kursi">
+                                      <input type="text" class="form-control" name="jumlah_kursi" id="kursiss">
                                     </div>
                                   </div>
+                                </div>
+                                <div class="form-group">
+                                  <label>Deskripsi Bus</label>
+                                  <textarea name="deskripsi" class="form-control" rows="4" id="deskripsiss"></textarea>
                                 </div>
 
                                 <div class="form-group" style="margin-top: 20px;">
@@ -447,6 +447,7 @@ Data Bus
   });
 </script>
 <script>
+  // detail pivot
   $('#showdetailpivot').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget)
     var nama = button.data('nama')
@@ -463,7 +464,9 @@ Data Bus
     modal.find('.modal-body #hargabus').val(harga)
     modal.find('.modal-body #deskripsi').val(desc)
   })
+  // end detail pivot
 
+  // detail bus
   $('#showdetail0').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget)
     var nama = button.data('nama')
@@ -478,5 +481,23 @@ Data Bus
     modal.find('.modal-body #kursis').val(kursi)
     modal.find('.modal-body #deskripsis').val(desc)
   })
+  // end detail bus
+
+  // detail bus
+  $('#editbus').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget)
+    var nama = button.data('nama')
+    var tipe = button.data('tipe')
+    var kursi = button.data('kursi')
+    var desc = button.data('desc')
+
+    var modal = $(this)
+    modal.find('.modal-title').text('Edit Data Bus ' + nama)
+    modal.find('.modal-body #namabusss').val(nama)
+    modal.find('.modal-body #tipebusss').val(2)
+    modal.find('.modal-body #kursiss').val(kursi)
+    modal.find('.modal-body #deskripsiss').val(desc)
+  })
+  // end detail bus
 </script>
 @endsection

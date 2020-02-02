@@ -125,7 +125,7 @@ class ManagemenBus extends Controller
     public function editBus(Request $request, $id)
     {
         $cek = \App\Kursi::where('id_bus', $id)->where('status', '!=', 'kosong')->count();
-        if($cek > 0) {
+        if ($cek > 0) {
             return $arrayName = array('status' => 'error', 'pesan' => 'Terdapat kursi yang berstatus terisi');
         }
         $delete_kursi = \App\Kursi::where('id_bus', $id)->delete();
@@ -154,7 +154,7 @@ class ManagemenBus extends Controller
         $data->rute = $request->rute;
         $data->save();
 
-        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Mengubah Data');   
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Mengubah Data');
     }
 
     public function editTipe(Request $request, $id)
@@ -163,7 +163,7 @@ class ManagemenBus extends Controller
         $data->nama = $request->nama;
         $data->save();
 
-        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Mengubah Data');   
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Mengubah Data');
     }
 
     public function editPivot(Request $request, $id)

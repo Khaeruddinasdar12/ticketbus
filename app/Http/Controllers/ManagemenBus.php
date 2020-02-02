@@ -18,13 +18,27 @@ class ManagemenBus extends Controller
                     ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
                     ->get();
                     
-        $test = DB::table('pivot_bus_rutes')
+        $countbus = \App\Bus::count();
+        $countrute= \App\Rute::count();
+
+        $showtipebus = \App\TipeBus::select('id', 'nama')->get();
+
+        $showbus = DB::table('pivot_bus_rutes')
                         ->select('bus.nama', DB::raw('count(pivot_bus_rutes.id_bus) as jml'))
                         ->rightJoin('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+                        ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+                        ->where('bus.id_tipebus', '=', 1)
                         ->groupBy('bus.nama')
-                        ->having('jml', '!=', 3)
+                        ->having('jml', '!=', $countrute)
                         ->get();
-        // return $test;
+        return $showbus;
+        $showrute = DB::table('pivot_bus_rutes')
+                        ->select('rutes.rute', DB::raw('count(pivot_bus_rutes.id_rute) as jml'))
+                        ->rightJoin('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+                        ->groupBy('rutes.rute')
+                        ->having('jml', '!=', $countbus)
+                        ->get();
+
         return view('admin.managemenbus');
     }
 
@@ -93,3 +107,5 @@ class ManagemenBus extends Controller
     {
     }
 }
+
+wkwkkww land

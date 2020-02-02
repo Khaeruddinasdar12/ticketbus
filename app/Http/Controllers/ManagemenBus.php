@@ -48,7 +48,7 @@ class ManagemenBus extends Controller
 
         $bus = DB::table('bus')
             ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
-            ->select('bus.nama', 'bus.deskripsi', 'bus.jumlah_kursi', 'tipebus.nama as tipebus')
+            ->select('bus.nama', 'bus.deskripsi', 'bus.jumlah_kursi', 'tipebus.id', 'tipebus.nama as tipebus')
             ->get();
 
         $tipebus = \App\TipeBus::select('id', 'nama')->get();

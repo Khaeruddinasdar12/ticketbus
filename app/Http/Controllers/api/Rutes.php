@@ -12,6 +12,13 @@ class Rutes extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function test($id)
+    {
+        $cek = \App\Kursi::where('id_bus', $id)->where('status', '!=', 'kosong')->count();
+        return $cek;
+
+        return 'berhasil';
+    }
     public function index()
     {
         $data = \App\Rute::all();

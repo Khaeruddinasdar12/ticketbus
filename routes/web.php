@@ -17,7 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
 Route::get('dashboard', 'Dashboard@index')->name('index');
 Route::get('pivot-bus', 'ManagemenBus@pivot')->name('pivot.bus');
 Route::get('data-bus', 'ManagemenBus@data')->name('data.bus');
@@ -32,10 +31,16 @@ Route::get('data-bus/{id}', 'ApiJquery@dataBus');
 // RUTE MANAGEMEN BUS
 Route::prefix('managemen-bus')->group(function () {
 	Route::get('/', 'ManagemenBus@index')->name('index.bus');
+
 	Route::post('store-pivot', 'ManagemenBus@storePivotBusRute')->name('store.pivot');
 	Route::post('store-bus', 'ManagemenBus@storeBus')->name('store.bus'); // menginput data bus
 	Route::post('store-tipe-bus', 'ManagemenBus@storeTipeBus')->name('store.tipebus');
 	Route::post('store-rute', 'ManagemenBus@storeRute')->name('store.rute');
+
+	Route::put('edit-bus/{id}', 'ManagemenBus@editBus');
+	Route::put('edit-tipe-bus/{id}', 'ManagemenBus@editTipe');
+	Route::put('edit-rute/{id}', 'ManagemenBus@editRute');
+	Route::put('edit-bus/{id}', 'ManagemenBus@editPivot');
 });
 
 // RUTE MANAGEMEN JADWAL

@@ -45,7 +45,12 @@ class ManagemenBus extends Controller
             ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
             ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama as tipebus')
             ->get();
-        $bus = \App\Bus::all();
+
+        $bus = DB::table('bus')
+            ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+            ->select('bus.nama', 'bus.deskripsi', 'bus.jumlah_kursi', 'tipebus.nama as tipebus')
+            ->get();
+
         $tipebus = \App\TipeBus::select('id', 'nama')->get();
         $rute = \App\Rute::select('id', 'rute')->get();
 
@@ -62,7 +67,7 @@ class ManagemenBus extends Controller
         $data->rute = $request->rute;
         $data->save();
 
-        return $arrayName = array('status' => 'success', 'message' => 'Berhasil Menambah Data');
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menambah Data');
     }
 
     public function storeTipeBus(Request $request)
@@ -71,7 +76,7 @@ class ManagemenBus extends Controller
         $data->nama = $request->nama;
         $data->save();
 
-        return $arrayName = array('status' => 'success', 'message' => 'Berhasil Menambah Data');
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menambah Data');
     }
 
     public function storeBus(Request $request)
@@ -91,7 +96,7 @@ class ManagemenBus extends Controller
             ]);
         }
 
-        return $arrayName = array('status' => 'success', 'message' => 'Berhasil Menambah Data');
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menambah Data');
     }
 
     public function storePivotBusRute(Request $request)
@@ -101,7 +106,7 @@ class ManagemenBus extends Controller
             ->where('id_rute', 1)
             ->count();
         if ($countData == 1) {
-            return $arrayName = array('status' => 'error', 'message' => 'Data Sudah Ada');
+            return $arrayName = array('status' => 'error', 'pesan' => 'Data Sudah Ada');
         }
 
         $data = new \App\PivotBusRute();
@@ -110,14 +115,58 @@ class ManagemenBus extends Controller
         $data->harga  = $request->harga;
         $data->save();
 
-        return $arrayName = array('status' => 'success', 'message' => 'Berhasil Menambah Data');
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menambah Data');
     }
 
     public function show($id)
     {
     }
 
-    public function edit($id)
+    public function editBus(Request $request, $id)
+    {
+        $cek = \App\Kursi::where('id_bus', $id)->where('status', '!=', 'kosong')->count();
+        if($cek > 0) {
+            return $arrayName = array('status' => 'error', 'pesan' => 'Terdapat kursi yang berstatus terisi');
+        }
+        $delete_kursi = \App\Kursi::where('id_bus', $id)->delete();
+
+        for ($i = 1; $i <= $request->jumlah_kursi; $i++) {
+            DB::table('kursis')->insert([
+                'id_bus' => $id,
+                'kursi' => '' . $i,
+                'status' => 'kosong'
+            ]);
+        }
+
+        $data = new \App\Bus();
+        $data->nama = $request->nama;
+        $data->id_tipebus = $request->id_tipebus;
+        $data->deskripsi = $request->deskripsi;
+        $data->jumlah_kursi = $request->jumlah_kursi;
+        $data->save();
+
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Mengubah Data');
+    }
+
+    public function editRute(Request $request, $id)
+    {
+        $data = \App\Rute::findOrFail($id);
+        $data->rute = $request->rute;
+        $data->save();
+
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Mengubah Data');   
+    }
+
+    public function editTipe(Request $request, $id)
+    {
+        $data = \App\TipeBus::findOrFail($id);
+        $data->nama = $request->nama;
+        $data->save();
+
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Mengubah Data');   
+    }
+
+    public function editPivot(Request $request, $id)
     {
     }
 

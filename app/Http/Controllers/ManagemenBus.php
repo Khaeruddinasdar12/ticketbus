@@ -39,7 +39,7 @@ class ManagemenBus extends Controller
                         ->get();
 
 
-        return view('admin.managemenbus');
+        return view('admin.managemenbus' , ['rute' => $showrute, 'bus' => $showbus, 'tipebus' => $showtipebus]);
         
     }
 

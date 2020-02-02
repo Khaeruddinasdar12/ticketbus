@@ -71,16 +71,18 @@ Data Bus
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach($bus as $databus)
                       <tr>
-                        <td>Baco</td>
-                        <td>1 januari 1990</td>
-                        <td>Bintang Prima</td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail0" title="lihat detail"><i class="far fa-eye"></i></button> </td>
+                        <td>{{ $databus->nama }}</td>
+                        <td>{{ $databus->tipebus }}</td>
+                        <td>{{ $databus->jumlah_kursi }}</td>
+                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail0" title="lihat detail" data-nama="{{ $databus->nama }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class=" far fa-eye"></i></button> </td>
                         <td>
                           <button class="btn btn-success" data-toggle="modal" data-target="#editbus" title="edit data"><i class="fas fa-pencil-alt"></i></button>
                           <button class="btn btn-danger" title="hapus data"><i class="fas fa-trash"></i></button>
                         </td>
                       </tr>
+                      @endforeach
                     </tbody>
 
                     <!-- Modal detail -->
@@ -98,34 +100,19 @@ Data Bus
                               <form role="form">
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Nama Bus</label>
-                                  <input type="text" class="form-control" id="namabus" readonly>
+                                  <input type="text" class="form-control" id="namabuss" readonly>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleInputEmail1">Tipe Bus</label>
+                                  <input type="text" class="form-control" id="tipebuss" readonly>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleInputEmail1">Jumlah Kursi</label>
+                                  <input type="text" class="form-control" id="kursis" readonly>
                                 </div>
                                 <div class="form-group">
                                   <label>Deskripsi Bus</label>
-                                  <textarea name="desc" class="form-control" rows="4" readonly></textarea>
-                                </div>
-                                <div class="row">
-                                  <div class="col-md-6">
-                                    <div class="form-group">
-                                      <label>Tipe Bus</label>
-                                      <select class="form-control custom-select" readonly>
-                                        <option selected disabled>Pilih Tipe</option>
-                                        <option>Tipe 1</option>
-                                        <option>Tipe 2</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div class="col-md-6">
-                                    <div class="form-group">
-                                      <label for="exampleInputEmail1">Jumlah Kursi</label>
-                                      <input type="text" class="form-control" id="kursi" readonly>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div class="form-group" style="margin-top: 20px;">
-                                  <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
-                                  <button type="submit" class="btn btn-primary float-right"><i class="nav-icon fas fa-plus"></i> Update</button>
+                                  <textarea name="desc" class="form-control" id="deskripsis" rows="4" readonly></textarea>
                                 </div>
 
                               </form>
@@ -308,21 +295,69 @@ Data Bus
                         <th>Tipe Bus</th>
                         <th>Rute</th>
                         <th>Harga Rp. Per Kursi</th>
+                        <th>Detail</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach($pivot as $datapivot)
                       <tr>
-                        <td>Baco</td>
-                        <td>Bintang Prima</td>
-                        <td>Selayar</td>
-                        <td>Rp. 14.000</td>
+                        <td>{{ $datapivot->nama_bus }}</td>
+                        <td>{{ $datapivot->tipebus }}</td>
+                        <td>{{ $datapivot->rute_bus }}</td>
+                        <td>{{ $datapivot->harga }}</td>
+                        <td>
+                          <button class="btn btn-primary" data-toggle="modal" data-target="#showdetailpivot" title="lihat detail" data-nama="{{ $datapivot->nama_bus }}" data-tipe="{{ $datapivot->tipebus }}" data-rute="{{ $datapivot->rute_bus }}" data-harga="{{ $datapivot->harga }}" data-desc="{{ $datapivot->deskripsi }}"><i class="far fa-eye"></i></button>
+                        </td>
                         <td>
                           <button class="btn btn-success" data-toggle="modal" data-target="#editpivot" title="edit data"><i class="fas fa-pencil-alt"></i></button>
                           <button class="btn btn-danger" title="hapus data"><i class="fas fa-trash"></i></button>
                         </td>
                       </tr>
+                      @endforeach
                     </tbody>
+
+                    <!-- Modal detail -->
+                    <div class="modal fade" id="showdetailpivot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Detail Bus</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="container">
+                              <form role="form">
+                                <div class="form-group">
+                                  <label for="exampleInputEmail1">Nama Bus</label>
+                                  <input type="text" class="form-control" id="namabus" readonly>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleInputEmail1">Tipe Bus</label>
+                                  <input type="text" class="form-control" id="tipebus" readonly>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleInputEmail1">Rute</label>
+                                  <input type="text" class="form-control" id="rutebus" readonly>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleInputEmail1">Harga Rp. Perkursi</label>
+                                  <input type="text" class="form-control" id="hargabus" readonly>
+                                </div>
+                                <div class="form-group">
+                                  <label>Deskripsi Bus</label>
+                                  <textarea name="desc" class="form-control" id="deskripsi" rows="4" readonly></textarea>
+                                </div>
+
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Modal detail -->
 
                     <!-- Modal edit pivot -->
                     <div class="modal fade" id="editpivot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -410,5 +445,38 @@ Data Bus
   $(function() {
     $("#example0, #example1, #example2, #example3, #example4").DataTable();
   });
+</script>
+<script>
+  $('#showdetailpivot').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget)
+    var nama = button.data('nama')
+    var tipe = button.data('tipe')
+    var rute = button.data('rute')
+    var harga = button.data('harga')
+    var desc = button.data('desc')
+
+    var modal = $(this)
+    modal.find('.modal-title').text('Detail Bus ' + nama)
+    modal.find('.modal-body #namabus').val(nama)
+    modal.find('.modal-body #tipebus').val(tipe)
+    modal.find('.modal-body #rutebus').val(rute)
+    modal.find('.modal-body #hargabus').val(harga)
+    modal.find('.modal-body #deskripsi').val(desc)
+  })
+
+  $('#showdetail0').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget)
+    var nama = button.data('nama')
+    var tipe = button.data('tipe')
+    var kursi = button.data('kursi')
+    var desc = button.data('desc')
+
+    var modal = $(this)
+    modal.find('.modal-title').text('Detail Bus ' + nama)
+    modal.find('.modal-body #namabuss').val(nama)
+    modal.find('.modal-body #tipebuss').val(tipe)
+    modal.find('.modal-body #kursis').val(kursi)
+    modal.find('.modal-body #deskripsis').val(desc)
+  })
 </script>
 @endsection

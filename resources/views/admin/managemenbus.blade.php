@@ -64,10 +64,6 @@ Manajemen Bus
                 <label for="exampleInputEmail1">Jumlah Kursi</label>
                 <input type="text" class="form-control" id="kursi">
               </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Harga Rp. Per Kursi</label>
-                <input type="text" class="form-control" id="harga">
-              </div>
 
               <div class="form-group" style="margin-top: 45px;">
                 <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
@@ -177,7 +173,7 @@ Manajemen Bus
 
               <div class="card-body">
                 <form role="form">
-                  @scrf
+                  @csrf
                   <div class="row">
                     <div class="col-sm-4">
                       <!-- text input -->

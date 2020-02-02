@@ -39,7 +39,8 @@ Manajemen Bus
 
         <!-- FORM TAMBAH BUS -->
         <div class="card-body">
-          <form action="" method="">
+          <form action="" method="POST">
+            @csrf
             <div class="form-group">
               <label>Nama Admin</label>
               <input type="text" name="name" class="form-control">
@@ -69,7 +70,7 @@ Manajemen Bus
             </div>
             <div class="form-group">
               <label>Role Admin</label>
-              <select class="form-control custom-select" name="role">
+              <select class="form-control custom-select" name="roleadmin">
                 <option selected disabled>Pilih Role</option>
                 <option>Admin</option>
                 <option>Kernet</option>

@@ -90,6 +90,7 @@ Transaksi
                             </button>
                           </div>
                           <form action="">
+                            @csrf
                             <div class="modal-body">
                               <div class="container">
                                 <div class="row">

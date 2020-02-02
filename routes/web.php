@@ -29,11 +29,11 @@ Route::get('riwayat-transaksi', 'Transaksi@riwayat')->name('riwayat.transaksi');
 Route::get('nama-bus/{id}', 'ApiJquery@namaBus'); 
 Route::get('data-bus/{id}', 'ApiJquery@dataBus'); 
 
-// RUTE MANAGEMEN ADMIN
+// RUTE MANAGEMEN BUS
 Route::prefix('managemen-bus')->group(function () {
 	Route::get('/', 'ManagemenBus@index')->name('index.bus');
 	Route::post('store-pivot', 'ManagemenBus@storePivotBusRute')->name('store.pivot');
-	Route::post('store-bus', 'ManagemenBus@storeBus')->name('store.bus');
+	Route::post('store-bus', 'ManagemenBus@storeBus')->name('store.bus'); // menginput data bus
 	Route::post('store-tipe-bus', 'ManagemenBus@storeTipeBus')->name('store.tipebus');
 	Route::post('store-rute', 'ManagemenBus@storeRute')->name('store.rute');
 });

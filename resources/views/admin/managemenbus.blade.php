@@ -100,13 +100,12 @@ Manajemen Bus
               <div class="card-body">
                 <form role="form" name="{{route('store.tipebus')}}" action="post">
                   @csrf
-
                   <div class="form-group">
                     <label for="tipebus">Nama Tipe</label>
                     <div class="input-group mb-3">
                       <input type="text" class="form-control" name="nama">
                       <span class="input-group-append">
-                        <button type="button" class="btn btn-info">Tambah</button>
+                        <button type="submit" class="btn btn-info">Tambah</button>
                       </span>
                     </div>
                   </div>

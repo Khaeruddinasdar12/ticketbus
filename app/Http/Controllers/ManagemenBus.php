@@ -65,7 +65,7 @@ class ManagemenBus extends Controller
 
     public function storeTipeBus(Request $request)
     {
-        $data = new \App\Tipebus();
+        $data = new \App\TipeBus();
         $data->nama = $request->nama;
         $data->save();
 

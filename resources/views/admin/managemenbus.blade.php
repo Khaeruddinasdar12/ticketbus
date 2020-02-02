@@ -42,27 +42,28 @@ Manajemen Bus
           <!-- form start -->
 
           <div class="card-body">
-            <form role="form" name="{{route('store.pivot')}}" action="post">
+            <form role="form" action="{{route('store.bus')}}" method="post">
               @csrf
               <div class="form-group">
                 <label for="exampleInputEmail1">Nama Bus</label>
-                <input type="text" class="form-control" id="namabus">
+                <input type="text" class="form-control" name="nama" required>
               </div>
               <div class="form-group">
                 <label>Deskripsi Bus</label>
-                <textarea name="desc" class="form-control" rows="4"></textarea>
+                <textarea class="form-control" rows="4" name="deskripsi" required></textarea>
               </div>
               <div class="form-group">
                 <label>Tipe Bus</label>
-                <select class="form-control custom-select">
+                <select class="form-control custom-select" name="id_tipebus" required>
                   <option selected disabled>Pilih Tipe</option>
-                  <option>Tipe 1</option>
-                  <option>Tipe 2</option>
+                  @foreach($tipebus as $tipe)
+                  <option value="{{ $tipe->id }}">{{ $tipe->nama }}</option>
+                  @endforeach
                 </select>
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Jumlah Kursi</label>
-                <input type="text" class="form-control" id="kursi">
+                <input type="text" class="form-control" id="kursi" name="jumlah_kursi" required>
               </div>
 
               <div class="form-group" style="margin-top: 45px;">
@@ -98,12 +99,12 @@ Manajemen Bus
               <!-- form start -->
 
               <div class="card-body">
-                <form role="form" name="{{route('store.tipebus')}}" action="post">
+                <form role="form" action="{{route('store.tipebus')}}" method="post">
                   @csrf
                   <div class="form-group">
                     <label for="tipebus">Nama Tipe</label>
                     <div class="input-group mb-3">
-                      <input type="text" class="form-control" name="nama">
+                      <input type="text" class="form-control" name="nama" required>
                       <span class="input-group-append">
                         <button type="submit" class="btn btn-info">Tambah</button>
                       </span>
@@ -141,9 +142,9 @@ Manajemen Bus
                   <div class="form-group">
                     <label for="tipebus">Nama Rute</label>
                     <div class="input-group mb-3">
-                      <input type="text" class="form-control" name="rute">
+                      <input type="text" class="form-control" name="rute" required>
                       <span class="input-group-append">
-                        <button type="button" class="btn btn-info">Tambah</button>
+                        <button type="submit" class="btn btn-info">Tambah</button>
                       </span>
                     </div>
                   </div>

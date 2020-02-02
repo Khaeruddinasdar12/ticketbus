@@ -10,8 +10,7 @@ class ManagemenBus extends Controller
 
     public function index()
     {
-        $showtipebus = \App\TipeBus::select('id', 'nama')->get();  
-
+        $showtipebus = \App\TipeBus::select('id', 'nama')->get();
         return view('admin.managemenbus', ['tipebus' => $showtipebus]);
     }
 
@@ -20,7 +19,7 @@ class ManagemenBus extends Controller
         $countbus = \App\Bus::count();
         $countrute = \App\Rute::count();
 
-         $showbus = DB::table('pivot_bus_rutes')
+        $showbus = DB::table('pivot_bus_rutes')
             ->select('bus.nama', DB::raw('count(pivot_bus_rutes.id_bus) as jml'))
             ->rightJoin('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
             ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
@@ -35,7 +34,7 @@ class ManagemenBus extends Controller
             ->having('jml', '!=', $countbus)
             ->get();
 
-        return view('admin.pivotbus', ['rute' => $showrute, 'bus' => $showbus] );
+        return view('admin.pivotbus', ['rute' => $showrute, 'bus' => $showbus]);
     }
 
     public function data()

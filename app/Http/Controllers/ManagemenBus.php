@@ -17,7 +17,7 @@ class ManagemenBus extends Controller
                     ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
                     ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
                     ->get();
-                    
+        
         $countbus = \App\Bus::count();
         $countrute= \App\Rute::count();
 
@@ -31,7 +31,6 @@ class ManagemenBus extends Controller
                         ->groupBy('bus.nama')
                         ->having('jml', '!=', $countrute)
                         ->get();
-        return $showbus;
         $showrute = DB::table('pivot_bus_rutes')
                         ->select('rutes.rute', DB::raw('count(pivot_bus_rutes.id_rute) as jml'))
                         ->rightJoin('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
@@ -41,6 +40,7 @@ class ManagemenBus extends Controller
 
 
         return view('admin.managemenbus');
+        
     }
 
     public function data()
@@ -58,7 +58,7 @@ class ManagemenBus extends Controller
         $data->nama = $request->nama;
         $data->save();
 
-        return $arrayName = array('status' => 'OK', 'code' => 200, 'message' => 'Berhasil Menambah Data');
+        return $arrayName = array('status' => 'success', 'message' => 'Berhasil Menambah Data');
     }
 
     public function storeBus(Request $request)
@@ -78,18 +78,26 @@ class ManagemenBus extends Controller
             ]);
         }
 
-        return $arrayName = array('status' => 'OK', 'code' => 200, 'message' => 'Berhasil Menambah Data');
+        return $arrayName = array('status' => 'success', 'message' => 'Berhasil Menambah Data');
     }
 
     public function storePivotBusRute(Request $request)
     {
+        $countData= DB::table('pivot_bus_rutes')
+                    ->where('id_bus', 1)
+                    ->where('id_rute', 1)
+                    ->count();
+        if($countData == 1){
+            return $arrayName = array('status' => 'error', 'message' => 'Data Sudah Ada');
+        }
+
         $data = new \App\PivotBusRute();
         $data->id_bus = $request->id_bus;
         $data->id_rute = $request->id_rute;
         $data->harga  = $request->harga;
         $data->save();
 
-        return $arrayName = array('status' => 'OK', 'code' => 200, 'message' => 'Berhasil Menambah Data');
+        return $arrayName = array('status' => 'success', 'message' => 'Berhasil Menambah Data');
     }
 
     public function show($id)
@@ -108,5 +116,3 @@ class ManagemenBus extends Controller
     {
     }
 }
-
-wkwkkww land

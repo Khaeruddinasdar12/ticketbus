@@ -38,8 +38,16 @@ Route::prefix('managemen-bus')->group(function () {
 	Route::post('store-rute', 'ManagemenBus@storeRute')->name('store.rute');
 });
 
+// RUTE MANAGEMEN JADWAL
+Route::prefix('managemen-jadwal')->group(function() {
+	Route::get('/', 'Jadwal@index')->name('index.jadwal');
+	Route::post('/', 'Jadwal@store')->name('store.jadwal'); // input data admin
+});
+
 // RUTE MANAGEMEN ADMIN
 Route::prefix('managemen-admin')->group(function() {
 	Route::get('/', 'ManagemenAdmin@index')->name('index.admin');
 	Route::post('/', 'ManagemenAdmin@store')->name('store.admin'); // input data admin
 });
+
+

@@ -10,20 +10,17 @@ class ManagemenBus extends Controller
 
     public function index()
     {
+        $showtipebus = \App\TipeBus::select('id', 'nama')->get();  
 
-        $pivotBusRute = DB::table('pivot_bus_rutes')
-            ->join('bus', 'bus.id', '=', 'pivot_bus_rutes.id_bus')
-            ->join('rutes', 'rutes.id', '=', 'pivot_bus_rutes.id_rute')
-            ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
-            ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
-            ->get();
+        return view('admin.managemenbus', ['tipebus' => $showtipebus]);
+    }
 
+    public function pivot()
+    {
         $countbus = \App\Bus::count();
         $countrute = \App\Rute::count();
 
-        $showtipebus = \App\TipeBus::select('id', 'nama')->get();
-
-        $showbus = DB::table('pivot_bus_rutes')
+         $showbus = DB::table('pivot_bus_rutes')
             ->select('bus.nama', DB::raw('count(pivot_bus_rutes.id_bus) as jml'))
             ->rightJoin('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
             ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
@@ -38,17 +35,18 @@ class ManagemenBus extends Controller
             ->having('jml', '!=', $countbus)
             ->get();
 
-
-        return view('admin.managemenbus', ['rute' => $showrute, 'bus' => $showbus, 'tipebus' => $showtipebus]);
-    }
-
-    public function pivot()
-    {
-        return view('admin.pivotbus');
+        return view('admin.pivotbus', ['rute' => $showrute, 'bus' => $showbus] );
     }
 
     public function data()
     {
+        $pivotBusRute = DB::table('pivot_bus_rutes')
+            ->join('bus', 'bus.id', '=', 'pivot_bus_rutes.id_bus')
+            ->join('rutes', 'rutes.id', '=', 'pivot_bus_rutes.id_rute')
+            ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
+            ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama')
+            ->get();
+
         return view('admin.databus');
     }
 

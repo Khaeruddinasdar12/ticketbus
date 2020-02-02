@@ -93,12 +93,12 @@ Jadwal
 
             <div class="form-group">
               <label>Deskripsi Bus</label>
-              <textarea class="form-control" rows="3" disabled name="deskripsi"></textarea>
+              <textarea class="form-control" rows="3" disabled id="deskripsi"></textarea>
             </div>
 
             <div class="form-group">
               <label for="inputName">Harga Rp. Per kursi</label>
-              <input type="text" class="form-control" disabled name="harga">
+              <input type="text" class="form-control" disabled id="harga">
             </div>
 
             <div class="form-group">

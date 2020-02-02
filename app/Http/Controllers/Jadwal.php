@@ -38,7 +38,8 @@ class Jadwal extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = \App\Jadwal();
+        // $data->
     }
 
     /**

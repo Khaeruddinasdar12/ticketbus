@@ -43,6 +43,7 @@ Manajemen Bus
 
           <div class="card-body">
             <form role="form">
+              @csrf
               <div class="form-group">
                 <label for="exampleInputEmail1">Nama Bus</label>
                 <input type="text" class="form-control" id="namabus">
@@ -102,6 +103,7 @@ Manajemen Bus
 
               <div class="card-body">
                 <form role="form">
+                  @csrf
                   <div class="form-group">
                     <label for="tipebus">Nama Tipe</label>
                     <input type="text" class="form-control" id="tipebus">
@@ -138,6 +140,7 @@ Manajemen Bus
 
               <div class="card-body">
                 <form role="form">
+                  @csrf
                   <div class="form-group">
                     <label for="namaroute">Nama Rute</label>
                     <input type="text" class="form-control" id="namaroute">
@@ -174,6 +177,7 @@ Manajemen Bus
 
               <div class="card-body">
                 <form role="form">
+                  @scrf
                   <div class="row">
                     <div class="col-sm-4">
                       <!-- text input -->

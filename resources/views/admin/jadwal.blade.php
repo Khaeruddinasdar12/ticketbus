@@ -24,7 +24,7 @@ Jadwal
 <!-- /.content-header -->
 <section class="content">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <div class="card card-primary">
         <div class="card-header">
           <h3 class="card-title">Tambah Jadwal</h3>
@@ -107,94 +107,6 @@ Jadwal
               <button type="submit" class="btn btn-success float-right"><i class="nav-icon fas fa-plus"></i> Tambah</button>
             </div>
           </form>
-        </div>
-        <!-- /.card-body -->
-      </div>
-      <!-- /.card -->
-    </div>
-    <div class="col-md-6">
-      <div class="card card-secondary">
-        <div class="card-header">
-          <h3 class="card-title">Tambah Rute Perjalanan</h3>
-
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fas fa-minus"></i></button>
-          </div>
-        </div>
-
-        <!-- FORM TAMBAH RUTE -->
-
-        <div class="card-body">
-          <form action="" method="">
-            <div class="form-group">
-              <label for="inputEstimatedBudget">Rute Perjalanan : </label>
-              <input type="text" name="rute" class="form-control" placeholder="makassar-toraja">
-            </div>
-
-            <div class="form-group">
-              <label for="inputStatus">Tipe Bus</label>
-              <select class="form-control custom-select">
-                <option selected disabled>Pilih tipe</option>
-                <option>Sleeper</option>
-                <option>Seatbelt</option>
-                <option>Comfortable</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <!-- <a href="#" class="btn btn-secondary">Cancel</a> -->
-              <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
-              <button type="submit" class="btn btn-success float-right"><i class="nav-icon fas fa-plus"></i> Tambah</button>
-
-            </div>
-          </form>
-        </div>
-
-        <!-- END FORM TAMBAH RUTE -->
-        <!-- /.card-body -->
-      </div>
-      <div class="card card-secondary">
-        <div class="card-header">
-          <h3 class="card-title">Data Rute Perjalanan</h3>
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fas fa-minus"></i></button>
-          </div>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-          <table id="example1" class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>Rute Perjalanan</th>
-                <th>Tipe Bus</th>
-                <th>Harga Rp. Per kursi</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Makassar - Palopo</td>
-                <td>Sleeper</td>
-                <td>Rp. 150.000</td>
-              </tr>
-              <tr>
-                <td>Makassar - Toraja</td>
-                <td>Seatbelt</td>
-                <td>Rp. 150.000</td>
-              </tr>
-              <tr>
-                <td>Makassar - Masamba</td>
-                <td>Sleeper</td>
-                <td>Rp. 180.000</td>
-              </tr>
-              <tr>
-                <td>Palopo - Makassar</td>
-                <td>Sleeper</td>
-                <td>Rp. 150.000</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
         <!-- /.card-body -->
       </div>

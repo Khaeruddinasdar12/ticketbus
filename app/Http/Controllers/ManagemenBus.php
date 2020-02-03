@@ -66,10 +66,6 @@ class ManagemenBus extends Controller
         return view('admin.databus', ['pivot' => $pivotBusRute, 'bus' => $bus, 'tipebus' => $tipebus, 'rute' => $rute]);
     }
 
-    public function create()
-    {
-    }
-
     public function storeRute(Request $request)
     {
         $data = new \App\Rute();
@@ -127,10 +123,6 @@ class ManagemenBus extends Controller
         return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menambah Data');
     }
 
-    public function show($id)
-    {
-    }
-
     public function editBus(Request $request, $id)
     {
         $cek = \App\Kursi::where('id_bus', $id)->where('status', '!=', 'kosong')->count();
@@ -147,7 +139,7 @@ class ManagemenBus extends Controller
             ]);
         }
 
-        $data = new \App\Bus();
+        $data = new \App\Bus::findOrFail($id);
         $data->nama = $request->nama;
         $data->id_tipebus = $request->id_tipebus;
         $data->deskripsi = $request->deskripsi;
@@ -175,15 +167,18 @@ class ManagemenBus extends Controller
         return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Mengubah Data');
     }
 
-    public function editPivot(Request $request, $id)
+    public function deleteBus($id)
     {
+        $cek = \App\PivotBusRute::
     }
 
-    public function update(Request $request, $id)
+    public function deleteTipe($id)
     {
+        
     }
 
-    public function destroy($id)
+    public function deleteRute($id)
     {
+        
     }
 }

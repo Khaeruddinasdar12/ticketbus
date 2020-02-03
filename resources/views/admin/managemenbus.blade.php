@@ -28,59 +28,6 @@ Manajemen Bus
       <!-- left column -->
       <div class="col-md-6">
         <!-- general form elements -->
-        <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">Tambah Data Bus</h3>
-
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fas fa-minus"></i></button>
-            </div>
-
-          </div>
-          <!-- /.card-header -->
-          <!-- form start -->
-
-          <div class="card-body">
-            <form role="form" action="" method="post" id="add-bus">
-              @csrf
-              <div class="form-group">
-                <label for="exampleInputEmail1">Nama Bus</label>
-                <input type="text" class="form-control" name="nama" required>
-              </div>
-              <div class="form-group">
-                <label>Deskripsi Bus</label>
-                <textarea class="form-control" rows="4" name="deskripsi" required></textarea>
-              </div>
-              <div class="form-group">
-                <label>Tipe Bus</label>
-                <select class="form-control custom-select" name="id_tipebus" required>
-                  <option selected disabled>Pilih Tipe</option>
-                  @foreach($tipebus as $tipe)
-                  <option value="{{ $tipe->id }}">{{ $tipe->nama }}</option>
-                  @endforeach
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Jumlah Kursi</label>
-                <input type="text" class="form-control" id="kursi" name="jumlah_kursi" required>
-              </div>
-
-              <div class="form-group" style="margin-top: 45px;">
-                <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
-                <button type="submit" class="btn btn-primary float-right"><i class="nav-icon fas fa-plus"></i> Tambah</button>
-              </div>
-
-            </form>
-          </div>
-          <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-      </div>
-      <!--/.col (left) -->
-      <!-- right column -->
-      <div class="col-md-6">
-        <!-- general form elements -->
 
         <!-- tipe bus form -->
         <div class="row">
@@ -99,7 +46,7 @@ Manajemen Bus
               <!-- form start -->
 
               <div class="card-body">
-                <form role="form" action="{{route('store.tipebus')}}" method="post">
+                <form role="form" action="" method="post" id="add-tipe">
                   @csrf
                   <div class="form-group">
                     <label for="tipebus">Nama Tipe</label>
@@ -136,7 +83,7 @@ Manajemen Bus
               <!-- form start -->
 
               <div class="card-body">
-                <form role="form" action="{{route('store.rute')}}" method="post">
+                <form role="form" action="" method="post" id="add-rute">
                   @csrf
 
                   <div class="form-group">
@@ -159,6 +106,59 @@ Manajemen Bus
 
         <!-- /.card -->
       </div>
+      <!--/.col (left) -->
+      <!-- right column -->
+      <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Tambah Data Bus</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <i class="fas fa-minus"></i></button>
+            </div>
+
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+
+          <div class="card-body">
+            <form role="form" action="" method="post" id="add-bus">
+              @csrf
+              <div class="form-group">
+                <label for="exampleInputEmail1">Nama Bus - Nomor Polisi (DD)</label>
+                <input type="text" class="form-control" name="nama" required placeholder="ex: Bintang Timur - DD 12345 AA">
+              </div>
+              <div class="form-group">
+                <label>Deskripsi Bus</label>
+                <textarea class="form-control" rows="4" name="deskripsi" required></textarea>
+              </div>
+              <div class="form-group">
+                <label>Tipe Bus</label>
+                <select class="form-control custom-select" name="id_tipebus" required>
+                  <option selected disabled>Pilih Tipe</option>
+                  @foreach($tipebus as $tipe)
+                  <option value="{{ $tipe->id }}">{{ $tipe->nama }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Jumlah Kursi</label>
+                <input type="text" class="form-control" id="kursi" name="jumlah_kursi" required>
+              </div>
+
+              <div class="form-group" style="margin-top: 45px;">
+                <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
+                <button type="submit" class="btn btn-primary float-right"><i class="nav-icon fas fa-plus"></i> Tambah</button>
+              </div>
+
+            </form>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
       <!--/.col (right) -->
     </div>
     <!-- /.row -->
@@ -176,32 +176,94 @@ Manajemen Bus
   });
 </script>
 <script type="text/javascript">
-  $('#add-bus').submit(function(e){
-      e.preventDefault();
+  // add tipe bus
+  $('#add-tipe').submit(function(e) {
+    e.preventDefault();
     var request = new FormData(this);
-    var endpoint= '{{route("store.bus")}}';
-          $.ajax({
-            url: endpoint,
-            method: "POST",
-            data: request,
-            contentType: false,
-            cache: false,
-            processData: false,
-            // dataType: "json",
-            success:function(data){
-              $('#add-bus')[0].reset();
-             
-              berhasil(data.status, data.pesan);
-            },
-            error: function(xhr, status, error){
-                var error = xhr.responseJSON; 
-                if ($.isEmptyObject(error) == false) {
-                  $.each(error.errors, function(key, value) {
-                    gagal(key, value);
-                  });
-                }
-                } 
-            }); 
+    var endpoint = '{{route("store.tipebus")}}';
+    $.ajax({
+      url: endpoint,
+      method: "POST",
+      data: request,
+      contentType: false,
+      cache: false,
+      processData: false,
+      // dataType: "json",
+      success: function(data) {
+        $('#add-tipe')[0].reset();
+
+        berhasil(data.status, data.pesan);
+      },
+      error: function(xhr, status, error) {
+        var error = xhr.responseJSON;
+        if ($.isEmptyObject(error) == false) {
+          $.each(error.errors, function(key, value) {
+            gagal(key, value);
+          });
+        }
+      }
     });
+  });
+  // end tipe bus
+
+  // add rute bus
+  $('#add-rute').submit(function(e) {
+    e.preventDefault();
+    var request = new FormData(this);
+    var endpoint = '{{route("store.rute")}}';
+    $.ajax({
+      url: endpoint,
+      method: "POST",
+      data: request,
+      contentType: false,
+      cache: false,
+      processData: false,
+      // dataType: "json",
+      success: function(data) {
+        $('#add-rute')[0].reset();
+
+        berhasil(data.status, data.pesan);
+      },
+      error: function(xhr, status, error) {
+        var error = xhr.responseJSON;
+        if ($.isEmptyObject(error) == false) {
+          $.each(error.errors, function(key, value) {
+            gagal(key, value);
+          });
+        }
+      }
+    });
+  });
+  // end rute bus
+
+  // add bus
+  $('#add-bus').submit(function(e) {
+    e.preventDefault();
+    var request = new FormData(this);
+    var endpoint = '{{route("store.bus")}}';
+    $.ajax({
+      url: endpoint,
+      method: "POST",
+      data: request,
+      contentType: false,
+      cache: false,
+      processData: false,
+      // dataType: "json",
+      success: function(data) {
+        $('#add-bus')[0].reset();
+
+        berhasil(data.status, data.pesan);
+      },
+      error: function(xhr, status, error) {
+        var error = xhr.responseJSON;
+        if ($.isEmptyObject(error) == false) {
+          $.each(error.errors, function(key, value) {
+            gagal(key, value);
+          });
+        }
+      }
+    });
+  });
+  // end add bus
 </script>
 @endsection

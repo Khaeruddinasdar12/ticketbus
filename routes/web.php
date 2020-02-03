@@ -43,7 +43,11 @@ Route::prefix('managemen-bus')->group(function () {
 	Route::put('edit-bus/{id}', 'ManagemenBus@editBus');
 	Route::put('edit-tipe-bus/{id}', 'ManagemenBus@editTipe');
 	Route::put('edit-rute/{id}', 'ManagemenBus@editRute');
-	Route::put('edit-bus/{id}', 'ManagemenBus@editPivot');
+
+	Route::delete('delete-bus/{id}', 'ManagemenBus@editBus');
+	Route::delete('delete-tipe-bus/{id}', 'ManagemenBus@editTipe');
+	Route::delete('delete-rute/{id}', 'ManagemenBus@editRute');
+	Route::delete('delete-bus/{id}', 'ManagemenBus@editPivot');
 });
 
 // RUTE MANAGEMEN JADWAL

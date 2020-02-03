@@ -28,8 +28,8 @@ Route::get('data-transaksi', 'Transaksi@index')->name('index.transaksi');
 Route::get('riwayat-transaksi', 'Transaksi@riwayat')->name('riwayat.transaksi');
 
 // all JQUERY
-Route::get('nama-bus/{id}', 'ApiJquery@namaBus'); 
-Route::get('data-bus/{id}', 'ApiJquery@dataBus'); 
+Route::get('nama-bus/{id}', 'ApiJquery@namaBus');
+Route::get('data-bus/{id}', 'ApiJquery@dataBus');
 
 // RUTE MANAGEMEN BUS
 Route::prefix('managemen-bus')->group(function () {
@@ -50,15 +50,13 @@ Route::prefix('managemen-bus')->group(function () {
 });
 
 // RUTE MANAGEMEN JADWAL
-Route::prefix('managemen-jadwal')->group(function() {
+Route::prefix('managemen-jadwal')->group(function () {
 	Route::get('/', 'Jadwal@index')->name('index.jadwal');
 	Route::post('/', 'Jadwal@store')->name('store.jadwal'); // input data admin
 });
 
 // RUTE MANAGEMEN ADMIN
-Route::prefix('managemen-admin')->group(function() {
+Route::prefix('managemen-admin')->group(function () {
 	Route::get('/', 'ManagemenAdmin@index')->name('index.admin');
 	Route::post('/', 'ManagemenAdmin@store')->name('store.admin'); // input data admin
 });
-
-

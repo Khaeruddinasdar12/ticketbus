@@ -78,7 +78,7 @@ Data Bus
                         <td>{{ $databus->jumlah_kursi }}</td>
                         <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail0" title="lihat detail" data-nama="{{ $databus->nama }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class=" far fa-eye"></i></button> </td>
                         <td>
-                          <button class="btn btn-success" data-toggle="modal" data-target="#editbus" title="edit data" data-nama="{{ $databus->nama }}" data-id="{{ $databus->id }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class="fas fa-pencil-alt"></i></button>
+                          <button class="btn btn-success" data-toggle="modal" data-target="#editbus" title="edit data" data-nama="{{ $databus->nama }}" data-id="{{ $databus->id_tipebus }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class="fas fa-pencil-alt"></i></button>
                           <button class="btn btn-danger" title="hapus data"><i class="fas fa-trash"></i></button>
                         </td>
                       </tr>
@@ -128,7 +128,7 @@ Data Bus
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Data Bus</h5>
+                            <h5 class="modal-title" id="exampleModalLabel"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -190,13 +190,15 @@ Data Bus
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach($tipebus as $tipe)
                       <tr>
-                        <td>Baco</td>
+                        <td>{{ $tipe->nama }}</td>
                         <td>
-                          <button class="btn btn-success" data-toggle="modal" data-target="#edittipe" title="edit data"><i class="fas fa-pencil-alt"></i></button>
+                          <button class="btn btn-success" data-toggle="modal" data-target="#edittipe" title="edit data" data-tipe="{{ $tipe->nama }}"><i class="fas fa-pencil-alt"></i></button>
                           <button class="btn btn-danger" title="hapus data"><i class="fas fa-trash"></i></button>
                         </td>
                       </tr>
+                      @endforeach
                     </tbody>
 
                     <!-- Modal edit tipe -->
@@ -204,7 +206,7 @@ Data Bus
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Tipe Bus</h5>
+                            <h5 class="modal-title" id="exampleModalLabel"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -213,8 +215,8 @@ Data Bus
                             <div class="container">
                               <form role="form">
                                 <div class="form-group">
-                                  <label for="exampleInputEmail1">Nama Tipe Bus</label>
-                                  <input type="text" class="form-control" name="nama">
+                                  <label for="exampleInputEmail1">Tipe </label>
+                                  <input type="text" class="form-control" name="nama" id="namatipe">
                                 </div>
 
                                 <div class="form-group" style="margin-top: 20px;">
@@ -239,18 +241,20 @@ Data Bus
                   <table id="example3" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Nama Rute</th>
+                        <th>Nama</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach($rute as $rutes)
                       <tr>
-                        <td>Baco</td>
+                        <td>{{ $rutes->rute }}</td>
                         <td>
-                          <button class="btn btn-success" data-toggle="modal" data-target="#editrute" title="edit data"><i class="fas fa-pencil-alt"></i></button>
+                          <button class="btn btn-success" data-toggle="modal" data-target="#editrute" title="edit data" data-rute="{{ $rutes->rute }}"><i class="fas fa-pencil-alt"></i></button>
                           <button class="btn btn-danger" title="hapus data"><i class="fas fa-trash"></i></button>
                         </td>
                       </tr>
+                      @endforeach
                     </tbody>
 
                     <!-- Modal edit tipe -->
@@ -258,7 +262,7 @@ Data Bus
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Rute</h5>
+                            <h5 class="modal-title" id="exampleModalLabel"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -268,7 +272,7 @@ Data Bus
                               <form role="form">
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Nama Rute</label>
-                                  <input type="text" class="form-control" name="rute">
+                                  <input type="text" class="form-control" name="rute" id="namarute">
                                 </div>
 
                                 <div class="form-group" style="margin-top: 20px;">
@@ -466,6 +470,25 @@ Data Bus
   })
   // end detail pivot
 
+  // edit pivot
+  $('#editpivot').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget)
+    var nama = button.data('nama')
+    var tipe = button.data('tipe')
+    var rute = button.data('rute')
+    var harga = button.data('harga')
+    var desc = button.data('desc')
+
+    var modal = $(this)
+    modal.find('.modal-title').text('Detail Bus ' + nama)
+    modal.find('.modal-body #namabus').val(nama)
+    modal.find('.modal-body #tipebus').val(tipe)
+    modal.find('.modal-body #rutebus').val(rute)
+    modal.find('.modal-body #hargabus').val(harga)
+    modal.find('.modal-body #deskripsi').val(desc)
+  })
+  // end edit pivot
+
   // detail bus
   $('#showdetail0').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget)
@@ -483,7 +506,7 @@ Data Bus
   })
   // end detail bus
 
-  // detail bus
+  // edit bus
   $('#editbus').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget)
     var nama = button.data('nama')
@@ -498,6 +521,28 @@ Data Bus
     modal.find('.modal-body #kursiss').val(kursi)
     modal.find('.modal-body #deskripsiss').val(desc)
   })
-  // end detail bus
+  // end edit bus
+
+  // detail tipe
+  $('#edittipe').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget)
+    var nama = button.data('tipe')
+
+    var modal = $(this)
+    modal.find('.modal-title').text('Edit Data Tipe ' + nama)
+    modal.find('.modal-body #namatipe').val(nama)
+  })
+  // end detail tipe
+
+  // detail rute
+  $('#editrute').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget)
+    var nama = button.data('rute')
+
+    var modal = $(this)
+    modal.find('.modal-title').text('Edit Data Rute ' + nama)
+    modal.find('.modal-body #namarute').val(nama)
+  })
+  // end detail rute
 </script>
 @endsection

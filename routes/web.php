@@ -44,7 +44,7 @@ Route::prefix('managemen-bus')->group(function () {
 	Route::put('edit-tipe-bus/{id}', 'ManagemenBus@editTipe');
 	Route::put('edit-rute/{id}', 'ManagemenBus@editRute');
 
-	Route::delete('delete-bus/{id}', 'ManagemenBus@deletBus');
+	Route::delete('delete-bus/{id}', 'ManagemenBus@deleteBus');
 	Route::delete('delete-tipe-bus/{id}', 'ManagemenBus@deleteTipe');
 	Route::delete('delete-rute/{id}', 'ManagemenBus@deleteRute');
 });

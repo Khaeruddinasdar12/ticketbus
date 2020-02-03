@@ -76,7 +76,7 @@ Data Bus
                         <td>{{ $databus->nama }}</td>
                         <td>{{ $databus->tipebus }}</td>
                         <td>{{ $databus->jumlah_kursi }}</td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail0" title="lihat detail" data-nama="{{ $databus->nama }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class=" far fa-eye"></i></button> </td>
+                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail0" title="lihat detail" data-id="{{ $databus->id }}" data-nama="{{ $databus->nama }}"  data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class=" far fa-eye"></i></button> </td>
                         <td>
                           <button class="btn btn-success" data-toggle="modal" data-target="#editbus" title="edit data" data-nama="{{ $databus->nama }}" data-id="{{ $databus->id_tipebus }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class="fas fa-pencil-alt"></i></button>
                           <button class="btn btn-danger" title="hapus data"><i class="fas fa-trash"></i></button>
@@ -135,7 +135,10 @@ Data Bus
                           </div>
                           <div class="modal-body">
                             <div class="container">
-                              <form role="form">
+                              <form role="form" action="" method="post" id="edit-bus">
+                                @csrf
+                                <input type="hidden" id="bus-id">
+                                <input type="hidden" name="_method" value="PUT">
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Nama Bus</label>
                                   <input type="text" class="form-control" name="nama" id="namabusss">
@@ -194,7 +197,7 @@ Data Bus
                       <tr>
                         <td>{{ $tipe->nama }}</td>
                         <td>
-                          <button class="btn btn-success" data-toggle="modal" data-target="#edittipe" title="edit data" data-tipe="{{ $tipe->nama }}"><i class="fas fa-pencil-alt"></i></button>
+                          <button class="btn btn-success" data-toggle="modal" data-target="#edittipe" title="edit data" data-id="{{ $tipe->id }}" data-tipe="{{ $tipe->nama }}"><i class="fas fa-pencil-alt"></i></button>
                           <button class="btn btn-danger" title="hapus data"><i class="fas fa-trash"></i></button>
                         </td>
                       </tr>
@@ -213,7 +216,10 @@ Data Bus
                           </div>
                           <div class="modal-body">
                             <div class="container">
-                              <form role="form">
+                              <form role="form" action="" method="post" id="edit-tipe">
+                                @csrf
+                                <input type="hidden" id="tipe-id">
+                                <input type="hidden" name="_method" value="PUT">
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Tipe </label>
                                   <input type="text" class="form-control" name="nama" id="namatipe">
@@ -250,14 +256,14 @@ Data Bus
                       <tr>
                         <td>{{ $rutes->rute }}</td>
                         <td>
-                          <button class="btn btn-success" data-toggle="modal" data-target="#editrute" title="edit data" data-rute="{{ $rutes->rute }}"><i class="fas fa-pencil-alt"></i></button>
+                          <button class="btn btn-success" data-toggle="modal" data-target="#editrute" title="edit data" data-id="{{ $rutes->id }}" data-rute="{{ $rutes->rute }}"><i class="fas fa-pencil-alt"></i></button>
                           <button class="btn btn-danger" title="hapus data"><i class="fas fa-trash"></i></button>
                         </td>
                       </tr>
                       @endforeach
                     </tbody>
 
-                    <!-- Modal edit tipe -->
+                    <!-- Modal edit rute -->
                     <div class="modal fade" id="editrute" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -269,7 +275,10 @@ Data Bus
                           </div>
                           <div class="modal-body">
                             <div class="container">
-                              <form role="form">
+                              <form role="form" method="post" action="" id="edit-rute">
+                                @csrf
+                                <input type="hidden" id="rute-id">
+                                <input type="hidden" name="_method" value="PUT">
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Nama Rute</label>
                                   <input type="text" class="form-control" name="rute" id="namarute">
@@ -430,12 +439,14 @@ Data Bus
     var tipe = button.data('id')
     var kursi = button.data('kursi')
     var desc = button.data('desc')
+    var id = button.data('id')
 
     var modal = $(this)
     modal.find('.modal-title').text('Edit Data Bus ' + nama)
     modal.find('.modal-body #namabusss').val(nama)
     modal.find('.modal-body #tipebusss').val(tipe)
     modal.find('.modal-body #kursiss').val(kursi)
+    modal.find('.modal-body #bus-id').val(id)
     modal.find('.modal-body #deskripsiss').val(desc)
   })
   // end edit bus
@@ -444,10 +455,12 @@ Data Bus
   $('#edittipe').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget)
     var nama = button.data('tipe')
+    var id = button.data('id')
 
     var modal = $(this)
     modal.find('.modal-title').text('Edit Data Tipe ' + nama)
     modal.find('.modal-body #namatipe').val(nama)
+    modal.find('.modal-body #tipe-id').val(id)
   })
   // end detail tipe
 
@@ -455,11 +468,48 @@ Data Bus
   $('#editrute').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget)
     var nama = button.data('rute')
+    var id = button.data('id')
 
     var modal = $(this)
     modal.find('.modal-title').text('Edit Data Rute ' + nama)
     modal.find('.modal-body #namarute').val(nama)
+    modal.find('.modal-body #rute-id').val(id)
   })
   // end detail rute
+
+
+  // JQUERY FORM EDIT
+  // EDIT TIPE
+    $('#edit-tipe').submit(function(e){
+    e.preventDefault();
+    var id  = eval(document.getElementById('tipe-id').value);
+    var request = new FormData(this);
+    var endpoint= "managemen-bus/edit-tipe-bus/"+id;
+          $.ajax({
+            url: endpoint,
+            method: "POST",
+            data: request,
+            contentType: false,
+            cache: false,
+            processData: false,
+            // dataType: "json",
+            success:function(data){
+              $('#edit-tipe')[0].reset();
+              $('#edittipe').modal('hide');
+             
+              berhasil(data.status, data.pesan);
+            },
+            error: function(xhr, status, error){
+                var error = xhr.responseJSON; 
+                if ($.isEmptyObject(error) == false) {
+                  $.each(error.errors, function(key, value) {
+                    gagal(key, value);
+                  });
+                }
+                } 
+            }); 
+});
+  // END EDIT TIPE
+  // END JQUERY FORM EDIT
 </script>
 @endsection

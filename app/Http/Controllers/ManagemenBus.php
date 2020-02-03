@@ -139,7 +139,7 @@ class ManagemenBus extends Controller
             ]);
         }
 
-        $data = new \App\Bus::findOrFail($id);
+        $data =  \App\Bus::findOrFail($id);
         $data->nama = $request->nama;
         $data->id_tipebus = $request->id_tipebus;
         $data->deskripsi = $request->deskripsi;
@@ -169,7 +169,8 @@ class ManagemenBus extends Controller
 
     public function deleteBus($id)
     {
-        $cek = \App\PivotBusRute::
+        $cek = \App\PivotBusRute::where('id_bus', $id)->count();
+        return $cek;
     }
 
     public function deleteTipe($id)

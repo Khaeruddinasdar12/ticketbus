@@ -7,6 +7,7 @@
   <title>TicketBus | @yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->
@@ -247,12 +248,53 @@
   @yield('js')
   <script type="text/javascript">
 
+    function hapus() {
+     $(document).on('click', '#del_id', function(){
+              Swal.fire({
+                title: 'Anda Yakin ?',
+                text: "Anda tidak dapat mengembalikan data yang telah di hapus!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Lanjutkan Hapus!',
+                timer: 6500
+              }).then((result) => {
+                  if (result.value) {
+                    var me = $(this),
+                        url = me.attr('href'),
+                        token = $('meta[name="csrf-token"]').attr('content');
+                        $.ajax({
+                          url: url,
+                          method: "POST",
+                          data : {
+                            '_method' : 'DELETE',
+                            '_token'  : token
+                          },
+                          success:function(data){
+                            berhasil(data.status, data.pesan);
+                          },
+                          error: function(xhr, status, error){
+                              var error = xhr.responseJSON; 
+                              if ($.isEmptyObject(error) == false) {
+                                $.each(error.errors, function(key, value) {
+                                  gagal(key, value);
+                                });
+                              }
+                          } 
+                        });
+                      }
+                  });
+              });
+   }
   function berhasil(status, pesan) {
       Swal.fire({
         type: status,
         title: pesan,
         showConfirmButton: true,
         button: "Ok"
+    }).then(function(){
+      location.reload();
     })
   }
 

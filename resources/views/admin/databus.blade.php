@@ -257,7 +257,7 @@ Data Bus
                         <td>{{ $rutes->rute }}</td>
                         <td>
                           <button class="btn btn-success" data-toggle="modal" data-target="#editrute" title="edit data" data-id="{{ $rutes->id }}" data-rute="{{ $rutes->rute }}"><i class="fas fa-pencil-alt"></i></button>
-                          <button class="btn btn-danger" title="hapus data"><i class="fas fa-trash"></i></button>
+                          <button class="btn btn-danger" title="hapus data" href="managemen-bus/delete-rute/{{$rutes->id}}" onclick="hapus()" id="del_id"><i class="fas fa-trash"></i></button>
                         </td>
                       </tr>
                       @endforeach

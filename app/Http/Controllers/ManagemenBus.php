@@ -170,16 +170,36 @@ class ManagemenBus extends Controller
     public function deleteBus($id)
     {
         $cek = \App\PivotBusRute::where('id_bus', $id)->count();
-        return $cek;
+        if($cek > 0) {
+            return $arrayName = array('status' => 'error', 'pesan' => 'Gagal! Data ini terdapat di tabel lain');
+        }
+        $data = \App\Bus::findOrFail($id);
+        $data->delete();
+
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menghapus Data');
     }
 
     public function deleteTipe($id)
     {
-        
+        $cek = \App\Bus::where('id_tipebus', $id)->count();
+        if($cek > 0) {
+            return $arrayName = array('status' => 'error', 'pesan' => 'Gagal! Data ini terdapat di tabel lain');
+        }
+        $data = \App\TipeBus::findOrFail($id);
+        $data->delete();
+
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menghapus Data');
     }
 
     public function deleteRute($id)
     {
-        
+        $cek = \App\PivotBusRute::where('id_rute', $id)->count();
+        if($cek > 0) {
+            return $arrayName = array('status' => 'error', 'pesan' => 'Gagal! Data ini terdapat di tabel lain');
+        }
+        $data = \App\Rute::findOrFail($id);
+        $data->delete();
+
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menghapus Data');
     }
 }

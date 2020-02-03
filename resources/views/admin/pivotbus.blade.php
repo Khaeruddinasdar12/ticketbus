@@ -40,14 +40,14 @@ Manajemen Bus
           <!-- form start -->
 
           <div class="card-body">
-            <form role="form" name="{{route('store.pivot')}}" action="post">
+            <form role="form" action="{{route('store.pivot')}}" method="post">
               @csrf
               <div class="row">
                 <div class="col-sm-4">
                   <!-- text input -->
                   <div class="form-group">
                     <label for="inputStatus">Tipe Bus</label>
-                    <select class="form-control custom-select" id="tipebus" onchange="show_tipe()" >
+                    <select class="form-control custom-select" id="tipebus" onchange="show_tipe()" required>
                       <option selected disabled>Pilih tipe</option>
                       @foreach($tipebus as $tipe)
                         <option value="{{$tipe->id}}">{{$tipe->nama}}</option>
@@ -58,7 +58,7 @@ Manajemen Bus
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label for="inputStatus">Nama Bus</label>
-                    <select class="form-control custom-select" id="nama-bus">
+                    <select class="form-control custom-select" id="nama-bus" required name="id_bus">
                       <option selected disabled>Pilih tipe</option>
                     </select>
                   </div>
@@ -66,7 +66,7 @@ Manajemen Bus
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label for="inputStatus">Route</label>
-                    <select class="form-control custom-select">
+                    <select class="form-control custom-select" required name="id_rute">
                       <option selected disabled>Pilih tipe</option>
                       @foreach($rute as $rutes)
                         <option value="{{$rutes->id}}">{{$rutes->rute}}</option>

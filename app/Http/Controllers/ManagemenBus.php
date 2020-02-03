@@ -112,8 +112,8 @@ class ManagemenBus extends Controller
     public function storePivotBusRute(Request $request)
     {
         $countData = DB::table('pivot_bus_rutes')
-            ->where('id_bus', 1)
-            ->where('id_rute', 1)
+            ->where('id_bus', $request->id_bus)
+            ->where('id_rute', $request->id_rute)
             ->count();
         if ($countData == 1) {
             return $arrayName = array('status' => 'error', 'pesan' => 'Data Sudah Ada');

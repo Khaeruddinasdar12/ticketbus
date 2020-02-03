@@ -314,7 +314,6 @@ Data Bus
                           <button class="btn btn-primary" data-toggle="modal" data-target="#showdetailpivot" title="lihat detail" data-nama="{{ $datapivot->nama_bus }}" data-tipe="{{ $datapivot->tipebus }}" data-rute="{{ $datapivot->rute_bus }}" data-harga="{{ $datapivot->harga }}" data-desc="{{ $datapivot->deskripsi }}"><i class="far fa-eye"></i></button>
                         </td>
                         <td>
-                          <button class="btn btn-success" data-toggle="modal" data-target="#editpivot" title="edit data"><i class="fas fa-pencil-alt"></i></button>
                           <button class="btn btn-danger" title="hapus data"><i class="fas fa-trash"></i></button>
                         </td>
                       </tr>
@@ -363,69 +362,6 @@ Data Bus
                     </div>
                     <!-- End Modal detail -->
 
-                    <!-- Modal edit pivot -->
-                    <div class="modal fade" id="editpivot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Rute</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <div class="container">
-                              <form role="form">
-                                <div class="row">
-                                  <div class="col-md-6">
-                                    <div class="form-group">
-                                      <label for="inputStatus">Nama Bus</label>
-                                      <select class="form-control custom-select" name="namabus">
-                                        <option selected disabled>Pilih tipe</option>
-                                        <option>Sleeper</option>
-                                        <option>Seatbelt</option>
-                                        <option>Comfortable</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div class="col-md-6">
-                                    <div class="form-group">
-                                      <label for="inputStatus">Tipe Bus</label>
-                                      <select class="form-control custom-select" name="tipebus">
-                                        <option selected disabled>Pilih tipe</option>
-                                        <option>Bintang Prima A10</option>
-                                        <option>Bintang Prima M70</option>
-                                        <option>Bintang Prima C30</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <label for="inputStatus">Route</label>
-                                  <select class="form-control custom-select" name="namarute">
-                                    <option selected disabled>Pilih tipe</option>
-                                    <option>Makassar - Bulukumba</option>
-                                    <option>Bulukumba - Selayar</option>
-                                    <option>Selayar - Maros</option>
-                                  </select>
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Harga Rp. Per Kursi</label>
-                                  <input type="text" class="form-control" name="harga">
-                                </div>
-
-                                <div class="form-group" style="margin-top: 20px;">
-                                  <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
-                                  <button type="submit" class="btn btn-info float-right"><i class="nav-icon fas fa-plus"></i> Update</button>
-                                </div>
-
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
                   </table>
                 </div>
                 <!-- end tab data pivot -->
@@ -469,25 +405,6 @@ Data Bus
     modal.find('.modal-body #deskripsi').val(desc)
   })
   // end detail pivot
-
-  // edit pivot
-  $('#editpivot').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget)
-    var nama = button.data('nama')
-    var tipe = button.data('tipe')
-    var rute = button.data('rute')
-    var harga = button.data('harga')
-    var desc = button.data('desc')
-
-    var modal = $(this)
-    modal.find('.modal-title').text('Detail Bus ' + nama)
-    modal.find('.modal-body #namabus').val(nama)
-    modal.find('.modal-body #tipebus').val(tipe)
-    modal.find('.modal-body #rutebus').val(rute)
-    modal.find('.modal-body #hargabus').val(harga)
-    modal.find('.modal-body #deskripsi').val(desc)
-  })
-  // end edit pivot
 
   // detail bus
   $('#showdetail0').on('show.bs.modal', function(event) {

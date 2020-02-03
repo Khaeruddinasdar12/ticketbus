@@ -44,7 +44,6 @@ class ManagemenBus extends Controller
             ->having('jml', '!=', $countrute)
             ->get();
         return $showbus;
-        
     }
 
     public function data()

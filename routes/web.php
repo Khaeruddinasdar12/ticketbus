@@ -18,7 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('dashboard', 'Dashboard@index')->name('index');
+
 Route::get('pivot-bus', 'ManagemenBus@pivot')->name('pivot.bus');
+Route::get('show-bus/{id}', 'ManagemenBus@showBus');
+
 Route::get('data-bus', 'ManagemenBus@data')->name('data.bus');
 Route::get('managemen-jadwal', 'Jadwal@index')->name('index.jadwal');
 Route::get('data-transaksi', 'Transaksi@index')->name('index.transaksi');

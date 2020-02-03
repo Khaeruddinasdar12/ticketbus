@@ -47,22 +47,19 @@ Manajemen Bus
                   <!-- text input -->
                   <div class="form-group">
                     <label for="inputStatus">Tipe Bus</label>
-                    <select class="form-control custom-select">
+                    <select class="form-control custom-select" id="tipebus" onchange="show_tipe()" >
                       <option selected disabled>Pilih tipe</option>
-                      <option>Bintang Prima A10</option>
-                      <option>Bintang Prima M70</option>
-                      <option>Bintang Prima C30</option>
+                      @foreach($tipebus as $tipe)
+                        <option value="{{$tipe->id}}">{{$tipe->nama}}</option>
+                      @endforeach
                     </select>
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label for="inputStatus">Nama Bus</label>
-                    <select class="form-control custom-select">
+                    <select class="form-control custom-select" id="nama-bus">
                       <option selected disabled>Pilih tipe</option>
-                      <option>Sleeper</option>
-                      <option>Seatbelt</option>
-                      <option>Comfortable</option>
                     </select>
                   </div>
                 </div>
@@ -71,9 +68,9 @@ Manajemen Bus
                     <label for="inputStatus">Route</label>
                     <select class="form-control custom-select">
                       <option selected disabled>Pilih tipe</option>
-                      <option>Makassar - Bulukumba</option>
-                      <option>Bulukumba - Selayar</option>
-                      <option>Selayar - Maros</option>
+                      @foreach($rute as $rutes)
+                        <option value="{{$rutes->id}}">{{$rutes->rute}}</option>
+                      @endforeach
                     </select>
                   </div>
                 </div>
@@ -108,5 +105,25 @@ Manajemen Bus
   $(function() {
     $("#example4").DataTable();
   });
+</script>
+<script type="text/javascript">
+  function show_tipe() {
+    // var tes = document.getElementById("kdbarang").value;
+    var id = $('#tipebus').val();
+    // console.log(id);
+    $.ajax({
+      'url': "show-bus/"+id,
+      'dataType': 'json',
+      success:function(data){
+
+        jQuery.each( data, function( i, val ) {
+          console.log(val.id);
+         $('#nama-bus' ).append('<option value="'+val.id+'">'+val.nama+'</option>');
+        });   
+
+      }
+
+    })
+  }
 </script>
 @endsection

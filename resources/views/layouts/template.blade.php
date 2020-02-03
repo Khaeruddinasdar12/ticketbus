@@ -26,6 +26,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.css') }}">
   <!-- Google Font: Source Sans Pro -->
+  <link href="{{ asset('css/sweetalert2.min.css') }}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
@@ -241,8 +242,29 @@
   <script src="{{ asset('admin/dist/js/pages/dashboard.js') }}"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="{{ asset('admin/dist/js/demo.js') }}"></script>
+  <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
 
   @yield('js')
+  <script type="text/javascript">
+
+  function berhasil(status, pesan) {
+      Swal.fire({
+        type: status,
+        title: pesan,
+        showConfirmButton: true,
+        button: "Ok"
+    })
+  }
+
+  function gagal(key, pesan) {
+      Swal.fire({
+        type: 'error',
+        title:  key + ' : ' + pesan,
+        showConfirmButton: true,
+        button: "Ok"
+    })
+  }
+</script>
 </body>
 
 </html>

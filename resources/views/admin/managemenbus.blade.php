@@ -42,7 +42,7 @@ Manajemen Bus
           <!-- form start -->
 
           <div class="card-body">
-            <form role="form" action="{{route('store.bus')}}" method="post">
+            <form role="form" action="" method="post" id="add-bus">
               @csrf
               <div class="form-group">
                 <label for="exampleInputEmail1">Nama Bus</label>
@@ -174,5 +174,34 @@ Manajemen Bus
   $(function() {
     $("#example4").DataTable();
   });
+</script>
+<script type="text/javascript">
+  $('#add-bus').submit(function(e){
+      e.preventDefault();
+    var request = new FormData(this);
+    var endpoint= '{{route("store.bus")}}';
+          $.ajax({
+            url: endpoint,
+            method: "POST",
+            data: request,
+            contentType: false,
+            cache: false,
+            processData: false,
+            // dataType: "json",
+            success:function(data){
+              $('#add-bus')[0].reset();
+             
+              berhasil(data.status, data.pesan);
+            },
+            error: function(xhr, status, error){
+                var error = xhr.responseJSON; 
+                if ($.isEmptyObject(error) == false) {
+                  $.each(error.errors, function(key, value) {
+                    gagal(key, value);
+                  });
+                }
+                } 
+            }); 
+    });
 </script>
 @endsection

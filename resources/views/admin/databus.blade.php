@@ -76,10 +76,10 @@ Data Bus
                         <td>{{ $databus->nama }}</td>
                         <td>{{ $databus->tipebus }}</td>
                         <td>{{ $databus->jumlah_kursi }}</td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail0" title="lihat detail" data-id="{{ $databus->id }}" data-nama="{{ $databus->nama }}"  data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class=" far fa-eye"></i></button> </td>
+                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail0" title="lihat detail" data-id="{{ $databus->id }}" data-nama="{{ $databus->nama }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class=" far fa-eye"></i></button> </td>
                         <td>
                           <button class="btn btn-success" data-toggle="modal" data-target="#editbus" title="edit data" data-nama="{{ $databus->nama }}" data-id="{{ $databus->id_tipebus }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class="fas fa-pencil-alt"></i></button>
-                          <button class="btn btn-danger" title="hapus data"><i class="fas fa-trash"></i></button>
+                          <button class="btn btn-danger" title="hapus data" href="managemen-bus/delete-bus/{{$databus->id}}" onclick="hapus()" id="del_idbus"><i class="fas fa-trash"></i></button>
                         </td>
                       </tr>
                       @endforeach
@@ -198,7 +198,7 @@ Data Bus
                         <td>{{ $tipe->nama }}</td>
                         <td>
                           <button class="btn btn-success" data-toggle="modal" data-target="#edittipe" title="edit data" data-id="{{ $tipe->id }}" data-tipe="{{ $tipe->nama }}"><i class="fas fa-pencil-alt"></i></button>
-                          <button class="btn btn-danger" title="hapus data"><i class="fas fa-trash"></i></button>
+                          <button class="btn btn-danger" title="hapus data" href="managemen-bus/delete-tipe-bus/{{$tipe->id}}" onclick="hapus()" id="del_id"><i class="fas fa-trash"></i></button>
                         </td>
                       </tr>
                       @endforeach
@@ -479,37 +479,103 @@ Data Bus
 
 
   // JQUERY FORM EDIT
-  // EDIT TIPE
-    $('#edit-tipe').submit(function(e){
+
+  //edit data bus
+  $('#edit-bus').submit(function(e) {
     e.preventDefault();
-    var id  = eval(document.getElementById('tipe-id').value);
+    var id = eval(document.getElementById('bus-id').value); //id pada inputan
     var request = new FormData(this);
-    var endpoint= "managemen-bus/edit-tipe-bus/"+id;
-          $.ajax({
-            url: endpoint,
-            method: "POST",
-            data: request,
-            contentType: false,
-            cache: false,
-            processData: false,
-            // dataType: "json",
-            success:function(data){
-              $('#edit-tipe')[0].reset();
-              $('#edittipe').modal('hide');
-             
-              berhasil(data.status, data.pesan);
-            },
-            error: function(xhr, status, error){
-                var error = xhr.responseJSON; 
-                if ($.isEmptyObject(error) == false) {
-                  $.each(error.errors, function(key, value) {
-                    gagal(key, value);
-                  });
-                }
-                } 
-            }); 
-});
+    var endpoint = "managemen-bus/edit-bus/" + id;
+    $.ajax({
+      url: endpoint,
+      method: "POST",
+      data: request,
+      contentType: false,
+      cache: false,
+      processData: false,
+      // dataType: "json",
+      success: function(data) {
+        $('#edit-bus')[0].reset(); //id form
+        $('#editbus').modal('hide'); //id modal
+
+        berhasil(data.status, data.pesan);
+      },
+      error: function(xhr, status, error) {
+        var error = xhr.responseJSON;
+        if ($.isEmptyObject(error) == false) {
+          $.each(error.errors, function(key, value) {
+            gagal(key, value);
+          });
+        }
+      }
+    });
+  });
+  // end edit data bus
+
+  // EDIT TIPE
+  $('#edit-tipe').submit(function(e) {
+    e.preventDefault();
+    var id = eval(document.getElementById('tipe-id').value); //id pada inputan
+    var request = new FormData(this);
+    var endpoint = "managemen-bus/edit-tipe-bus/" + id;
+    $.ajax({
+      url: endpoint,
+      method: "POST",
+      data: request,
+      contentType: false,
+      cache: false,
+      processData: false,
+      // dataType: "json",
+      success: function(data) {
+        $('#edit-tipe')[0].reset(); //id form
+        $('#edittipe').modal('hide'); //id modal
+
+        berhasil(data.status, data.pesan);
+      },
+      error: function(xhr, status, error) {
+        var error = xhr.responseJSON;
+        if ($.isEmptyObject(error) == false) {
+          $.each(error.errors, function(key, value) {
+            gagal(key, value);
+          });
+        }
+      }
+    });
+  });
   // END EDIT TIPE
+
+  //edit rute bus
+  $('#edit-rute').submit(function(e) {
+    e.preventDefault();
+    var id = eval(document.getElementById('rute-id').value); //id pada inputan
+    var request = new FormData(this);
+    var endpoint = "managemen-bus/edit-rute/" + id;
+    $.ajax({
+      url: endpoint,
+      method: "POST",
+      data: request,
+      contentType: false,
+      cache: false,
+      processData: false,
+      // dataType: "json",
+      success: function(data) {
+        $('#edit-rute')[0].reset(); //id form
+        $('#editrute').modal('hide'); //id modal
+
+        berhasil(data.status, data.pesan);
+      },
+      error: function(xhr, status, error) {
+        var error = xhr.responseJSON;
+        if ($.isEmptyObject(error) == false) {
+          $.each(error.errors, function(key, value) {
+            gagal(key, value);
+          });
+        }
+      }
+    });
+  });
+  // end edit rute bus
+
   // END JQUERY FORM EDIT
 </script>
 @endsection

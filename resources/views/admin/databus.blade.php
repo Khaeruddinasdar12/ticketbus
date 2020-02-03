@@ -515,7 +515,7 @@ Data Bus
   // EDIT TIPE
   $('#edit-tipe').submit(function(e) {
     e.preventDefault();
-    var id = eval(document.getElementById('tipe-id').value);
+    var id = eval(document.getElementById('tipe-id').value); //id pada inputan
     var request = new FormData(this);
     var endpoint = "managemen-bus/edit-tipe-bus/" + id;
     $.ajax({
@@ -527,8 +527,8 @@ Data Bus
       processData: false,
       // dataType: "json",
       success: function(data) {
-        $('#edit-tipe')[0].reset();
-        $('#edittipe').modal('hide');
+        $('#edit-tipe')[0].reset(); //id form
+        $('#edittipe').modal('hide'); //id modal
 
         berhasil(data.status, data.pesan);
       },
@@ -543,6 +543,38 @@ Data Bus
     });
   });
   // END EDIT TIPE
+
+  //edit rute bus
+  $('#edit-rute').submit(function(e) {
+    e.preventDefault();
+    var id = eval(document.getElementById('rute-id').value); //id pada inputan
+    var request = new FormData(this);
+    var endpoint = "managemen-bus/edit-rute/" + id;
+    $.ajax({
+      url: endpoint,
+      method: "POST",
+      data: request,
+      contentType: false,
+      cache: false,
+      processData: false,
+      // dataType: "json",
+      success: function(data) {
+        $('#edit-rute')[0].reset(); //id form
+        $('#editrute').modal('hide'); //id modal
+
+        berhasil(data.status, data.pesan);
+      },
+      error: function(xhr, status, error) {
+        var error = xhr.responseJSON;
+        if ($.isEmptyObject(error) == false) {
+          $.each(error.errors, function(key, value) {
+            gagal(key, value);
+          });
+        }
+      }
+    });
+  });
+  // end edit rute bus
 
   // END JQUERY FORM EDIT
 </script>

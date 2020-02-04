@@ -36,6 +36,26 @@ Jadwal
         <!-- /.card-header -->
         <div class="card-body">
           <form role="form">
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label for="filter">Filter By</label>
+                  <select class="form-control custom-select" name="pilihfilter">
+                    <option selected disabled>Pilih filter</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Pilihan</label>
+                  <select class="form-control custom-select" name="pilihan">
+                    <option selected disabled>Hasil Pilihan</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
             <div class="form-group">
               <label for="inputStatus">Rute Perjalanan</label>
               <select class="form-control custom-select" name="pilihrute">

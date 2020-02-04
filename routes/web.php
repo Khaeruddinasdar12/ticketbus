@@ -20,7 +20,8 @@ Auth::routes();
 Route::get('dashboard', 'Dashboard@index')->name('index');
 
 
-Route::get('show-bus/{id}', 'ManagemenBus@showBus');
+
+Route::get('filterby/{tipe}', 'Jadwal@tipe');
 
 
 Route::get('managemen-jadwal', 'Jadwal@index')->name('index.jadwal');
@@ -36,7 +37,9 @@ Route::prefix('managemen-bus')->group(function () {
 	Route::get('/', 'ManagemenBus@index')->name('index.bus');
 	Route::get('jalur-bus', 'ManagemenBus@pivot')->name('pivot.bus');
 	Route::get('data-bus', 'ManagemenBus@data')->name('data.bus');
-	
+
+	Route::get('show-bus/{id}', 'ManagemenBus@showBus'); //jquery show bus di jalur
+
 	Route::post('store-pivot', 'ManagemenBus@storePivotBusRute')->name('store.pivot');
 	Route::post('store-bus', 'ManagemenBus@storeBus')->name('store.bus'); // menginput data bus
 	Route::post('store-tipe-bus', 'ManagemenBus@storeTipeBus')->name('store.tipebus');

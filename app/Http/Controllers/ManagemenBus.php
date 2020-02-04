@@ -173,6 +173,14 @@ class ManagemenBus extends Controller
         if($cek > 0) {
             return $arrayName = array('status' => 'error', 'pesan' => 'Gagal! Data ini terdapat di tabel lain');
         }
+
+        $cekKursi = \App\Kursi::where('id_bus', $id)->where('status', '!=', 'kosong')->count();
+        if($cekKursi > 0) {
+            return $arrayName = array('status' => 'error', 'pesan' => 'Gagal! Terdapat pemesanan di bus ini');
+        }
+
+        $deleteKursi = \App\Kursi::where('id_bus', $id)->delete();
+
         $data = \App\Bus::findOrFail($id);
         $data->delete();
 
@@ -198,6 +206,18 @@ class ManagemenBus extends Controller
             return $arrayName = array('status' => 'error', 'pesan' => 'Gagal! Data ini terdapat di tabel lain');
         }
         $data = \App\Rute::findOrFail($id);
+        $data->delete();
+
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menghapus Data');
+    }
+
+    public function deletePivot($id)
+    {
+        $cek = \App\Jadwal::where('id_bus_rute', $id)->count();
+        if($cek > 0) {
+            return $arrayName = array('status' => 'error', 'pesan' => 'Gagal! Data ini terdapat di tabel lain');
+        }
+        $data = \App\PivotBusRute::findOrFail($id);
         $data->delete();
 
         return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menghapus Data');

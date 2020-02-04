@@ -323,7 +323,8 @@ Data Bus
                           <button class="btn btn-primary" data-toggle="modal" data-target="#showdetailpivot" title="lihat detail" data-nama="{{ $datapivot->nama_bus }}" data-tipe="{{ $datapivot->tipebus }}" data-rute="{{ $datapivot->rute_bus }}" data-harga="{{ $datapivot->harga }}" data-desc="{{ $datapivot->deskripsi }}"><i class="far fa-eye"></i></button>
                         </td>
                         <td>
-                          <button class="btn btn-danger" title="hapus data"><i class="fas fa-trash"></i></button>
+                          <button class="btn btn-danger" title="hapus data" 
+                          href="managemen-bus/delete-pivot/{{$tipe->id}}" onclick="hapus()" id="del_id"><i class="fas fa-trash"></i></button>
                         </td>
                       </tr>
                       @endforeach

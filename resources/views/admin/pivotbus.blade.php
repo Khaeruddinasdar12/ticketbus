@@ -40,7 +40,7 @@ Manajemen Bus
           <!-- form start -->
 
           <div class="card-body">
-            <form role="form" action="{{route('store.pivot')}}" method="post">
+            <form role="form" action="{{route('store.pivot')}}" method="post" id="add-pivot">
               @csrf
               <div class="row">
                 <div class="col-sm-4">
@@ -107,23 +107,49 @@ Manajemen Bus
   });
 </script>
 <script type="text/javascript">
+  // menampilkan bus setelah memilih tipe bus
   function show_tipe() {
-    // var tes = document.getElementById("kdbarang").value;
     var id = $('#tipebus').val();
-    // console.log(id);
     $.ajax({
       'url': "show-bus/"+id,
       'dataType': 'json',
       success:function(data){
-
         jQuery.each( data, function( i, val ) {
           console.log(val.id);
          $('#nama-bus' ).append('<option value="'+val.id+'">'+val.nama+'</option>');
         });   
-
       }
-
     })
   }
+  //end menampilkan bus setelah memilih tipe bus
+
+  // Tambah data pivot
+   $('#add-pivot').submit(function(e) {
+    e.preventDefault();
+    var request = new FormData(this);
+    var endpoint = '{{route("store.pivot")}}';
+    $.ajax({
+      url: endpoint,
+      method: "POST",
+      data: request,
+      contentType: false,
+      cache: false,
+      processData: false,
+      // dataType: "json",
+      success: function(data) {
+        $('#add-pivot')[0].reset()
+        berhasil(data.status, data.pesan);
+      },
+      error: function(xhr, status, error) {
+        var error = xhr.responseJSON;
+        if ($.isEmptyObject(error) == false) {
+          $.each(error.errors, function(key, value) {
+            gagal(key, value);
+          });
+        }
+      }
+    });
+  });
+   // End tambah data pivot
 </script>
 @endsection

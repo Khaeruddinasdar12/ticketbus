@@ -113,8 +113,8 @@
               </a>
             </li>
 
-            <li class="nav-item {{ request()->is('managemen-bus') || request()->is('pivot-bus') || request()->is('data-bus') ? 'has-treeview menu-open' : '' }}">
-              <a href="#" class="nav-link {{ request()->is('managemen-bus') || request()->is('pivot-bus') || request()->is('data-bus') ? 'active' : '' }}">
+            <li class="nav-item {{ request()->is('managemen-bus') || request()->is('managemen-bus/jalur-bus') || request()->is('managemen-bus/data-bus') ? 'has-treeview menu-open' : '' }}">
+              <a href="#" class="nav-link {{ request()->is('managemen-bus') || request()->is('managemen-bus/jalur-bus') || request()->is('managemen-bus/data-bus') || request()->is('managemen-bus/data-bus') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-bus-alt"></i>
                 <p>
                   Manajemen Bus
@@ -129,13 +129,13 @@
                       Tambah Data Bus
                     </p>
                   </a>
-                  <a href="{{route('pivot.bus')}}" class="nav-link {{ request()->is('pivot-bus') ? 'active' : '' }}">
+                  <a href="{{route('pivot.bus')}}" class="nav-link {{ request()->is('managemen-bus/jalur-bus') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
-                      Tambah Pivot Bus
+                      Tambah Jalur Bus
                     </p>
                   </a>
-                  <a href="{{route('data.bus')}}" class="nav-link {{ request()->is('data-bus') ? 'active' : '' }}">
+                  <a href="{{route('data.bus')}}" class="nav-link {{ request()->is('managemen-bus/data-bus') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Data Bus</p>
                   </a>
@@ -288,14 +288,23 @@
     }
 
     function berhasil(status, pesan) {
-      Swal.fire({
-        type: status,
-        title: pesan,
-        showConfirmButton: true,
-        button: "Ok"
-      }).then(function() {
-        location.reload();
-      })
+      if(status == 'success') {
+          Swal.fire({
+          type: status,
+          title: pesan,
+          showConfirmButton: true,
+          button: "Ok"
+        }).then(function() {
+          location.reload();
+        })
+      } else {
+        Swal.fire({
+          type: status,
+          title: pesan,
+          showConfirmButton: true,
+          button: "Ok"
+        })
+      } 
     }
 
     function gagal(key, pesan) {

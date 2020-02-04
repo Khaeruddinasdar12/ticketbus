@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+
 class Jadwal extends Controller
 {
     /**
@@ -16,11 +17,11 @@ class Jadwal extends Controller
         $tipeBus = \App\TipeBus::select('id', 'nama')->get();
 
         $ruteBus = DB::table('pivot_bus_rutes')
-                    ->join('bus', 'pivot_bus_rutes.id_bus','=', 'bus.id')
-                    ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
-                    ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
-                    ->select('pivot_bus_rutes.id', 'bus.nama', 'rutes.rute', 'tipebus.nama as tipebus')
-                    ->get();
+            ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+            ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+            ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+            ->select('pivot_bus_rutes.id', 'bus.nama', 'rutes.rute', 'tipebus.nama as tipebus')
+            ->get();
         // return $ruteBus;
 
         return view('admin.jadwal');
@@ -28,11 +29,11 @@ class Jadwal extends Controller
 
     public function tipe($filter)
     {
-        if($filter == 'tipe') {
+        if ($filter == 'tipe') {
             $data = \App\TipeBus::select('id', 'nama')->get();
-        } else if($filter == 'rute') {
-            $data = \App\Rute::select('id', 'rute')->get();
-        } else if($filter == 'bus') {
+        } else if ($filter == 'rute') {
+            $data = \App\Rute::select('id', 'rute as nama')->get();
+        } else if ($filter == 'bus') {
             $data = \App\Bus::select('id', 'nama')->get();
         } else {
             exit();
@@ -43,7 +44,6 @@ class Jadwal extends Controller
 
     public function showRutePerjalanan($id)
     {
-
     }
 
     public function create()

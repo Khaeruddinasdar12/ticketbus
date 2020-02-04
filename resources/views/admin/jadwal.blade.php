@@ -43,6 +43,9 @@ Jadwal
                   <label for="filter">Filter By</label>
                   <select class="form-control custom-select" name="pilihfilter">
                     <option selected disabled>Pilih filter</option>
+                    <option value="rute">Rute</option>
+                    <option value="tipe">Tipe</option>
+                    <option value="bus">Nama Bus</option>
                   </select>
                 </div>
               </div>
@@ -58,14 +61,8 @@ Jadwal
 
             <div class="form-group">
               <label for="inputStatus">Rute Perjalanan</label>
-              <select class="form-control custom-select" name="pilihrute">
+              <select class="form-control custom-select" name="pilihrute" id="pilih-rute">
                 <option selected disabled>Pilih tipe</option>
-                <option>Makassar - Palopp</option>
-                <option>Makassar - Toraja</option>
-                <option>Makassar - Masamba</option>
-                <option>Masamba - Makassar</option>
-                <option>Toraja - Makassar</option>
-                <option>Palopo - Makassar</option>
               </select>
             </div>
 
@@ -151,5 +148,24 @@ Jadwal
       "autoWidth": false,
     });
   });
+</script>
+<script>
+  // menampilkan bus setelah memilih tipe bus
+  function show_tipe() {
+    $('#pilih-rute').empty();
+    var id = $('#tipebus').val();
+    $.ajax({
+      'url': "show-bus/" + id,
+      'dataType': 'json',
+      success: function(data) {
+        jQuery.each(data, function(i, val) {
+          console.log(val.id);
+          // $('#nama-bus').empty();
+          $('#nama-bus').append('<option value="' + val.id + '">' + val.nama + '</option>');
+        });
+      }
+    })
+  }
+  //end menampilkan bus setelah memilih tipe bus
 </script>
 @endsection

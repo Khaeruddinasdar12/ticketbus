@@ -109,6 +109,7 @@ Manajemen Bus
 <script type="text/javascript">
   // menampilkan bus setelah memilih tipe bus
   function show_tipe() {
+    $('#nama-bus').empty();
     var id = $('#tipebus').val();
     $.ajax({
       'url': "show-bus/"+id,
@@ -116,7 +117,8 @@ Manajemen Bus
       success:function(data){
         jQuery.each( data, function( i, val ) {
           console.log(val.id);
-         $('#nama-bus' ).append('<option value="'+val.id+'">'+val.nama+'</option>');
+          // $('#nama-bus').empty();
+          $('#nama-bus' ).append('<option value="'+val.id+'">'+val.nama+'</option>');
         });   
       }
     })

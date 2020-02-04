@@ -43,6 +43,9 @@ Jadwal
                   <label for="filter">Filter By</label>
                   <select class="form-control custom-select" name="pilihfilter">
                     <option selected disabled>Pilih filter</option>
+                    <option value="rute">Rute</option>
+                    <option value="tipe">Tipe</option>
+                    <option value="bus">Nama Bus</option>
                   </select>
                 </div>
               </div>
@@ -60,12 +63,6 @@ Jadwal
               <label for="inputStatus">Rute Perjalanan</label>
               <select class="form-control custom-select" name="pilihrute">
                 <option selected disabled>Pilih tipe</option>
-                <option>Makassar - Palopp</option>
-                <option>Makassar - Toraja</option>
-                <option>Makassar - Masamba</option>
-                <option>Masamba - Makassar</option>
-                <option>Toraja - Makassar</option>
-                <option>Palopo - Makassar</option>
               </select>
             </div>
 

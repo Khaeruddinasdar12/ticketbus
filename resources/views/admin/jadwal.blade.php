@@ -61,7 +61,7 @@ Jadwal
 
             <div class="form-group">
               <label for="inputStatus">Rute Perjalanan</label>
-              <select class="form-control custom-select" name="pilihrute">
+              <select class="form-control custom-select" name="pilihrute" id="pilih-rute">
                 <option selected disabled>Pilih tipe</option>
               </select>
             </div>
@@ -148,5 +148,24 @@ Jadwal
       "autoWidth": false,
     });
   });
+</script>
+<script>
+  // menampilkan bus setelah memilih tipe bus
+  function show_tipe() {
+    $('#pilih-rute').empty();
+    var id = $('#tipebus').val();
+    $.ajax({
+      'url': "show-bus/" + id,
+      'dataType': 'json',
+      success: function(data) {
+        jQuery.each(data, function(i, val) {
+          console.log(val.id);
+          // $('#nama-bus').empty();
+          $('#nama-bus').append('<option value="' + val.id + '">' + val.nama + '</option>');
+        });
+      }
+    })
+  }
+  //end menampilkan bus setelah memilih tipe bus
 </script>
 @endsection

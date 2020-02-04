@@ -50,7 +50,7 @@ Manajemen Bus
                     <select class="form-control custom-select" id="tipebus" onchange="show_tipe()" required>
                       <option selected disabled>Pilih tipe</option>
                       @foreach($tipebus as $tipe)
-                        <option value="{{$tipe->id}}">{{$tipe->nama}}</option>
+                      <option value="{{$tipe->id}}">{{$tipe->nama}}</option>
                       @endforeach
                     </select>
                   </div>
@@ -69,7 +69,7 @@ Manajemen Bus
                     <select class="form-control custom-select" required name="id_rute">
                       <option selected disabled>Pilih tipe</option>
                       @foreach($rute as $rutes)
-                        <option value="{{$rutes->id}}">{{$rutes->rute}}</option>
+                      <option value="{{$rutes->id}}">{{$rutes->rute}}</option>
                       @endforeach
                     </select>
                   </div>
@@ -112,21 +112,21 @@ Manajemen Bus
     $('#nama-bus').empty();
     var id = $('#tipebus').val();
     $.ajax({
-      'url': "show-bus/"+id,
+      'url': "show-bus/" + id,
       'dataType': 'json',
-      success:function(data){
-        jQuery.each( data, function( i, val ) {
+      success: function(data) {
+        jQuery.each(data, function(i, val) {
           console.log(val.id);
           // $('#nama-bus').empty();
-          $('#nama-bus' ).append('<option value="'+val.id+'">'+val.nama+'</option>');
-        });   
+          $('#nama-bus').append('<option value="' + val.id + '">' + val.nama + '</option>');
+        });
       }
     })
   }
   //end menampilkan bus setelah memilih tipe bus
 
   // Tambah data pivot
-   $('#add-pivot').submit(function(e) {
+  $('#add-pivot').submit(function(e) {
     e.preventDefault();
     var request = new FormData(this);
     var endpoint = '{{route("store.pivot")}}';
@@ -152,6 +152,6 @@ Manajemen Bus
       }
     });
   });
-   // End tambah data pivot
+  // End tambah data pivot
 </script>
 @endsection

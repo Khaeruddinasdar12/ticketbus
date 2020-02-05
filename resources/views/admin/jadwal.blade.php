@@ -42,7 +42,7 @@ Jadwal
                 <div class="form-group">
                   <label for="filter">Filter By</label>
                   <select class="form-control custom-select" name="pilihfilter" id="filteredby" onchange="show_filter()">
-                    <option selected disabled>Pilih filter</option>
+                    <option selected>Pilih filter</option>
                     <option value="rute">Rute</option>
                     <option value="tipe">Tipe</option>
                   </select>
@@ -51,75 +51,50 @@ Jadwal
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>Pilihan</label>
-                  <select class="form-control custom-select" name="pilihan" id="hasil-pilih">
-                    <option selected disabled>Hasil Pilihan</option>
+                  <select class="form-control custom-select" name="pilihan" id="hasil-pilih" onchange="hasil_filter()">
                   </select>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="inputStatus">Rute Perjalanan</label>
-              <select class="form-control custom-select" name="pilihrute" id="pilih-rute">
-                <option selected disabled>Pilih tipe</option>
-              </select>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-6">
-                <!-- text input -->
-                <div class="form-group">
-                  <label>Waktu (jam)</label>
-                  <input type="text" class="form-control" placeholder="14.00 WITA" name="jam">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label>Tanggal</label>
-                  <input type="date" class="form-control" name="tanggal">
                 </div>
               </div>
             </div>
 
             <div class="row">
-              <div class="col-sm-6">
-                <!-- text input -->
+              <div class="col-md-6">
                 <div class="form-group">
-                  <label for="inputStatus">Tipe Bus</label>
-                  <select class="form-control custom-select" name="pilihtipe">
-                    <option selected disabled>Pilih tipe</option>
-                    <option>Sleeper</option>
-                    <option>Seatbelt</option>
-                    <option>Comfortable</option>
+                  <label for="inputStatus">Rute Perjalanan</label>
+                  <select class="form-control custom-select" name="pilihrute" id="pilih-rute" onchange="showdesc()">
                   </select>
                 </div>
               </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="inputStatus">Nama Bus</label>
-                  <select class="form-control custom-select" name="pilihbus">
-                    <option selected disabled>Pilih tipe</option>
-                    <option>Bintang Prima A10</option>
-                    <option>Bintang Prima M70</option>
-                    <option>Bintang Prima C30</option>
-                  </select>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>Waktu (jam)</label>
+                      <input type="text" class="form-control" placeholder="14.00 WITA" name="jam" id="jam">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Tanggal</label>
+                      <input type="date" class="form-control" name="tanggal" id="tanggal">
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div class="form-group">
-              <label>Deskripsi Bus</label>
-              <textarea class="form-control" rows="3" disabled id="deskripsi"></textarea>
             </div>
 
             <div class="form-group">
               <label for="inputName">Harga Rp. Per kursi</label>
-              <input type="text" class="form-control" disabled id="harga">
+              <input type="text" class="form-control" disabled id="harga-kursi">
             </div>
 
             <div class="form-group">
-              <!-- <a href="#" class="btn btn-secondary">Cancel</a> -->
-              <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
+              <label>Deskripsi Bus</label>
+              <textarea class="form-control" rows="3" disabled id="deskripsis"></textarea>
+            </div>
+
+            <div class="form-group">
               <button type="submit" class="btn btn-success float-right"><i class="nav-icon fas fa-plus"></i> Tambah</button>
             </div>
           </form>
@@ -149,22 +124,68 @@ Jadwal
   });
 </script>
 <script>
-  // menampilkan bus setelah memilih tipe bus
+  // menampilkan pilihan setelah memilih filter
   function show_filter() {
     $('#hasil-pilih').empty();
+    $("#hasil-pilih").append("<option>--Select--</option>");
+    $('#pilih-rute').empty();
+    $("#pilih-rute").append("<option>--Select--</option>");
+    $("#deskripsis").val(" ");
+    $('#harga-kursi').val(" ");
+    $("#jam").val(" ");
+    $('#tanggal').val(" ");
     tipe = $('#filteredby').val();
     $.ajax({
       'url': "managemen-jadwal/filterby/" + tipe,
       'dataType': 'json',
       success: function(data) {
         jQuery.each(data, function(i, val) {
-          // console.log(val.tipe);
-          // $('#nama-bus').empty();
           $('#hasil-pilih').append('<option value="' + val.id + '">' + val.nama + '</option>');
         });
       }
     })
   }
-  //end menampilkan bus setelah memilih tipe bus
+  //end menampilkan pilihan setelah memilih filter
+
+  // menampilkan pilihan setelah memilih hasil filter
+  function hasil_filter() {
+    $('#pilih-rute').empty();
+    $("#pilih-rute").append("<option>--Select--</option>");
+    $("#deskripsis").val(" ");
+    $('#harga-kursi').val(" ");
+    $("#jam").val(" ");
+    $('#tanggal').val(" ");
+    tipe = $('#filteredby').val();
+    id = $('#hasil-pilih').val();
+    $.ajax({
+      'url': "managemen-jadwal/show-rute-perjalanan/" + tipe + "/" + id,
+      'dataType': 'json',
+      success: function(data) {
+        jQuery.each(data, function(i, val) {
+          $('#pilih-rute').append('<option value="' + val.id + '">' + val.filter + '/ ' + val.data1 + ' / ' +
+            val.data2 + '</option>');
+        });
+      }
+    })
+  }
+  // end menampilkan pilihan setelah memilih hasil filter
+
+  // menampilkan harga dan deskripsi
+  function showdesc() {
+    id = $('#pilih-rute').val();
+    console.log(id);
+    $.ajax({
+      'url': "managemen-jadwal/deskripsi-bus/" + id,
+      'dataType': 'json',
+      success: function(data) {
+        console.log(data);
+        jQuery.each(data, function(i, val) {
+          $('#harga-kursi').val(val.harga);
+          $('#deskripsis').val(val.deskripsi);
+        });
+      }
+    })
+  }
+  // end menampilkan harga dan deskripsi
 </script>
 @endsection

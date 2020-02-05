@@ -58,7 +58,7 @@ Route::prefix('managemen-jadwal')->group(function () {
 	Route::get('show-rute-perjalanan/{tipe}/{id}', 'Jadwal@showRutePerjalanan'); //menampilkan dropdown rute di input jadwal
 	Route::get('deskripsi-bus/{id}', 'Jadwal@showDeskripsi');
 
-	Route::post('store-jadwal', 'Jadwal@store')->name('store.jadwal'); // input data admin
+	Route::post('store-jadwal', 'Jadwal@store')->name('store.jadwal'); // input data jadwal
 
 	Route::delete('delete-bus/{id}', 'ManagemenBus@deleteBus');
 });

@@ -65,11 +65,6 @@ class Jadwal extends Controller
         
     }
 
-    public function create()
-    {
-        
-    }
-
     public function store(Request $request)
     {
         $data = new \App\Jadwal();
@@ -80,8 +75,7 @@ class Jadwal extends Controller
         $data->created_by = \Auth::user()->id;
         $data->save();
 
-
-        // $data->
+        return $arrayName = array('status' => 'success', 'message' => 'Berhasil Menambah Data');
     }
 
     public function showDeskripsi($id)

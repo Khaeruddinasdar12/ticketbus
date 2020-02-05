@@ -26,7 +26,7 @@ Route::get('show-rute-perjalanan/{tipe}/{id}', 'Jadwal@showRutePerjalanan'); //m
 Route::get('deskripsi-bus/{id}', 'Jadwal@showDeskripsi');
 
 
-Route::get('managemen-jadwal', 'Jadwal@index')->name('index.jadwal');
+// Route::get('managemen-jadwal', 'Jadwal@index')->name('index.jadwal');
 Route::get('data-transaksi', 'Transaksi@index')->name('index.transaksi');
 Route::get('riwayat-transaksi', 'Transaksi@riwayat')->name('riwayat.transaksi');
 
@@ -60,7 +60,7 @@ Route::prefix('managemen-bus')->group(function () {
 // RUTE MANAGEMEN JADWAL
 Route::prefix('managemen-jadwal')->group(function () {
 	Route::get('/', 'Jadwal@index')->name('index.jadwal');
-	Route::post('/', 'Jadwal@store')->name('store.jadwal'); // input data admin
+	Route::post('store-jadwal', 'Jadwal@store')->name('store.jadwal'); // input data admin
 });
 
 // RUTE MANAGEMEN ADMIN

@@ -7,11 +7,11 @@ use DB;
 
 class Jadwal extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $tipeBus = \App\TipeBus::select('id', 'nama')->get();
@@ -33,8 +33,6 @@ class Jadwal extends Controller
             $data = \App\TipeBus::select('id', 'nama')->get();
         } else if ($filter == 'rute') {
             $data = \App\Rute::select('id', 'rute as nama')->get();
-        } else if ($filter == 'bus') {
-            $data = \App\Bus::select('id', 'nama')->get();
         } else {
             exit();
         }
@@ -42,69 +40,67 @@ class Jadwal extends Controller
         return $data;
     }
 
-    public function showRutePerjalanan($id)
+    public function showRutePerjalanan($tipe, $id)
     {
+        if($tipe == 'tipe') {
+            $data = DB::table('pivot_bus_rutes')
+                    ->join('bus', 'pivot_bus_rutes.id_bus','=', 'bus.id')
+                    ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+                    ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+                    ->select('pivot_bus_rutes.id', 'bus.nama as data1', 'rutes.rute as data2', 'tipebus.nama as filter')
+                    ->where('tipebus.id', $id)
+                    ->get();
+        } else if($tipe == 'rute') {
+            $data = DB::table('pivot_bus_rutes')
+                    ->join('bus', 'pivot_bus_rutes.id_bus','=', 'bus.id')
+                    ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+                    ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+                    ->select('pivot_bus_rutes.id', 'bus.nama as data1', 'rutes.rute as filter', 'tipebus.nama as data2')
+                    ->where('rutes.id', $id)
+                    ->get();
+        } else {
+            exit();
+        }
+         return $data;
+        
     }
 
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $data = \App\Jadwal();
-        // $data->
+        $data = new \App\Jadwal();
+        $data->id_bus_rute = $request->id_bus_rute;
+        $data->tanggal =$request->tanggal;
+        $data->jam = $data->jam;
+        $data->status = 'belum';
+        $data->created_by = \Auth::user()->id;
+        $data->save();
+
+        return $arrayName = array('status' => 'success', 'message' => 'Berhasil Menambah Data');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function showDeskripsi($id)
     {
-        //
+        $data = DB::table('pivot_bus_rutes')
+                    ->join('bus', 'pivot_bus_rutes.id_bus','=', 'bus.id')
+                    ->select('bus.deskripsi', 'pivot_bus_rutes.harga')
+                    ->where('pivot_bus_rutes.id', $id)
+                    // ->where('pivot_bus_rutes.id_bus', $id)
+                    ->get();
+        return $data;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        
     }
 }

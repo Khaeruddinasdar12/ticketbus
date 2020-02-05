@@ -45,7 +45,6 @@ Jadwal
                     <option selected disabled>Pilih filter</option>
                     <option value="rute">Rute</option>
                     <option value="tipe">Tipe</option>
-                    <option value="bus">Nama Bus</option>
                   </select>
                 </div>
               </div>
@@ -155,7 +154,7 @@ Jadwal
     $('#hasil-pilih').empty();
     tipe = $('#filteredby').val();
     $.ajax({
-      'url': "filterby/" + tipe,
+      'url': "managemen-jadwal/filterby/" + tipe,
       'dataType': 'json',
       success: function(data) {
         jQuery.each(data, function(i, val) {

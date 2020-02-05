@@ -41,18 +41,17 @@ Jadwal
                 <!-- text input -->
                 <div class="form-group">
                   <label for="filter">Filter By</label>
-                  <select class="form-control custom-select" name="pilihfilter">
+                  <select class="form-control custom-select" name="pilihfilter" id="filteredby" onchange="show_filter()">
                     <option selected disabled>Pilih filter</option>
                     <option value="rute">Rute</option>
                     <option value="tipe">Tipe</option>
-                    <option value="bus">Nama Bus</option>
                   </select>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>Pilihan</label>
-                  <select class="form-control custom-select" name="pilihan">
+                  <select class="form-control custom-select" name="pilihan" id="hasil-pilih">
                     <option selected disabled>Hasil Pilihan</option>
                   </select>
                 </div>
@@ -151,17 +150,17 @@ Jadwal
 </script>
 <script>
   // menampilkan bus setelah memilih tipe bus
-  function show_tipe() {
-    $('#pilih-rute').empty();
-    var id = $('#tipebus').val();
+  function show_filter() {
+    $('#hasil-pilih').empty();
+    tipe = $('#filteredby').val();
     $.ajax({
-      'url': "show-bus/" + id,
+      'url': "filterby/" + tipe,
       'dataType': 'json',
       success: function(data) {
         jQuery.each(data, function(i, val) {
-          console.log(val.id);
+          // console.log(val.tipe);
           // $('#nama-bus').empty();
-          $('#nama-bus').append('<option value="' + val.id + '">' + val.nama + '</option>');
+          $('#hasil-pilih').append('<option value="' + val.id + '">' + val.nama + '</option>');
         });
       }
     })

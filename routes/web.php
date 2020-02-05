@@ -22,6 +22,7 @@ Route::get('dashboard', 'Dashboard@index')->name('index');
 
 
 Route::get('filterby/{tipe}', 'Jadwal@tipe');
+Route::get('show-rute-perjalanan/{tipe}/{id}', 'Jadwal@showRutePerjalanan'); //menampilkan dropdown rute di input jadwal
 
 
 Route::get('managemen-jadwal', 'Jadwal@index')->name('index.jadwal');

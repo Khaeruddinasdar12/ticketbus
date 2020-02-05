@@ -41,9 +41,40 @@ class Jadwal extends Controller
         return $data;
     }
 
-    public function showRutePerjalanan($id)
+    public function showRutePerjalanan($tipe, $id)
     {
-
+        if($tipe == 'tipe') {
+            $data = \App\TipeBus::select('id', 'nama')->get();
+        } else if($tipe == 'rute') {
+            $data = DB::table('pivot_bus_rutes')
+                    ->join('bus', 'pivot_bus_rutes.id_bus','=', 'bus.id')
+                    ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+                    ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+                    ->select('pivot_bus_rutes.id', 'bus.nama as data1', 'rutes.rute as filter', 'tipebus.nama as data2')
+                    ->where('rutes.id', $id)
+                    ->get();
+            // $data_id = $data->id;
+            // $filter = $data->rute;
+            // $data1 = $data->nama;
+            // $data2 = $data->tipebus;
+        } else if($tipe == 'bus') {
+            $data = DB::table('pivot_bus_rutes')
+                    ->join('bus', 'pivot_bus_rutes.id_bus','=', 'bus.id')
+                    ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+                    ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+                    ->select('pivot_bus_rutes.id', 'bus.nama as filter', 'rutes.rute as data1', 'tipebus.nama as data2')
+                    ->where('bus.id', $id)
+                    ->get();
+            // $data_id = $data->id;
+            // $filter = $data->nama;
+            // $data1 = $data->tipebus;
+            // $data2 = $data->rute;
+        } else {
+            exit();
+        }
+         return $data;
+        
+        
     }
 
     public function create()

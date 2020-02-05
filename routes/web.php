@@ -20,10 +20,6 @@ Auth::routes();
 Route::get('dashboard', 'Dashboard@index')->name('index');
 
 
-
-
-Route::get('deskripsi-bus/{id}', 'Jadwal@showDeskripsi');
-
 Route::get('data-transaksi', 'Transaksi@index')->name('index.transaksi');
 Route::get('riwayat-transaksi', 'Transaksi@riwayat')->name('riwayat.transaksi');
 
@@ -59,6 +55,7 @@ Route::prefix('managemen-jadwal')->group(function () {
 	Route::get('/', 'Jadwal@index')->name('index.jadwal');
 	Route::get('filterby/{tipe}', 'Jadwal@tipe');
 	Route::get('show-rute-perjalanan/{tipe}/{id}', 'Jadwal@showRutePerjalanan'); //menampilkan dropdown rute di input jadwal
+	Route::get('deskripsi-bus/{id}', 'Jadwal@showDeskripsi');
 
 	Route::post('store-jadwal', 'Jadwal@store')->name('store.jadwal'); // input data admin
 

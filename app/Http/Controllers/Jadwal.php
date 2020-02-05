@@ -14,6 +14,12 @@ class Jadwal extends Controller
 
     public function index()
     {
+
+        return view('admin.datajadwal');
+    }
+
+    public function create() //tambah jadwal
+    {
         $tipeBus = \App\TipeBus::select('id', 'nama')->get();
 
         $ruteBus = DB::table('pivot_bus_rutes')
@@ -22,13 +28,7 @@ class Jadwal extends Controller
             ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
             ->select('pivot_bus_rutes.id', 'bus.nama', 'rutes.rute', 'tipebus.nama as tipebus')
             ->get();
-        // return $ruteBus;
 
-        return view('admin.jadwal');
-    }
-
-    public function create()
-    {
         return view('admin.tambahjadwal');
     }
 

@@ -104,13 +104,30 @@
               </a>
             </li>
 
-            <li class="nav-item">
-              <a href="{{route('index.jadwal')}}" class="nav-link {{ request()->is('managemen-jadwal') ? 'active' : '' }}">
+            <li class="nav-item {{ request()->is('managemen-jadwal/tambah-jadwal') || request()->is('managemen-jadwal/data-jadwal') ? 'has-treeview menu-open' : '' }}">
+              <a href="#" class="nav-link {{ request()->is('managemen-jadwal') || request()->is('managemen-jadwal/data-jadwal') || request()->is('managemen-jadwal/tambah-jadwal') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-calendar-alt"></i>
                 <p>
                   Jadwal
+                  <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('create.jadwal')}}" class="nav-link {{ request()->is('managemen-jadwal/tambah-jadwal') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                      Tambah Data Jadwal
+                    </p>
+                  </a>
+                  <a href="{{route('index.jadwal')}}" class="nav-link {{ request()->is('managemen-jadwal/data-jadwal') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                      Data Jadwal
+                    </p>
+                  </a>
+                </li>
+              </ul>
             </li>
 
             <li class="nav-item {{ request()->is('managemen-bus') || request()->is('managemen-bus/jalur-bus') || request()->is('managemen-bus/data-bus') ? 'has-treeview menu-open' : '' }}">
@@ -288,8 +305,8 @@
     }
 
     function berhasil(status, pesan) {
-      if(status == 'success') {
-          Swal.fire({
+      if (status == 'success') {
+        Swal.fire({
           type: status,
           title: pesan,
           showConfirmButton: true,
@@ -304,7 +321,7 @@
           showConfirmButton: true,
           button: "Ok"
         })
-      } 
+      }
     }
 
     function gagal(key, pesan) {

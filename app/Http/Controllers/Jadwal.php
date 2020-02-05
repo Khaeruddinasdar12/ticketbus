@@ -47,65 +47,61 @@ class Jadwal extends Controller
 
     public function showRutePerjalanan($tipe, $id)
     {
-        if($tipe == 'tipe') {
+        if ($tipe == 'tipe') {
             $data = DB::table('pivot_bus_rutes')
-                    ->join('bus', 'pivot_bus_rutes.id_bus','=', 'bus.id')
-                    ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
-                    ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
-                    ->select('pivot_bus_rutes.id', 'bus.nama as data1', 'rutes.rute as data2', 'tipebus.nama as filter')
-                    ->where('tipebus.id', $id)
-                    ->get();
-        } else if($tipe == 'rute') {
+                ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+                ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+                ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+                ->select('pivot_bus_rutes.id', 'bus.nama as data1', 'rutes.rute as data2', 'tipebus.nama as filter')
+                ->where('tipebus.id', $id)
+                ->get();
+        } else if ($tipe == 'rute') {
             $data = DB::table('pivot_bus_rutes')
-                    ->join('bus', 'pivot_bus_rutes.id_bus','=', 'bus.id')
-                    ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
-                    ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
-                    ->select('pivot_bus_rutes.id', 'bus.nama as data1', 'rutes.rute as filter', 'tipebus.nama as data2')
-                    ->where('rutes.id', $id)
-                    ->get();
+                ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+                ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+                ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+                ->select('pivot_bus_rutes.id', 'bus.nama as data1', 'rutes.rute as filter', 'tipebus.nama as data2')
+                ->where('rutes.id', $id)
+                ->get();
         } else {
             exit();
         }
-         return $data;
-        
+        return $data;
     }
 
     public function store(Request $request)
     {
         $data = new \App\Jadwal();
         $data->id_bus_rute = $request->id_bus_rute;
-        $data->tanggal =$request->tanggal;
-        $data->jam = $data->jam;
+        $data->tanggal = $request->tanggal;
+        $data->jam = $request->jam;
         $data->status = 'belum';
         $data->created_by = \Auth::user()->id;
         $data->save();
 
-        return $arrayName = array('status' => 'success', 'message' => 'Berhasil Menambah Data');
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menambah Data');
     }
 
     public function showDeskripsi($id)
     {
         $data = DB::table('pivot_bus_rutes')
-                    ->join('bus', 'pivot_bus_rutes.id_bus','=', 'bus.id')
-                    ->select('bus.deskripsi', 'pivot_bus_rutes.harga')
-                    ->where('pivot_bus_rutes.id', $id)
-                    // ->where('pivot_bus_rutes.id_bus', $id)
-                    ->get();
+            ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+            ->select('bus.deskripsi', 'pivot_bus_rutes.harga')
+            ->where('pivot_bus_rutes.id', $id)
+            // ->where('pivot_bus_rutes.id_bus', $id)
+            ->get();
         return $data;
     }
 
     public function edit($id)
     {
-        
     }
 
     public function update(Request $request, $id)
     {
-        
     }
 
     public function destroy($id)
     {
-        
     }
 }

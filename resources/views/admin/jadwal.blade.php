@@ -35,7 +35,8 @@ Jadwal
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-          <form role="form">
+          <form role="form" method="post" id="add-jadwal">
+            @csrf
             <div class="row">
               <div class="col-sm-6">
                 <!-- text input -->
@@ -61,7 +62,7 @@ Jadwal
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="inputStatus">Rute Perjalanan</label>
-                  <select class="form-control custom-select" name="pilihrute" id="pilih-rute" onchange="showdesc()">
+                  <select class="form-control custom-select" name="id_bus_rute" id="pilih-rute" onchange="showdesc()">
                   </select>
                 </div>
               </div>
@@ -187,5 +188,37 @@ Jadwal
     })
   }
   // end menampilkan harga dan deskripsi
+</script>
+
+<script>
+  // add jadwal
+  $('#add-jadwal').submit(function(e) {
+    e.preventDefault();
+    var request = new FormData(this);
+    var endpoint = '{{route("store.jadwal")}}';
+    $.ajax({
+      url: endpoint,
+      method: "POST",
+      data: request,
+      contentType: false,
+      cache: false,
+      processData: false,
+      // dataType: "json",
+      success: function(data) {
+        $('#add-jadwal')[0].reset();
+
+        berhasil(data.status, data.pesan);
+      },
+      error: function(xhr, status, error) {
+        var error = xhr.responseJSON;
+        if ($.isEmptyObject(error) == false) {
+          $.each(error.errors, function(key, value) {
+            gagal(key, value);
+          });
+        }
+      }
+    });
+  });
+  // end jadwal
 </script>
 @endsection

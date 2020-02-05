@@ -54,13 +54,17 @@ Manajemen Bus
                 <!-- text input -->
                 <div class="form-group">
                   <label>Password</label>
-                  <input type="password" name="password" class="form-control">
+                  <input type="password" name="password" class="form-control" id="password1">
+                  <i class="form-control-feedback"></i>
+                  <span class="text-warning"></span>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>Ulangi Password</label>
-                  <input type="password" name="password2" class="form-control">
+                  <input type="password" name="password2" class="form-control" id="password2">
+                  <i class="form-control-feedback"></i>
+                  <span class="text-warning"></span>
                 </div>
               </div>
             </div>
@@ -197,6 +201,36 @@ Manajemen Bus
 <script>
   $(function() {
     $("#example4").DataTable();
+  });
+
+  // $('.text-warning').hide();
+
+  //mengecek password
+  $('#password1').blur(function() {
+    var password = $(this).val();
+    var len = password.length;
+    if (len > 0 && len < 8) {
+      $(this).parent().find('.text-warning').text("");
+      $(this).parent().find('.text-warning').text("password minimal 8 karakter");
+      return apply_feedback_error(this);
+    } else {
+      if (len > 15) {
+        $(this).parent().find('.text-warning').text("");
+        $(this).parent().find('.text-warning').text("password maximal 15 karakter");
+        return apply_feedback_error(this);
+      }
+    }
+  });
+  //mengecek konfirmasi password
+  $('#password2').blur(function() {
+    var pass = $("#password1").val();
+    var conf = $(this).val();
+    var len = conf.length;
+    if (len > 0 && pass !== conf) {
+      $(this).parent().find('.text-warning').text("");
+      $(this).parent().find('.text-warning').text("Konfirmasi Password tidak sama dengan password");
+      return apply_feedback_error(this);
+    }
   });
 </script>
 @endsection

@@ -27,6 +27,11 @@ class Jadwal extends Controller
         return view('admin.jadwal');
     }
 
+    public function create()
+    {
+        return view('admin.tambahjadwal');
+    }
+
     public function tipe($filter)
     {
         if ($filter == 'tipe') {

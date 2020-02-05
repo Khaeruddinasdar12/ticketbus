@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
+use DB;
 class LoginController extends Controller
 {
     /*
@@ -77,6 +78,21 @@ class LoginController extends Controller
         ],[
             'username' => 'Kolom username atau password harus diisi'
         ]);
+
+        $cekRole = DB::table('users')
+                    ->where('username', $request->username)
+                    ->where('role', 'superadmin')
+                    ->count();
+
+        if(!$cekRole){
+            return redirect()->back()
+                ->withInput()
+                ->withErrors([
+                    'username' => 'Data yang Anda masukkan tidak valid atau Anda bukan superadmin.',
+                ]);
+        }
+        
+                  
 
         $login_type = filter_var($request->input('username'), FILTER_VALIDATE_EMAIL ) 
             ? 'email' 

@@ -154,7 +154,7 @@ Jadwal
     $('#hasil-pilih').empty();
     tipe = $('#filteredby').val();
     $.ajax({
-      'url': "filterby/" + tipe,
+      'url': "managemen-jadwal/filterby/" + tipe,
       'dataType': 'json',
       success: function(data) {
         jQuery.each(data, function(i, val) {

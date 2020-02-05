@@ -52,7 +52,6 @@ Jadwal
                 <div class="form-group">
                   <label>Pilihan</label>
                   <select class="form-control custom-select" name="pilihan" id="hasil-pilih" onchange="hasil_filter()">
-                    <option selected>Hasil Pilihan</option>
                   </select>
                 </div>
               </div>
@@ -63,7 +62,6 @@ Jadwal
                 <div class="form-group">
                   <label for="inputStatus">Rute Perjalanan</label>
                   <select class="form-control custom-select" name="pilihrute" id="pilih-rute" onchange="showdesc()">
-                    <option selected>Pilih tipe</option>
                   </select>
                 </div>
               </div>
@@ -131,6 +129,7 @@ Jadwal
   // menampilkan pilihan setelah memilih filter
   function show_filter() {
     $('#hasil-pilih').empty();
+    $("#hasil-pilih").append("<option>--Select--</option>");
     tipe = $('#filteredby').val();
     $.ajax({
       'url': "managemen-jadwal/filterby/" + tipe,
@@ -147,6 +146,7 @@ Jadwal
   // menampilkan pilihan setelah memilih hasil filter
   function hasil_filter() {
     $('#pilih-rute').empty();
+    $("#pilih-rute").append("<option>--Select--</option>");
     tipe = $('#filteredby').val();
     id = $('#hasil-pilih').val();
     $.ajax({

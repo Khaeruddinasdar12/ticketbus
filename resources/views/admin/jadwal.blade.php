@@ -71,13 +71,13 @@ Jadwal
                     <!-- text input -->
                     <div class="form-group">
                       <label>Waktu (jam)</label>
-                      <input type="text" class="form-control" placeholder="14.00 WITA" name="jam">
+                      <input type="text" class="form-control" placeholder="14.00 WITA" name="jam" id="jam">
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>Tanggal</label>
-                      <input type="date" class="form-control" name="tanggal">
+                      <input type="date" class="form-control" name="tanggal" id="tanggal">
                     </div>
                   </div>
                 </div>
@@ -95,8 +95,6 @@ Jadwal
             </div>
 
             <div class="form-group">
-              <!-- <a href="#" class="btn btn-secondary">Cancel</a> -->
-              <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
               <button type="submit" class="btn btn-success float-right"><i class="nav-icon fas fa-plus"></i> Tambah</button>
             </div>
           </form>
@@ -130,6 +128,12 @@ Jadwal
   function show_filter() {
     $('#hasil-pilih').empty();
     $("#hasil-pilih").append("<option>--Select--</option>");
+    $('#pilih-rute').empty();
+    $("#pilih-rute").append("<option>--Select--</option>");
+    $("#deskripsis").val(" ");
+    $('#harga-kursi').val(" ");
+    $("#jam").val(" ");
+    $('#tanggal').val(" ");
     tipe = $('#filteredby').val();
     $.ajax({
       'url': "managemen-jadwal/filterby/" + tipe,
@@ -147,6 +151,10 @@ Jadwal
   function hasil_filter() {
     $('#pilih-rute').empty();
     $("#pilih-rute").append("<option>--Select--</option>");
+    $("#deskripsis").val(" ");
+    $('#harga-kursi').val(" ");
+    $("#jam").val(" ");
+    $('#tanggal').val(" ");
     tipe = $('#filteredby').val();
     id = $('#hasil-pilih').val();
     $.ajax({

@@ -18,14 +18,16 @@ class CreateTransaksisTable extends Migration
             $table->string('order_code')->unique();
             $table->bigInteger('id_jadwal')->unsigned();
             $table->bigInteger('id_customer')->unsigned();
-            $table->enum('status_bayar', ['belum', 'proses_admin', 'sudah']);
+            $table->enum('status_bayar', ['belum', 'proses_admin', 'sudah', 'canceled']);
             $table->string('no_kursi');
             $table->string('barcode');
             $table->enum('trip', ['n', 'y']);
             $table->string('bukti_transfer')->nullable();
+            $table->bigInteger('canceled_by')->unsigned()->nullable();
             $table->timestamps();
             $table->foreign('id_jadwal')->references('id')->on('jadwals');
-            $table->foreign('id_customer')->references('id')->on('customers');
+            $table->foreign('id_customer')->references('id')->on('users');
+            $table->foreign('canceled_by')->references('id')->on('users');
         });
     }
 

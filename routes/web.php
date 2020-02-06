@@ -29,9 +29,9 @@ Route::get('data-bus/{id}', 'ApiJquery@dataBus');
 
 // RUTE MANAGEMEN BUS
 Route::prefix('managemen-bus')->group(function () {
-	Route::get('/', 'ManagemenBus@index')->name('index.bus');
-	Route::get('jalur-bus', 'ManagemenBus@pivot')->name('pivot.bus');
-	Route::get('data-bus', 'ManagemenBus@data')->name('data.bus');
+	Route::get('/', 'ManagemenBus@index')->name('index.bus'); //menampilkan halaman data bus
+	Route::get('jalur-bus', 'ManagemenBus@pivot')->name('pivot.bus'); //menampilkan halaman jalur bus
+	Route::get('tambah-bus', 'ManagemenBus@create')->name('tambah.bus'); //menampilkan halaman tambah bus
 
 	Route::get('show-bus/{id}', 'ManagemenBus@showBus'); //jquery show bus di jalur
 
@@ -52,8 +52,8 @@ Route::prefix('managemen-bus')->group(function () {
 
 // RUTE MANAGEMEN JADWAL
 Route::prefix('managemen-jadwal')->group(function () {
-	Route::get('data-jadwal', 'Jadwal@index')->name('index.jadwal');
-	Route::get('tambah-jadwal', 'Jadwal@create')->name('create.jadwal');
+	Route::get('/', 'Jadwal@index')->name('index.jadwal'); //menampilkan halaman data jadwal
+	Route::get('tambah-jadwal', 'Jadwal@create')->name('create.jadwal');//menampilkan halaman tambah jadwal
 	Route::get('filterby/{tipe}', 'Jadwal@tipe');
 	Route::get('show-rute-perjalanan/{tipe}/{id}', 'Jadwal@showRutePerjalanan'); //menampilkan dropdown rute di input jadwal
 	Route::get('deskripsi-bus/{id}', 'Jadwal@showDeskripsi');

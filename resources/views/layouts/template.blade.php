@@ -104,8 +104,8 @@
               </a>
             </li>
 
-            <li class="nav-item {{ request()->is('managemen-jadwal/tambah-jadwal') || request()->is('managemen-jadwal/data-jadwal') ? 'has-treeview menu-open' : '' }}">
-              <a href="#" class="nav-link {{ request()->is('managemen-jadwal') || request()->is('managemen-jadwal/data-jadwal') || request()->is('managemen-jadwal/tambah-jadwal') ? 'active' : '' }}">
+            <li class="nav-item {{ request()->is('managemen-jadwal/tambah-jadwal') || request()->is('managemen-jadwal') ? 'has-treeview menu-open' : '' }}">
+              <a href="#" class="nav-link {{ request()->is('managemen-jadwal') || request()->is('managemen-jadwal/tambah-jadwal') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-calendar-alt"></i>
                 <p>
                   Jadwal
@@ -120,7 +120,7 @@
                       Tambah Data Jadwal
                     </p>
                   </a>
-                  <a href="{{route('index.jadwal')}}" class="nav-link {{ request()->is('managemen-jadwal/data-jadwal') ? 'active' : '' }}">
+                  <a href="{{route('index.jadwal')}}" class="nav-link {{ request()->is('managemen-jadwal') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                       Data Jadwal
@@ -130,8 +130,8 @@
               </ul>
             </li>
 
-            <li class="nav-item {{ request()->is('managemen-bus') || request()->is('managemen-bus/jalur-bus') || request()->is('managemen-bus/data-bus') ? 'has-treeview menu-open' : '' }}">
-              <a href="#" class="nav-link {{ request()->is('managemen-bus') || request()->is('managemen-bus/jalur-bus') || request()->is('managemen-bus/data-bus') || request()->is('managemen-bus/data-bus') ? 'active' : '' }}">
+            <li class="nav-item {{ request()->is('managemen-bus') || request()->is('managemen-bus/jalur-bus') || request()->is('managemen-bus/tambah-bus') ? 'has-treeview menu-open' : '' }}">
+              <a href="#" class="nav-link {{ request()->is('managemen-bus') || request()->is('managemen-bus/jalur-bus') || request()->is('managemen-bus/tambah-bus') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-bus-alt"></i>
                 <p>
                   Manajemen Bus
@@ -140,7 +140,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{route('index.bus')}}" class="nav-link {{ request()->is('managemen-bus') ? 'active' : '' }}">
+                  <a href="{{route('tambah.bus')}}" class="nav-link {{ request()->is('managemen-bus/tambah-bus') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                       Tambah Data Bus
@@ -152,7 +152,7 @@
                       Tambah Jalur Bus
                     </p>
                   </a>
-                  <a href="{{route('data.bus')}}" class="nav-link {{ request()->is('managemen-bus/data-bus') ? 'active' : '' }}">
+                  <a href="{{route('index.bus')}}" class="nav-link {{ request()->is('managemen-bus') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Data Bus</p>
                   </a>

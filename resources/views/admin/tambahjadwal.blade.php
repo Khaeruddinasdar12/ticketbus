@@ -137,7 +137,7 @@ Jadwal
     $('#tanggal').val(" ");
     tipe = $('#filteredby').val();
     $.ajax({
-      'url': "managemen-jadwal/filterby/" + tipe,
+      'url': "filterby/" + tipe,
       'dataType': 'json',
       success: function(data) {
         jQuery.each(data, function(i, val) {
@@ -159,11 +159,11 @@ Jadwal
     tipe = $('#filteredby').val();
     id = $('#hasil-pilih').val();
     $.ajax({
-      'url': "managemen-jadwal/show-rute-perjalanan/" + tipe + "/" + id,
+      'url': "show-rute-perjalanan/" + tipe + "/" + id,
       'dataType': 'json',
       success: function(data) {
         jQuery.each(data, function(i, val) {
-          $('#pilih-rute').append('<option value="' + val.id + '">' + val.filter + '/ ' + val.data1 + ' / ' +
+          $('#pilih-rute').append('<option value="' + val.id + '">' + val.filter + ' / ' + val.data1 + ' / ' +
             val.data2 + '</option>');
         });
       }
@@ -176,7 +176,7 @@ Jadwal
     id = $('#pilih-rute').val();
     console.log(id);
     $.ajax({
-      'url': "managemen-jadwal/deskripsi-bus/" + id,
+      'url': "deskripsi-bus/" + id,
       'dataType': 'json',
       success: function(data) {
         console.log(data);

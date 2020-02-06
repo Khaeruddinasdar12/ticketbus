@@ -8,7 +8,27 @@ use DB;
 class ManagemenBus extends Controller
 {
 
-    public function index()
+    public function index() //menampilkan halaman data bus
+    {
+        $pivotBusRute = DB::table('pivot_bus_rutes')
+            ->join('bus', 'bus.id', '=', 'pivot_bus_rutes.id_bus')
+            ->join('rutes', 'rutes.id', '=', 'pivot_bus_rutes.id_rute')
+            ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
+            ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama as tipebus')
+            ->get();
+
+        $bus = DB::table('bus')
+            ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+            ->select('bus.id', 'bus.nama', 'bus.deskripsi', 'bus.jumlah_kursi', 'tipebus.id as id_tipebus', 'tipebus.nama as tipebus')
+            ->get();
+
+        $tipebus = \App\TipeBus::select('id', 'nama')->get();
+        $rute = \App\Rute::select('id', 'rute')->get();
+
+        return view('admin.databus', ['pivot' => $pivotBusRute, 'bus' => $bus, 'tipebus' => $tipebus, 'rute' => $rute]);
+    }
+
+    public function create() //menampilkan halaman tambah bus
     {
         $showtipebus = \App\TipeBus::select('id', 'nama')->get();
         return view('admin.managemenbus', ['tipebus' => $showtipebus]);
@@ -46,25 +66,6 @@ class ManagemenBus extends Controller
         return $showbus;
     }
 
-    public function data()
-    {
-        $pivotBusRute = DB::table('pivot_bus_rutes')
-            ->join('bus', 'bus.id', '=', 'pivot_bus_rutes.id_bus')
-            ->join('rutes', 'rutes.id', '=', 'pivot_bus_rutes.id_rute')
-            ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
-            ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama as tipebus')
-            ->get();
-
-        $bus = DB::table('bus')
-            ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
-            ->select('bus.id', 'bus.nama', 'bus.deskripsi', 'bus.jumlah_kursi', 'tipebus.id as id_tipebus', 'tipebus.nama as tipebus')
-            ->get();
-
-        $tipebus = \App\TipeBus::select('id', 'nama')->get();
-        $rute = \App\Rute::select('id', 'rute')->get();
-
-        return view('admin.databus', ['pivot' => $pivotBusRute, 'bus' => $bus, 'tipebus' => $tipebus, 'rute' => $rute]);
-    }
 
     public function storeRute(Request $request)
     {

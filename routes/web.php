@@ -54,9 +54,13 @@ Route::prefix('managemen-bus')->group(function () {
 Route::prefix('managemen-jadwal')->group(function () {
 	Route::get('/', 'Jadwal@index')->name('index.jadwal'); //menampilkan halaman data jadwal
 	Route::get('tambah-jadwal', 'Jadwal@create')->name('create.jadwal');//menampilkan halaman tambah jadwal
+	Route::get('riwayat-perjalanan', 'Jadwal@riwayat')->name('riwayat.jadwal');//menampilkan halaman riwayat perjalana
+
+	//keperluan get jquery
 	Route::get('filterby/{tipe}', 'Jadwal@tipe');
 	Route::get('show-rute-perjalanan/{tipe}/{id}', 'Jadwal@showRutePerjalanan'); //menampilkan dropdown rute di input jadwal
-	Route::get('deskripsi-bus/{id}', 'Jadwal@showDeskripsi');
+	Route::get('deskripsi-bus/{id}', 'Jadwal@showDeskripsi'); //deskripsi bus dan harga perkursi
+	//End keperluan get jquery
 
 	Route::post('store-jadwal', 'Jadwal@store')->name('store.jadwal'); // input data jadwal
 

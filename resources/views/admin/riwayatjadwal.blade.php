@@ -15,7 +15,7 @@ Data Jadwal
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">Managemen Jadwal</a></li>
-          <!-- <li class="breadcrumb-item active">Dashboard v1</li> -->
+          <li class="breadcrumb-item active">riwayat perjalanan</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -27,7 +27,7 @@ Data Jadwal
     <div class="col-md-12">
       <div class="card card-primary">
         <div class="card-header">
-          <h3 class="card-title">Data Jadwal</h3>
+          <h3 class="card-title">Riwayat Perjalanan</h3>
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fas fa-minus"></i></button>
@@ -61,5 +61,4 @@ Data Jadwal
     });
   });
 </script>
-
 @endsection

@@ -119,20 +119,20 @@ class ManagemenBus extends Controller
     public function editBus(Request $request, $id)
     {
         $cek = DB::table('jadwals')
-                ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
-                ->where('pivot_bus_rutes.id_bus', $id)
-                ->count();
+            ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
+            ->where('pivot_bus_rutes.id_bus', $id)
+            ->count();
 
         $data =  \App\Bus::findOrFail($id);
 
-        if($cek > 0){
+        if ($cek > 0) {
             $data->nama = $request->nama;
             $data->deskripsi = $request->deskripsi;
             $data->save();
             return $arrayName = array('status' => 'success', 'pesan' => 'Info! Bus ini telah beroperasi, hanya bisa mengubah nama bus');
         }
 
-        
+
         $data->nama = $request->nama;
         $data->id_tipebus = $request->id_tipebus;
         $data->deskripsi = $request->deskripsi;
@@ -163,7 +163,7 @@ class ManagemenBus extends Controller
     public function deleteBus($id)
     {
         $cek = \App\PivotBusRute::where('id_bus', $id)->count();
-        if($cek > 0) {
+        if ($cek > 0) {
             return $arrayName = array('status' => 'error', 'pesan' => 'Gagal! Data ini terdapat di tabel lain');
         }
 
@@ -176,7 +176,7 @@ class ManagemenBus extends Controller
     public function deleteTipe($id)
     {
         $cek = \App\Bus::where('id_tipebus', $id)->count();
-        if($cek > 0) {
+        if ($cek > 0) {
             return $arrayName = array('status' => 'error', 'pesan' => 'Gagal! Data ini terdapat di tabel lain');
         }
         $data = \App\TipeBus::findOrFail($id);
@@ -188,7 +188,7 @@ class ManagemenBus extends Controller
     public function deleteRute($id)
     {
         $cek = \App\PivotBusRute::where('id_rute', $id)->count();
-        if($cek > 0) {
+        if ($cek > 0) {
             return $arrayName = array('status' => 'error', 'pesan' => 'Gagal! Data ini terdapat di tabel lain');
         }
         $data = \App\Rute::findOrFail($id);
@@ -200,7 +200,7 @@ class ManagemenBus extends Controller
     public function deletePivot($id)
     {
         $cek = \App\Jadwal::where('id_bus_rute', $id)->count();
-        if($cek > 0) {
+        if ($cek > 0) {
             return $arrayName = array('status' => 'error', 'pesan' => 'Gagal! Data ini terdapat di tabel lain');
         }
         $data = \App\PivotBusRute::findOrFail($id);

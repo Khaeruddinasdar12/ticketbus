@@ -277,7 +277,7 @@
   @yield('js')
   <script type="text/javascript">
     function hapus() {
-      $(document).on('click', "#del_idbus, #del_id", function() {
+      $(document).on('click', "#del_data", function() {
         Swal.fire({
           title: 'Anda Yakin ?',
           text: "Anda tidak dapat mengembalikan data yang telah di hapus!",

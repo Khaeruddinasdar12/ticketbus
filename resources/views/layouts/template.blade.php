@@ -104,8 +104,8 @@
               </a>
             </li>
 
-            <li class="nav-item {{ request()->is('managemen-jadwal/tambah-jadwal') || request()->is('managemen-jadwal') || request()->is('managemen-jadwal/tambah-jadwal') || request()->is('managemen-jadwal/riwayat-perjalanan') ? 'has-treeview menu-open' : '' }}">
-              <a href="#" class="nav-link {{ request()->is('managemen-jadwal') || request()->is('managemen-jadwal/tambah-jadwal') || request()->is('managemen-jadwal/tambah-jadwal') || request()->is('managemen-jadwal/riwayat-perjalanan') ? 'active' : '' }}">
+            <li class="nav-item {{ request()->is('managemen-jadwal') || request()->is('managemen-jadwal/tambah-jadwal') || request()->is('managemen-jadwal/riwayat-perjalanan') || request()->is('managemen-jadwal/dalam-perjalanan') ? 'has-treeview menu-open' : '' }}">
+              <a href="#" class="nav-link {{ request()->is('managemen-jadwal') || request()->is('managemen-jadwal/tambah-jadwal') || request()->is('managemen-jadwal/tambah-jadwal') || request()->is('managemen-jadwal/riwayat-perjalanan') || request()->is('managemen-jadwal/dalam-perjalanan') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-calendar-alt"></i>
                 <p>
                   Mangemen Jadwal

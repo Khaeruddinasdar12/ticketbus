@@ -104,8 +104,8 @@
               </a>
             </li>
 
-            <li class="nav-item {{ request()->is('managemen-jadwal/tambah-jadwal') || request()->is('managemen-jadwal') || request()->is('managemen-jadwal/riwayat-perjalanan') ? 'has-treeview menu-open' : '' }}">
-              <a href="#" class="nav-link {{ request()->is('managemen-jadwal') || request()->is('managemen-jadwal/tambah-jadwal') || request()->is('managemen-jadwal/riwayat-perjalanan') ? 'active' : '' }}">
+            <li class="nav-item {{ request()->is('managemen-jadwal') || request()->is('managemen-jadwal/tambah-jadwal') || request()->is('managemen-jadwal/riwayat-perjalanan') || request()->is('managemen-jadwal/dalam-perjalanan') ? 'has-treeview menu-open' : '' }}">
+              <a href="#" class="nav-link {{ request()->is('managemen-jadwal') || request()->is('managemen-jadwal/tambah-jadwal') || request()->is('managemen-jadwal/tambah-jadwal') || request()->is('managemen-jadwal/riwayat-perjalanan') || request()->is('managemen-jadwal/dalam-perjalanan') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-calendar-alt"></i>
                 <p>
                   Mangemen Jadwal
@@ -118,6 +118,12 @@
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                       Data Jadwal
+                    </p>
+                  </a>
+                  <a href="{{route('perjalanan.jadwal')}}" class="nav-link {{ request()->is('managemen-jadwal/dalam-perjalanan') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                      Dalam Perjalanan
                     </p>
                   </a>
                   <a href="{{route('create.jadwal')}}" class="nav-link {{ request()->is('managemen-jadwal/tambah-jadwal') ? 'active' : '' }}">

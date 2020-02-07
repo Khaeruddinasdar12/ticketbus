@@ -54,7 +54,8 @@ Route::prefix('managemen-bus')->group(function () {
 Route::prefix('managemen-jadwal')->group(function () {
 	Route::get('/', 'Jadwal@index')->name('index.jadwal'); //menampilkan halaman data jadwal
 	Route::get('tambah-jadwal', 'Jadwal@create')->name('create.jadwal');//menampilkan halaman tambah jadwal
-	Route::get('riwayat-perjalanan', 'Jadwal@riwayat')->name('riwayat.jadwal');//menampilkan halaman riwayat perjalana
+	Route::get('dalam-perjalanan', 'Jadwal@perjalanan')->name('perjalanan.jadwal');//menampilkan halaman dalam perjalanan
+	Route::get('riwayat-perjalanan', 'Jadwal@riwayat')->name('riwayat.jadwal');//menampilkan halaman riwayat perjalanan
 
 	//keperluan get jquery
 	Route::get('filterby/{tipe}', 'Jadwal@tipe');
@@ -64,7 +65,10 @@ Route::prefix('managemen-jadwal')->group(function () {
 
 	Route::post('store-jadwal', 'Jadwal@store')->name('store.jadwal'); // input data jadwal
 
-	Route::delete('delete-bus/{id}', 'ManagemenBus@deleteBus');
+	Route::put('edit-status/{status}/{id}', 'Jadwal@editStatus'); //mengedit status jadwal menjadi perjalanan atau selesai
+	Route::put('edit-jadwal/{id}', 'Jadwal@editJadwal'); //mengedit data jadwal
+
+	Route::delete('delete-jadwal/{id}', 'ManagemenBus@destroy'); //menghapus data jadwal
 });
 
 // RUTE MANAGEMEN ADMIN

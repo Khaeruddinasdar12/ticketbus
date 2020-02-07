@@ -94,14 +94,6 @@ class ManagemenBus extends Controller
         $data->jumlah_kursi = $request->jumlah_kursi;
         $data->save();
 
-        for ($i = 1; $i <= $request->jumlah_kursi; $i++) {
-            DB::table('kursis')->insert([
-                'id_bus' => $data->id,
-                'kursi' => '' . $i,
-                'status' => 'kosong'
-            ]);
-        }
-
         return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menambah Data');
     }
 
@@ -126,21 +118,21 @@ class ManagemenBus extends Controller
 
     public function editBus(Request $request, $id)
     {
-        $cek = \App\Kursi::where('id_bus', $id)->where('status', '!=', 'kosong')->count();
-        if ($cek > 0) {
-            return $arrayName = array('status' => 'error', 'pesan' => 'Terdapat kursi yang berstatus terisi');
-        }
-        $delete_kursi = \App\Kursi::where('id_bus', $id)->delete();
-
-        for ($i = 1; $i <= $request->jumlah_kursi; $i++) {
-            DB::table('kursis')->insert([
-                'id_bus' => $id,
-                'kursi' => '' . $i,
-                'status' => 'kosong'
-            ]);
-        }
+        $cek = DB::table('jadwals')
+                ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
+                ->where('pivot_bus_rutes.id_bus', $id)
+                ->count();
 
         $data =  \App\Bus::findOrFail($id);
+
+        if($cek > 0){
+            $data->nama = $request->nama;
+            $data->deskripsi = $request->deskripsi;
+            $data->save();
+            return $arrayName = array('status' => 'success', 'pesan' => 'Info! Bus ini telah beroperasi, hanya bisa mengubah nama bus');
+        }
+
+        
         $data->nama = $request->nama;
         $data->id_tipebus = $request->id_tipebus;
         $data->deskripsi = $request->deskripsi;
@@ -174,13 +166,6 @@ class ManagemenBus extends Controller
         if($cek > 0) {
             return $arrayName = array('status' => 'error', 'pesan' => 'Gagal! Data ini terdapat di tabel lain');
         }
-
-        $cekKursi = \App\Kursi::where('id_bus', $id)->where('status', '!=', 'kosong')->count();
-        if($cekKursi > 0) {
-            return $arrayName = array('status' => 'error', 'pesan' => 'Gagal! Terdapat pemesanan di bus ini');
-        }
-
-        $deleteKursi = \App\Kursi::where('id_bus', $id)->delete();
 
         $data = \App\Bus::findOrFail($id);
         $data->delete();

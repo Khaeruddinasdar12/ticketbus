@@ -14,11 +14,11 @@ class CreateKursisTable extends Migration
     public function up()
     {
         Schema::create('kursis', function (Blueprint $table) {
-            $table->bigInteger('id_bus')->unsigned();
+            $table->bigInteger('id_jadwal')->unsigned();
             $table->string('kursi');
             $table->enum('status', ['kosong', 'keranjang', 'proses_admin', 'terisi']);
             $table->timestamps();
-            $table->foreign('id_bus')->references('id')->on('bus');
+            $table->foreign('id_jadwal')->references('id')->on('jadwals');
         });
     }
 

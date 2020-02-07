@@ -153,11 +153,11 @@ class Jadwal extends Controller
 
     public function editStatus($status, $id) //mengubah status jadwal menjadi perjalanan atau selesai
     {
-        if($status == 'belum') {
+        if ($status == 'belum') {
             $query = \App\Jadwal::findOrFail($id);
             $query->status = 'perjalanan';
             $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Mengubah Data');
-        } else if($status == 'perjalanan') {
+        } else if ($status == 'perjalanan') {
             $query = \App\Jadwal::findOrFail($id);
             $query->status = 'selesai';
             $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Mengubah Data');
@@ -181,7 +181,7 @@ class Jadwal extends Controller
     public function destroy($id) //menghapus data jadwal
     {
         $cek = \App\Transaksi::where('id_jadwal', $id)->count();
-        if($cek > 0) {
+        if ($cek > 0) {
             return $arrayName = array('status' => 'error', 'pesan' => 'Terdapat transaksi di jadwal ini');
         }
 

@@ -1,5 +1,5 @@
 <?php
-
+use QrCode;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +19,9 @@ Auth::routes();
 
 Route::get('dashboard', 'Dashboard@index')->name('index');
 
+Route::get('code', function () {
+     return QrCode::size(300)->generate(20909090);
+ });
 
 Route::get('data-transaksi', 'Transaksi@index')->name('index.transaksi');
 Route::get('riwayat-transaksi', 'Transaksi@riwayat')->name('riwayat.transaksi');

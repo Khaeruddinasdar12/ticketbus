@@ -29,6 +29,23 @@ class Jadwal extends Controller
         return view('admin.datajadwal', ['data' => $data]);
     }
 
+    public function perjalanan() // menampilkan halaman sedang/dalam perjalanan
+    {
+        $data = DB::table('jadwals')
+            ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
+            ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+            ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+            ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+            ->rightJoin('kursis', 'jadwals.id', 'kursis.id_jadwal')
+            ->select('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', DB::raw('count(case when kursis.status = "terisi" then 1 end)as kursi_terpakai'))
+            ->where('jadwals.status', 'perjalanan')
+            ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus')
+            ->get();
+
+        // return $data;
+        return view('admin.dalamperjalanan', ['data' => $data]);
+    }
+
     public function create() //tambah jadwal
     {
         $tipeBus = \App\TipeBus::select('id', 'nama')->get();
@@ -50,11 +67,12 @@ class Jadwal extends Controller
             ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
             ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
             ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
-            ->rightJoin('kursis', 'bus.id', 'kursis.id_bus')
-            ->select('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'rutes.rute', 'tipebus.nama as tipebus', DB::raw('count(case when kursis.status = "kosong" then 1 end)as kursi_kosong'))
+            ->rightJoin('kursis', 'jadwals.id', 'kursis.id_jadwal')
+            ->select('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', DB::raw('count(case when kursis.status = "kosong" then 1 end)as kursi_kosong'))
             ->where('jadwals.status', 'selesai')
-            ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.nama', 'rutes.rute', 'tipebus')
+            ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus')
             ->get();
+        return $data;
         return view('admin.riwayatjadwal');
     }
 
@@ -133,15 +151,42 @@ class Jadwal extends Controller
         return $data;
     }
 
-    public function edit($id)
+    public function editStatus($status, $id) //mengubah status jadwal menjadi perjalanan atau selesai
     {
+        if($status == 'belum') {
+            $query = \App\Jadwal::findOrFail($id);
+            $query->status = 'perjalanan';
+            $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Mengubah Data');
+        } else if($status == 'perjalanan') {
+            $query = \App\Jadwal::findOrFail($id);
+            $query->status = 'selesai';
+            $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Mengubah Data');
+        } else {
+            exit();
+        }
+
+        return $arrayName;
     }
 
-    public function update(Request $request, $id)
+    public function editJadwal(Request $request, $id) //mengedit data jadwal
     {
+        $data = \App\Jadwal::findOrFail($id);
+        $data->tanggal = $request->tanggal;
+        $data->jam      = $request->jam;
+        $data->save();
+
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menambah Data');
     }
 
-    public function destroy($id)
+    public function destroy($id) //menghapus data jadwal
     {
+        $cek = \App\Transaksi::where('id_jadwal', $id)->count();
+        if($cek > 0) {
+            return $arrayName = array('status' => 'error', 'pesan' => 'Terdapat transaksi di jadwal ini');
+        }
+
+        $data = \App\Jadwal::find($id);
+        $data->delete();
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menghapus Data');
     }
 }

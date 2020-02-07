@@ -8,20 +8,17 @@ class Transaksi extends Controller
 {
     public function index()
     {
-    	$belum = DB::table('transaksis')
-    			->join('users', 'transaksis.id_customer', '=', 'users.id')
-    			->join('jadwals', 'transaksis.id_jadwal', '=', 'jadwals.id')
-    			->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
-    			->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
-    			->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
-    			->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
-    			->join('kursis', 'bus.id', 'kursis.id_bus')
-    			->select('order_code', 'users.name as customer', 'transaksis.no_kursi', 'jadwals.tanggal',
-    					'jadwals.jam', 'bus.nama as nama_bus', 'rutes.rute', 'tipebus.nama as tipebus', 'kursis.status')
-    			->where('transaksis.status_bayar', 'belum')
-    			->where('kursis.kursi', 'transaksis.no_kursi')
-    			->get();
-    	return $belum;
+    	$data = DB::table('jadwals')
+            ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
+            ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+            ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+            ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+            ->rightJoin('kursis', 'jadwals.id', 'kursis.id_jadwal')
+            ->select('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', DB::raw('count(case when kursis.status = "kosong" then 1 end)as kursi_kosong'))
+            ->where('jadwals.status', 'belum')
+            ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus')
+            ->get();
+    	// return $belum;
         return view('admin.transaksi');
     }
 

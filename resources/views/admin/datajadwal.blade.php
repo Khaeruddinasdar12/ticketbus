@@ -58,10 +58,13 @@ Data Jadwal
                       <td>{{ $jadwal->rute }}</td>
                       <td>{{ $jadwal->tanggal }}</td>
                       <td>{{ $jadwal->jam }}</td>
-                      <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showjadwal" title="lihat detail" data-id="{{ $jadwal->id }}" data-nama="{{ $jadwal->namabus }}" data-tipe="{{ $jadwal->tipebus }}" data-rute="{{ $jadwal->rute }}" data-tgl="{{ $jadwal->tanggal }}" data-jam="{{ $jadwal->jam }}" data-desc="{{ $jadwal->deskripsi }}"><i class=" far fa-eye"></i></button> </td>
+                      <td>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#showjadwal" title="lihat detail" data-id="{{ $jadwal->id }}" data-nama="{{ $jadwal->namabus }}" data-tipe="{{ $jadwal->tipebus }}" data-rute="{{ $jadwal->rute }}" data-tgl="{{ $jadwal->tanggal }}" data-jam="{{ $jadwal->jam }}" data-desc="{{ $jadwal->deskripsi }}"><i class=" far fa-eye"></i></button>
+                      </td>
                       <td>
                         <button class="btn btn-success" data-toggle="modal" data-target="#editjadwal" title="edit data" data-id="{{ $jadwal->id }}" data-nama="{{ $jadwal->namabus }}" data-tipe="{{ $jadwal->tipebus }}" data-rute="{{ $jadwal->rute }}" data-tgl="{{ $jadwal->tanggal }}" data-jam="{{ $jadwal->jam }}" data-desc="{{ $jadwal->deskripsi }}"><i class="fas fa-pencil-alt"></i></button>
-                        <button class="btn btn-danger" title="hapus data" onclick="hapus()" id="del_idbus"><i class="fas fa-trash"></i></button>
+
+                        <button class="btn btn-danger" title="hapus data" href="managemen-jadwal/delete-jadwal/{{$jadwal->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
                       </td>
                     </tr>
                     @endforeach
@@ -151,7 +154,7 @@ Data Jadwal
                                 <div class="col-md-6">
                                   <div class="form-group">
                                     <label for="exampleInputEmail1">Tanggal Berangkat</label>
-                                    <input type="text" class="form-control" name="tanggal" id="tanggals" required>
+                                    <input type="date" class="form-control" name="tanggal" id="tanggals" required>
                                   </div>
                                 </div>
                                 <div class="col-md-6">

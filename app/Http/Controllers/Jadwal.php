@@ -19,7 +19,7 @@ class Jadwal extends Controller
                 ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
                 ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
                 ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
-                ->rightJoin('kursis', 'bus.id', 'kursis.id_bus')
+                ->rightJoin('kursis', 'jadwals.id', 'kursis.id_jadwal')
                 ->select('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'rutes.rute', 'tipebus.nama as tipebus', DB::raw('count(case when kursis.status = "kosong" then 1 end)as kursi_kosong'))
                 ->where('jadwals.status', 'belum')
                 ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.nama', 'rutes.rute', 'tipebus')

@@ -60,7 +60,7 @@ Data Jadwal
                       <td>{{ $jadwal->jam }}</td>
                       <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showjadwal" title="lihat detail" data-nama="{{ $jadwal->namabus }}" data-tipe="{{ $jadwal->tipebus }}" data-rute="{{ $jadwal->rute }}" data-tgl="{{ $jadwal->tanggal }}" data-jam="{{ $jadwal->jam }}" data-desc="{{ $jadwal->deskripsi }}"><i class=" far fa-eye"></i></button> </td>
                       <td>
-                        <button class="btn btn-success" data-toggle="modal" data-target="#editbus" title="edit data"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#editjadwal" title="edit data" data-d="{{ $jadwal->id }}" data-nama="{{ $jadwal->namabus }}" data-tipe="{{ $jadwal->tipebus }}" data-rute="{{ $jadwal->rute }}" data-tgl="{{ $jadwal->tanggal }}" data-jam="{{ $jadwal->jam }}" data-desc="{{ $jadwal->deskripsi }}"><i class="fas fa-pencil-alt"></i></button>
                         <button class="btn btn-danger" title="hapus data" onclick="hapus()" id="del_idbus"><i class="fas fa-trash"></i></button>
                       </td>
                     </tr>
@@ -119,6 +119,65 @@ Data Jadwal
                   </div>
                   <!-- End Modal detail -->
 
+                  <!-- Modal edit -->
+                  <div class="modal fade" id="editjadwal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Detail Bus</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="container">
+                            <form role="form" action="" method="post" id="edit-jadwal">
+                              @csrf
+                              <input type="hidden" id="jadwal-id">
+                              <input type="hidden" name="_method" value="PUT">
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Nama Bus</label>
+                                <input type="text" class="form-control" id="namabuss" readonly>
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Tipe Bus</label>
+                                <input type="text" class="form-control" id="tipebuss" readonly>
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Rute</label>
+                                <input type="text" class="form-control" id="rutebuss" readonly>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Tanggal Berangkat</label>
+                                    <input type="text" class="form-control" id="tanggals" required>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Jam Berangkat</label>
+                                    <input type="text" class="form-control" id="jams" required>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label>Deskripsi Bus</label>
+                                <textarea name="desc" class="form-control" id="deskripsis" rows="4" readonly></textarea>
+                              </div>
+
+                              <div class="form-group" style="margin-top: 20px;">
+                                <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
+                                <button type="submit" class="btn btn-primary float-right"><i class="nav-icon fas fa-plus"></i> Update</button>
+                              </div>
+
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Modal edit -->
 
                 </table>
               </div>
@@ -142,7 +201,7 @@ Data Jadwal
   });
 </script>
 <script>
-  // detail pivot
+  // detail jadwal
   $('#showjadwal').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget)
     var nama = button.data('nama')
@@ -161,7 +220,63 @@ Data Jadwal
     modal.find('.modal-body #jam').val(jam)
     modal.find('.modal-body #deskripsi').val(desc)
   })
-  // end detail pivot
+  // end detail jadwal
+
+  // edit jadwal
+  $('#editjadwal').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget)
+    var nama = button.data('nama')
+    var tipe = button.data('tipe')
+    var rute = button.data('rute')
+    var tgl = button.data('tgl')
+    var jam = button.data('jam')
+    var desc = button.data('desc')
+
+    var modal = $(this)
+    modal.find('.modal-title').text('Edit Jadwal Bus ' + nama)
+    modal.find('.modal-body #namabuss').val(nama)
+    modal.find('.modal-body #tipebuss').val(tipe)
+    modal.find('.modal-body #rutebuss').val(rute)
+    modal.find('.modal-body #tanggals').val(tgl)
+    modal.find('.modal-body #jams').val(jam)
+    modal.find('.modal-body #deskripsis').val(desc)
+  })
+  // end edit jadwal
+
+  // JQUERY FORM EDIT
+  //edit data bus
+  $('#edit-jadwal').submit(function(e) {
+    e.preventDefault();
+    var id = eval(document.getElementById('jadwal-id').value); //id pada inputan
+    console.log(id);
+    var request = new FormData(this);
+    var endpoint = "managemen-bus/edit-bus/" + id;
+    $.ajax({
+      url: endpoint,
+      method: "POST",
+      data: request,
+      contentType: false,
+      cache: false,
+      processData: false,
+      // dataType: "json",
+      success: function(data) {
+        $('#edit-bus')[0].reset(); //id form
+        $('#editbus').modal('hide'); //id modal
+        console.log(data.pesan);
+        berhasil(data.status, data.pesan);
+      },
+      error: function(xhr, status, error) {
+        var error = xhr.responseJSON;
+        if ($.isEmptyObject(error) == false) {
+          $.each(error.errors, function(key, value) {
+            gagal(key, value);
+          });
+        }
+      }
+    });
+  });
+  // end edit data bus
+  // END JQUERY FORM EDIT
 </script>
 
 @endsection

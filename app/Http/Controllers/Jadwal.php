@@ -180,11 +180,13 @@ class Jadwal extends Controller
 
   public function destroy($id) //menghapus data jadwal
   {
+    // $cek = \App\PivotBusRute::where('id_bus', $id)->count();
     $cek = \App\Transaksi::where('id_jadwal', $id)->count();
     if ($cek > 0) {
       return $arrayName = array('status' => 'error', 'pesan' => 'Terdapat transaksi di jadwal ini');
     }
-
+    
+    $delete_kursi = \App\Kursi::where('id_jadwal', $id)->delete();
     $data = \App\Jadwal::find($id);
     $data->delete();
     return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menghapus Data');

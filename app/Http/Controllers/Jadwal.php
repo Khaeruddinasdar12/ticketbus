@@ -25,7 +25,7 @@ class Jadwal extends Controller
                 ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus')
                 ->get();
 
-        return $data;
+        // return $data;
         return view('admin.datajadwal', ['data' => $data]);
     }
 

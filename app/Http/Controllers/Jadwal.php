@@ -15,15 +15,15 @@ class Jadwal extends Controller
     public function index() // menampilkan data jadwal
     {
         $data = DB::table('jadwals')
-                ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
-                ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
-                ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
-                ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
-                ->rightJoin('kursis', 'bus.id', 'kursis.id_bus')
-                ->select('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'rutes.rute', 'tipebus.nama as tipebus', DB::raw('count(case when kursis.status = "kosong" then 1 end)as kursi_kosong'))
-                ->where('jadwals.status', 'belum')
-                ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.nama', 'rutes.rute', 'tipebus')
-                ->get();
+            ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
+            ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+            ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+            ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+            ->rightJoin('kursis', 'bus.id', 'kursis.id_bus')
+            ->select('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'rutes.rute', 'tipebus.nama as tipebus', DB::raw('count(case when kursis.status = "kosong" then 1 end)as kursi_kosong'))
+            ->where('jadwals.status', 'belum')
+            ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.nama', 'rutes.rute', 'tipebus')
+            ->get();
         return $data;
         return view('admin.datajadwal', ['data' => $data]);
     }
@@ -45,15 +45,15 @@ class Jadwal extends Controller
     public function riwayat() // menampilkan riwayat jadwal
     {
         $data = DB::table('jadwals')
-                ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
-                ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
-                ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
-                ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
-                ->rightJoin('kursis', 'bus.id', 'kursis.id_bus')
-                ->select('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'rutes.rute', 'tipebus.nama as tipebus', DB::raw('count(case when kursis.status = "kosong" then 1 end)as kursi_kosong'))
-                ->where('jadwals.status', 'selesai')
-                ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.nama', 'rutes.rute', 'tipebus')
-                ->get();
+            ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
+            ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+            ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+            ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+            ->rightJoin('kursis', 'bus.id', 'kursis.id_bus')
+            ->select('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'rutes.rute', 'tipebus.nama as tipebus', DB::raw('count(case when kursis.status = "kosong" then 1 end)as kursi_kosong'))
+            ->where('jadwals.status', 'selesai')
+            ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.nama', 'rutes.rute', 'tipebus')
+            ->get();
         return view('admin.riwayatjadwal');
     }
 
@@ -97,11 +97,11 @@ class Jadwal extends Controller
     public function store(Request $request) // menginput data jadwal
     {
         $id_bus = DB::table('pivot_bus_rutes')
-                ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
-                ->select('bus.jumlah_kursi')
-                ->where('pivot_bus_rutes.id', $request->id_bus_rute)
-                ->first();
-        
+            ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+            ->select('bus.jumlah_kursi')
+            ->where('pivot_bus_rutes.id', $request->id_bus_rute)
+            ->first();
+
         $data = new \App\Jadwal();
         $data->id_bus_rute = $request->id_bus_rute;
         $data->tanggal = $request->tanggal;

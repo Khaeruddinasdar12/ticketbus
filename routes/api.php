@@ -21,4 +21,4 @@ Route::apiResource('admin', 'api\User'); // table users
 
 Route::apiResource('rute', 'api\Rutes'); //tabel rutes
 
-Route::put('test/{id}', 'api\Rutes@test'); // TEST
+Route::get('test/{id}', 'api\Rutes@test'); // TEST

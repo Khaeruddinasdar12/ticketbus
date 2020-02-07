@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
+use DB;
 class Rutes extends Controller
 {
     /**
@@ -14,7 +15,10 @@ class Rutes extends Controller
      */
     public function test($id)
     {
-        $cek = \App\Kursi::where('id_bus', $id)->where('status', '!=', 'kosong')->count();
+        $cek = DB::table('jadwals')
+                ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
+                ->where('pivot_bus_rutes.id_bus', $id)
+                ->count();
         return $cek;
 
         return 'berhasil';

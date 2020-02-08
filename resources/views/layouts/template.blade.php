@@ -316,6 +316,46 @@
       });
     }
 
+    function status() {
+      $(document).on('click', "#status_perjalanan", function() {
+        Swal.fire({
+          title: 'Anda Yakin ?',
+          text: "Bus yang anda pilih akan di berangkatkan!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya, Lanjutkan!',
+          timer: 6500
+        }).then((result) => {
+          if (result.value) {
+            var me = $(this),
+              url = me.attr('href'),
+              token = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+              url: url,
+              method: "POST",
+              data: {
+                '_method': 'PUT',
+                '_token': token
+              },
+              success: function(data) {
+                berhasil(data.status, data.pesan);
+              },
+              error: function(xhr, status, error) {
+                var error = xhr.responseJSON;
+                if ($.isEmptyObject(error) == false) {
+                  $.each(error.errors, function(key, value) {
+                    gagal(key, value);
+                  });
+                }
+              }
+            });
+          }
+        });
+      });
+    }
+
     function berhasil(status, pesan) {
       if (status == 'success') {
         Swal.fire({

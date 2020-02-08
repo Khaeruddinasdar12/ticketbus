@@ -185,7 +185,7 @@ class Jadwal extends Controller
     if ($cek > 0) {
       return $arrayName = array('status' => 'error', 'pesan' => 'Terdapat transaksi di jadwal ini');
     }
-    
+
     $delete_kursi = \App\Kursi::where('id_jadwal', $id)->delete();
     $data = \App\Jadwal::find($id);
     $data->delete();

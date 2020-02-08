@@ -1,5 +1,5 @@
 <?php
-use QrCode;
+// use QrCode;/
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +20,13 @@ Auth::routes();
 Route::get('dashboard', 'Dashboard@index')->name('index');
 
 Route::get('code', function () {
-     return QrCode::size(300)->generate(20909090);
+		$image = \QrCode::format('png')
+						 ->size(200)->errorCorrection('H')
+		                 ->generate('A simple example of QR code!');
+		$output_file = 'public/img/qr-code/img-' . time() .  'asdar.png';
+		Storage::disk('local')->put($output_file, $image);
+
+		return 'success';
  });
 
 Route::get('data-transaksi', 'Transaksi@index')->name('index.transaksi');

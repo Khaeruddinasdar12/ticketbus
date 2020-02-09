@@ -60,8 +60,6 @@ Data Jadwal
                       <td>{{ $jadwal->jam }}</td>
                       <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail0" title="lihat detail"><i class=" far fa-eye"></i></button> </td>
                       <td>
-                        <button class="btn btn-success" data-toggle="modal" data-target="#editbus" title="edit data"><i class="fas fa-pencil-alt"></i></button>
-                        <button class="btn btn-danger" title="hapus data" onclick="hapus()" id="del_idbus"><i class="fas fa-trash"></i></button>
                         <button class="btn btn-danger" title="Bus Telah Sampai" href="managemen-jadwal/edit-status/{{$jadwal->status}}/{{$jadwal->id}}" onclick="status()" id="status_perjalanan"><i class="fas fa-trash"></i></button>
                       </td>
                     </tr>

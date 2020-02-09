@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('uang',  function(){ 
+echo  "Rp. " .format_uang(125000); });
+
 Route::get('dashboard', 'Dashboard@index')->name('index');
 
 Route::get('code', function () {
@@ -29,7 +32,10 @@ Route::get('code', function () {
 		return 'success';
  });
 
+// RUTE TRANSAKSI
 Route::get('data-transaksi', 'Transaksi@index')->name('index.transaksi');
+Route::get('store-transaksi', 'Transaksi@store')->name('store.transaksi');
+Route::get('cek-kursi/{id}', 'Transaksi@cekKursi');
 Route::get('riwayat-transaksi', 'Transaksi@riwayat')->name('riwayat.transaksi');
 
 // all JQUERY

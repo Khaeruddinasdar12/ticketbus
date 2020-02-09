@@ -181,7 +181,7 @@ Transaksi
                 </div>
 
                 <div class="tab-pane fade show" id="vert-tabs-home" role="tabpanel" aria-labelledby="vert-tabs-home-tab">
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="example2" class="table table-bordered table-striped">
                     <thead>
                       <tr>
                         <th>Nama Customer</th>
@@ -413,7 +413,35 @@ Transaksi
 <script src="{{ asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <script>
   $(function() {
-    $("#example1, #example2, #example3").DataTable();
+    $("#example2, #example3").DataTable();
   });
+
+  $(document).ready(function() {
+    // Setup - add a text input to each footer cell
+    $('#example1 thead tr').clone(true).appendTo( '#example1 thead' );
+    $('#example1 thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+ 
+        $( 'input', this ).on( 'keyup change', function () {
+            if ( table.column(i).search() !== this.value ) {
+                table
+                    .column(i)
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+ 
+    var table = $('#example1').DataTable( {
+        orderCellsTop: true,
+        fixedHeader: true
+    } );
+} );
 </script>
+<style type="text/css">
+  thead input {
+        width: 100%;
+    }
+</style>
 @endsection

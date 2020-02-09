@@ -59,10 +59,10 @@ Data Jadwal
                       <td>{{ $jadwal->tanggal }}</td>
                       <td>{{ $jadwal->jam }}</td>
                       <td>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#showjadwal" title="lihat detail" data-id="{{ $jadwal->id }}" data-nama="{{ $jadwal->namabus }}" data-tipe="{{ $jadwal->tipebus }}" data-rute="{{ $jadwal->rute }}" data-tgl="{{ $jadwal->tanggal }}" data-jam="{{ $jadwal->jam }}" data-desc="{{ $jadwal->deskripsi }}"><i class=" far fa-eye"></i></button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#showjadwal" title="lihat detail" data-id="{{ $jadwal->id }}" data-nama="{{ $jadwal->namabus }}" data-tipe="{{ $jadwal->tipebus }}" data-rute="{{ $jadwal->rute }}" data-tgl="{{ $jadwal->tanggal }}" data-jam="{{ $jadwal->jam }}" data-desc="{{ $jadwal->deskripsi }}" data-harga="Rp. {{ format_uang($jadwal->harga) }}"><i class=" far fa-eye"></i></button>
                       </td>
                       <td>
-                        <button class="btn btn-success" data-toggle="modal" data-target="#editjadwal" title="edit data" data-id="{{ $jadwal->id }}" data-nama="{{ $jadwal->namabus }}" data-tipe="{{ $jadwal->tipebus }}" data-rute="{{ $jadwal->rute }}" data-tgl="{{ $jadwal->tanggal }}" data-jam="{{ $jadwal->jam }}" data-desc="{{ $jadwal->deskripsi }}"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#editjadwal" title="edit data" data-id="{{ $jadwal->id }}" data-nama="{{ $jadwal->namabus }}" data-tipe="{{ $jadwal->tipebus }}" data-rute="{{ $jadwal->rute }}" data-tgl="{{ $jadwal->tanggal }}" data-jam="{{ $jadwal->jam }}" data-desc="{{ $jadwal->deskripsi }}" data-harga="Rp. {{ format_uang($jadwal->harga) }}"><i class="fas fa-pencil-alt"></i></button>
 
                         <button class="btn btn-danger" title="hapus data" href="managemen-jadwal/delete-jadwal/{{$jadwal->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
 
@@ -92,6 +92,10 @@ Data Jadwal
                               <div class="form-group">
                                 <label for="exampleInputEmail1">Tipe Bus</label>
                                 <input type="text" class="form-control" id="tipebus" readonly>
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Harga Per kursi</label>
+                                <input type="text" class="form-control" id="harga" readonly>
                               </div>
                               <div class="form-group">
                                 <label for="exampleInputEmail1">Rute</label>
@@ -151,6 +155,10 @@ Data Jadwal
                               <div class="form-group">
                                 <label for="exampleInputEmail1">Rute</label>
                                 <input type="text" class="form-control" name="rute" id="rutebuss" readonly>
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Harga Per kursi</label>
+                                <input type="text" class="form-control" name="tipebus" id="hargas" readonly>
                               </div>
                               <div class="row">
                                 <div class="col-md-6">
@@ -214,6 +222,7 @@ Data Jadwal
     var tgl = button.data('tgl')
     var jam = button.data('jam')
     var desc = button.data('desc')
+    var harga = button.data('harga')
 
     var modal = $(this)
     modal.find('.modal-title').text('Detail Jadwal Bus ' + nama)
@@ -223,6 +232,7 @@ Data Jadwal
     modal.find('.modal-body #tanggal').val(tgl)
     modal.find('.modal-body #jam').val(jam)
     modal.find('.modal-body #deskripsi').val(desc)
+    modal.find('.modal-body #harga').val(harga)
   })
   // end detail jadwal
 
@@ -236,6 +246,7 @@ Data Jadwal
     var jam = button.data('jam')
     var desc = button.data('desc')
     var id = button.data('id')
+    var harga = button.data('harga')
 
     var modal = $(this)
     modal.find('.modal-title').text('Edit Jadwal Bus ' + nama)
@@ -246,6 +257,7 @@ Data Jadwal
     modal.find('.modal-body #tanggals').val(tgl)
     modal.find('.modal-body #jams').val(jam)
     modal.find('.modal-body #deskripsis').val(desc)
+    modal.find('.modal-body #hargas').val(harga)
   })
   // end edit jadwal
 

@@ -31,6 +31,8 @@ Route::get('code', function () {
 
 		return 'success';
  });
+// RUTE CUSTOMER
+Route::get('data-customer', 'Customer@index')->name('index.customer');
 
 // RUTE TRANSAKSI
 Route::get('data-transaksi', 'Transaksi@index')->name('index.transaksi');

@@ -7,7 +7,11 @@ use DB;
 
 class ManagemenBus extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index() //menampilkan halaman data bus
     {
         $pivotBusRute = DB::table('pivot_bus_rutes')

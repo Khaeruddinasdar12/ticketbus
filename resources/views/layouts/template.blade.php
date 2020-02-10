@@ -165,7 +165,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{route('index.customer')}}" class="nav-link">
+              <a href="{{route('index.customer')}}" class="nav-link {{ request()->is('data-customer') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Customers
@@ -189,7 +189,7 @@
                   </a>
                   <a href="{{route('riwayat.transaksi')}}" class="nav-link {{ request()->is('riwayat-transaksi') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Riwayat Perjalanan</p>
+                    <p>Riwayat Transaksi</p>
                   </a>
                 </li>
               </ul>

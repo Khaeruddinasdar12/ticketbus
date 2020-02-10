@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
+
 class Transaksi extends Controller
 {
     public function __construct()
@@ -14,7 +15,7 @@ class Transaksi extends Controller
     
     public function index()
     {
-    	$data = DB::table('jadwals')
+        $data = DB::table('jadwals')
             ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
             ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
             ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
@@ -46,9 +47,9 @@ class Transaksi extends Controller
             ->select('transaksis.id', 'transaksis.order_code', 'transaksis.barcode', 'users.name', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', 'transaksis.no_kursi', 'transaksis.status_bayar')
             ->where('transaksis.status_bayar', 'sudah')
             ->get();
-            // return $sudah;
-    	
-        return view('admin.transaksi', ['data' => $data]);
+        // return $belum;
+
+        return view('admin.transaksi', ['data' => $data, 'belum' => $belum, 'sudah' => $sudah]);
     }
 
     public function store()
@@ -60,17 +61,17 @@ class Transaksi extends Controller
         $data = new \App\Transaksi();
         $data->id_jadwal = $request->id_jadwal;
         $data->id_customer = $store_user->id;
-        $data->status_bayar= 'sudah';
-        $data->no_kursi =$request->no_kursi;
+        $data->status_bayar = 'sudah';
+        $data->no_kursi = $request->no_kursi;
         $data->trip = 'n';
-        
+
         //qrcode
-            $i = $request->id_jadwal;
-            $order_code = \Carbon\Carbon::now().'id'.$i;
-            $image = \QrCode::format('png')
-                         ->size(200)->errorCorrection('H')
-                         ->generate($order_code);
-                         return $image;
+        $i = $request->id_jadwal;
+        $order_code = \Carbon\Carbon::now() . 'id' . $i;
+        $image = \QrCode::format('png')
+            ->size(200)->errorCorrection('H')
+            ->generate($order_code);
+        return $image;
         $output_file = 'public/img/qr-code/img-' . time() .  'asdar.png';
         Storage::disk('local')->put($output_file, $image);
         //end qrcode
@@ -80,9 +81,9 @@ class Transaksi extends Controller
 
         //ubah status di tabel kursis
         $set_kursis = \App\Kursi::where('id_jadwal', $request->id_jadwal)->where('kursi', $request->no_kursi)
-                        ->update([
-                            'status' => 'terisi',
-                        ]);
+            ->update([
+                'status' => 'terisi',
+            ]);
         //end ubah status di tabel kursis
 
         return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menambah Data');
@@ -106,8 +107,8 @@ class Transaksi extends Controller
             ->select('transaksis.id', 'transaksis.order_code', 'transaksis.barcode', 'users.name', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', 'transaksis.no_kursi')
             ->where('transaksis.status_bayar', 'sudah')
             ->get();
-        return $data;
-            
+        // return $data;
+
         return view('admin.riwayattransaksi', ['data' => $data]);
     }
 }

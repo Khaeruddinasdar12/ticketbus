@@ -75,7 +75,7 @@ Transaksi
                         <td>Bintang Prima</td>
                         <td>Bus Jago</td>
                         <td>Rp 15.000</td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#pesan" title="pesan kursi"><i class="fas fa-money-check-alt"></i></button> </td>
+                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#pesan" title="pesan kursi"><i class="fas fa-shopping-cart"></i></button> </td>
                       </tr>
                     </tbody>
 
@@ -185,20 +185,24 @@ Transaksi
                     <thead>
                       <tr>
                         <th>Nama Customer</th>
-                        <th>Tgl Berangkat</th>
                         <th>Nama Bus</th>
+                        <th>Tgl Berangkat</th>
+                        <th>Jam Berangkat</th>
                         <th>Status</th>
                         <th>Detail</th>
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach($belum as $belumbayar)
                       <tr>
-                        <td>Baco</td>
-                        <td>1 januari 1990</td>
-                        <td>Bintang Prima</td>
-                        <td> <button class="btn btn-danger" data-toggle="modal" data-target="#verif">Belum Bayar</button> </td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail1">Show</button> </td>
+                        <td>{{$belumbayar->name}}</td>
+                        <td>{{$belumbayar->namabus}}</td>
+                        <td>{{$belumbayar->tanggal}}</td>
+                        <td>{{$belumbayar->jam}}</td>
+                        <td> <button class="btn btn-danger" data-toggle="modal" data-target="#verif" title="belum bayar"><i class="fab fa-creative-commons-nc"></i></button> </td>
+                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail1" title="lihat detail" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-barcode="{{ $belumbayar->barcode }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="{{ $belumbayar->harga }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class=" far fa-eye"></i></button> </td>
                       </tr>
+                      @endforeach
                     </tbody>
                     <!-- Modal -->
                     <div class="modal fade" id="verif" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -239,7 +243,7 @@ Transaksi
                       <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Detal Transaksi (Nama Customer)</h5>
+                            <h5 class="modal-title" id="exampleModalLabel"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -259,13 +263,15 @@ Transaksi
 
                                     <div class="col-md-5">
                                       <h6>Nama Customer</h6>
-                                      <h6>Email</h6>
                                       <h6>Tanggal Berangkat</h6>
                                       <h6>Jam Berangkat</h6>
                                       <h6>Nama Bus</h6>
+                                      <h6>Rute Bus</h6>
                                       <h6>Nomor Kursi</h6>
                                       <h6>Harga</h6>
-                                      <h6>Type Bus</h6>
+                                      <h6>Tipe Bus</h6>
+                                      <h6>Deskripsi</h6>
+                                      <br>
                                       <h6>Status</h6>
                                     </div>
 
@@ -279,18 +285,21 @@ Transaksi
                                       <h6>:</h6>
                                       <h6>:</h6>
                                       <h6>:</h6>
+                                      <br>
+                                      <h6>:</h6>
                                     </div>
 
                                     <div class="col-md-6">
-                                      <h6>Baco Baco Becce Becce</h6>
-                                      <h6>Baco@gmail.com</h6>
-                                      <h6>1 januari 1990</h6>
-                                      <h6>Pukul 00:00 WITA</h6>
-                                      <h6>Bintang Prima</h6>
-                                      <h6>A3</h6>
-                                      <h6>Rp. 10.000</h6>
-                                      <h6>Full Stack Bus</h6>
-                                      <h6>Belum Bayar</h6>
+                                      <h6 id="nama"></h6>
+                                      <h6 id="tanggal"></h6>
+                                      <h6 id="jam"></h6>
+                                      <h6 id="namabus"></h6>
+                                      <h6 id="rutebus"></h6>
+                                      <h6 id="nokursi"></h6>
+                                      <h6 id="harga"></h6>
+                                      <h6 id="tipebus"></h6>
+                                      <h6 id="deskripsi"></h6>
+                                      <h6 id="status"></h6>
                                     </div>
 
 
@@ -322,7 +331,7 @@ Transaksi
                         <td>1 januari 1990</td>
                         <td>Bintang Prima</td>
                         <td>Sudah Bayar</td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail2">show</button> </td>
+                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail2" title="lihat detail"><i class=" far fa-eye"></i></button> </td>
                       </tr>
                     </tbody>
                     <!-- Modal -->
@@ -418,30 +427,63 @@ Transaksi
 
   $(document).ready(function() {
     // Setup - add a text input to each footer cell
-    $('#example1 thead tr').clone(true).appendTo( '#example1 thead' );
-    $('#example1 thead tr:eq(1) th').each( function (i) {
-        var title = $(this).text();
-        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
- 
-        $( 'input', this ).on( 'keyup change', function () {
-            if ( table.column(i).search() !== this.value ) {
-                table
-                    .column(i)
-                    .search( this.value )
-                    .draw();
-            }
-        } );
-    } );
- 
-    var table = $('#example1').DataTable( {
-        orderCellsTop: true,
-        fixedHeader: true
-    } );
-} );
+    $('#example1 thead tr').clone(true).appendTo('#example1 thead');
+    $('#example1 thead tr:eq(1) th').each(function(i) {
+      var title = $(this).text();
+      $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+
+      $('input', this).on('keyup change', function() {
+        if (table.column(i).search() !== this.value) {
+          table
+            .column(i)
+            .search(this.value)
+            .draw();
+        }
+      });
+    });
+
+    var table = $('#example1').DataTable({
+      orderCellsTop: true,
+      fixedHeader: true
+    });
+  });
+</script>
+<script>
+  // detail transaksi belum bayar
+  $('#showdetail1').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var order = button.data('order')
+    var barcode = button.data('barcode')
+    var nama = button.data('nama')
+    var tgl = button.data('tgl')
+    var jam = button.data('jam')
+    var bus = button.data('bus')
+    var desc = button.data('desc')
+    var rute = button.data('rute')
+    var tipe = button.data('tipe')
+    var harga = button.data('harga')
+    var kursi = button.data('kursi')
+    var status = button.data('status')
+
+    var modal = $(this)
+    modal.find('.modal-title').text('Detail Transaksi ' + nama)
+    modal.find('.modal-body #nama').text(nama)
+    modal.find('.modal-body #tanggal').text(tgl)
+    modal.find('.modal-body #jam').text(jam)
+    modal.find('.modal-body #namabus').text(bus)
+    modal.find('.modal-body #rutebus').text(rute)
+    modal.find('.modal-body #nokursi').text(kursi)
+    modal.find('.modal-body #harga').text(harga)
+    modal.find('.modal-body #tipebus').text(tipe)
+    modal.find('.modal-body #deskripsi').text(desc)
+    modal.find('.modal-body #status').text(status)
+  })
+  // end detail transaksi belum bayar
 </script>
 <style type="text/css">
   thead input {
-        width: 100%;
-    }
+    width: 100%;
+  }
 </style>
 @endsection

@@ -72,8 +72,8 @@ class Jadwal extends Controller
       ->where('jadwals.status', 'selesai')
       ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus')
       ->get();
-    return $data;
-    return view('admin.riwayatjadwal');
+    // return $data;
+    return view('admin.riwayatjadwal', ['data' => $data]);
   }
 
   public function tipe($filter)

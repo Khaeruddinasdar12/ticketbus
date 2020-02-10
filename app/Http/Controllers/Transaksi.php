@@ -15,17 +15,33 @@ class Transaksi extends Controller
             ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
             ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
             ->rightJoin('kursis', 'jadwals.id', 'kursis.id_jadwal')
-            ->select('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', DB::raw('count(case when kursis.status = "kosong" then 1 end)as kursi_kosong'))
+            ->select('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', DB::raw('count(case when kursis.status = "kosong" then 1 end)as kursi_kosong'))
             ->where('jadwals.status', 'belum')
-            ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus')
+            ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus', 'pivot_bus_rutes.harga')
             ->get();
-            // return $data;
+
+        $belum = DB::table('transaksis')
+            ->join('users', 'transaksis.id_customer', '=', 'users.id')
+            ->join('jadwals', 'transaksis.id_jadwal', '=', 'jadwals.id')
+            ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
+            ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+            ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+            ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+            ->select('transaksis.id', 'transaksis.order_code', 'transaksis.barcode', 'users.name', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', 'transaksis.no_kursi')
+            ->where('transaksis.status_bayar', 'belum')
+            ->get();
+            return $belum;
     	
         return view('admin.transaksi', ['data' => $data]);
     }
 
     public function store()
     {
+        $set_kursis = \App\Kursi::where('id_jadwal', 1)->where('kursi', 20)->update([
+            'status' => 'terisi',
+        ]);
+        
+        return 'berhasil';
         // $store_user = new \App\User();
         // $store_user->name = $request->name;
         // $store_user->save();
@@ -35,9 +51,10 @@ class Transaksi extends Controller
         // $data->id_customer = $store_user->id;
         // $data->status_bayar= 'sudah';
         // $data->no_kursi =$request->no_kursi;
+        // $data->trip = 'n';
         
         //qrcode
-            $i = 1000000;
+            $i = $request->id_jadwal;
             $order_code = \Carbon\Carbon::now().$i;
             // return $order_code;
             $image = \QrCode::
@@ -47,6 +64,12 @@ class Transaksi extends Controller
         $output_file = 'public/img/qr-code/img-' . time() .  'asdar.png';
         // Storage::disk('local')->put($output_file, $image);
         //end qrcode
+
+        //ubah status di tabel kursis
+        $set_kursis = \App\Kursi::where('id_jadwal', $request->id_jadwal)->where('kursi', $request->no_kursi)->first();
+        return 'berhasil';
+        //end ubah status di tabel kursis
+
     }
 
     public function cekKursi($id)
@@ -57,17 +80,18 @@ class Transaksi extends Controller
 
     public function riwayat()
     {
-        // $data = DB::table('jadwals')
-        //     ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
-        //     ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
-        //     ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
-        //     ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
-        //     ->rightJoin('kursis', 'jadwals.id', 'kursis.id_jadwal')
-        //     ->select('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', DB::raw('count(case when kursis.status = "kosong" then 1 end)as kursi_kosong'))
-        //     ->where('jadwals.status', 'belum')
-        //     ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus')
-        //     ->get();
+        $data = DB::table('users')
+            ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
+            ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+            ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+            ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+            ->rightJoin('kursis', 'jadwals.id', 'kursis.id_jadwal')
+            ->select('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', DB::raw('count(case when kursis.status = "kosong" then 1 end)as kursi_kosong'))
+            ->where('jadwals.status', 'belum')
+            ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus')
+            ->get();
+        return $data;
             
-        return view('admin.riwayattransaksi');
+        return view('admin.riwayattransaksi', ['data' => $data]);
     }
 }

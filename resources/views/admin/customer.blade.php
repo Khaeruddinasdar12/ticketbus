@@ -48,7 +48,6 @@ Customer
                   <tbody>
                     @foreach($data as $datas)
                     <tr>
-                      <td>Nama</td>
                       <td>{{ $datas->name }}</td>
                       <td>{{ $datas->email }}</td>
                       <td>{{ $datas->alamat }}</td>

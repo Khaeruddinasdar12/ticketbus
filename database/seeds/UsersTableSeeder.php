@@ -17,6 +17,24 @@ class UsersTableSeeder extends Seeder
 
 		DB::table('users')->insert([
 	        'name'  => 'Rijal Pardi',
+	        'email' => 'rijalpardi@gmail.com',
+	        'username' => 'rijal',
+	        'role' => 'superadmin',
+	        'alamat' => 'Btp Blok M no. 541',
+	        'password'  => bcrypt('12345678')
+		]);
+
+		DB::table('users')->insert([
+	        'name'  => 'Risky Nurmala',
+	        'email' => 'lala@gmail.com',
+	        'username' => 'lala',
+	        'role' => 'superadmin',
+	        'alamat' => 'Jalan Pongtiku',
+	        'password'  => bcrypt('12345678')
+		]);
+
+		DB::table('users')->insert([
+	        'name'  => 'Rijal Pardi',
 	        'email' => 'rijal@gmail.com',
 	        'username' => 'rijal',
 	        'role' => 'kernet',
@@ -25,7 +43,7 @@ class UsersTableSeeder extends Seeder
 		]);
 
 		DB::table('users')->insert([
-	        'name'  => 'Adhe Pratam',
+	        'name'  => 'Adhe Pratama',
 	        'email' => 'adhe@gmail.com',
 	        'username' => 'adhe',
 	        'role' => 'kernet',

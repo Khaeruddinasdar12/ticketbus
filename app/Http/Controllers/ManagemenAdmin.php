@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use Validator;
 class ManagemenAdmin extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $data = \App\User::select('id', 'name', 'email', 'role')->get();

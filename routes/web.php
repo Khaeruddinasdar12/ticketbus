@@ -11,15 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-	return view('home');
-});
+// Route::get('/', function () {
+// 	return view('home');
+// });
 
 Auth::routes();
 
 Route::get('uang',  function(){ 
 echo  "Rp. " .format_uang(125000); });
 
+Route::get('/', 'Dashboard@index')->name('index');
 Route::get('dashboard', 'Dashboard@index')->name('index');
 
 Route::get('code', function () {

@@ -185,7 +185,10 @@ Tambah Jadwal
       success: function(data) {
         console.log(data);
         jQuery.each(data, function(i, val) {
-          harga = 'Rp. ' + new Intl.NumberFormat('de-ID', { style: 'currency', currency: 'IDN' }).format(val.harga);
+          harga = 'Rp. ' + new Intl.NumberFormat('de-ID', {
+            style: 'currency',
+            currency: 'IDN'
+          }).format(val.harga);
           $('#harga-kursi').val(harga);
           $('#deskripsis').val(val.deskripsi);
         });

@@ -76,7 +76,7 @@ Transaksi
                         <td>{{ $datajadwal -> namabus }}</td>
                         <td>{{ $datajadwal -> tipebus }}</td>
                         <td>{{ $datajadwal -> harga }}</td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#pesan" title="pesan kursi"><i class="fas fa-shopping-cart"></i></button> </td>
+                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#pesan" title="pesan kursi" onclick="kursi()"><i class="fas fa-shopping-cart"></i></button> </td>
                       </tr>
                       @endforeach
                     </tbody>
@@ -506,6 +506,21 @@ Transaksi
     modal.find('.modal-body #status').text(status)
   })
   // end detail transaksi belum bayar
+
+  // menampilkan jumlah kursi
+  function show_filter() {
+    tipe = $('#filteredby').val();
+    $.ajax({
+      'url': "cek-kursi/" + id,
+      'dataType': 'json',
+      success: function(data) {
+        jQuery.each(data, function(i, val) {
+          $('#hasil-pilih').append('<option value="' + val.id + '">' + val.nama + '</option>');
+        });
+      }
+    })
+  }
+  //end menampilkan jumlah kursi
 </script>
 <style type="text/css">
   thead input {

@@ -25,7 +25,7 @@ class User extends Controller
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
             // $success['token'] =  $user->createToken('nApp')->accessToken;
-            return response()->json(['status' => true, 'message' => 'berhasil login', 'code' => 200]);
+            return response()->json(['status' => true, 'message' => 'berhasil login', 'code' => 200, 'id_user' => $data->id]);
         }else{
             return response()->json(['error'=>'Unauthorised'], 401);
         }
@@ -67,6 +67,7 @@ class User extends Controller
         $data->username = $request->username;
         $data->password = bcrypt($request->password);
         $data->email = $request->email;
+        $data->jkel = $request->jkel;
         $data->role = $request->role;
         $data->alamat = $request->alamat;
         $data->save();

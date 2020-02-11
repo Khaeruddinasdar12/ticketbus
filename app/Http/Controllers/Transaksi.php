@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
+use Metzli\Encoder\Encoder;
+use Metzli\Renderer\PngRenderer;
 
 class Transaksi extends Controller
 {

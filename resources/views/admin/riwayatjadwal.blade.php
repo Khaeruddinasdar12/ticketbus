@@ -47,7 +47,6 @@ Data Jadwal
                       <th>Tanggal Berangkat</th>
                       <th>Jam Berangkat</th>
                       <th>Detail</th>
-                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -202,7 +201,7 @@ Data Jadwal
 <script src="{{ asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <script>
   $(function() {
-    $("#example1").DataTable();
+    $("#example0").DataTable();
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,

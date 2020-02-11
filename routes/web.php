@@ -1,5 +1,7 @@
 <?php
 // use QrCode;/
+use Metzli\Encoder\Encoder;
+use Metzli\Renderer\PngRenderer;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,16 +19,37 @@
 
 Auth::routes();
 
-Route::get('uang',  function(){ 
-echo  "Rp. " .format_uang(125000); });
+
+// ... some awesome code here ...
+
+
+
+
+Route::get('aztec',  function(){ 
+		$code = Encoder::encode('Hello World!');
+		$renderer = new PngRenderer();
+		$image = $renderer->render($code);
+// echo $code;
+		$output_file = 'public/img/qr-code/img-' . time() .  'asdar.png';
+		Storage::disk('local')->put($output_file, $image);
+
+		// 
+		// header('Content-Type: image/png');
+		// return $image;
+		// return '<img src="'.$image.'">';
+		return 'berhasil';
+});
 
 Route::get('/', 'Dashboard@index')->name('index');
 Route::get('dashboard', 'Dashboard@index')->name('index');
 
 Route::get('code', function () {
 		$image = \QrCode::format('png')
-						 ->size(200)->errorCorrection('H')
+						->size(200)->errorCorrection('H')
 		                 ->generate('A simple example of QR code!');
+		                 // return $image;
+		                 // return $image;
+		return '<img src="'.$image.'code.png">';
 		$output_file = 'public/img/qr-code/img-' . time() .  'asdar.png';
 		Storage::disk('local')->put($output_file, $image);
 

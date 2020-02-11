@@ -111,11 +111,11 @@ Manajemen Bus
         <!-- FORM TAMBAH TIPE -->
 
         <div class="card-body">
+          <div class="table-responsive">
           <table id="example4" class="table table-bordered table-striped">
             <thead>
               <tr>
                 <th>Nama Admin</th>
-                <th>Username</th>
                 <th>Role</th>
                 <th>Detail</th>
               </tr>
@@ -124,14 +124,18 @@ Manajemen Bus
               @foreach($data as $datas)
               <tr>
                 <td>{{$datas->name}}</td>
-                <td>{{$datas->email}}</td>
-                <td>Bintang Prima</td>
-                <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail3">show</button> </td>
+                <td>{{$datas->role}}</td>
+                <td> <button class="btn btn-primary" data-toggle="modal" data-target="#detailadmin" data-name="{{$datas->name}}" data-email="{{$datas->email}}" data-role="{{$datas->role}}" data-alamat="{{$datas->alamat}}">show</button> </td>
               </tr>
               @endforeach
             </tbody>
-            <!-- Modal -->
-            <div class="modal fade" id="showdetail3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          </table>
+          </div>
+        </div>
+      </div>
+      <!-- END FORM TAMBAH TIPE -->
+<!-- Modal -->
+            <div class="modal fade" id="detailadmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -148,7 +152,6 @@ Manajemen Bus
 
                             <div class="col-md-5">
                               <h6>Nama Admin</h6>
-                              <h6>Username</h6>
                               <h6>Email</h6>
                               <h6>Role Admin</h6>
                               <h6>Alamat</h6>
@@ -159,15 +162,13 @@ Manajemen Bus
                               <h6>:</h6>
                               <h6>:</h6>
                               <h6>:</h6>
-                              <h6>:</h6>
                             </div>
 
                             <div class="col-md-6">
-                              <h6>Baco Baco Becce Becce</h6>
-                              <h6>Baco</h6>
-                              <h6>baco@gmail.com</h6>
-                              <h6>Karnet</h6>
-                              <h6>Sudiang</h6>
+                              <h6 id="name"></h6>
+                              <h6 id="email"></h6>
+                              <h6 id="role"></h6>
+                              <h6 id="alamat"></h6>
                             </div>
 
                           </div>
@@ -182,11 +183,6 @@ Manajemen Bus
                 </div>
               </div>
             </div>
-          </table>
-        </div>
-      </div>
-      <!-- END FORM TAMBAH TIPE -->
-
       <!-- /.card-body -->
     </div>
     <!-- /.card -->
@@ -204,7 +200,20 @@ Manajemen Bus
   });
 
   // $('.text-warning').hide();
+  $('#detailadmin').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget)
+    var name = button.data('name')
+    var role = button.data('role')
+    var email = button.data('email')
+    var alamat = button.data('alamat')
 
+    var modal = $(this)
+    modal.find('.modal-title').text('Detail Admin ' + name)
+    modal.find('.modal-body #name').text(name)
+    modal.find('.modal-body #role').text(role)
+    modal.find('.modal-body #email').text(email)
+    modal.find('.modal-body #alamat').text(alamat)
+  })
   //mengecek password
   $('#password1').blur(function() {
     var password = $(this).val();

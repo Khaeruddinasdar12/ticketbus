@@ -60,6 +60,7 @@ Data Bus
 
                 <!-- tab data bus -->
                 <div class="tab-pane text-left fade show active" id="vert-tabs-add" role="tabpanel" aria-labelledby="vert-tabs-add-tab">
+                  <div class="table-responsive">
                   <table id="example0" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -181,11 +182,13 @@ Data Bus
                     <!-- End Modal edit bus -->
 
                   </table>
+                  </div>
                 </div>
                 <!-- end tab data bus -->
 
                 <!-- tab data tipe bus -->
                 <div class="tab-pane fade show" id="vert-tabs-home" role="tabpanel" aria-labelledby="vert-tabs-home-tab">
+                  <div class="table-responsive">
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -240,11 +243,13 @@ Data Bus
                     <!-- End Modal edit tipe -->
 
                   </table>
+                  </div>
                 </div>
                 <!-- end tab data tipe bus -->
 
                 <!-- tab data rute -->
                 <div class="tab-pane fade" id="vert-tabs-messages" role="tabpanel" aria-labelledby="vert-tabs-messages-tab">
+                  <div class="table-responsive">
                   <table id="example3" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -297,11 +302,13 @@ Data Bus
                       </div>
                     </div>
                   </table>
+                  </div>
                 </div>
                 <!-- end tab data rute -->
 
                 <!-- tab data pivot -->
                 <div class="tab-pane fade" id="vert-tabs-pivot" role="tabpanel" aria-labelledby="vert-tabs-pivot-tab">
+                  <div class="table-responsive">
                   <table id="example4" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -329,8 +336,12 @@ Data Bus
                       </tr>
                       @endforeach
                     </tbody>
+                  </table>
+                </div>
+                </div>
+                <!-- end tab data pivot -->
 
-                    <!-- Modal detail -->
+ <!-- Modal detail -->
                     <div class="modal fade" id="showdetailpivot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -371,11 +382,6 @@ Data Bus
                       </div>
                     </div>
                     <!-- End Modal detail -->
-
-                  </table>
-                </div>
-                <!-- end tab data pivot -->
-
               </div>
             </div>
           </div>

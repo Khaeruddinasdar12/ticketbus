@@ -359,13 +359,13 @@ Transaksi
   // menampilkan harga dan deskripsi
   function kursi() {
     $(document).on('click', "#pesankursi", function() {
-      $('#pilih-kursi').empty();
       var id = $(this).attr('data-id');
       console.log(id);
       $.ajax({
         'url': "cek-kursi/" + id,
         'dataType': 'json',
         success: function(data) {
+          $('#pilih-kursi').empty();
           jQuery.each(data, function(i, val) {
             var br = '';
             var span = '';
@@ -385,7 +385,6 @@ Transaksi
             } else {
               bg = '<label class="btn btn-secondary disabled kursi mb-1 ml-1" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off">' + val.kursi + '</label>';
             }
-
             $('#pilih-kursi').append(bg + span + br);
           });
         }

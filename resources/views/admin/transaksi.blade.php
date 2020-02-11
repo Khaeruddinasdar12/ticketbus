@@ -359,16 +359,19 @@ Transaksi
   // menampilkan harga dan deskripsi
   function kursi() {
     $(document).on('click', "#pesankursi", function() {
+      $('#pilih-kursi').empty();
       var id = $(this).attr('data-id');
-      // id = me.attr('data-id');
       console.log(id);
       $.ajax({
         'url': "cek-kursi/" + id,
         'dataType': 'json',
         success: function(data) {
-          console.log(data);
           jQuery.each(data, function(i, val) {
-            $('#pilih-kursi').append('<label class="btn bg-olive mb-1" style="cursor: pointer" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" > A1 </label>');
+            var br = '';
+            if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19 || i == 23 || i == 27 || i == 31) {
+              var br = '<br>';
+            }
+            $('#pilih-kursi').append('<label class="btn bg-olive mb-1" style="cursor: pointer" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" >' + val.kursi + '</label>' + br);
           });
         }
       })

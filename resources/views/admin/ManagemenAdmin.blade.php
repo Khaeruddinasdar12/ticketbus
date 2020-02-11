@@ -39,16 +39,45 @@ Manajemen Bus
 
         <!-- FORM TAMBAH BUS -->
         <div class="card-body">
-          <form action="{{route('store.admin')}}" method="POST">
+          <form action="" method="POST" id="add-admin">
             @csrf
             <div class="form-group">
               <label>Nama Admin</label>
               <input type="text" name="name" class="form-control">
             </div>
             <div class="form-group">
-              <label>Username</label>
-              <input type="text" name="username" class="form-control">
+              <label>Email</label>
+              <input type="mail" name="email" class="form-control">
             </div>
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" name="username" class="form-control" >
+            </div>
+            <div class="form-group">
+              <label>Role Admin</label>
+              <select class="form-control custom-select" name="role">
+                <option selected disabled>Pilih Role</option>
+                <option value="superadmin">Admin</option>
+                <option value="kernet">Kernet</option>
+              </select>
+            </div>
+            <div class="form-group"> 
+              <label>Jenis Kelamin</label>
+            <div class="row">
+                  <div class="col-md-6">
+                      <div class="icheck-primary d-inline">
+                        <input type="radio" id="radioPrimary1" name="jkel" value="L" checked>
+                        <label for="radioPrimary1">Laki-laki</label>
+                      </div>
+                      </div>
+                      <div class="col-md-6">
+                      <div class="icheck-primary d-inline">
+                        <input type="radio" id="radioPrimary2" name="jkel" value="P">
+                        <label for="radioPrimary2">Perempuan</label>
+                      </div>
+                      </div>
+                  </div>
+              </div>
             <div class="row">
               <div class="col-sm-6">
                 <!-- text input -->
@@ -62,24 +91,13 @@ Manajemen Bus
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>Ulangi Password</label>
-                  <input type="password" name="password2" class="form-control" id="password2">
+                  <input type="password" name="password2" class="form-control" id="password2" required>
                   <i class="form-control-feedback"></i>
                   <span class="text-warning"></span>
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label>Email</label>
-              <input type="mail" name="email" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Role Admin</label>
-              <select class="form-control custom-select" name="role">
-                <option selected disabled>Pilih Role</option>
-                <option value="superadmin">Admin</option>
-                <option value="kernet">Kernet</option>
-              </select>
-            </div>
+            
             <div class="form-group">
               <label>Alamat</label>
               <textarea name="alamat" class="form-control" rows="4"></textarea>
@@ -199,7 +217,6 @@ Manajemen Bus
     $("#example4").DataTable();
   });
 
-  // $('.text-warning').hide();
   $('#detailadmin').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget)
     var name = button.data('name')
@@ -214,6 +231,37 @@ Manajemen Bus
     modal.find('.modal-body #email').text(email)
     modal.find('.modal-body #alamat').text(alamat)
   })
+
+    // add admin
+  $('#add-admin').submit(function(e) {
+    e.preventDefault();
+    var request = new FormData(this);
+    var endpoint = '{{route("store.admin")}}';
+    $.ajax({
+      url: endpoint,
+      method: "POST",
+      data: request,
+      contentType: false,
+      cache: false,
+      processData: false,
+      // dataType: "json",
+      success: function(data) {
+        $('#add-admin')[0].reset();
+
+        berhasil(data.status, data.pesan);
+      },
+      error: function(xhr, status, error) {
+        var error = xhr.responseJSON;
+        if ($.isEmptyObject(error) == false) {
+          $.each(error.errors, function(key, value) {
+            gagal(key, value);
+          });
+        }
+      }
+    });
+  });
+  // end add admin
+
   //mengecek password
   $('#password1').blur(function() {
     var password = $(this).val();

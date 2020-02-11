@@ -368,10 +368,15 @@ Transaksi
         success: function(data) {
           jQuery.each(data, function(i, val) {
             var br = '';
+            var span = '';
             if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19 || i == 23 || i == 27 || i == 31) {
               var br = '<br>';
             }
-            $('#pilih-kursi').append('<label class="btn bg-olive mb-1" style="cursor: pointer" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" >' + val.kursi + '</label>' + br);
+            if (i == 1 || i == 5 || i == 9 || i == 13 || i == 17 || i == 21 || i == 25 || i == 29) {
+              var span = '<span class="ml-3"></span>'
+            }
+
+            $('#pilih-kursi').append('<label class="btn bg-olive kursi mb-1 ml-1" style="cursor: pointer" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" >' + val.kursi + '</label>' + span + br);
           });
         }
       })
@@ -382,6 +387,10 @@ Transaksi
 <style type="text/css">
   thead input {
     width: 100%;
+  }
+
+  .kursi {
+    width: 50px !important;
   }
 </style>
 @endsection

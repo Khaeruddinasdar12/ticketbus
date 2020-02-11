@@ -38,149 +38,107 @@ Data Jadwal
           <div class="row">
             <div class="col-md-12">
               <div class="tab-pane text-left fade show active" id="vert-tabs-add" role="tabpanel" aria-labelledby="vert-tabs-add-tab">
-                <table id="example0" class="table table-bordered table-striped">
+                <table id="example3" class="table table-bordered table-striped">
                   <thead>
                     <tr>
+                      <th>Nama Customer</th>
                       <th>Nama Bus</th>
-                      <th>Tipe Bus</th>
-                      <th>Rute</th>
-                      <th>Tanggal Berangkat</th>
+                      <th>Tgl Berangkat</th>
                       <th>Jam Berangkat</th>
+                      <th>Status</th>
                       <th>Detail</th>
                     </tr>
                   </thead>
-                  <tbody>                    
+                  <tbody>
+                    @foreach($sudah as $sudahbyr)
                     <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>{{ $sudahbyr->name }}</td>
+                      <td>{{ $sudahbyr->namabus }}</td>
+                      <td>{{ $sudahbyr->tanggal }}</td>
+                      <td>{{ $sudahbyr->jam }}</td>
                       <td>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#showjadwal" title="lihat detail"><i class=" far fa-eye"></i></button>
+                        <button class="btn btn-success" title="sudah bayar"><i class=" far fa-check-square"></i></button>
+                      </td>
+
+                      <td>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail2" title="lihat detail" data-id="{{ $sudahbyr->id }}" data-order="{{ $sudahbyr->order_code }}" data-barcode="{{ $sudahbyr->barcode }}" data-nama="{{ $sudahbyr->name }}" data-tgl="{{ $sudahbyr->tanggal }}" data-jam="{{ $sudahbyr->jam }}" data-bus="{{ $sudahbyr->namabus }}" data-desc="{{ $sudahbyr->deskripsi }}" data-rute="{{ $sudahbyr->rute }}" data-tipe="{{ $sudahbyr->tipebus }}" data-harga="{{ $sudahbyr->harga }}" data-kursi="{{ $sudahbyr->no_kursi }}" data-status="{{ $sudahbyr->status_bayar }}"><i class=" far fa-eye"></i></button>
                       </td>
                     </tr>
+                    @endforeach
                   </tbody>
-
-                  <!-- Modal detail -->
-                  <div class="modal fade" id="showjadwal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                  <!-- Modal -->
+                  <div class="modal fade" id="showdetail2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Detail Bus</h5>
+                          <h5 class="modal-title" id="exampleModalLabel">Detal Transaksi (Nama Customer)</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
                         <div class="modal-body">
                           <div class="container">
-                            <form role="form">
-                              <div class="form-group">
-                                <label for="exampleInputEmail1">Nama Bus</label>
-                                <input type="text" class="form-control" id="namabus" readonly>
+                            <div class="row">
+                              <div class="col-md-4" style="border-right: 1px solid #c7c9ca">
+                                <h6>Order Code</h6>
+                                <h5 id="orders"></h5>
+                                <hr>
+                                <h6>BarCode</h6>
+                                <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" alt="">
                               </div>
-                              <div class="form-group">
-                                <label for="exampleInputEmail1">Tipe Bus</label>
-                                <input type="text" class="form-control" id="tipebus" readonly>
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInputEmail1">Harga Per kursi</label>
-                                <input type="text" class="form-control" id="harga" readonly>
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInputEmail1">Rute</label>
-                                <input type="text" class="form-control" id="rutebus" readonly>
-                              </div>
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label for="exampleInputEmail1">Tanggal Berangkat</label>
-                                    <input type="text" class="form-control" id="tanggal" readonly>
-                                  </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label for="exampleInputEmail1">Jam Berangkat</label>
-                                    <input type="text" class="form-control" id="jam" readonly>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label>Deskripsi Bus</label>
-                                <textarea name="desc" class="form-control" id="deskripsi" rows="4" readonly></textarea>
-                              </div>
+                              <div class="col-md-7 offset-md-1" style="margin: auto">
+                                <div class="row">
 
-                            </form>
+                                  <div class="col-md-5">
+                                    <h6>Nama Customer</h6>
+                                    <h6>Tanggal Berangkat</h6>
+                                    <h6>Jam Berangkat</h6>
+                                    <h6>Nama Bus</h6>
+                                    <h6>Rute Bus</h6>
+                                    <h6>Nomor Kursi</h6>
+                                    <h6>Harga</h6>
+                                    <h6>Tipe Bus</h6>
+                                    <h6>Deskripsi</h6>
+                                    <br>
+                                    <h6>Status</h6>
+                                  </div>
+
+                                  <div class="col-md-1">
+                                    <h6>:</h6>
+                                    <h6>:</h6>
+                                    <h6>:</h6>
+                                    <h6>:</h6>
+                                    <h6>:</h6>
+                                    <h6>:</h6>
+                                    <h6>:</h6>
+                                    <h6>:</h6>
+                                    <h6>:</h6>
+                                    <br>
+                                    <h6>:</h6>
+                                  </div>
+
+                                  <div class="col-md-6">
+                                    <h6 id="namas"></h6>
+                                    <h6 id="tanggals"></h6>
+                                    <h6 id="jams"></h6>
+                                    <h6 id="namabuss"></h6>
+                                    <h6 id="rutebuss"></h6>
+                                    <h6 id="nokursis"></h6>
+                                    <h6 id="hargas"></h6>
+                                    <h6 id="tipebuss"></h6>
+                                    <h6 id="deskripsis"></h6>
+                                    <h6 id="statuss"></h6>
+                                  </div>
+
+
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- End Modal detail -->
-
-                  <!-- Modal edit -->
-                  <div class="modal fade" id="editjadwal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel"></h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <div class="container">
-                            <form role="form" action="" method="post" id="edit-jadwal">
-                              @csrf
-                              <input type="hidden" id="jadwal-id">
-                              <input type="hidden" name="_method" value="PUT">
-                              <div class="form-group">
-                                <label for="exampleInputEmail1">Nama Bus</label>
-                                <input type="text" class="form-control" name="namabus" id="namabuss" readonly>
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInputEmail1">Tipe Bus</label>
-                                <input type="text" class="form-control" name="tipebus" id="tipebuss" readonly>
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInputEmail1">Rute</label>
-                                <input type="text" class="form-control" name="rute" id="rutebuss" readonly>
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInputEmail1">Harga Per kursi</label>
-                                <input type="text" class="form-control" name="tipebus" id="hargas" readonly>
-                              </div>
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label for="exampleInputEmail1">Tanggal Berangkat</label>
-                                    <input type="date" class="form-control" name="tanggal" id="tanggals" required>
-                                  </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label for="exampleInputEmail1">Jam Berangkat</label>
-                                    <input type="text" class="form-control" name="jam" id="jams" required>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label>Deskripsi Bus</label>
-                                <textarea name="desc" class="form-control" name="deskripsi" id="deskripsis" rows="4" readonly></textarea>
-                              </div>
-
-                              <div class="form-group" style="margin-top: 20px;">
-                                <button type="submit" class="btn btn-primary float-right"><i class="nav-icon fas fa-plus"></i> Update</button>
-                              </div>
-
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- End Modal edit -->
-
                 </table>
               </div>
             </div>
@@ -199,8 +157,42 @@ Data Jadwal
 <script src="{{ asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <script>
   $(function() {
-    $("#example0").DataTable();
+    $("#example3").DataTable();
   });
+</script>
+<script>
+  // detail transaksi sudah bayar
+  $('#showdetail2').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var order = button.data('order')
+    var barcode = button.data('barcode')
+    var nama = button.data('nama')
+    var tgl = button.data('tgl')
+    var jam = button.data('jam')
+    var bus = button.data('bus')
+    var desc = button.data('desc')
+    var rute = button.data('rute')
+    var tipe = button.data('tipe')
+    var harga = button.data('harga')
+    var kursi = button.data('kursi')
+    var status = button.data('status')
+
+    var modal = $(this)
+    modal.find('.modal-title').text('Detail Transaksi ' + nama)
+    modal.find('.modal-body #orders').text(order)
+    modal.find('.modal-body #namas').text(nama)
+    modal.find('.modal-body #tanggals').text(tgl)
+    modal.find('.modal-body #jams').text(jam)
+    modal.find('.modal-body #namabuss').text(bus)
+    modal.find('.modal-body #rutebuss').text(rute)
+    modal.find('.modal-body #nokursis').text(kursi)
+    modal.find('.modal-body #hargas').text(harga)
+    modal.find('.modal-body #tipebuss').text(tipe)
+    modal.find('.modal-body #deskripsis').text(desc)
+    modal.find('.modal-body #statuss').text(status)
+  })
+  // end detail transaksi sudah bayar
 </script>
 
 

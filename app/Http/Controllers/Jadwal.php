@@ -46,18 +46,16 @@ class Jadwal extends Controller
     return view('admin.dalamperjalanan', ['data' => $data]);
   }
 
-  public function create() //tambah jadwal
+  public function create() //menampilkan halaman tambah jadwal
   {
-    $tipeBus = \App\TipeBus::select('id', 'nama')->get();
-
-    $ruteBus = DB::table('pivot_bus_rutes')
+    $data = DB::table('pivot_bus_rutes')
       ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
       ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
       ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
       ->select('pivot_bus_rutes.id', 'bus.nama', 'rutes.rute', 'tipebus.nama as tipebus')
       ->get();
-
-    return view('admin.tambahjadwal');
+      // return $data;
+    return view('admin.tambahjadwal', ['data' => $data]);
   }
 
   public function riwayat() // menampilkan riwayat jadwal

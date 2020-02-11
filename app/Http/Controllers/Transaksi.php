@@ -35,6 +35,7 @@ class Transaksi extends Controller
             ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
             ->select('transaksis.id', 'transaksis.order_code', 'transaksis.barcode', 'users.name', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', 'transaksis.no_kursi', 'transaksis.status_bayar')
             ->where('transaksis.status_bayar', 'proses_admin')
+            ->where('jadwals.status', 'belum')
             ->get();
         // return $sudah;
 
@@ -57,10 +58,9 @@ class Transaksi extends Controller
         //qrcode
         $i = $request->id_jadwal;
         $order_code = \Carbon\Carbon::now() . 'id' . $i;
-        $image = \QrCode::format('png')
-            ->size(200)->errorCorrection('H')
-            ->generate($order_code);
-        return $image;
+        $code = Encoder::encode($order_code);
+        $renderer = new PngRenderer();
+        $image = $renderer->render($code);
         $output_file = 'public/img/qr-code/img-' . time() .  'asdar.png';
         Storage::disk('local')->put($output_file, $image);
         //end qrcode
@@ -98,5 +98,14 @@ class Transaksi extends Controller
             ->get();
 
         return view('admin.riwayattransaksi', ['sudah' => $sudah]);
+    }
+
+    public function editStatus($id)
+    {   
+        $data = \App\Transaksi::find($id);
+        $data->status_bayar = 'sudah';
+        $data->save();
+
+        return $arrayName = array('status' => 'success', 'pesan' => 'Verifikasi Data Berhasil');
     }
 }

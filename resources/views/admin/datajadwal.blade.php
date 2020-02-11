@@ -38,6 +38,7 @@ Data Jadwal
           <div class="row">
             <div class="col-md-12">
               <div class="tab-pane text-left fade show active" id="vert-tabs-add" role="tabpanel" aria-labelledby="vert-tabs-add-tab">
+                <div class="table-responsive">
                 <table id="example0" class="table table-bordered table-striped">
                   <thead>
                     <tr>
@@ -66,7 +67,7 @@ Data Jadwal
 
                         <button class="btn btn-danger" title="hapus data" href="managemen-jadwal/delete-jadwal/{{$jadwal->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
 
-                        <button class="btn btn-info" title="Bus Dalam Perjalanan" href="managemen-jadwal/edit-status/{{$jadwal->status}}/{{$jadwal->id}}" onclick="status()" id="status_perjalanan"><i class="fas fa-road"></i></button>
+                        <button class="btn btn-info" title="Bus Dalam Perjalanan" href="managemen-jadwal/edit-status/{{$jadwal->status}}/{{$jadwal->id}}" onclick="status('Bus yang anda pilih akan di berangkatkan ?')" id="status_perjalanan"><i class="fas fa-road"></i></button>
                       </td>
                     </tr>
                     @endforeach
@@ -192,6 +193,7 @@ Data Jadwal
                   <!-- End Modal edit -->
 
                 </table>
+                </div>
               </div>
             </div>
           </div>

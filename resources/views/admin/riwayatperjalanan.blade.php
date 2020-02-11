@@ -36,6 +36,7 @@ Transaksi
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+          <div class="table-responsive">
           <table id="example4" class="table table-bordered table-striped">
             <thead>
               <tr>
@@ -113,8 +114,6 @@ Transaksi
                               <h6>Full Stack Bus</h6>
                               <h6>Verified</h6>
                             </div>
-
-
                           </div>
                         </div>
                       </div>
@@ -124,6 +123,7 @@ Transaksi
               </div>
             </div>
           </table>
+          </div>
         </div>
         <!-- /.card-body -->
       </div>

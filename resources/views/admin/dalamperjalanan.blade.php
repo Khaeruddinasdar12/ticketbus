@@ -38,6 +38,7 @@ Data Jadwal
           <div class="row">
             <div class="col-md-12">
               <div class="tab-pane text-left fade show active" id="vert-tabs-add" role="tabpanel" aria-labelledby="vert-tabs-add-tab">
+                <div class="table-responsive">
                 <table id="example0" class="table table-bordered table-striped">
                   <thead>
                     <tr>
@@ -60,15 +61,13 @@ Data Jadwal
                       <td>{{ $jadwal->jam }}</td>
                       <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail0" title="lihat detail"><i class=" far fa-eye"></i></button> </td>
                       <td>
-                        <button class="btn btn-danger" title="Bus Telah Sampai" href="edit-status/{{$jadwal->status}}/{{$jadwal->id}}" onclick="status()" id="status_perjalanan"><i class="fas fa-clipboard-check"></i></button>
+                        <button class="btn btn-danger" title="Bus Telah Sampai" href="edit-status/{{$jadwal->status}}/{{$jadwal->id}}" onclick="status('Perjalanan bus ini telah selesai ?')" id="status_perjalanan"><i class="fas fa-clipboard-check"></i></button>
                       </td>
                     </tr>
                     @endforeach
                   </tbody>
-
-
-
                 </table>
+                </div>
               </div>
             </div>
           </div>

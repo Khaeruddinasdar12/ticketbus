@@ -308,11 +308,11 @@
       });
     }
 
-    function status() {
+    function status(pesan) {
       $(document).on('click', "#status_perjalanan", function() {
         Swal.fire({
           title: 'Anda Yakin ?',
-          text: "Bus yang anda pilih akan di berangkatkan!",
+          text: pesan,
           type: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',

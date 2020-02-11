@@ -97,60 +97,8 @@ Transaksi
                                   <div class="col-md-5 offset-md-1" style="border-right: 1px solid #c7c9ca">
                                     <div class="btn-group-toggle" data-toggle="buttons">
 
-                                      <label class="btn bg-olive">
+                                      <label class="btn bg-olive mb-1" style="cursor: pointer" id="pilih-kursi">
                                         <input type="radio" name="options" id="option1" autocomplete="off"> A1
-                                      </label>
-                                      <label class="btn bg-olive">
-                                        <input type="radio" name="options" id="option2" autocomplete="off"> A2
-                                      </label>
-
-                                      <label class="btn bg-olive">
-                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
-                                      </label>
-                                      <label class="btn bg-olive">
-                                        <input type="radio" name="options" id="option2" autocomplete="off"> A2
-                                      </label><br><br>
-
-                                      <label class="btn bg-olive">
-                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
-                                      </label>
-                                      <label class="btn bg-olive">
-                                        <input type="radio" name="options" id="option2" autocomplete="off"> A2
-                                      </label>
-
-                                      <label class="btn bg-olive">
-                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
-                                      </label>
-                                      <label class="btn bg-olive ml-1">
-                                        <input type="radio" name="options" id="option2" autocomplete="off"> A2
-                                      </label><br><br>
-
-                                      <label class="btn bg-olive">
-                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
-                                      </label>
-                                      <label class="btn bg-olive ml-1">
-                                        <input type="radio" name="options" id="option2" autocomplete="off"> A2
-                                      </label>
-
-                                      <label class="btn bg-olive ml-5">
-                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
-                                      </label>
-                                      <label class="btn bg-olive ml-1">
-                                        <input type="radio" name="options" id="option2" autocomplete="off"> A2
-                                      </label><br><br>
-
-                                      <label class="btn bg-olive">
-                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
-                                      </label>
-                                      <label class="btn bg-olive ml-1">
-                                        <input type="radio" name="options" id="option2" autocomplete="off"> A2
-                                      </label>
-
-                                      <label class="btn bg-olive ml-5">
-                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
-                                      </label>
-                                      <label class="btn bg-olive ml-1">
-                                        <input type="radio" name="options" id="option2" autocomplete="off"> A2
                                       </label>
 
                                     </div>
@@ -413,6 +361,20 @@ Transaksi
     modal.find('.modal-body #status').text(status)
   })
   // end detail transaksi belum bayar
+
+  // menampilkan harga dan deskripsi
+  function kursi() {
+    $.ajax({
+      'url': "cek-kursi/" + id,
+      'dataType': 'json',
+      success: function(data) {
+        jQuery.each(data, function(i, val) {
+          $('#pilih-kursi').append('<label class="btn bg-olive mb-1" style="cursor: pointer" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" > A1 </label>');
+        });
+      }
+    })
+  }
+  // end menampilkan harga dan deskripsi
 </script>
 <style type="text/css">
   thead input {

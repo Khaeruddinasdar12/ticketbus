@@ -61,127 +61,127 @@ Data Bus
                 <!-- tab data bus -->
                 <div class="tab-pane text-left fade show active" id="vert-tabs-add" role="tabpanel" aria-labelledby="vert-tabs-add-tab">
                   <div class="table-responsive">
-                  <table id="example0" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Nama Bus</th>
-                        <th>Tipe Bus</th>
-                        <th>Jumlah Kursi</th>
-                        <th>Detail</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @foreach($bus as $databus)
-                      <tr>
-                        <td>{{ $databus->nama }}</td>
-                        <td>{{ $databus->tipebus }}</td>
-                        <td>{{ $databus->jumlah_kursi }}</td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail0" title="lihat detail" data-id="{{ $databus->id }}" data-nama="{{ $databus->nama }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class=" far fa-eye"></i></button> </td>
-                        <td>
-                          <button class="btn btn-success" data-toggle="modal" data-target="#editbus" title="edit data" data-nama="{{ $databus->nama }}" data-id="{{ $databus->id }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class="fas fa-pencil-alt"></i></button>
+                    <table id="example0" class="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th>Nama Bus</th>
+                          <th>Tipe Bus</th>
+                          <th>Jumlah Kursi</th>
+                          <th>Detail</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach($bus as $databus)
+                        <tr>
+                          <td>{{ $databus->nama }}</td>
+                          <td>{{ $databus->tipebus }}</td>
+                          <td>{{ $databus->jumlah_kursi }}</td>
+                          <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail0" title="lihat detail" data-id="{{ $databus->id }}" data-nama="{{ $databus->nama }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class=" far fa-eye"></i></button> </td>
+                          <td>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#editbus" title="edit data" data-nama="{{ $databus->nama }}" data-id="{{ $databus->id }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class="fas fa-pencil-alt"></i></button>
 
-                          <button class="btn btn-danger" title="hapus data" href="managemen-bus/delete-bus/{{$databus->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
-                        </td>
-                      </tr>
-                      @endforeach
-                    </tbody>
+                            <button class="btn btn-danger" title="hapus data" href="managemen-bus/delete-bus/{{$databus->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
 
-                    <!-- Modal detail -->
-                    <div class="modal fade" id="showdetail0" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Detail Bus (Nama Bus)</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <div class="container">
-                              <form role="form">
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Nama Bus</label>
-                                  <input type="text" class="form-control" id="namabuss" readonly>
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Tipe Bus</label>
-                                  <input type="text" class="form-control" id="tipebuss" readonly>
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Jumlah Kursi</label>
-                                  <input type="text" class="form-control" id="kursis" readonly>
-                                </div>
-                                <div class="form-group">
-                                  <label>Deskripsi Bus</label>
-                                  <textarea name="desc" class="form-control" id="deskripsis" rows="4" readonly></textarea>
-                                </div>
+                      <!-- Modal detail -->
+                      <div class="modal fade" id="showdetail0" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Detail Bus (Nama Bus)</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="container">
+                                <form role="form">
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Nama Bus</label>
+                                    <input type="text" class="form-control" id="namabuss" readonly>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Tipe Bus</label>
+                                    <input type="text" class="form-control" id="tipebuss" readonly>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Jumlah Kursi</label>
+                                    <input type="text" class="form-control" id="kursis" readonly>
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Deskripsi Bus</label>
+                                    <textarea name="desc" class="form-control" id="deskripsis" rows="4" readonly></textarea>
+                                  </div>
 
-                              </form>
+                                </form>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <!-- End Modal detail -->
+                      <!-- End Modal detail -->
 
-                    <!-- Modal edit bus -->
-                    <div class="modal fade" id="editbus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <div class="container">
-                              <form role="form" action="" method="post" id="edit-bus">
-                                @csrf
-                                <input type="hidden" id="bus-id">
-                                <input type="hidden" name="_method" value="PUT">
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Nama Bus</label>
-                                  <input type="text" class="form-control" name="nama" id="namabusss">
-                                </div>
-                                <div class="row">
-                                  <div class="col-md-6">
-                                    <div class="form-group">
-                                      <label>Tipe Bus</label>
-                                      <select class="form-control custom-select" name="id_tipebus" id="tipebusss">
-                                        @foreach($tipebus as $tipe)
-                                        <option value="{{ $tipe->id }}"> {{$tipe->nama}} </option>
-                                        @endforeach
-                                      </select>
+                      <!-- Modal edit bus -->
+                      <div class="modal fade" id="editbus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel"></h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="container">
+                                <form role="form" action="" method="post" id="edit-bus">
+                                  @csrf
+                                  <input type="hidden" id="bus-id">
+                                  <input type="hidden" name="_method" value="PUT">
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Nama Bus</label>
+                                    <input type="text" class="form-control" name="nama" id="namabusss">
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                        <label>Tipe Bus</label>
+                                        <select class="form-control custom-select" name="id_tipebus" id="tipebusss">
+                                          @foreach($tipebus as $tipe)
+                                          <option value="{{ $tipe->id }}"> {{$tipe->nama}} </option>
+                                          @endforeach
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                        <label for="exampleInputEmail1">Jumlah Kursi</label>
+                                        <input type="text" class="form-control" name="jumlah_kursi" id="kursiss">
+                                      </div>
                                     </div>
                                   </div>
-                                  <div class="col-md-6">
-                                    <div class="form-group">
-                                      <label for="exampleInputEmail1">Jumlah Kursi</label>
-                                      <input type="text" class="form-control" name="jumlah_kursi" id="kursiss">
-                                    </div>
+                                  <div class="form-group">
+                                    <label>Deskripsi Bus</label>
+                                    <textarea name="deskripsi" class="form-control" rows="4" id="deskripsiss"></textarea>
                                   </div>
-                                </div>
-                                <div class="form-group">
-                                  <label>Deskripsi Bus</label>
-                                  <textarea name="deskripsi" class="form-control" rows="4" id="deskripsiss"></textarea>
-                                </div>
 
-                                <div class="form-group" style="margin-top: 20px;">
-                                  <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
-                                  <button type="submit" class="btn btn-primary float-right"><i class="nav-icon fas fa-plus"></i> Update</button>
-                                </div>
+                                  <div class="form-group" style="margin-top: 20px;">
+                                    <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
+                                    <button type="submit" class="btn btn-primary float-right"><i class="nav-icon fas fa-plus"></i> Update</button>
+                                  </div>
 
-                              </form>
+                                </form>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <!-- End Modal edit bus -->
+                      <!-- End Modal edit bus -->
 
-                  </table>
+                    </table>
                   </div>
                 </div>
                 <!-- end tab data bus -->
@@ -189,60 +189,60 @@ Data Bus
                 <!-- tab data tipe bus -->
                 <div class="tab-pane fade show" id="vert-tabs-home" role="tabpanel" aria-labelledby="vert-tabs-home-tab">
                   <div class="table-responsive">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Nama Tipe Bus</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @foreach($tipebus as $tipe)
-                      <tr>
-                        <td>{{ $tipe->nama }}</td>
-                        <td>
-                          <button class="btn btn-success" data-toggle="modal" data-target="#edittipe" title="edit data" data-id="{{ $tipe->id }}" data-tipe="{{ $tipe->nama }}"><i class="fas fa-pencil-alt"></i></button>
-                          <button class="btn btn-danger" title="hapus data" href="managemen-bus/delete-tipe-bus/{{$tipe->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
-                        </td>
-                      </tr>
-                      @endforeach
-                    </tbody>
+                    <table id="example1" class="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th>Nama Tipe Bus</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach($tipebus as $tipe)
+                        <tr>
+                          <td>{{ $tipe->nama }}</td>
+                          <td>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#edittipe" title="edit data" data-id="{{ $tipe->id }}" data-tipe="{{ $tipe->nama }}"><i class="fas fa-pencil-alt"></i></button>
+                            <button class="btn btn-danger" title="hapus data" href="managemen-bus/delete-tipe-bus/{{$tipe->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
 
-                    <!-- Modal edit tipe -->
-                    <div class="modal fade" id="edittipe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <div class="container">
-                              <form role="form" action="" method="post" id="edit-tipe">
-                                @csrf
-                                <input type="hidden" id="tipe-id">
-                                <input type="hidden" name="_method" value="PUT">
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Tipe </label>
-                                  <input type="text" class="form-control" name="nama" id="namatipe">
-                                </div>
+                      <!-- Modal edit tipe -->
+                      <div class="modal fade" id="edittipe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel"></h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="container">
+                                <form role="form" action="" method="post" id="edit-tipe">
+                                  @csrf
+                                  <input type="hidden" id="tipe-id">
+                                  <input type="hidden" name="_method" value="PUT">
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Tipe </label>
+                                    <input type="text" class="form-control" name="nama" id="namatipe">
+                                  </div>
 
-                                <div class="form-group" style="margin-top: 20px;">
-                                  <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
-                                  <button type="submit" class="btn btn-primary float-right"><i class="nav-icon fas fa-plus"></i> Update</button>
-                                </div>
+                                  <div class="form-group" style="margin-top: 20px;">
+                                    <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
+                                    <button type="submit" class="btn btn-primary float-right"><i class="nav-icon fas fa-plus"></i> Update</button>
+                                  </div>
 
-                              </form>
+                                </form>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <!-- End Modal edit tipe -->
+                      <!-- End Modal edit tipe -->
 
-                  </table>
+                    </table>
                   </div>
                 </div>
                 <!-- end tab data tipe bus -->
@@ -250,58 +250,58 @@ Data Bus
                 <!-- tab data rute -->
                 <div class="tab-pane fade" id="vert-tabs-messages" role="tabpanel" aria-labelledby="vert-tabs-messages-tab">
                   <div class="table-responsive">
-                  <table id="example3" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Nama</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @foreach($rute as $rutes)
-                      <tr>
-                        <td>{{ $rutes->rute }}</td>
-                        <td>
-                          <button class="btn btn-success" data-toggle="modal" data-target="#editrute" title="edit data" data-id="{{ $rutes->id }}" data-rute="{{ $rutes->rute }}"><i class="fas fa-pencil-alt"></i></button>
-                          <button class="btn btn-danger" title="hapus data" href="managemen-bus/delete-rute/{{$rutes->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
-                        </td>
-                      </tr>
-                      @endforeach
-                    </tbody>
+                    <table id="example3" class="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th>Nama</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach($rute as $rutes)
+                        <tr>
+                          <td>{{ $rutes->rute }}</td>
+                          <td>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#editrute" title="edit data" data-id="{{ $rutes->id }}" data-rute="{{ $rutes->rute }}"><i class="fas fa-pencil-alt"></i></button>
+                            <button class="btn btn-danger" title="hapus data" href="managemen-bus/delete-rute/{{$rutes->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
 
-                    <!-- Modal edit rute -->
-                    <div class="modal fade" id="editrute" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <div class="container">
-                              <form role="form" method="post" action="" id="edit-rute">
-                                @csrf
-                                <input type="hidden" id="rute-id">
-                                <input type="hidden" name="_method" value="PUT">
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Nama Rute</label>
-                                  <input type="text" class="form-control" name="rute" id="namarute">
-                                </div>
+                      <!-- Modal edit rute -->
+                      <div class="modal fade" id="editrute" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel"></h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="container">
+                                <form role="form" method="post" action="" id="edit-rute">
+                                  @csrf
+                                  <input type="hidden" id="rute-id">
+                                  <input type="hidden" name="_method" value="PUT">
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Nama Rute</label>
+                                    <input type="text" class="form-control" name="rute" id="namarute">
+                                  </div>
 
-                                <div class="form-group" style="margin-top: 20px;">
-                                  <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
-                                  <button type="submit" class="btn btn-primary float-right"><i class="nav-icon fas fa-plus"></i> Update</button>
-                                </div>
+                                  <div class="form-group" style="margin-top: 20px;">
+                                    <button type="reset" class="btn btn-secondary float-left"><i class="nav-icon fas fa-sync-alt"></i> Reset</button>
+                                    <button type="submit" class="btn btn-primary float-right"><i class="nav-icon fas fa-plus"></i> Update</button>
+                                  </div>
 
-                              </form>
+                                </form>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </table>
+                    </table>
                   </div>
                 </div>
                 <!-- end tab data rute -->
@@ -309,79 +309,79 @@ Data Bus
                 <!-- tab data pivot -->
                 <div class="tab-pane fade" id="vert-tabs-pivot" role="tabpanel" aria-labelledby="vert-tabs-pivot-tab">
                   <div class="table-responsive">
-                  <table id="example4" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Nama Bus</th>
-                        <th>Tipe Bus</th>
-                        <th>Rute</th>
-                        <th>Harga Rp. Per Kursi</th>
-                        <th>Detail</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @foreach($pivot as $datapivot)
-                      <tr>
-                        <td>{{ $datapivot->nama_bus }}</td>
-                        <td>{{ $datapivot->tipebus }}</td>
-                        <td>{{ $datapivot->rute_bus }}</td>
-                        <td>{{ $datapivot->harga }}</td>
-                        <td>
-                          <button class="btn btn-primary" data-toggle="modal" data-target="#showdetailpivot" title="lihat detail" data-nama="{{ $datapivot->nama_bus }}" data-tipe="{{ $datapivot->tipebus }}" data-rute="{{ $datapivot->rute_bus }}" data-harga="{{ $datapivot->harga }}" data-desc="{{ $datapivot->deskripsi }}"><i class="far fa-eye"></i></button>
-                        </td>
-                        <td>
-                          <button class="btn btn-danger" title="hapus data" href="managemen-bus/delete-pivot/{{$tipe->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
-                        </td>
-                      </tr>
-                      @endforeach
-                    </tbody>
-                  </table>
-                </div>
+                    <table id="example4" class="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th>Nama Bus</th>
+                          <th>Tipe Bus</th>
+                          <th>Rute</th>
+                          <th>Harga Rp. Per Kursi</th>
+                          <th>Detail</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach($pivot as $datapivot)
+                        <tr>
+                          <td>{{ $datapivot->nama_bus }}</td>
+                          <td>{{ $datapivot->tipebus }}</td>
+                          <td>{{ $datapivot->rute_bus }}</td>
+                          <td>{{ $datapivot->harga }}</td>
+                          <td>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#showdetailpivot" title="lihat detail" data-nama="{{ $datapivot->nama_bus }}" data-tipe="{{ $datapivot->tipebus }}" data-rute="{{ $datapivot->rute_bus }}" data-harga="{{ $datapivot->harga }}" data-desc="{{ $datapivot->deskripsi }}"><i class="far fa-eye"></i></button>
+                          </td>
+                          <td>
+                            <button class="btn btn-danger" title="hapus data" href="managemen-bus/delete-pivot/{{$tipe->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
                 <!-- end tab data pivot -->
 
- <!-- Modal detail -->
-                    <div class="modal fade" id="showdetailpivot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Detail Bus</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <div class="container">
-                              <form role="form">
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Nama Bus</label>
-                                  <input type="text" class="form-control" id="namabus" readonly>
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Tipe Bus</label>
-                                  <input type="text" class="form-control" id="tipebus" readonly>
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Rute</label>
-                                  <input type="text" class="form-control" id="rutebus" readonly>
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Harga Rp. Perkursi</label>
-                                  <input type="text" class="form-control" id="hargabus" readonly>
-                                </div>
-                                <div class="form-group">
-                                  <label>Deskripsi Bus</label>
-                                  <textarea name="desc" class="form-control" id="deskripsi" rows="4" readonly></textarea>
-                                </div>
-
-                              </form>
+                <!-- Modal detail -->
+                <div class="modal fade" id="showdetailpivot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detail Bus</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="container">
+                          <form role="form">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Nama Bus</label>
+                              <input type="text" class="form-control" id="namabus" readonly>
                             </div>
-                          </div>
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Tipe Bus</label>
+                              <input type="text" class="form-control" id="tipebus" readonly>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Rute</label>
+                              <input type="text" class="form-control" id="rutebus" readonly>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Harga Rp. Perkursi</label>
+                              <input type="text" class="form-control" id="hargabus" readonly>
+                            </div>
+                            <div class="form-group">
+                              <label>Deskripsi Bus</label>
+                              <textarea name="desc" class="form-control" id="deskripsi" rows="4" readonly></textarea>
+                            </div>
+
+                          </form>
                         </div>
                       </div>
                     </div>
-                    <!-- End Modal detail -->
+                  </div>
+                </div>
+                <!-- End Modal detail -->
               </div>
             </div>
           </div>

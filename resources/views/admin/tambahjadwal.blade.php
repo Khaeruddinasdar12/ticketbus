@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('title')
-Jadwal
+Tambah Jadwal
 @endsection
 
 @section('content')
@@ -62,7 +62,11 @@ Jadwal
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="inputStatus">Rute Perjalanan</label>
-                  <select class="form-control custom-select" name="id_bus_rute" id="pilih-rute" onchange="showdesc()">
+                  <select class="form-control custom-select" name="id_bus_rute" id="pilih-rute" onchange="showdesc()" required>
+                    <option>--Select--</option>
+                    @foreach($data as $datas)
+                    <option value="{{$datas->id}}">{{$datas->tipebus}} / {{$datas->nama}} / {{$datas->rute}}</option>
+                    @endforeach
                   </select>
                 </div>
               </div>
@@ -181,7 +185,8 @@ Jadwal
       success: function(data) {
         console.log(data);
         jQuery.each(data, function(i, val) {
-          $('#harga-kursi').val(val.harga);
+          harga = 'Rp. ' + new Intl.NumberFormat('de-ID', { style: 'currency', currency: 'IDN' }).format(val.harga);
+          $('#harga-kursi').val(harga);
           $('#deskripsis').val(val.deskripsi);
         });
       }

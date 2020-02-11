@@ -102,25 +102,25 @@ Transaksi
                                       <label class="btn bg-olive">
                                         <input type="radio" name="options" id="option1" autocomplete="off"> A1
                                       </label>
-                                      <label class="btn bg-olive ml-1">
+                                      <label class="btn bg-olive">
                                         <input type="radio" name="options" id="option2" autocomplete="off"> A2
                                       </label>
 
-                                      <label class="btn bg-olive ml-5">
+                                      <label class="btn bg-olive">
                                         <input type="radio" name="options" id="option1" autocomplete="off"> A1
                                       </label>
-                                      <label class="btn bg-olive ml-1">
+                                      <label class="btn bg-olive">
                                         <input type="radio" name="options" id="option2" autocomplete="off"> A2
                                       </label><br><br>
 
                                       <label class="btn bg-olive">
                                         <input type="radio" name="options" id="option1" autocomplete="off"> A1
                                       </label>
-                                      <label class="btn bg-olive ml-1">
+                                      <label class="btn bg-olive">
                                         <input type="radio" name="options" id="option2" autocomplete="off"> A2
                                       </label>
 
-                                      <label class="btn bg-olive ml-5">
+                                      <label class="btn bg-olive">
                                         <input type="radio" name="options" id="option1" autocomplete="off"> A1
                                       </label>
                                       <label class="btn bg-olive ml-1">

@@ -369,14 +369,24 @@ Transaksi
           jQuery.each(data, function(i, val) {
             var br = '';
             var span = '';
+            var status = val.status;
+            var bg = '';
+
             if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19 || i == 23 || i == 27 || i == 31) {
-              var br = '<br>';
+              br = '<br>';
             }
             if (i == 1 || i == 5 || i == 9 || i == 13 || i == 17 || i == 21 || i == 25 || i == 29) {
-              var span = '<span class="ml-3"></span>'
+              span = '<span class="ml-3"></span>';
+            }
+            if (status == 'kosong') {
+              bg = '<label class="btn bg-danger kursi mb-1 ml-1" style="cursor: pointer" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" >' + val.kursi + '</label>';
+            } else if (status == 'keranjang') {
+              bg = '<label class="btn bg-primary disabled kursi mb-1 ml-1" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" >' + val.kursi + '</label>';
+            } else {
+              bg = '<label class="btn btn-secondary disabled kursi mb-1 ml-1" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off">' + val.kursi + '</label>';
             }
 
-            $('#pilih-kursi').append('<label class="btn bg-olive kursi mb-1 ml-1" style="cursor: pointer" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" >' + val.kursi + '</label>' + span + br);
+            $('#pilih-kursi').append(bg + span + br);
           });
         }
       })

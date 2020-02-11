@@ -51,7 +51,7 @@ Manajemen Bus
             </div>
             <div class="form-group">
               <label>Username</label>
-              <input type="text" name="username" class="form-control" >
+              <input type="text" name="username" class="form-control">
             </div>
             <div class="form-group">
               <label>Role Admin</label>
@@ -61,23 +61,23 @@ Manajemen Bus
                 <option value="kernet">Kernet</option>
               </select>
             </div>
-            <div class="form-group"> 
+            <div class="form-group">
               <label>Jenis Kelamin</label>
-            <div class="row">
-                  <div class="col-md-6">
-                      <div class="icheck-primary d-inline">
-                        <input type="radio" id="radioPrimary1" name="jkel" value="L" checked>
-                        <label for="radioPrimary1">Laki-laki</label>
-                      </div>
-                      </div>
-                      <div class="col-md-6">
-                      <div class="icheck-primary d-inline">
-                        <input type="radio" id="radioPrimary2" name="jkel" value="P">
-                        <label for="radioPrimary2">Perempuan</label>
-                      </div>
-                      </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="icheck-primary d-inline">
+                    <input type="radio" id="radioPrimary1" name="jkel" value="L" checked>
+                    <label for="radioPrimary1">Laki-laki</label>
                   </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="icheck-primary d-inline">
+                    <input type="radio" id="radioPrimary2" name="jkel" value="P">
+                    <label for="radioPrimary2">Perempuan</label>
+                  </div>
+                </div>
               </div>
+            </div>
             <div class="row">
               <div class="col-sm-6">
                 <!-- text input -->
@@ -97,7 +97,7 @@ Manajemen Bus
                 </div>
               </div>
             </div>
-            
+
             <div class="form-group">
               <label>Alamat</label>
               <textarea name="alamat" class="form-control" rows="4"></textarea>
@@ -130,77 +130,77 @@ Manajemen Bus
 
         <div class="card-body">
           <div class="table-responsive">
-          <table id="example4" class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>Nama Admin</th>
-                <th>Role</th>
-                <th>Detail</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($data as $datas)
-              <tr>
-                <td>{{$datas->name}}</td>
-                <td>{{$datas->role}}</td>
-                <td> <button class="btn btn-primary" data-toggle="modal" data-target="#detailadmin" data-name="{{$datas->name}}" data-email="{{$datas->email}}" data-role="{{$datas->role}}" data-alamat="{{$datas->alamat}}">show</button> </td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
+            <table id="example4" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Nama Admin</th>
+                  <th>Role</th>
+                  <th>Detail</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($data as $datas)
+                <tr>
+                  <td>{{$datas->name}}</td>
+                  <td>{{$datas->role}}</td>
+                  <td> <button class="btn btn-primary" data-toggle="modal" data-target="#detailadmin" data-name="{{$datas->name}}" data-email="{{$datas->email}}" data-role="{{$datas->role}}" data-alamat="{{$datas->alamat}}"><i class=" far fa-eye"></i></button> </td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
       <!-- END FORM TAMBAH TIPE -->
-<!-- Modal -->
-            <div class="modal fade" id="detailadmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Detal Transaksi (Nama Customer)</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="container">
-                      <div class="row">
-                        <div class="col-md-10" style="margin: auto">
-                          <div class="row">
+      <!-- Modal -->
+      <div class="modal fade" id="detailadmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Detal Transaksi (Nama Customer)</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-10" style="margin: auto">
+                    <div class="row">
 
-                            <div class="col-md-5">
-                              <h6>Nama Admin</h6>
-                              <h6>Email</h6>
-                              <h6>Role Admin</h6>
-                              <h6>Alamat</h6>
-                            </div>
-
-                            <div class="col-md-1">
-                              <h6>:</h6>
-                              <h6>:</h6>
-                              <h6>:</h6>
-                              <h6>:</h6>
-                            </div>
-
-                            <div class="col-md-6">
-                              <h6 id="name"></h6>
-                              <h6 id="email"></h6>
-                              <h6 id="role"></h6>
-                              <h6 id="alamat"></h6>
-                            </div>
-
-                          </div>
-                        </div>
+                      <div class="col-md-5">
+                        <h6>Nama Admin</h6>
+                        <h6>Email</h6>
+                        <h6>Role Admin</h6>
+                        <h6>Alamat</h6>
                       </div>
-                    </div>
-                  </div>
 
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <div class="col-md-1">
+                        <h6>:</h6>
+                        <h6>:</h6>
+                        <h6>:</h6>
+                        <h6>:</h6>
+                      </div>
+
+                      <div class="col-md-6">
+                        <h6 id="name"></h6>
+                        <h6 id="email"></h6>
+                        <h6 id="role"></h6>
+                        <h6 id="alamat"></h6>
+                      </div>
+
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- /.card-body -->
     </div>
     <!-- /.card -->
@@ -232,7 +232,7 @@ Manajemen Bus
     modal.find('.modal-body #alamat').text(alamat)
   })
 
-    // add admin
+  // add admin
   $('#add-admin').submit(function(e) {
     e.preventDefault();
     var request = new FormData(this);

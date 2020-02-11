@@ -74,7 +74,7 @@ Transaksi
                         <td>{{ $datajadwal -> namabus }}</td>
                         <td>{{ $datajadwal -> tipebus }}</td>
                         <td>{{ $datajadwal -> harga }}</td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#pesan" title="pesan kursi" onclick="kursi()"><i class="fas fa-shopping-cart"></i></button> </td>
+                        <td> <button class="btn btn-primary" data-toggle="modal" id="pesankursi" data-target="#pesan" title="pesan kursi" onclick="kursi()" data-id="{{$datajadwal->id}}"><i class="fas fa-shopping-cart"></i></button> </td>
                       </tr>
                       @endforeach
                     </tbody>
@@ -95,13 +95,7 @@ Transaksi
                               <div class="container">
                                 <div class="row">
                                   <div class="col-md-5 offset-md-1" style="border-right: 1px solid #c7c9ca">
-                                    <div class="btn-group-toggle" data-toggle="buttons">
-
-                                      <label class="btn bg-olive mb-1" style="cursor: pointer" id="pilih-kursi">
-                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
-                                      </label>
-
-                                    </div>
+                                    <div class="btn-group-toggle" data-toggle="buttons" id="pilih-kursi"></div>
                                   </div>
 
                                   <div class="col-md-5 m-auto">
@@ -364,14 +358,20 @@ Transaksi
 
   // menampilkan harga dan deskripsi
   function kursi() {
-    $.ajax({
-      'url': "cek-kursi/" + id,
-      'dataType': 'json',
-      success: function(data) {
-        jQuery.each(data, function(i, val) {
-          $('#pilih-kursi').append('<label class="btn bg-olive mb-1" style="cursor: pointer" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" > A1 </label>');
-        });
-      }
+    $(document).on('click', "#pesankursi", function() {
+      var id = $(this).attr('data-id');
+      // id = me.attr('data-id');
+      console.log(id);
+      $.ajax({
+        'url': "cek-kursi/" + id,
+        'dataType': 'json',
+        success: function(data) {
+          console.log(data);
+          jQuery.each(data, function(i, val) {
+            $('#pilih-kursi').append('<label class="btn bg-olive mb-1" style="cursor: pointer" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" > A1 </label>');
+          });
+        }
+      })
     })
   }
   // end menampilkan harga dan deskripsi

@@ -366,12 +366,13 @@ Transaksi
         'dataType': 'json',
         success: function(data) {
           $('#pilih-kursi').empty();
+
           jQuery.each(data, function(i, val) {
+
             var br = '';
             var span = '';
             var status = val.status;
             var bg = '';
-
             if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19 || i == 23 || i == 27 || i == 31) {
               br = '<br>';
             }
@@ -379,19 +380,26 @@ Transaksi
               span = '<span class="ml-3"></span>';
             }
             if (status == 'kosong') {
-              bg = '<label class="btn bg-danger kursi mb-1 ml-1" style="cursor: pointer" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" >' + val.kursi + '</label>';
+              bg = '<label class="btn bg-danger kursi mb-1 ml-1" style="cursor: pointer" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" onclick="nokursi()">' + val.kursi + '</label>';
             } else if (status == 'keranjang') {
               bg = '<label class="btn bg-primary disabled kursi mb-1 ml-1" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" >' + val.kursi + '</label>';
             } else {
               bg = '<label class="btn btn-secondary disabled kursi mb-1 ml-1" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off">' + val.kursi + '</label>';
             }
             $('#pilih-kursi').append(bg + span + br);
+
           });
         }
       })
     })
   }
   // end menampilkan harga dan deskripsi
+
+  // nokursi
+  function nokursi() {
+    $('#nmrkursi').val(val.kursi);
+  }
+  // end nokursi
 </script>
 <style type="text/css">
   thead input {

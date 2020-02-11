@@ -360,12 +360,12 @@ Transaksi
   function kursi() {
     $(document).on('click', "#pesankursi", function() {
       var id = $(this).attr('data-id');
-      console.log(id);
       $.ajax({
         'url': "cek-kursi/" + id,
         'dataType': 'json',
         success: function(data) {
           $('#pilih-kursi').empty();
+          $('#nmrkursi').val('');
 
           jQuery.each(data, function(i, val) {
 
@@ -380,9 +380,9 @@ Transaksi
               span = '<span class="ml-3"></span>';
             }
             if (status == 'kosong') {
-              bg = '<label class="btn bg-danger kursi mb-1 ml-1" style="cursor: pointer" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" onclick="nokursi()">' + val.kursi + '</label>';
+              bg = '<label class="btn bg-danger kursi mb-1 ml-1" style="cursor: pointer" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" onchange="nokursi(' + val.kursi + ')">' + val.kursi + '</label>';
             } else if (status == 'keranjang') {
-              bg = '<label class="btn bg-primary disabled kursi mb-1 ml-1" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" >' + val.kursi + '</label>';
+              bg = '<label class="btn bg-primary disabled kursi mb-1 ml-1" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off">' + val.kursi + '</label>';
             } else {
               bg = '<label class="btn btn-secondary disabled kursi mb-1 ml-1" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off">' + val.kursi + '</label>';
             }
@@ -396,8 +396,9 @@ Transaksi
   // end menampilkan harga dan deskripsi
 
   // nokursi
-  function nokursi() {
-    $('#nmrkursi').val(val.kursi);
+  function nokursi(kursi) {
+    document.getElementById("nmrkursi").value = kursi;
+    $('#nmrkursi').val(kursi);
   }
   // end nokursi
 </script>

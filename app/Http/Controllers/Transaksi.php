@@ -12,7 +12,7 @@ class Transaksi extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         $data = DB::table('jadwals')
@@ -47,7 +47,7 @@ class Transaksi extends Controller
             ->select('transaksis.id', 'transaksis.order_code', 'transaksis.barcode', 'users.name', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', 'transaksis.no_kursi', 'transaksis.status_bayar')
             ->where('transaksis.status_bayar', 'sudah')
             ->get();
-        // return $belum;
+        // return $data;
 
         return view('admin.transaksi', ['data' => $data, 'belum' => $belum, 'sudah' => $sudah]);
     }

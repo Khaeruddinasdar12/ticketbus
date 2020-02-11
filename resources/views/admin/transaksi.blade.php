@@ -59,7 +59,7 @@ Transaksi
                     <thead>
                       <tr>
                         <th>Rute</th>
-                        <th>Waktu Berangkat</th>
+                        <th>Jam Berangkat</th>
                         <th>Tanggal Berangkat</th>
                         <th>Nama Bus</th>
                         <th>Tipe Bus</th>
@@ -68,15 +68,17 @@ Transaksi
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach($data as $datajadwal)
                       <tr>
-                        <td>Baco</td>
-                        <td>00:00 WITA</td>
-                        <td>1 januari 1990</td>
-                        <td>Bintang Prima</td>
-                        <td>Bus Jago</td>
-                        <td>Rp 15.000</td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#pesan" title="pesan kursi"><i class="fas fa-shopping-cart"></i></button> </td>
+                        <td>{{ $datajadwal -> rute }}</td>
+                        <td>{{ $datajadwal -> jam }}</td>
+                        <td>{{ $datajadwal -> tanggal }}</td>
+                        <td>{{ $datajadwal -> namabus }}</td>
+                        <td>{{ $datajadwal -> tipebus }}</td>
+                        <td>{{ $datajadwal -> harga }}</td>
+                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#pesan" title="pesan kursi" onclick="kursi()"><i class="fas fa-shopping-cart"></i></button> </td>
                       </tr>
+                      @endforeach
                     </tbody>
 
                     <!-- Modal -->
@@ -100,25 +102,25 @@ Transaksi
                                       <label class="btn bg-olive">
                                         <input type="radio" name="options" id="option1" autocomplete="off"> A1
                                       </label>
-                                      <label class="btn bg-olive ml-1">
+                                      <label class="btn bg-olive">
                                         <input type="radio" name="options" id="option2" autocomplete="off"> A2
                                       </label>
 
-                                      <label class="btn bg-olive ml-5">
+                                      <label class="btn bg-olive">
                                         <input type="radio" name="options" id="option1" autocomplete="off"> A1
                                       </label>
-                                      <label class="btn bg-olive ml-1">
+                                      <label class="btn bg-olive">
                                         <input type="radio" name="options" id="option2" autocomplete="off"> A2
                                       </label><br><br>
 
                                       <label class="btn bg-olive">
                                         <input type="radio" name="options" id="option1" autocomplete="off"> A1
                                       </label>
-                                      <label class="btn bg-olive ml-1">
+                                      <label class="btn bg-olive">
                                         <input type="radio" name="options" id="option2" autocomplete="off"> A2
                                       </label>
 
-                                      <label class="btn bg-olive ml-5">
+                                      <label class="btn bg-olive">
                                         <input type="radio" name="options" id="option1" autocomplete="off"> A1
                                       </label>
                                       <label class="btn bg-olive ml-1">
@@ -199,8 +201,15 @@ Transaksi
                         <td>{{$belumbayar->namabus}}</td>
                         <td>{{$belumbayar->tanggal}}</td>
                         <td>{{$belumbayar->jam}}</td>
-                        <td> <button class="btn btn-danger" data-toggle="modal" data-target="#verif" title="belum bayar"><i class="fab fa-creative-commons-nc"></i></button> </td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail1" title="lihat detail" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-barcode="{{ $belumbayar->barcode }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="{{ $belumbayar->harga }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class=" far fa-eye"></i></button> </td>
+
+                        <td>
+                          <button class="btn btn-danger" data-toggle="modal" data-target="#verif" title="belum bayar" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-barcode="{{ $belumbayar->barcode }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="{{ $belumbayar->harga }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class="fab fa-creative-commons-nc"></i></button>
+                        </td>
+
+                        <td>
+                          <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail1" title="lihat detail" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-barcode="{{ $belumbayar->barcode }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="{{ $belumbayar->harga }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class=" far fa-eye"></i></button>
+                        </td>
+
                       </tr>
                       @endforeach
                     </tbody>
@@ -209,18 +218,19 @@ Transaksi
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Detal Transaksi (Nama Customer)</h5>
+                            <h5 class="modal-title" id="exampleModalLabel"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                           <form action="">
+                            @csrf
                             <div class="modal-body">
                               <div class="container">
                                 <div class="row">
                                   <div class="col-md-12">
                                     <h6>Order Code</h6>
-                                    <h5>123456 - example</h5>
+                                    <h5 id="order"></h5>
                                     <hr>
                                     <h6>Bukti Pembayaran</h6>
                                     <div class="text-center">
@@ -253,7 +263,7 @@ Transaksi
                               <div class="row">
                                 <div class="col-md-4" style="border-right: 1px solid #c7c9ca">
                                   <h6>Order Code</h6>
-                                  <h5>123456 - example</h5>
+                                  <h5 id="order"></h5>
                                   <hr>
                                   <h6>BarCode</h6>
                                   <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" alt="">
@@ -449,6 +459,21 @@ Transaksi
   });
 </script>
 <script>
+  // verifikasi transaksi belum bayar
+  $('#verif').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var order = button.data('order')
+    var barcode = button.data('barcode')
+    var nama = button.data('nama')
+
+    var modal = $(this)
+    modal.find('.modal-title').text('verifikasi pembayaran ' + nama)
+    modal.find('.modal-body #order').text(order)
+    modal.find('.modal-body #nama').text(nama)
+  })
+  // end verifikasi transaksi belum bayar
+
   // detail transaksi belum bayar
   $('#showdetail1').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget)
@@ -468,6 +493,7 @@ Transaksi
 
     var modal = $(this)
     modal.find('.modal-title').text('Detail Transaksi ' + nama)
+    modal.find('.modal-body #order').text(order)
     modal.find('.modal-body #nama').text(nama)
     modal.find('.modal-body #tanggal').text(tgl)
     modal.find('.modal-body #jam').text(jam)
@@ -480,6 +506,21 @@ Transaksi
     modal.find('.modal-body #status').text(status)
   })
   // end detail transaksi belum bayar
+
+  // menampilkan jumlah kursi
+  function show_filter() {
+    tipe = $('#filteredby').val();
+    $.ajax({
+      'url': "cek-kursi/" + id,
+      'dataType': 'json',
+      success: function(data) {
+        jQuery.each(data, function(i, val) {
+          $('#hasil-pilih').append('<option value="' + val.id + '">' + val.nama + '</option>');
+        });
+      }
+    })
+  }
+  //end menampilkan jumlah kursi
 </script>
 <style type="text/css">
   thead input {

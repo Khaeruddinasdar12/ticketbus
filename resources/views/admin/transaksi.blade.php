@@ -506,21 +506,6 @@ Transaksi
     modal.find('.modal-body #status').text(status)
   })
   // end detail transaksi belum bayar
-
-  // menampilkan jumlah kursi
-  function show_filter() {
-    tipe = $('#filteredby').val();
-    $.ajax({
-      'url': "cek-kursi/" + id,
-      'dataType': 'json',
-      success: function(data) {
-        jQuery.each(data, function(i, val) {
-          $('#hasil-pilih').append('<option value="' + val.id + '">' + val.nama + '</option>');
-        });
-      }
-    })
-  }
-  //end menampilkan jumlah kursi
 </script>
 <style type="text/css">
   thead input {

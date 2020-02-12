@@ -103,7 +103,7 @@ class Transaksi extends Controller
     }
 
     public function editStatus($id)
-    {   
+    {
         $data = \App\Transaksi::find($id);
         $data->status_bayar = 'sudah';
         $data->save();

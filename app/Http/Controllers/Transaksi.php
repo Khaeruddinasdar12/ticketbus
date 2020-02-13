@@ -44,10 +44,12 @@ class Transaksi extends Controller
         return view('admin.transaksi', ['data' => $data, 'belum' => $belum]);
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $store_user = new \App\User();
         $store_user->name = $request->name;
+        $store_user->jkel = $request->jkel;
+        $store_user->role = 'nologin';
         $store_user->save();
 
         $data = new \App\Transaksi();
@@ -63,10 +65,11 @@ class Transaksi extends Controller
         $code = Encoder::encode($order_code);
         $renderer = new PngRenderer();
         $image = $renderer->render($code);
-        $output_file = 'public/img/qr-code/img-' . time() .  'asdar.png';
+        $output_file = 'public/img/qr-code/img-' . time() .  'bus.png';
         Storage::disk('local')->put($output_file, $image);
         //end qrcode
 
+        $data->barcode = $output_file;
         $data->order_code = $order_code;
         $data->save();
 

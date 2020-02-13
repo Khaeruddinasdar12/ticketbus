@@ -95,7 +95,7 @@ Transaksi
                               <form action="" method="post" id="add-transaksi">
                                 @csrf
                                 <input type="hidden" id="jadwal-id" name="id_jadwal">
-                                <input type="hidden" name="_method" value="PUT">
+                                <!-- <input type="hidden" name="_method" value="PUT"> -->
                                 <div class="row">
                                   <div class="col-md-5 offset-md-1" style="border-right: 1px solid #c7c9ca">
                                     <div class="btn-group-toggle" data-toggle="buttons" id="pilih-kursi"></div>

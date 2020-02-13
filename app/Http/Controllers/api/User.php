@@ -9,49 +9,47 @@ use Validator;
 use App\Http\Requests\ApiAdminRequest;
 use API;
 use Auth;
+use Carbon\Carbon;
 class User extends Controller
 {
+    public function login(){ // logic untuk login
+        if(Auth::attempt(['email' => request('user'), 'password' => request('password'), 'role' => 'customer' ]) || 
+            Auth::attempt(['username' => request('user'), 'password' => request('password'), 'role' => 'customer' ])){
+            $id = Auth::user()->id;
 
-    public function index()
-    {
-        $data = \App\Customer::all();
-
-        $data = \App\User::where('role', 'kernet')->get();
-        // $data = 
-        return response()->json($data);   
-    }
-
-    public function login(){
-        if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
-            $user = Auth::user();
-            // $success['token'] =  $user->createToken('nApp')->accessToken;
-            return response()->json(['status' => true, 'message' => 'berhasil login', 'code' => 200, 'id_user' => $data->id]);
-        }else{
-            return response()->json(['error'=>'Unauthorised'], 401);
+            $data = \App\User::find($id);
+            return response()->json([
+                'status' => true, 
+                'message' => 'berhasil login', 
+                'code' => 200, 
+                'data' => $data
+            ]);
+        } else {
+            return response()->json(['error'=>'Unauthorised', 401]);
         }
     }
 
-    public function store(Request $request)
+    public function register(Request $request) // fungsi registrasi
     {
         $rules=array(
             'name' => 'required|min:2',
             'username' => 'required|unique:users',
             'password' => 'required',
             'email' => 'required|email|unique:users',
-            'role' => 'required',
-            'alamat' => 'required'
+            'alamat' => 'required',
+            'jkel'  => 'required'
         );
         $messages=array(
             'name.required' => 'name field tidak boleh kosong',
             'username.required' => 'username field tidak boleh kosong',
             'password.required' => 'password field tidak boleh kosong',
             'email.required' => 'email field tidak boleh kosong',
-            'role.required' => 'role field tidak boleh kosong',
             'alamat.required' => 'alamat field tidak boleh kosong',
             'username.unique' => 'username sudah ada',
             'email.email' => 'email field harus format email',
             'email.unique' => 'email sudah ada',
-            'alamat.unique' => 'email sudah ada'
+            'alamat.unique' => 'email sudah ada',
+            'jkel.required' => 'jkel field tidak boleh kosong'
         );
 
         $validator=Validator::make($request->all(),$rules,$messages);
@@ -59,7 +57,7 @@ class User extends Controller
         {
             $messages=$validator->messages();
             $errors=$messages->all();
-            return response()->json($errors, 500);
+            return response()->json($errors, 406);
         }
 
         $data = new \App\User();
@@ -68,17 +66,18 @@ class User extends Controller
         $data->password = bcrypt($request->password);
         $data->email = $request->email;
         $data->jkel = $request->jkel;
-        $data->role = $request->role;
+        $data->role = 'customer';
         $data->alamat = $request->alamat;
+        $data->created_at = Carbon::now();
         $data->save();
 
-        return $arrayName = array('status' => 'OK', 'code' => 200, 'message' => 'Berhasil Menambah Data');
-    }
-
-    public function show($id)
-    {
-        $data = \App\User::find($id);
-        return $data;
+        $user = \App\User::find($data->id);
+        return response()->json([
+                'status' => true, 
+                'message' => 'Registrasi berhasil', 
+                'code' => 201, 
+                'data' => $user
+            ]);
     }
 
     public function update(Request $request, $id)
@@ -105,21 +104,14 @@ class User extends Controller
             return response()->json($errors, 500);
         }
 
-        
+        $data->jkel = $request->jkel;
         $data->name = $request->name;
         $data->alamat = $request->alamat;
         $data->role = $request->role;
         $data->save();
 
+        
         return $arrayName = array('status' => 'OK', 'code' => 200, 'message' => 'Berhasil Mengubah Data' );
 
-    }
-
-    public function destroy($id)
-    {
-        $data = \App\User::findOrFail($id);
-        $data->delete();
-
-        return $arrayName = array('status' => 'OK', 'code' => 200, 'message' => 'Berhasil Menghapus Data' );
     }
 }

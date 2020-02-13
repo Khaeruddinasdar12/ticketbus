@@ -75,8 +75,17 @@ Tambah Jadwal
                   <div class="col-sm-6">
                     <!-- text input -->
                     <div class="form-group">
-                      <label>Waktu (jam)</label>
-                      <input type="text" class="form-control" placeholder="14.00 WITA" name="jam" id="jam">
+                      <div class="bootstrap-timepicker">
+                        <div class="form-group">
+                          <label>Jam</label>
+                          <div class="input-group date" id="timepicker" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#timepicker" name="jam" id="jam" />
+                            <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
+                              <div class="input-group-text"><i class="far fa-clock"></i></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="col-sm-6">
@@ -129,6 +138,12 @@ Tambah Jadwal
   });
 </script>
 <script>
+  //Timepicker
+  $('#timepicker').datetimepicker({
+    format: 'HH:mm'
+  })
+  // end timepicker
+
   // menampilkan pilihan setelah memilih filter
   function show_filter() {
     $('#hasil-pilih').empty();

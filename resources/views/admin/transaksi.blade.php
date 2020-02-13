@@ -109,6 +109,23 @@ Transaksi
                                       <label for="exampleInputEmail1">Nama Customer</label>
                                       <input type="text" class="form-control" id="namabus" name="name">
                                     </div>
+                                    <div class="form-group">
+                                      <label>Jenis Kelamin</label>
+                                      <div class="row">
+                                        <div class="col-md-6">
+                                          <div class="icheck-primary d-inline">
+                                            <input type="radio" id="radioPrimary1" name="jkel" value="L" checked>
+                                            <label for="radioPrimary1">Laki-laki</label>
+                                          </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <div class="icheck-primary d-inline">
+                                            <input type="radio" id="radioPrimary2" name="jkel" value="P">
+                                            <label for="radioPrimary2">Perempuan</label>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                                 <div class="form-group" style="margin-top: 20px;">
@@ -407,6 +424,8 @@ Transaksi
 
   // add transaksi
   $('#add-transaksi').submit(function(e) {
+    var id = document.getElementById("id-jadwal").value;
+    console.log(id);
     console.log("gagagaga")
     e.preventDefault();
     var request = new FormData(this);
@@ -421,7 +440,7 @@ Transaksi
       // dataType: "json",
       success: function(data) {
         $('#add-transaksi')[0].reset();
-
+        console.log('berhasil');
         berhasil(data.status, data.pesan);
       },
       error: function(xhr, status, error) {

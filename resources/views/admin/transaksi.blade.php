@@ -89,33 +89,35 @@ Transaksi
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                          <form action="">
-                            @csrf
-                            <div class="modal-body">
-                              <div class="container">
+
+                          <div class="modal-body">
+                            <div class="container">
+                              <form action="" method="post" id="add-transaksi">
+                                @csrf
+                                <input type="hidden" id="jadwal-id" name="id_jadwal">
+                                <input type="hidden" name="_method" value="PUT">
                                 <div class="row">
                                   <div class="col-md-5 offset-md-1" style="border-right: 1px solid #c7c9ca">
                                     <div class="btn-group-toggle" data-toggle="buttons" id="pilih-kursi"></div>
                                   </div>
-
                                   <div class="col-md-5 m-auto">
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Nomor Kursi</label>
-                                      <input type="text" class="form-control" id="nmrkursi" readonly>
+                                      <input type="text" class="form-control" id="nmrkursi" name="no_kursi" readonly>
                                     </div>
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Nama Customer</label>
-                                      <input type="text" class="form-control" id="namabus">
+                                      <input type="text" class="form-control" id="namabus" name="name">
                                     </div>
                                   </div>
                                 </div>
-                              </div>
+                                <div class="form-group" style="margin-top: 20px;">
+                                  <button type="reset" class="btn btn-default float-left" data-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-primary float-right">Pesan</button>
+                                </div>
+                              </form>
                             </div>
-                            <div class="modal-footer justify-content-between">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary">Pesan</button>
-                            </div>
-                          </form>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -366,6 +368,7 @@ Transaksi
         success: function(data) {
           $('#pilih-kursi').empty();
           $('#nmrkursi').val('');
+          $('#namabus').val('');
 
           jQuery.each(data, function(i, val) {
 
@@ -401,6 +404,37 @@ Transaksi
     $('#nmrkursi').val(kursi);
   }
   // end nokursi
+
+  // add transaksi
+  $('#add-transaksi').submit(function(e) {
+    console.log("gagagaga")
+    e.preventDefault();
+    var request = new FormData(this);
+    var endpoint = '{{route("store.transaksi")}}';
+    $.ajax({
+      url: endpoint,
+      method: "POST",
+      data: request,
+      contentType: false,
+      cache: false,
+      processData: false,
+      // dataType: "json",
+      success: function(data) {
+        $('#add-transaksi')[0].reset();
+
+        berhasil(data.status, data.pesan);
+      },
+      error: function(xhr, status, error) {
+        var error = xhr.responseJSON;
+        if ($.isEmptyObject(error) == false) {
+          $.each(error.errors, function(key, value) {
+            gagal(key, value);
+          });
+        }
+      }
+    });
+  });
+  // end transaksi
 </script>
 <style type="text/css">
   thead input {

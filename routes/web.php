@@ -61,7 +61,7 @@ Route::get('data-customer', 'Customer@index')->name('index.customer');
 // RUTE TRANSAKSI
 Route::get('data-transaksi', 'Transaksi@index')->name('index.transaksi');
 Route::post('store-transaksi', 'Transaksi@store')->name('store.transaksi');// menginput transaksi
-Route::put('verifikasi-bayar/{id}', 'Transaksi@editStatus'); //mengubah status_bayar menjadi sudah
+Route::put('verifikasi-bayar/{status}/{id}', 'Transaksi@editStatus'); //mengubah status_bayar menjadi sudah
 Route::get('cek-kursi/{id}', 'Transaksi@cekKursi');
 Route::get('riwayat-transaksi', 'Transaksi@riwayat')->name('riwayat.transaksi');
 

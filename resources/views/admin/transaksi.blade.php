@@ -92,7 +92,7 @@ Transaksi
 
                           <div class="modal-body">
                             <div class="container">
-                              <form action="" method="post" id="add-transaksi">
+                              <form id="transaksi-customer" method="POST">
                                 @csrf
                                 <input type="hidden" id="jadwal-id" name="id_jadwal">
                                 <!-- <input type="hidden" name="_method" value="PUT"> -->
@@ -149,8 +149,8 @@ Transaksi
                         <th>Nama Bus</th>
                         <th>Tgl Berangkat</th>
                         <th>Jam Berangkat</th>
-                        <th>Status</th>
-                        <th>Detail</th>
+                        <th>Bukti</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -164,10 +164,15 @@ Transaksi
                         <td>
                           <button class="btn btn-danger" data-toggle="modal" data-target="#verif" title="belum bayar" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-barcode="{{ $belumbayar->barcode }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class="fab fa-creative-commons-nc"></i></button>
                         </td>
-
+                        
                         <td>
                           <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail1" title="lihat detail" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-barcode="{{ $belumbayar->barcode }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class=" far fa-eye"></i></button>
+
+                          <button title="Verifikasi Pembayaran" class="btn btn-success" id-transaksi="{{$belumbayar->id}}" id-user="{{$belumbayar->id_user}}" onclick="verified('verified')" id="verified"><i class="fas fa-check"></i></button>
+
+                          <button title="Batalkan Transaksi" class="btn btn-danger" id-transaksi="{{$belumbayar->id}}" id-user="{{$belumbayar->id_user}}" onclick="cancel('cancel')" id="cancel"><i class="fas fa-window-close"></i></button>
                         </td>
+
 
                       </tr>
                       @endforeach
@@ -183,6 +188,7 @@ Transaksi
                             </button>
                           </div>
                           <form action="">
+                            <input type="hidden" id="transaksi-id" name="id_transaksi">
                             @csrf
                             <div class="modal-body">
                               <div class="container">
@@ -201,7 +207,8 @@ Transaksi
                             </div>
                             <div class="modal-footer justify-content-between">
                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-success">Verifikasi Pembayaran</button>
+                              <button type="button" class="btn btn-danger" title="Batalkan Transaksi">Cancel</button>
+                              <button type="button" class="btn btn-success" title="Verifikasi pembayaran">Verifikasi</button>
                             </div>
                           </form>
                         </div>
@@ -303,6 +310,89 @@ Transaksi
     $("#example2, #example3").DataTable();
   });
 
+//edit status transaksi
+  function verified(status) {
+      $(document).on('click', "#verified", function() {
+        Swal.fire({
+          title: 'Anda Yakin ?',
+          text: "Pastikan bukti pembayaran telah dicek!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya, Verifikasi!',
+          timer: 6500
+        }).then((result) => {
+          if (result.value) {
+            var me = $(this),
+              id = me.attr('id-transaksi');
+              url = 'verifikasi-bayar/verified/'+id,
+              token = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+              url: url,
+              method: "POST",
+              data: {
+                '_method': 'PUT',
+                '_token': token
+              },
+              success: function(data) {
+                berhasil(data.status, data.pesan);
+              },
+              error: function(xhr, status, error) {
+                var error = xhr.responseJSON;
+                if ($.isEmptyObject(error) == false) {
+                  $.each(error.errors, function(key, value) {
+                    gagal(key, value);
+                  });
+                }
+              }
+            });
+          }
+        });
+      });
+    }
+
+    function cancel(status) {
+      $(document).on('click', "#cancel", function() {
+        Swal.fire({
+          title: 'Anda Yakin ?',
+          text: "Anda tidak dapat mengembalikan data yang telah di hapus!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya, Lanjutkan Hapus!',
+          timer: 6500
+        }).then((result) => {
+          if (result.value) {
+            var me = $(this),
+              url = me.attr('href'),
+              token = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+              url: url,
+              method: "POST",
+              data: {
+                '_method': 'DELETE',
+                '_token': token
+              },
+              success: function(data) {
+                berhasil(data.status, data.pesan);
+              },
+              error: function(xhr, status, error) {
+                var error = xhr.responseJSON;
+                if ($.isEmptyObject(error) == false) {
+                  $.each(error.errors, function(key, value) {
+                    gagal(key, value);
+                  });
+                }
+              }
+            });
+          }
+        });
+      });
+    }
+    //end edit status transaksi
+
   $(document).ready(function() {
     // Setup - add a text input to each footer cell
     $('#example1 thead tr').clone(true).appendTo('#example1 thead');
@@ -339,6 +429,7 @@ Transaksi
     modal.find('.modal-title').text('verifikasi pembayaran ' + nama)
     modal.find('.modal-body #order').text(order)
     modal.find('.modal-body #nama').text(nama)
+    modal.find('.modal-body #id_transaksi').val(id)
   })
   // end verifikasi transaksi belum bayar
 
@@ -378,7 +469,10 @@ Transaksi
   // menampilkan harga dan deskripsi
   function kursi() {
     $(document).on('click', "#pesankursi", function() {
+      // idJadwal = $(this).attr('data-id');
       var id = $(this).attr('data-id');
+      $('#jadwal-id').val(id);
+      console.log(id);
       $.ajax({
         'url': "cek-kursi/" + id,
         'dataType': 'json',
@@ -423,10 +517,7 @@ Transaksi
   // end nokursi
 
   // add transaksi
-  $('#add-transaksi').submit(function(e) {
-    var id = document.getElementById("id-jadwal").value;
-    console.log(id);
-    console.log("gagagaga")
+  $('#transaksi-customer').submit(function(e) {
     e.preventDefault();
     var request = new FormData(this);
     var endpoint = '{{route("store.transaksi")}}';
@@ -439,8 +530,8 @@ Transaksi
       processData: false,
       // dataType: "json",
       success: function(data) {
-        $('#add-transaksi')[0].reset();
-        console.log('berhasil');
+        $('#transaksi-customer')[0].reset();
+
         berhasil(data.status, data.pesan);
       },
       error: function(xhr, status, error) {
@@ -453,7 +544,6 @@ Transaksi
       }
     });
   });
-  // end transaksi
 </script>
 <style type="text/css">
   thead input {

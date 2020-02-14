@@ -7,7 +7,7 @@ use DB;
 use Carbon\Carbon;
 use Metzli\Encoder\Encoder;
 use Metzli\Renderer\PngRenderer;
-
+use Storage;
 class Transaksi extends Controller
 {
     public function __construct()
@@ -15,7 +15,7 @@ class Transaksi extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index() // halaman data-transaksi
     {
         $data = DB::table('jadwals')
             ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
@@ -35,7 +35,7 @@ class Transaksi extends Controller
             ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
             ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
             ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
-            ->select('transaksis.id', 'transaksis.order_code', 'transaksis.barcode', 'users.name', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', 'transaksis.no_kursi', 'transaksis.status_bayar')
+            ->select('transaksis.id', 'transaksis.order_code', 'transaksis.barcode', 'users.id as id_user', 'users.name', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', 'transaksis.no_kursi', 'transaksis.status_bayar')
             ->where('transaksis.status_bayar', 'proses_admin')
             ->where('jadwals.status', 'belum')
             ->get();
@@ -44,7 +44,7 @@ class Transaksi extends Controller
         return view('admin.transaksi', ['data' => $data, 'belum' => $belum]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request) // menginput transaksi customer
     {
         $store_user = new \App\User();
         $store_user->name = $request->name;
@@ -59,17 +59,18 @@ class Transaksi extends Controller
         $data->no_kursi = $request->no_kursi;
         $data->trip = 'n';
 
-        //qrcode
-        $i = $request->id_jadwal;
-        $order_code = \Carbon\Carbon::now() . 'id' . $i;
-        $code = Encoder::encode($order_code);
-        $renderer = new PngRenderer();
-        $image = $renderer->render($code);
-        $output_file = 'public/img/qr-code/img-' . time() .  'bus.png';
-        Storage::disk('local')->put($output_file, $image);
-        //end qrcode
+            //qrcode
+                $i = $request->id_jadwal;
+                $order_code = \Carbon\Carbon::now() . 'jadwal' . $i;
+                $code = Encoder::encode($order_code);
+                $renderer = new PngRenderer();
+                $image = $renderer->render($code);
+                $path = 'img/qr-code/img-' . time() .  'bus.png';
+                $output_file = 'public/'.$path;
+                Storage::disk('local')->put($output_file, $image);
+            //end qrcode
 
-        $data->barcode = $output_file;
+        $data->barcode = $path;
         $data->order_code = $order_code;
         $data->save();
 
@@ -83,7 +84,7 @@ class Transaksi extends Controller
         return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menambah Data');
     }
 
-    public function cekKursi($id)
+    public function cekKursi($id) // cek kursi per jadwal
     {
         $data = \App\Kursi::where('id_jadwal', $id)->get();
         return $data;
@@ -105,10 +106,23 @@ class Transaksi extends Controller
         return view('admin.riwayattransaksi', ['sudah' => $sudah]);
     }
 
-    public function editStatus($id)
+    public function editStatus($status, $id) //mengedit status belum bayar menjadi sudah atau cancel dari transaksi android
     {
+
+        $h = $status;
         $data = \App\Transaksi::find($id);
         $data->status_bayar = 'sudah';
+
+        //qrcode
+                // $code = $data->order_code;
+                $code = Encoder::encode($data->order_code);
+                $renderer = new PngRenderer();
+                $image = $renderer->render($code);
+                $path = 'img/qr-code/img-' . time() .  'bus.png';
+                $output_file = 'public/'.$path;
+                Storage::disk('local')->put($output_file, $image);
+            //end qrcode
+        $data->barcode = $path;
         $data->save();
 
         return $arrayName = array('status' => 'success', 'pesan' => 'Verifikasi Data Berhasil');

@@ -7,6 +7,18 @@ use Illuminate\Http\Request;
 use DB;
 class Transaksi extends Controller
 {
+    public function cekKursi($id) // cek kursi berdasarkan id jadwal
+    {
+        $data = \App\Kursi::where('id_jadwal', $id)->get();
+
+        return response()->json([
+                'status'    => true, 
+                'message'   => 'Cek kursi', 
+                'code'      => 201, 
+                'data'      => $data
+            ]);
+    }
+
     public function store(Request $request) // bertransaksi di android
     {
         $data = new \App\Transaksi();
@@ -30,11 +42,29 @@ class Transaksi extends Controller
         return response()->json([
                 'status' => true, 
                 'message' => 'Transaksi berhasil', 
-                'code' => 201, 
-                'data' => $data
+                'code' => 201
             ]);
     }
 
+    public function list_belum_bayar($id) // menampilkan list transaksi yang belum di bayar berdasarkan id user
+    {
+
+    }
+
+    public function buktiStore($id) // menginput bukti transfer berdasarkan id transaksi
+    {
+       
+    }
+
+    public function tiket($id) // menampilkan tiket user berdasarkan id user
+    {
+        
+    }
+
+    public function cek_transaksi($id) // menampilkan semua status transaksi berdasarkan id user
+    {
+        # code...
+    }
     public function riwayat($id) //riwayat transaksi user
     {
         $data = DB::table('transaksis')
@@ -56,4 +86,8 @@ class Transaksi extends Controller
                 'data' => $data
             ]);
     }
+
+    
+
+    
 }

@@ -29,5 +29,10 @@ class Jadwal extends Controller
                 'data' => $data
             ]);
     }
+
+    public function cekKursi() // cek kursi
+    {
+      
+    }
     
 }

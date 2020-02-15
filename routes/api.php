@@ -22,4 +22,4 @@ Route::post('register', 'api\User@register'); //register
 
 Route::post('transaksi', 'api\Transaksi@store'); // input transaksi
 
-Route::get('jadwals', 'api\Jadwal@jadwals');
+Route::get('jadwals', 'api\Jadwal@jadwals'); //menampilkan semua jadwal yang belum berangkat /tersedia

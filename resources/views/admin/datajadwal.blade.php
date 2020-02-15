@@ -6,6 +6,7 @@ Data Jadwal
 
 @section('content')
 <!-- Content Header (Page header) -->
+
 <div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -165,7 +166,7 @@ Data Jadwal
                                   <div class="col-md-6">
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Tanggal Berangkat</label>
-                                      <input type="date" class="form-control" name="tanggal" id="tanggals" required>
+                                      <input required type="date" class="form-control" name="tanggal" id="tanggals" min="<?php echo date('Y-m-d'); ?>" />
                                     </div>
                                   </div>
                                   <div class="col-md-6">

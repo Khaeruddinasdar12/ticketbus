@@ -102,7 +102,7 @@ Dashboard
 
 @section('js')
 <!-- <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script> -->
-<script>
+<!-- <script>
   Swal.fire({
     position: 'top-end',
     type: 'success',
@@ -110,5 +110,5 @@ Dashboard
     showConfirmButton: false,
     timer: 2500
   })
-</script>
+</script> -->
 @endsection

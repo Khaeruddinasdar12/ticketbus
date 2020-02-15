@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('title')
-Manajemen Bus
+Jalur Bus
 @endsection
 
 @section('content')

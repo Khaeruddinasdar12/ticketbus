@@ -73,8 +73,8 @@ Transaksi
                         <td>{{ $datajadwal -> tanggal }}</td>
                         <td>{{ $datajadwal -> namabus }}</td>
                         <td>{{ $datajadwal -> tipebus }}</td>
-                        <td>{{ $datajadwal -> harga }}</td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" data-target="#pesan" title="pesan kursi" onclick="kursi()"><i class="fas fa-shopping-cart"></i></button> </td>
+                        <td>Rp. {{ format_uang($datajadwal -> harga) }}</td>
+                        <td> <button class="btn btn-primary" data-toggle="modal" id="pesankursi" data-target="#pesan" title="pesan kursi" onclick="kursi()" data-id="{{$datajadwal->id}}"><i class="fas fa-shopping-cart"></i></button> </td>
                       </tr>
                       @endforeach
                     </tbody>
@@ -89,39 +89,52 @@ Transaksi
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                          <form action="">
-                            @csrf
-                            <div class="modal-body">
-                              <div class="container">
+
+                          <div class="modal-body">
+                            <div class="container">
+                              <form id="transaksi-customer" method="POST">
+                                @csrf
+                                <input type="hidden" id="jadwal-id" name="id_jadwal">
+                                <!-- <input type="hidden" name="_method" value="PUT"> -->
                                 <div class="row">
                                   <div class="col-md-5 offset-md-1" style="border-right: 1px solid #c7c9ca">
-                                    <div class="btn-group-toggle" data-toggle="buttons">
-
-                                      <label class="btn bg-olive mb-1" style="cursor: pointer" id="pilih-kursi">
-                                        <input type="radio" name="options" id="option1" autocomplete="off"> A1
-                                      </label>
-
-                                    </div>
+                                    <div class="btn-group-toggle" data-toggle="buttons" id="pilih-kursi"></div>
                                   </div>
-
                                   <div class="col-md-5 m-auto">
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Nomor Kursi</label>
-                                      <input type="text" class="form-control" id="nmrkursi" readonly>
+                                      <input type="text" class="form-control" id="nmrkursi" name="no_kursi" readonly>
                                     </div>
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Nama Customer</label>
-                                      <input type="text" class="form-control" id="namabus">
+                                      <input type="text" class="form-control" id="namabus" name="name">
+                                    </div>
+                                    <div class="form-group">
+                                      <label>Jenis Kelamin</label>
+                                      <div class="row">
+                                        <div class="col-md-6">
+                                          <div class="icheck-primary d-inline">
+                                            <input type="radio" id="radioPrimary1" name="jkel" value="L" checked>
+                                            <label for="radioPrimary1">Laki-laki</label>
+                                          </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <div class="icheck-primary d-inline">
+                                            <input type="radio" id="radioPrimary2" name="jkel" value="P">
+                                            <label for="radioPrimary2">Perempuan</label>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
+                                <div class="form-group" style="margin-top: 20px;">
+                                  <button type="reset" class="btn btn-default float-left" data-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-primary float-right">Pesan</button>
+                                </div>
+                              </form>
                             </div>
-                            <div class="modal-footer justify-content-between">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary">Pesan</button>
-                            </div>
-                          </form>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -136,8 +149,8 @@ Transaksi
                         <th>Nama Bus</th>
                         <th>Tgl Berangkat</th>
                         <th>Jam Berangkat</th>
-                        <th>Status</th>
-                        <th>Detail</th>
+                        <th>Bukti</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -149,12 +162,17 @@ Transaksi
                         <td>{{$belumbayar->jam}}</td>
 
                         <td>
-                          <button class="btn btn-danger" data-toggle="modal" data-target="#verif" title="belum bayar" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-barcode="{{ $belumbayar->barcode }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="{{ $belumbayar->harga }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class="fab fa-creative-commons-nc"></i></button>
+                          <button class="btn btn-danger" data-toggle="modal" data-target="#verif" title="belum bayar" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-barcode="{{ $belumbayar->barcode }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class="fab fa-creative-commons-nc"></i></button>
+                        </td>
+                        
+                        <td>
+                          <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail1" title="lihat detail" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-barcode="{{ $belumbayar->barcode }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class=" far fa-eye"></i></button>
+
+                          <button title="Verifikasi Pembayaran" class="btn btn-success" id-transaksi="{{$belumbayar->id}}" id-user="{{$belumbayar->id_user}}" onclick="verified('verified')" id="verified"><i class="fas fa-check"></i></button>
+
+                          <button title="Batalkan Transaksi" class="btn btn-danger" id-transaksi="{{$belumbayar->id}}" id-user="{{$belumbayar->id_user}}" onclick="cancel('cancel')" id="cancel"><i class="fas fa-window-close"></i></button>
                         </td>
 
-                        <td>
-                          <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail1" title="lihat detail" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-barcode="{{ $belumbayar->barcode }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="{{ $belumbayar->harga }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class=" far fa-eye"></i></button>
-                        </td>
 
                       </tr>
                       @endforeach
@@ -170,6 +188,7 @@ Transaksi
                             </button>
                           </div>
                           <form action="">
+                            <input type="hidden" id="transaksi-id" name="id_transaksi">
                             @csrf
                             <div class="modal-body">
                               <div class="container">
@@ -188,7 +207,8 @@ Transaksi
                             </div>
                             <div class="modal-footer justify-content-between">
                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-success">Verifikasi Pembayaran</button>
+                              <button type="button" class="btn btn-danger" title="Batalkan Transaksi">Cancel</button>
+                              <button type="button" class="btn btn-success" title="Verifikasi pembayaran">Verifikasi</button>
                             </div>
                           </form>
                         </div>
@@ -290,6 +310,89 @@ Transaksi
     $("#example2, #example3").DataTable();
   });
 
+//edit status transaksi
+  function verified(status) {
+      $(document).on('click', "#verified", function() {
+        Swal.fire({
+          title: 'Anda Yakin ?',
+          text: "Pastikan bukti pembayaran telah dicek!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya, Verifikasi!',
+          timer: 6500
+        }).then((result) => {
+          if (result.value) {
+            var me = $(this),
+              id = me.attr('id-transaksi');
+              url = 'verifikasi-bayar/verified/'+id,
+              token = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+              url: url,
+              method: "POST",
+              data: {
+                '_method': 'PUT',
+                '_token': token
+              },
+              success: function(data) {
+                berhasil(data.status, data.pesan);
+              },
+              error: function(xhr, status, error) {
+                var error = xhr.responseJSON;
+                if ($.isEmptyObject(error) == false) {
+                  $.each(error.errors, function(key, value) {
+                    gagal(key, value);
+                  });
+                }
+              }
+            });
+          }
+        });
+      });
+    }
+
+    function cancel(status) {
+      $(document).on('click', "#cancel", function() {
+        Swal.fire({
+          title: 'Anda Yakin ?',
+          text: "Anda tidak dapat mengembalikan data yang telah di hapus!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya, Lanjutkan Hapus!',
+          timer: 6500
+        }).then((result) => {
+          if (result.value) {
+            var me = $(this),
+              url = me.attr('href'),
+              token = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+              url: url,
+              method: "POST",
+              data: {
+                '_method': 'DELETE',
+                '_token': token
+              },
+              success: function(data) {
+                berhasil(data.status, data.pesan);
+              },
+              error: function(xhr, status, error) {
+                var error = xhr.responseJSON;
+                if ($.isEmptyObject(error) == false) {
+                  $.each(error.errors, function(key, value) {
+                    gagal(key, value);
+                  });
+                }
+              }
+            });
+          }
+        });
+      });
+    }
+    //end edit status transaksi
+
   $(document).ready(function() {
     // Setup - add a text input to each footer cell
     $('#example1 thead tr').clone(true).appendTo('#example1 thead');
@@ -326,6 +429,7 @@ Transaksi
     modal.find('.modal-title').text('verifikasi pembayaran ' + nama)
     modal.find('.modal-body #order').text(order)
     modal.find('.modal-body #nama').text(nama)
+    modal.find('.modal-body #id_transaksi').val(id)
   })
   // end verifikasi transaksi belum bayar
 
@@ -364,21 +468,90 @@ Transaksi
 
   // menampilkan harga dan deskripsi
   function kursi() {
-    $.ajax({
-      'url': "cek-kursi/" + id,
-      'dataType': 'json',
-      success: function(data) {
-        jQuery.each(data, function(i, val) {
-          $('#pilih-kursi').append('<label class="btn bg-olive mb-1" style="cursor: pointer" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" > A1 </label>');
-        });
-      }
+    $(document).on('click', "#pesankursi", function() {
+      // idJadwal = $(this).attr('data-id');
+      var id = $(this).attr('data-id');
+      $('#jadwal-id').val(id);
+      console.log(id);
+      $.ajax({
+        'url': "cek-kursi/" + id,
+        'dataType': 'json',
+        success: function(data) {
+          $('#pilih-kursi').empty();
+          $('#nmrkursi').val('');
+          $('#namabus').val('');
+
+          jQuery.each(data, function(i, val) {
+
+            var br = '';
+            var span = '';
+            var status = val.status;
+            var bg = '';
+            if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19 || i == 23 || i == 27 || i == 31) {
+              br = '<br>';
+            }
+            if (i == 1 || i == 5 || i == 9 || i == 13 || i == 17 || i == 21 || i == 25 || i == 29) {
+              span = '<span class="ml-3"></span>';
+            }
+            if (status == 'kosong') {
+              bg = '<label class="btn bg-danger kursi mb-1 ml-1" style="cursor: pointer" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off" onchange="nokursi(' + val.kursi + ')">' + val.kursi + '</label>';
+            } else if (status == 'keranjang') {
+              bg = '<label class="btn bg-primary disabled kursi mb-1 ml-1" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off">' + val.kursi + '</label>';
+            } else {
+              bg = '<label class="btn btn-secondary disabled kursi mb-1 ml-1" id="pilih-kursi"> <input type = "radio" name = "options" id = "option1" autocomplete = "off">' + val.kursi + '</label>';
+            }
+            $('#pilih-kursi').append(bg + span + br);
+
+          });
+        }
+      })
     })
   }
   // end menampilkan harga dan deskripsi
+
+  // nokursi
+  function nokursi(kursi) {
+    document.getElementById("nmrkursi").value = kursi;
+    $('#nmrkursi').val(kursi);
+  }
+  // end nokursi
+
+  // add transaksi
+  $('#transaksi-customer').submit(function(e) {
+    e.preventDefault();
+    var request = new FormData(this);
+    var endpoint = '{{route("store.transaksi")}}';
+    $.ajax({
+      url: endpoint,
+      method: "POST",
+      data: request,
+      contentType: false,
+      cache: false,
+      processData: false,
+      // dataType: "json",
+      success: function(data) {
+        $('#transaksi-customer')[0].reset();
+
+        berhasil(data.status, data.pesan);
+      },
+      error: function(xhr, status, error) {
+        var error = xhr.responseJSON;
+        if ($.isEmptyObject(error) == false) {
+          $.each(error.errors, function(key, value) {
+            gagal(key, value);
+          });
+        }
+      }
+    });
+  });
 </script>
 <style type="text/css">
   thead input {
     width: 100%;
+  }
+
+  .kursi {
+    width: 50px !important;
   }
 </style>
 @endsection

@@ -30,7 +30,6 @@
   <link href="{{ asset('css/sweetalert2.min.css') }}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
@@ -42,23 +41,22 @@
           <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            {{ Auth::user()->name }} <span class="caret"></span>
+          </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                       <i class="right fas fa-sign-out-alt"></i> {{ __('Logout') }}
-                                    </a>
+              <i class="right fas fa-sign-out-alt"></i> {{ __('Logout') }}
+            </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+            </form>
+          </div>
+        </li>
       </ul>
 
     </nav>
@@ -76,8 +74,8 @@
       <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+          <div class="image image-s">
+            <i class="fa fa-user-circle"></i>
           </div>
           <div class="info">
             <a href="#" class="d-block">{{ Auth::user()->name }} </a>
@@ -209,11 +207,11 @@
         <!-- /.sidebar-menu -->
       </div>
       <!-- /.sidebar -->
+      
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-
       @yield('content')
     </div>
     <!-- /.content-wrapper -->
@@ -267,6 +265,22 @@
   <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
 
   @yield('js')
+  @if(session('success'))
+<script>
+  var pesan = '{{session("success")}}';
+  loginSukses();
+  function loginSukses() {
+    Swal.fire({
+    position: 'top-end',
+    type: 'success',
+    title: 'Selamat Datang ' + pesan ,
+    showConfirmButton: false,
+    timer: 2500
+  })
+
+  }
+  </script>
+@endif
   <script type="text/javascript">
     function hapus() {
       $(document).on('click', "#del_data", function() {
@@ -378,5 +392,12 @@
     }
   </script>
 </body>
+
+<style>
+  .image-s i {
+    font-size: 30px !important;
+    color: #ffff;
+  }
+</style>
 
 </html>

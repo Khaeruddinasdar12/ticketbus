@@ -16,9 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('admin/login', 'api\User@login'); // table users
-Route::apiResource('admin', 'api\User'); // table users
 
-Route::apiResource('rute', 'api\Rutes'); //tabel rutes
+Route::post('login', 'api\User@login'); // login
+Route::post('register', 'api\User@register'); //register
 
-Route::get('test/{id}', 'api\Rutes@test'); // TEST
+Route::post('transaksi', 'api\Transaksi@store'); // input transaksi
+
+Route::get('jadwals', 'api\Jadwal@jadwals'); //menampilkan semua jadwal yang belum berangkat /tersedia
+
+Route::get('riwayat/{id}', 'api\Transaksi@riwayat');

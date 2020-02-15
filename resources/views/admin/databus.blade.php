@@ -326,7 +326,7 @@ Data Bus
                           <td>{{ $datapivot->nama_bus }}</td>
                           <td>{{ $datapivot->tipebus }}</td>
                           <td>{{ $datapivot->rute_bus }}</td>
-                          <td>{{ $datapivot->harga }}</td>
+                          <td>Rp. {{ format_uang($datapivot->harga) }}</td>
                           <td>
                             <button class="btn btn-primary" data-toggle="modal" data-target="#showdetailpivot" title="lihat detail" data-nama="{{ $datapivot->nama_bus }}" data-tipe="{{ $datapivot->tipebus }}" data-rute="{{ $datapivot->rute_bus }}" data-harga="{{ $datapivot->harga }}" data-desc="{{ $datapivot->deskripsi }}"><i class="far fa-eye"></i></button>
                           </td>

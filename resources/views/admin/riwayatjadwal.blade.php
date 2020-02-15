@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('title')
-Data Jadwal
+Riwayat Jadwal
 @endsection
 
 @section('content')

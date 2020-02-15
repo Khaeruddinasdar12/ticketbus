@@ -25,6 +25,11 @@ Dashboard
 <section class="content">
   <div class="container-fluid">
     <!-- Small boxes (Stat box) -->
+    <div class="row mb-5 mt-4 text-center">
+      <div class="col-md-12">
+        <img src="{{ asset('bintangprima.jpg') }}" alt="Logo Bintang Prima">
+      </div>
+    </div>
     <div class="row">
       <div class="col-lg-3 col-6">
         <!-- small box -->

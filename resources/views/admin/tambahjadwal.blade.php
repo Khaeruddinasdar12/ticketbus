@@ -91,7 +91,8 @@ Tambah Jadwal
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>Tanggal</label>
-                      <input type="date" class="form-control" name="tanggal" id="tanggal">
+                      <input required type="date" class="form-control" name="tanggal" id="tanggal" min="<?php echo date('Y-m-d'); ?>" />
+                      <!-- <input type="date" class="form-control" name="tanggal" id="tanggal"> -->
                     </div>
                   </div>
                 </div>

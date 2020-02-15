@@ -13,7 +13,7 @@ class ManagemenAdmin extends Controller
 
     public function index()
     {
-        $data = \App\User::select('id', 'name', 'email', 'role', 'alamat')->get();
+        $data = \App\User::select('id', 'name', 'email', 'role', 'alamat')->where('role', 'superadmin')->orWhere('role', 'kernet')->get();
 
         return view('admin.ManagemenAdmin', ['data' => $data]);
     }

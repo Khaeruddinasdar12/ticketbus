@@ -61,7 +61,7 @@ Riwayat Transaksi
                       </td>
 
                       <td>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail2" title="lihat detail" data-id="{{ $sudahbyr->id }}" data-order="{{ $sudahbyr->order_code }}" data-barcode="{{ $sudahbyr->barcode }}" data-nama="{{ $sudahbyr->name }}" data-tgl="{{ $sudahbyr->tanggal }}" data-jam="{{ $sudahbyr->jam }}" data-bus="{{ $sudahbyr->namabus }}" data-desc="{{ $sudahbyr->deskripsi }}" data-rute="{{ $sudahbyr->rute }}" data-tipe="{{ $sudahbyr->tipebus }}" data-harga="Rp. {{ format_uang($sudahbyr->harga) }}" data-kursi="{{ $sudahbyr->no_kursi }}" data-status="{{ $sudahbyr->status_bayar }}"><i class=" far fa-eye"></i></button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail2" title="lihat detail" data-id="{{ $sudahbyr->id }}" data-order="{{ $sudahbyr->order_code }}" data-barcode="{{ asset('storage/'.$sudahbyr->barcode) }}" data-nama="{{ $sudahbyr->name }}" data-tgl="{{ $sudahbyr->tanggal }}" data-jam="{{ $sudahbyr->jam }}" data-bus="{{ $sudahbyr->namabus }}" data-desc="{{ $sudahbyr->deskripsi }}" data-rute="{{ $sudahbyr->rute }}" data-tipe="{{ $sudahbyr->tipebus }}" data-harga="Rp. {{ format_uang($sudahbyr->harga) }}" data-kursi="{{ $sudahbyr->no_kursi }}" data-status="{{ $sudahbyr->status_bayar }}"><i class=" far fa-eye"></i></button>
                       </td>
                     </tr>
                     @endforeach
@@ -84,7 +84,7 @@ Riwayat Transaksi
                                 <h5 id="orders"></h5>
                                 <hr>
                                 <h6>BarCode</h6>
-                                <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" alt="">
+                                <img alt="" id="img-barcode">
                               </div>
                               <div class="col-md-7 offset-md-1" style="margin: auto">
                                 <div class="row">
@@ -183,6 +183,8 @@ Riwayat Transaksi
     modal.find('.modal-body #orders').text(order)
     modal.find('.modal-body #namas').text(nama)
     modal.find('.modal-body #tanggals').text(tgl)
+    modal.find('.modal-body #img-barcode').attr('src', barcode);
+    // document.getElementById("google").href='http://google.com';
     modal.find('.modal-body #jams').text(jam)
     modal.find('.modal-body #namabuss').text(bus)
     modal.find('.modal-body #rutebuss').text(rute)

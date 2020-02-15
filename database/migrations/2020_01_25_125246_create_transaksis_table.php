@@ -20,7 +20,7 @@ class CreateTransaksisTable extends Migration
             $table->bigInteger('id_customer')->unsigned();
             $table->enum('status_bayar', ['belum', 'proses_admin', 'sudah', 'canceled']);
             $table->string('no_kursi');
-            $table->string('barcode');
+            $table->string('barcode')->nullable();
             $table->enum('trip', ['n', 'y']);
             $table->string('bukti_transfer')->nullable();
             $table->bigInteger('canceled_by')->unsigned()->nullable();

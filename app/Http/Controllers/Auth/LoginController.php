@@ -103,7 +103,8 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($request->only($login_type, 'password'))) {
-            return redirect()->intended($this->redirectPath());
+            $nama = Auth::user()->name;
+            return redirect()->intended($this->redirectPath())->with('success', $nama);
         }
 
         return redirect()->back()

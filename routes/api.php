@@ -20,6 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login', 'api\User@login'); // login
 Route::post('register', 'api\User@register'); //register
 
-
+Route::post('transaksi', 'api\Transaksi@store'); // input transaksi
 
 Route::get('jadwals', 'api\Jadwal@jadwals');

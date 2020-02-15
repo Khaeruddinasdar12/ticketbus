@@ -234,31 +234,38 @@ Manajemen Admin
 
   // add admin
   $('#add-admin').submit(function(e) {
+    pw1 = document.getElementById("password1").value;
+    pw2 = document.getElementById("password2").value;
     e.preventDefault();
-    var request = new FormData(this);
-    var endpoint = '{{route("store.admin")}}';
-    $.ajax({
-      url: endpoint,
-      method: "POST",
-      data: request,
-      contentType: false,
-      cache: false,
-      processData: false,
-      // dataType: "json",
-      success: function(data) {
-        $('#add-admin')[0].reset();
+    if(pw1 != pw2) {
+      gagal('Password', 'Konfirmasi password tidak sama');
+    } else {
+      var request = new FormData(this);
+      var endpoint = '{{route("store.admin")}}';
+      $.ajax({
+        url: endpoint,
+        method: "POST",
+        data: request,
+        contentType: false,
+        cache: false,
+        processData: false,
+        // dataType: "json",
+        success: function(data) {
+          $('#add-admin')[0].reset();
 
-        berhasil(data.status, data.pesan);
-      },
-      error: function(xhr, status, error) {
-        var error = xhr.responseJSON;
-        if ($.isEmptyObject(error) == false) {
-          $.each(error.errors, function(key, value) {
-            gagal(key, value);
-          });
-        }
-      }
-    });
+          berhasil(data.status, data.pesan);
+        },
+        error: function(xhr, status, error) {
+          var error = xhr.responseJSON;
+          if ($.isEmptyObject(error) == false) {
+            $.each(error.errors, function(key, value) {
+              gagal(key, value);
+            });
+          }
+        } // end error
+      }); //end ajax
+    } // end of else
+    
   });
   // end add admin
 

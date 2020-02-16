@@ -48,6 +48,7 @@ Data Jadwal
                         <th>Rute</th>
                         <th>Tanggal Berangkat</th>
                         <th>Jam Berangkat</th>
+                        <th>Kursi Kosong</th>
                         <th>Detail</th>
                         <th>Action</th>
                       </tr>
@@ -60,6 +61,7 @@ Data Jadwal
                         <td>{{ $jadwal->rute }}</td>
                         <td>{{ $jadwal->tanggal }}</td>
                         <td>{{ $jadwal->jam }}</td>
+                        <td>{{ $jadwal->kursi_kosong }}</td>
                         <td>
                           <button class="btn btn-primary" data-toggle="modal" data-target="#showjadwal" title="lihat detail" data-id="{{ $jadwal->id }}" data-nama="{{ $jadwal->namabus }}" data-tipe="{{ $jadwal->tipebus }}" data-rute="{{ $jadwal->rute }}" data-tgl="{{ $jadwal->tanggal }}" data-jam="{{ $jadwal->jam }}" data-desc="{{ $jadwal->deskripsi }}" data-harga="Rp. {{ format_uang($jadwal->harga) }}"><i class=" far fa-eye"></i></button>
                         </td>

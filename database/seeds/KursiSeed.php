@@ -6,12 +6,18 @@ class KursiSeed extends Seeder
 {
     public function run()
     {
-        $count  = DB::table('bus')->select('id')->get();
+        $count  = DB::table('jadwals')->select('id')->get();
+
         foreach ($count as $counts) {
-            $data = DB::table('bus')->select('id', 'jumlah_kursi')->where('id', $counts->id)->first();
+            $data = DB::table('jadwals')
+                    ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
+                    ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+                    ->select('jadwals.id', 'bus.jumlah_kursi')
+                    ->where('jadwals.id', $counts->id)
+                    ->first();
             for ($i = 1; $i <= $data->jumlah_kursi; $i++) {
                 DB::table('kursis')->insert([
-                    'id_bus' => $data->id,
+                    'id_jadwal' => $data->id,
                     'kursi' => '' . $i,
                     'status' => 'kosong'
                 ]);

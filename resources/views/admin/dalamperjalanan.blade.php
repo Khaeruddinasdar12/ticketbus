@@ -47,6 +47,7 @@ Dalam Perjalanan
                       <th>Rute</th>
                       <th>Tanggal Berangkat</th>
                       <th>Jam Berangkat</th>
+                      <th>Kursi Terisi</th>
                       <th>Detail</th>
                       <th>Action</th>
                     </tr>
@@ -59,6 +60,7 @@ Dalam Perjalanan
                       <td>{{ $jadwal->rute }}</td>
                       <td>{{ $jadwal->tanggal }}</td>
                       <td>{{ $jadwal->jam }}</td>
+                      <td>{{ $jadwal->kursi_terisi }}</td>
                       <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail0" title="lihat detail"><i class=" far fa-eye"></i></button> </td>
                       <td>
                         <button class="btn btn-danger" title="Bus Telah Sampai" href="edit-status/{{$jadwal->status}}/{{$jadwal->id}}" onclick="status('Perjalanan bus ini telah selesai ?')" id="status_perjalanan"><i class="fas fa-clipboard-check"></i></button>

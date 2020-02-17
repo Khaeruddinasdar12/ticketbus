@@ -5,115 +5,163 @@ Dashboard
 @endsection
 @section('content')
 <!-- Content Header (Page header) -->
+<style>
+  .col-md-6 .small-box {
+    height: 170px !important;
+    cursor: pointer;
+    transition: 1s;
+  }
+
+  .icon i {
+    font-size: 100px !important;
+  }
+
+  .col-md-6 .small-box:hover .icon i {
+    font-size: 120px !important;
+  }
+
+  .col-md-6 .small-box:hover {
+    position: relative;
+    bottom: 10px;
+    box-shadow: 0 15px 15px #adacad;
+    -webkit-box-shadow: 0 15px 15px #adacad;
+    -moz-box-shadow: 0 15px 15px #adacad;
+    transition: 1s;
+  }
+
+  .bg-custom1 {
+    background-color: #f53b66;
+  }
+
+  .bg-custom2 {
+    background-color: #3b9ef5;
+  }
+
+  .bg-custom3 {
+    background-color: #b73bf5;
+  }
+
+  .small-box .inner h3 {
+    margin-top: 70px !important;
+  }
+
+  .small-box .inner h3,
+  .small-box .inner p {
+    color: #fff;
+  }
+
+  .bg-custom-1,
+  .bg-custom-2,
+  .bg-custom-3 {
+    color: #fff;
+  }
+
+  .bg-custom-1 {
+    background-color: #4a47ff;
+  }
+
+  .bg-custom-2 {
+    background-color: #ff6947;
+  }
+
+  .bg-custom-3 {
+    background-color: #ff47ac;
+  }
+</style>
+
 <div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">Dashboard</h1>
-      </div><!-- /.col -->
+        <h1 class="m-0 text-dark"><img src="{{ asset('bintangprima.png') }}" alt="Logo Bintang Prima" width="250px"></h1>
+      </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <!-- <li class="breadcrumb-item active">Dashboard v1</li> -->
         </ol>
-      </div><!-- /.col -->
-    </div><!-- /.row -->
-  </div><!-- /.container-fluid -->
-</div>
-<!-- /.content-header -->
-<!-- Main content -->
-<section class="content">
-  <div class="container-fluid">
-    <!-- Small boxes (Stat box) -->
-    <div class="row mb-5 mt-4 text-center">
-      <div class="col-md-12">
-        <img src="{{ asset('bintangprima.jpg') }}" alt="Logo Bintang Prima">
       </div>
     </div>
-    <div class="row">
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-info">
-          <div class="inner">
-            <h3>150</h3>
+  </div>
+</div>
 
-            <p>New Orders</p>
+<section class="content mt-4">
+  <div class="container-fluid">
+    <div class="row card-box">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- small box -->
+            <a href="#">
+              <div class="small-box bg-custom1">
+                <div class="inner">
+                  <div class="container">
+                    <h3>150</h3>
+                    <p>User yang bertransaksi</p>
+                  </div>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+              </div>
+            </a>
           </div>
-          <div class="icon">
-            <i class="ion ion-bag"></i>
+          <div class="col-md-6">
+            <!-- small box -->
+            <a href="#">
+              <div class="small-box bg-custom3">
+                <div class="inner">
+                  <div class="container">
+                    <h3>150</h3>
+                    <p>Jadwal bus</p>
+                  </div>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+              </div>
+            </a>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-success">
-          <div class="inner">
-            <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-            <p>Bounce Rate</p>
+      <div class="col-md-4">
+        <!-- Info Boxes Style 2 -->
+        <div class="info-box">
+          <span class="info-box-icon bg-custom-1 elevation-1"><i class="fas fa-cog"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Jumlah Bus Scania</span>
+            <span class="info-box-number">
+              10
+              <small>%</small>
+            </span>
           </div>
-          <div class="icon">
-            <i class="ion ion-stats-bars"></i>
-          </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-warning">
-          <div class="inner">
-            <h3>44</h3>
 
-            <p>User Registrations</p>
+        <div class="info-box">
+          <span class="info-box-icon bg-custom-2 elevation-1"><i class="fas fa-cog"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Jumlah Bus Sleeper</span>
+            <span class="info-box-number">
+              10
+              <small>%</small>
+            </span>
           </div>
-          <div class="icon">
-            <i class="ion ion-person-add"></i>
-          </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-danger">
-          <div class="inner">
-            <h3>65</h3>
 
-            <p>Unique Visitors</p>
+        <div class="info-box">
+          <span class="info-box-icon bg-custom-3 elevation-1"><i class="fas fa-cog"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Jumlah Bus Suspensi</span>
+            <span class="info-box-number">
+              10
+              <small>%</small>
+            </span>
           </div>
-          <div class="icon">
-            <i class="ion ion-pie-graph"></i>
-          </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
+
       </div>
-      <!-- ./col -->
     </div>
     <!-- /.row -->
-    <!-- Main row -->
-    <div class="row">
-      <!-- Left col -->
-
-      <!-- right col -->
-    </div>
-    <!-- /.row (main row) -->
   </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->
-@endsection
-
-@section('js')
-<!-- <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script> -->
-<!-- <script>
-  Swal.fire({
-    position: 'top-end',
-    type: 'success',
-    title: 'Anda berhasil login',
-    showConfirmButton: false,
-    timer: 2500
-  })
-</script> -->
 @endsection

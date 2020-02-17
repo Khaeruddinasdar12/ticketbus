@@ -41,7 +41,7 @@ Route::post('register', 'api\User@register'); //register
 
 	// FITUR E-TICKET
 	// no.6
-	Route::get('e-tiket', 'api\Transaksi@tiket'); // menampilkan e-ticket
+	Route::get('e-tiket/{id}', 'api\Transaksi@tiket'); // menampilkan e-ticket berdasarkan id user
 
 // ---------------- AKHIR ALUR TRANSAKSI ----------------
 

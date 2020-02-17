@@ -69,9 +69,27 @@ class Transaksi extends Controller
             ]);
     }
 
-    public function buktiStore($id) // menginput bukti transfer berdasarkan id transaksi
+    public function buktiStore(Request $request, $id) // menginput bukti transfer berdasarkan id transaksi
     {
-       
+        $data = \App\Transaksi::find($id);
+            // Upload Foto Bukti Transfer
+                $bukti = $request->file('bukti');
+                if($bukti) {
+                    if($data->bukti_transfer && file_exists(storage_path('app/public/' . $data->bukti_transfer))) { 
+                    \Storage::delete('public/'. $data->bukti_transfer);
+                    }
+                    $bukti_path = $bukti->store('bukti', 'public');
+                    $data->bukti_transfer = $bukti_path;
+                }
+            // End Upload Foto Bukti Transfer
+        $data->save();
+
+            return response()->json([
+                'status' => true, 
+                'message' => 'upload bukti transfer berhasil', 
+                'code' => 201
+            ]);
+
     }
 
     public function tiket($id) // menampilkan tiket user berdasarkan id user

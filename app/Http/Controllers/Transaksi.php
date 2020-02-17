@@ -35,7 +35,7 @@ class Transaksi extends Controller
             ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
             ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
             ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
-            ->select('transaksis.id', 'transaksis.order_code', 'transaksis.barcode', 'users.id as id_user', 'users.name', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', 'transaksis.no_kursi', 'transaksis.status_bayar')
+            ->select('transaksis.id', 'transaksis.order_code', 'transaksis.bukti_transfer', 'users.id as id_user', 'users.name', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', 'transaksis.no_kursi', 'transaksis.status_bayar')
             ->where('transaksis.status_bayar', 'proses_admin')
             ->where('jadwals.status', 'belum')
             ->get();

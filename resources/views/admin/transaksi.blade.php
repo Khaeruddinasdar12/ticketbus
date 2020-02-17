@@ -162,11 +162,12 @@ Transaksi
                         <td>{{$belumbayar->jam}}</td>
 
                         <td>
-                          <button class="btn btn-danger" data-toggle="modal" data-target="#verif" title="belum bayar" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-barcode="{{ $belumbayar->barcode }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class="fab fa-creative-commons-nc"></i></button>
+                          <button class="btn btn-danger" data-toggle="modal" data-target="#verif" title="belum bayar" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}"
+                          data-bukti="{{ asset('storage/'.$belumbayar->bukti_transfer) }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class="fab fa-creative-commons-nc"></i></button>
                         </td>
                         
                         <td>
-                          <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail1" title="lihat detail" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-barcode="{{ $belumbayar->barcode }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class=" far fa-eye"></i></button>
+                          <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail1" title="lihat detail" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-bukti="{{ asset('storage/'.$belumbayar->bukti_transfer) }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class=" far fa-eye"></i></button>
 
                           <button title="Verifikasi Pembayaran" class="btn btn-success" id-transaksi="{{$belumbayar->id}}" id-user="{{$belumbayar->id_user}}" onclick="verified('verified')" id="verified"><i class="fas fa-check"></i></button>
 
@@ -177,7 +178,7 @@ Transaksi
                       </tr>
                       @endforeach
                     </tbody>
-                    <!-- Modal -->
+                    <!-- Modal Bukti Transfer -->
                     <div class="modal fade" id="verif" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -187,9 +188,6 @@ Transaksi
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                          <form action="">
-                            <input type="hidden" id="transaksi-id" name="id_transaksi">
-                            @csrf
                             <div class="modal-body">
                               <div class="container">
                                 <div class="row">
@@ -199,7 +197,7 @@ Transaksi
                                     <hr>
                                     <h6>Bukti Pembayaran</h6>
                                     <div class="text-center">
-                                      <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" alt="">
+                                      <img src="" alt="bukti transfer" id="bukti-transfer" width="70px" height="100px">
                                     </div>
                                   </div>
                                 </div>
@@ -207,13 +205,11 @@ Transaksi
                             </div>
                             <div class="modal-footer justify-content-between">
                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-danger" title="Batalkan Transaksi">Cancel</button>
-                              <button type="button" class="btn btn-success" title="Verifikasi pembayaran">Verifikasi</button>
                             </div>
-                          </form>
                         </div>
                       </div>
                     </div>
+                    <!-- End modal bukti transfer -->
 
                     <div class="modal fade" id="showdetail1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-lg" role="document">
@@ -231,8 +227,6 @@ Transaksi
                                   <h6>Order Code</h6>
                                   <h5 id="order"></h5>
                                   <hr>
-                                  <h6>BarCode</h6>
-                                  <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" alt="">
                                 </div>
                                 <div class="col-md-7 offset-md-1" style="margin: auto">
                                   <div class="row">
@@ -424,12 +418,14 @@ Transaksi
     var order = button.data('order')
     var barcode = button.data('barcode')
     var nama = button.data('nama')
+    var bukti = button.data('bukti')
 
     var modal = $(this)
-    modal.find('.modal-title').text('verifikasi pembayaran ' + nama)
+    modal.find('.modal-title').text('Bukti Pembayaran ' + nama)
     modal.find('.modal-body #order').text(order)
     modal.find('.modal-body #nama').text(nama)
     modal.find('.modal-body #id_transaksi').val(id)
+    modal.find('.modal-body #bukti-transfer').attr('src', bukti)
   })
   // end verifikasi transaksi belum bayar
 
@@ -437,8 +433,8 @@ Transaksi
   $('#showdetail1').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget)
     var id = button.data('id')
+    var bukti = button.data('bukti')
     var order = button.data('order')
-    var barcode = button.data('barcode')
     var nama = button.data('nama')
     var tgl = button.data('tgl')
     var jam = button.data('jam')

@@ -20,8 +20,35 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login', 'api\User@login'); // login
 Route::post('register', 'api\User@register'); //register
 
-Route::post('transaksi', 'api\Transaksi@store'); // input transaksi
 
-Route::get('jadwals', 'api\Jadwal@jadwals'); //menampilkan semua jadwal yang belum berangkat /tersedia
+// ---------------- ALUR TRANSAKSI ----------------
 
-Route::get('riwayat/{id}', 'api\Transaksi@riwayat');
+	// FITUR  PESAN TIKET
+	// no.1
+	Route::get('jadwals', 'api\Jadwal@jadwals'); //menampilkan semua jadwal yang belum berangkat /tersedia
+	// no.2
+	Route::get('cek-kursi/{id}', 'api\Transaksi@cekKursi'); // cek kursi berdasarkan id jadwal dan pilih kursi
+	// no.3
+	Route::post('transaksi', 'api\Transaksi@store'); // input transaksi 
+
+
+	// FITUR PEMBAYARAN
+	// no.4
+	Route::get('transaksi/{id}', 'api\Transaksi@list_belum_bayar'); //menampilkan daftar transaksi yang belum di bayar
+	// no.5
+	Route::post('bukti-store/{id}', 'api\Transaksi@buktiStore'); // menginput bukti transfer berdasarkan id transaksi
+
+
+	// FITUR E-TICKET
+	// no.6
+	Route::get('e-tiket/{id}', 'api\Transaksi@tiket'); // menampilkan e-ticket berdasarkan id user
+
+// ---------------- AKHIR ALUR TRANSAKSI ----------------
+
+
+// FIUTR CEK PEMBAYARAN
+Route::get('cek-pembayaran', 'api\Transaksi@cek_transaksi'); // mengecek status transaksi
+
+
+//FITUR RIWAYAT TRANSAKSI
+Route::get('riwayat/{id}', 'api\Transaksi@riwayat');// menampilkan riwayat transaksi user

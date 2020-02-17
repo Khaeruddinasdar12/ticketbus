@@ -50,5 +50,14 @@ class UsersTableSeeder extends Seeder
 	        'alamat' => 'Jalan Paccerakkang',
 	        'password'  => bcrypt('12345678')
 		]);
+
+		DB::table('users')->insert([
+	        'name'  => 'Arwiadi',
+	        'email' => 'arwiadi@gmail.com',
+	        'username' => 'arwiadi',
+	        'role' => 'customer',
+	        'alamat' => 'Bone',
+	        'password'  => bcrypt('12345678')
+		]);
     }
 }

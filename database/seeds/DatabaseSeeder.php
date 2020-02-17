@@ -16,5 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call(BusSeed::class);
         $this->call(RuteSeed::class);
         $this->call(PivotBusRutes::class);
+        $this->call(Jadwal::class);
+        $this->call(KursiSeed::class);
+        $this->call(Transaksi::class);
+
     }
 }

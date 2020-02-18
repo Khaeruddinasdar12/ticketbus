@@ -95,7 +95,7 @@ Dashboard
               <div class="small-box bg-custom1">
                 <div class="inner">
                   <div class="container">
-                    <h3>150</h3>
+                    <h3>{{$transaksi}}</h3>
                     <p>User yang bertransaksi</p>
                   </div>
                 </div>
@@ -111,7 +111,7 @@ Dashboard
               <div class="small-box bg-custom3">
                 <div class="inner">
                   <div class="container">
-                    <h3>150</h3>
+                    <h3>{{$jadwal}}</h3>
                     <p>Jadwal bus</p>
                   </div>
                 </div>
@@ -125,38 +125,18 @@ Dashboard
       </div>
       <div class="col-md-4">
         <!-- Info Boxes Style 2 -->
+        @foreach($tipe as $tipes)
         <div class="info-box">
           <span class="info-box-icon bg-custom-1 elevation-1"><i class="fas fa-cog"></i></span>
           <div class="info-box-content">
-            <span class="info-box-text">Jumlah Bus Scania</span>
+            <span class="info-box-text">Jumlah Bus {{$tipes->nama}}</span>
             <span class="info-box-number">
-              10
-              <small>%</small>
+              {{$tipes->jml}}
+              <small>Unit</small>
             </span>
           </div>
         </div>
-
-        <div class="info-box">
-          <span class="info-box-icon bg-custom-2 elevation-1"><i class="fas fa-cog"></i></span>
-          <div class="info-box-content">
-            <span class="info-box-text">Jumlah Bus Sleeper</span>
-            <span class="info-box-number">
-              10
-              <small>%</small>
-            </span>
-          </div>
-        </div>
-
-        <div class="info-box">
-          <span class="info-box-icon bg-custom-3 elevation-1"><i class="fas fa-cog"></i></span>
-          <div class="info-box-content">
-            <span class="info-box-text">Jumlah Bus Suspensi</span>
-            <span class="info-box-number">
-              10
-              <small>%</small>
-            </span>
-          </div>
-        </div>
+        @endforeach
 
       </div>
     </div>

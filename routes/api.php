@@ -20,6 +20,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login', 'api\User@login'); // login
 Route::post('register', 'api\User@register'); //register
 
+Route::get('rutes', 'api\Jadwal@rutes'); //menampilkan semua data rute
+
+Route::post('jadwals', 'api\Jadwal@jadwalsWhere'); //menampilkan semua data jadwal berdasarkan tanggal atau id_rute
+
 
 // ---------------- ALUR TRANSAKSI ----------------
 
@@ -34,7 +38,7 @@ Route::post('register', 'api\User@register'); //register
 
 	// FITUR PEMBAYARAN
 	// no.4
-	Route::get('transaksi/{id}', 'api\Transaksi@list_belum_bayar'); //menampilkan daftar transaksi yang belum di bayar
+	Route::get('transaksi/{id}', 'api\Transaksi@list_belum_bayar'); //menampilkan daftar transaksi yang belum di bayar id user
 	// no.5
 	Route::post('bukti-store/{id}', 'api\Transaksi@buktiStore'); // menginput bukti transfer berdasarkan id transaksi
 
@@ -47,8 +51,18 @@ Route::post('register', 'api\User@register'); //register
 
 
 // FIUTR CEK PEMBAYARAN
-Route::get('cek-pembayaran', 'api\Transaksi@cek_transaksi'); // mengecek status transaksi
+Route::get('cek-pembayaran/{id}', 'api\Transaksi@cek_transaksi'); // mengecek status transaksi id user
 
 
 //FITUR RIWAYAT TRANSAKSI
 Route::get('riwayat/{id}', 'api\Transaksi@riwayat');// menampilkan riwayat transaksi user
+
+
+
+
+// Area KERNET
+
+	Route::get('order-code/{order_code}', 'api\Kernet@scan'); // scan aztec code 
+	Route::put('verif/{id}', 'api\Kernet@verif'); // verifikasi aztec code
+
+// Akhir Area KERNET

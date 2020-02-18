@@ -36,7 +36,7 @@ class Transaksi extends Controller
         //ubah status di tabel kursis
         $set_kursis = \App\Kursi::where('id_jadwal', $request->id_jadwal)->where('kursi', $request->no_kursi)
             ->update([
-                'status' => 'terisi',
+                'status' => 'keranjang',
             ]);
         //end ubah status di tabel kursis
         return response()->json([
@@ -82,7 +82,13 @@ class Transaksi extends Controller
                     $data->bukti_transfer = $bukti_path;
                 }
             // End Upload Foto Bukti Transfer
+        $data->status_bayar = 'proses_admin';
         $data->save();
+
+        $kursi = \App\Kursi::where('id_jadwal', $data->id_jadwal)->where('kursi', $data->no_kursi)
+            ->update([
+                'status' => 'terisi',
+            ]);
 
             return response()->json([
                 'status' => true, 
@@ -94,12 +100,46 @@ class Transaksi extends Controller
 
     public function tiket($id) // menampilkan tiket user berdasarkan id user
     {
-        
+        $data = DB::table('transaksis')
+            ->join('users', 'transaksis.id_customer', '=', 'users.id')
+            ->join('jadwals', 'transaksis.id_jadwal', '=', 'jadwals.id')
+            ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
+            ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+            ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+            ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+            ->select('transaksis.id as transaksi_id', 'transaksis.order_code', 'transaksis.barcode', 'users.id as user_id','users.name', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', 'transaksis.no_kursi', 'transaksis.status_bayar')
+            ->where('transaksis.status_bayar', 'sudah')
+            ->where('trip', 'n')
+            ->where('users.id', $id)
+            ->get();
+
+            return response()->json([
+                'status' => true, 
+                'message' => 'Semua Tiket', 
+                'code' => 201, 
+                'data' => $data
+            ]);
     }
 
     public function cek_transaksi($id) // menampilkan semua status transaksi berdasarkan id user
     {
-        # code...
+        $data = DB::table('transaksis')
+            ->join('users', 'transaksis.id_customer', '=', 'users.id')
+            ->join('jadwals', 'transaksis.id_jadwal', '=', 'jadwals.id')
+            ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
+            ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
+            ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
+            ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
+            ->select('transaksis.id as transaksi_id', 'transaksis.order_code', 'transaksis.barcode', 'users.id as user_id','users.name', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', 'transaksis.no_kursi', 'transaksis.status_bayar')
+            ->where('users.id', $id)
+            ->get();
+
+            return response()->json([
+                'status' => true, 
+                'message' => 'Semua Transaksi', 
+                'code' => 200, 
+                'data' => $data
+            ]);
     }
     public function riwayat($id) //riwayat transaksi user
     {
@@ -112,6 +152,7 @@ class Transaksi extends Controller
             ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
             ->select('transaksis.id as transaksi_id', 'transaksis.order_code', 'transaksis.barcode', 'users.id as user_id','users.name', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', 'transaksis.no_kursi', 'transaksis.status_bayar')
             ->where('transaksis.status_bayar', 'sudah')
+            ->where('trip', 'y')
             ->where('users.id', $id)
             ->get();
 

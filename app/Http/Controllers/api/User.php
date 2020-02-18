@@ -13,8 +13,8 @@ use Carbon\Carbon;
 class User extends Controller
 {
     public function login(){ // logic untuk login
-        if(Auth::attempt(['email' => request('user'), 'password' => request('password'), 'role' => 'customer' ]) || 
-            Auth::attempt(['username' => request('user'), 'password' => request('password'), 'role' => 'customer' ])){
+        if(Auth::attempt(['email' => request('user'), 'password' => request('password') ]) || 
+            Auth::attempt(['username' => request('user'), 'password' => request('password') ])){
             $id = Auth::user()->id;
 
             $data = \App\User::find($id);
@@ -25,7 +25,12 @@ class User extends Controller
                 'data' => $data
             ]);
         } else {
-            return response()->json(['error'=>'Unauthorised', 401]);
+            return response()->json([
+                'status' => false, 
+                'message' => 'kesalahan pada username, email atau password', 
+                'code' => 401
+            ]);
+            // return response()->json(['error'=>'Unauthorised', 401]);
         }
     }
 
@@ -110,8 +115,13 @@ class User extends Controller
         $data->role = $request->role;
         $data->save();
 
+        return response()->json([
+                'status' => true, 
+                'message' => 'Berhasil mengubah data', 
+                'code' => 201
+            ]);
         
-        return $arrayName = array('status' => 'OK', 'code' => 200, 'message' => 'Berhasil Mengubah Data' );
+        // return $arrayName = array('status' => 'OK', 'code' => 200, 'message' => 'Berhasil Mengubah Data' );
 
     }
 }

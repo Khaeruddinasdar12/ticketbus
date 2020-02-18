@@ -107,7 +107,7 @@ Transaksi
                                     </div>
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Nama Customer</label>
-                                      <input type="text" class="form-control" id="namabus" name="name">
+                                      <input type="text" class="form-control" id="namabus" name="name" required>
                                     </div>
                                     <div class="form-group">
                                       <label>Jenis Kelamin</label>
@@ -162,10 +162,9 @@ Transaksi
                         <td>{{$belumbayar->jam}}</td>
 
                         <td>
-                          <button class="btn btn-danger" data-toggle="modal" data-target="#verif" title="belum bayar" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}"
-                          data-bukti="{{ asset('storage/'.$belumbayar->bukti_transfer) }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class="fab fa-creative-commons-nc"></i></button>
+                          <button class="btn btn-danger" data-toggle="modal" data-target="#verif" title="belum bayar" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-bukti="{{ asset('storage/'.$belumbayar->bukti_transfer) }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class="fab fa-creative-commons-nc"></i></button>
                         </td>
-                        
+
                         <td>
                           <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail1" title="lihat detail" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-bukti="{{ asset('storage/'.$belumbayar->bukti_transfer) }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class=" far fa-eye"></i></button>
 
@@ -188,24 +187,24 @@ Transaksi
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                            <div class="modal-body">
-                              <div class="container">
-                                <div class="row">
-                                  <div class="col-md-12">
-                                    <h6>Order Code</h6>
-                                    <h5 id="order"></h5>
-                                    <hr>
-                                    <h6>Bukti Pembayaran</h6>
-                                    <div class="text-center">
-                                      <img src="" alt="bukti transfer" id="bukti-transfer" width="70px" height="100px">
-                                    </div>
+                          <div class="modal-body">
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <h6>Order Code</h6>
+                                  <h5 id="order"></h5>
+                                  <hr>
+                                  <h6>Bukti Pembayaran</h6>
+                                  <div class="text-center">
+                                    <img src="" alt="bukti transfer" id="bukti-transfer" width="70px" height="100px">
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div class="modal-footer justify-content-between">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
+                          </div>
+                          <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -304,88 +303,88 @@ Transaksi
     $("#example2, #example3").DataTable();
   });
 
-//edit status transaksi
+  //edit status transaksi
   function verified(status) {
-      $(document).on('click', "#verified", function() {
-        Swal.fire({
-          title: 'Anda Yakin ?',
-          text: "Pastikan bukti pembayaran telah dicek!",
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Ya, Verifikasi!',
-          timer: 6500
-        }).then((result) => {
-          if (result.value) {
-            var me = $(this),
-              id = me.attr('id-transaksi');
-              url = 'verifikasi-bayar/verified/'+id,
-              token = $('meta[name="csrf-token"]').attr('content');
-            $.ajax({
-              url: url,
-              method: "POST",
-              data: {
-                '_method': 'PUT',
-                '_token': token
-              },
-              success: function(data) {
-                berhasil(data.status, data.pesan);
-              },
-              error: function(xhr, status, error) {
-                var error = xhr.responseJSON;
-                if ($.isEmptyObject(error) == false) {
-                  $.each(error.errors, function(key, value) {
-                    gagal(key, value);
-                  });
-                }
+    $(document).on('click', "#verified", function() {
+      Swal.fire({
+        title: 'Anda Yakin ?',
+        text: "Pastikan bukti pembayaran telah dicek!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Verifikasi!',
+        timer: 6500
+      }).then((result) => {
+        if (result.value) {
+          var me = $(this),
+            id = me.attr('id-transaksi');
+          url = 'verifikasi-bayar/verified/' + id,
+            token = $('meta[name="csrf-token"]').attr('content');
+          $.ajax({
+            url: url,
+            method: "POST",
+            data: {
+              '_method': 'PUT',
+              '_token': token
+            },
+            success: function(data) {
+              berhasil(data.status, data.pesan);
+            },
+            error: function(xhr, status, error) {
+              var error = xhr.responseJSON;
+              if ($.isEmptyObject(error) == false) {
+                $.each(error.errors, function(key, value) {
+                  gagal(key, value);
+                });
               }
-            });
-          }
-        });
+            }
+          });
+        }
       });
-    }
+    });
+  }
 
-    function cancel(status) {
-      $(document).on('click', "#cancel", function() {
-        Swal.fire({
-          title: 'Anda Yakin ?',
-          text: "Anda tidak dapat mengembalikan data yang telah di hapus!",
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Ya, Lanjutkan Hapus!',
-          timer: 6500
-        }).then((result) => {
-          if (result.value) {
-            var me = $(this),
-              url = me.attr('href'),
-              token = $('meta[name="csrf-token"]').attr('content');
-            $.ajax({
-              url: url,
-              method: "POST",
-              data: {
-                '_method': 'DELETE',
-                '_token': token
-              },
-              success: function(data) {
-                berhasil(data.status, data.pesan);
-              },
-              error: function(xhr, status, error) {
-                var error = xhr.responseJSON;
-                if ($.isEmptyObject(error) == false) {
-                  $.each(error.errors, function(key, value) {
-                    gagal(key, value);
-                  });
-                }
+  function cancel(status) {
+    $(document).on('click', "#cancel", function() {
+      Swal.fire({
+        title: 'Anda Yakin ?',
+        text: "Anda tidak dapat mengembalikan data yang telah di hapus!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Lanjutkan Hapus!',
+        timer: 6500
+      }).then((result) => {
+        if (result.value) {
+          var me = $(this),
+            url = me.attr('href'),
+            token = $('meta[name="csrf-token"]').attr('content');
+          $.ajax({
+            url: url,
+            method: "POST",
+            data: {
+              '_method': 'DELETE',
+              '_token': token
+            },
+            success: function(data) {
+              berhasil(data.status, data.pesan);
+            },
+            error: function(xhr, status, error) {
+              var error = xhr.responseJSON;
+              if ($.isEmptyObject(error) == false) {
+                $.each(error.errors, function(key, value) {
+                  gagal(key, value);
+                });
               }
-            });
-          }
-        });
+            }
+          });
+        }
       });
-    }
-    //end edit status transaksi
+    });
+  }
+  //end edit status transaksi
 
   $(document).ready(function() {
     // Setup - add a text input to each footer cell
@@ -527,8 +526,8 @@ Transaksi
       // dataType: "json",
       success: function(data) {
         $('#transaksi-customer')[0].reset();
-
         berhasil(data.status, data.pesan);
+        window.location = "invoice";
       },
       error: function(xhr, status, error) {
         var error = xhr.responseJSON;

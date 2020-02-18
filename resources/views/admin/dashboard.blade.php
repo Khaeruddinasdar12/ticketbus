@@ -112,11 +112,11 @@ Dashboard
                 <div class="inner">
                   <div class="container">
                     <h3>{{$jadwal}}</h3>
-                    <p>Jadwal bus</p>
+                    <p>Jadwal bus yang tersedia</p>
                   </div>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-person-add"></i>
+                  <i class="fas fa-bus-alt"></i>
                 </div>
               </div>
             </a>

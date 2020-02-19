@@ -526,8 +526,14 @@ Transaksi
       // dataType: "json",
       success: function(data) {
         $('#transaksi-customer')[0].reset();
-        berhasil(data.status, data.pesan);
-        window.location = "invoice";
+        Swal.fire({
+          type: 'success',
+          title: 'Berhasil Memesan Kursi',
+          showConfirmButton: true,
+          button: "Ok"
+        }).then(function() {
+          window.location = "invoice";
+        })
       },
       error: function(xhr, status, error) {
         var error = xhr.responseJSON;

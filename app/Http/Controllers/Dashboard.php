@@ -17,7 +17,7 @@ class Dashboard extends Controller
     	$transaksi 	= DB::table('transaksis')
     					->join('jadwals', 'transaksis.id_jadwal', '=', 'jadwals.id')
     					->where('jadwals.status', 'belum')
-    					->where('transaksis.status_bayar', 'sudah')
+    					->where('transaksis.status_bayar', 'proses_admin')
     					->count();
     	
     	$jadwal 	= \App\Jadwal::where('status', 'belum')

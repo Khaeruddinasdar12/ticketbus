@@ -2,10 +2,8 @@
 
 Auth::routes();
 
-
-Route::get('invoice', function () {
-	return view('admin.invoice');
-});
+// INVOICE
+Route::get('invoice/{id}', 'Invoice@invoice');
 
 Route::get('/', 'Dashboard@index')->name('index');
 Route::get('dashboard', 'Dashboard@index')->name('index');

@@ -532,7 +532,7 @@ Transaksi
           showConfirmButton: true,
           button: "Ok"
         }).then(function() {
-          window.location = "invoice";
+          window.location = "invoice/" + data.id;
         })
       },
       error: function(xhr, status, error) {

@@ -5,6 +5,9 @@ Auth::routes();
 // INVOICE
 Route::get('invoice/{id}', 'Invoice@invoice');
 
+// print invoice
+Route::get('invoice-print/{id}', 'Invoice@print')->name('print');
+
 Route::get('/', 'Dashboard@index')->name('index');
 Route::get('dashboard', 'Dashboard@index')->name('index');
 

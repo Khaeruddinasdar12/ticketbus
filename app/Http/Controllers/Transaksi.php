@@ -81,7 +81,7 @@ class Transaksi extends Controller
             ]);
         //end ubah status di tabel kursis
 
-        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menambah Data');
+        return $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Menambah Data', 'id' => $data->id);
     }
 
     public function cekKursi($id) // cek kursi per jadwal

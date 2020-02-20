@@ -58,6 +58,7 @@ class Transaksi extends Controller
         $data->status_bayar = 'sudah';
         $data->no_kursi = $request->no_kursi;
         $data->trip = 'n';
+        $data->admin = \Auth::user()->id;
 
             //qrcode
                 $i = $request->id_jadwal;
@@ -93,38 +94,62 @@ class Transaksi extends Controller
     public function riwayat() //menampilkan riwayat transaksi
     {
         $sudah = DB::table('transaksis')
-            ->join('users', 'transaksis.id_customer', '=', 'users.id')
+            ->join('users as createdby', 'transaksis.id_customer', '=', 'createdby.id')
+            ->leftJoin('users as canceledby', 'transaksis.admin', '=', 'canceledby.id')
             ->join('jadwals', 'transaksis.id_jadwal', '=', 'jadwals.id')
             ->join('pivot_bus_rutes', 'jadwals.id_bus_rute', '=', 'pivot_bus_rutes.id')
             ->join('rutes', 'pivot_bus_rutes.id_rute', '=', 'rutes.id')
             ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
             ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
-            ->select('transaksis.id', 'transaksis.order_code', 'transaksis.barcode', 'users.name', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', 'transaksis.no_kursi', 'transaksis.status_bayar')
+            ->select('transaksis.id', 'transaksis.order_code', 'transaksis.barcode', 'createdby.name', 'canceledby.name as canceledby', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', 'transaksis.no_kursi', 'transaksis.status_bayar')
             ->where('transaksis.status_bayar', 'sudah')
+            ->orWhere('transaksis.status_bayar', 'canceled')
             ->get();
-
+        // return $sudah;
         return view('admin.riwayattransaksi', ['sudah' => $sudah]);
     }
 
     public function editStatus($status, $id) //mengedit status belum bayar menjadi sudah atau cancel dari transaksi android
     {
+        $data = \App\Transaksi::findOrFail($id);
+        if($status == 'verified') {
+            $data->status_bayar = 'sudah';
+            $data->admin = \Auth::user()->id;
+            //qrcode
+                    // $code = $data->order_code;
+                    $code = Encoder::encode($data->order_code);
+                    $renderer = new PngRenderer();
+                    $image = $renderer->render($code);
+                    $path = 'img/qr-code/img-' . time() .  'bus.png';
+                    $output_file = 'public/'.$path;
+                    Storage::disk('local')->put($output_file, $image);
+                //end qrcode
+            $data->barcode = $path;
+            $data->save();
 
-        $h = $status;
-        $data = \App\Transaksi::find($id);
-        $data->status_bayar = 'sudah';
+            $kursi = \App\Kursi::where('id_jadwal', $data->id_jadwal)
+                    ->where('kursi', $data->no_kursi)
+                    ->update([
+                        'status' => 'terisi',
+                    ]);
 
-        //qrcode
-                // $code = $data->order_code;
-                $code = Encoder::encode($data->order_code);
-                $renderer = new PngRenderer();
-                $image = $renderer->render($code);
-                $path = 'img/qr-code/img-' . time() .  'bus.png';
-                $output_file = 'public/'.$path;
-                Storage::disk('local')->put($output_file, $image);
-            //end qrcode
-        $data->barcode = $path;
-        $data->save();
+            return $arrayName = array('status' => 'success', 'pesan' => 'Verifikasi Data Berhasil');
+        } else if ($status == 'cancel') {
+            // return $arrayName = array('status' => 'success', 'pesan' => 'Data Transaksi Dibatalkan');
+            $data->status_bayar = 'canceled';
+            $data->admin = \Auth::user()->id;
+            $data->save();
 
-        return $arrayName = array('status' => 'success', 'pesan' => 'Verifikasi Data Berhasil');
+            $kursi = \App\Kursi::where('id_jadwal', $data->id_jadwal)
+                    ->where('kursi', $data->no_kursi)
+                    ->update([
+                        'status' => 'kosong',
+                    ]);
+
+            return $arrayName = array('status' => 'success', 'pesan' => 'Data Transaksi Dibatalkan');
+        } else {
+            abort(404);
+        }
+        
     }
 }

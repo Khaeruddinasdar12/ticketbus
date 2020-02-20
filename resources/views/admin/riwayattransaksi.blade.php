@@ -56,12 +56,14 @@ Riwayat Transaksi
                       <td>{{ $sudahbyr->namabus }}</td>
                       <td>{{ $sudahbyr->tanggal }}</td>
                       <td>{{ $sudahbyr->jam }}</td>
-                      <td>
-                        <button class="btn btn-success" title="sudah bayar"><i class=" far fa-check-square"></i></button>
+                      <td>@if($sudahbyr->status_bayar == 'sudah')<span class="badge badge-pill badge-success">Sudah</span>
+                        @elseif($sudahbyr->status_bayar == 'canceled')<span class="badge badge-pill badge-danger">Cancel</span>
+                        @endif
                       </td>
 
                       <td>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail2" title="lihat detail" data-id="{{ $sudahbyr->id }}" data-order="{{ $sudahbyr->order_code }}" data-barcode="{{ asset('storage/'.$sudahbyr->barcode) }}" data-nama="{{ $sudahbyr->name }}" data-tgl="{{ $sudahbyr->tanggal }}" data-jam="{{ $sudahbyr->jam }}" data-bus="{{ $sudahbyr->namabus }}" data-desc="{{ $sudahbyr->deskripsi }}" data-rute="{{ $sudahbyr->rute }}" data-tipe="{{ $sudahbyr->tipebus }}" data-harga="Rp. {{ format_uang($sudahbyr->harga) }}" data-kursi="{{ $sudahbyr->no_kursi }}" data-status="{{ $sudahbyr->status_bayar }}"><i class=" far fa-eye"></i></button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail2" title="lihat detail" data-id="{{ $sudahbyr->id }}" data-order="{{ $sudahbyr->order_code }}" data-barcode="{{ asset('storage/'.$sudahbyr->barcode) }}" data-nama="{{ $sudahbyr->name }}" data-tgl="{{ $sudahbyr->tanggal }}" data-jam="{{ $sudahbyr->jam }}" data-bus="{{ $sudahbyr->namabus }}" data-desc="{{ $sudahbyr->deskripsi }}" data-rute="{{ $sudahbyr->rute }}" data-tipe="{{ $sudahbyr->tipebus }}" data-harga="Rp. {{ format_uang($sudahbyr->harga) }}" data-kursi="{{ $sudahbyr->no_kursi }}" data-status="{{ $sudahbyr->status_bayar }}"
+                          data-admin="{{$sudahbyr->canceledby}}"><i class=" far fa-eye"></i></button>
                       </td>
                     </tr>
                     @endforeach
@@ -101,6 +103,7 @@ Riwayat Transaksi
                                     <h6>Deskripsi</h6>
                                     <br>
                                     <h6>Status</h6>
+                                    <h6>Admin</h6>
                                   </div>
 
                                   <div class="col-md-1">
@@ -115,6 +118,7 @@ Riwayat Transaksi
                                     <h6>:</h6>
                                     <br>
                                     <h6>:</h6>
+                                    <h6>:</h6>
                                   </div>
 
                                   <div class="col-md-6">
@@ -127,7 +131,9 @@ Riwayat Transaksi
                                     <h6 id="hargas"></h6>
                                     <h6 id="tipebuss"></h6>
                                     <h6 id="deskripsis"></h6>
+
                                     <h6 id="statuss"></h6>
+                                    <h6 id="admin"></h6>
                                   </div>
 
 
@@ -177,10 +183,12 @@ Riwayat Transaksi
     var harga = button.data('harga')
     var kursi = button.data('kursi')
     var status = button.data('status')
+    var admin = button.data('admin')
 
     var modal = $(this)
     modal.find('.modal-title').text('Detail Transaksi ' + nama)
     modal.find('.modal-body #orders').text(order)
+    modal.find('.modal-body #admin').text(admin)
     modal.find('.modal-body #namas').text(nama)
     modal.find('.modal-body #tanggals').text(tgl)
     modal.find('.modal-body #img-barcode').attr('src', barcode);

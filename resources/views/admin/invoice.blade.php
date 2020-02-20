@@ -27,9 +27,6 @@ Transaksi
 
           </div>
         </div>
-        @foreach($data as $datas)
-{{$datas->name}}
-@endforeach
 
         <!-- Main content -->
         <div class="invoice p-3 mb-3">

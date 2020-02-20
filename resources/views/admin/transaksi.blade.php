@@ -319,7 +319,7 @@ Transaksi
         if (result.value) {
           var me = $(this),
             id = me.attr('id-transaksi');
-          url = 'verifikasi-bayar/verified/' + id,
+            url = 'verifikasi-bayar/verified/' + id,
             token = $('meta[name="csrf-token"]').attr('content');
           $.ajax({
             url: url,
@@ -354,18 +354,19 @@ Transaksi
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, Lanjutkan Hapus!',
+        confirmButtonText: 'Ya, Batalkan Transaksi!',
         timer: 6500
       }).then((result) => {
         if (result.value) {
           var me = $(this),
-            url = me.attr('href'),
+            id = me.attr('id-transaksi');
+            url = 'verifikasi-bayar/cancel/' + id,
             token = $('meta[name="csrf-token"]').attr('content');
           $.ajax({
             url: url,
             method: "POST",
             data: {
-              '_method': 'DELETE',
+              '_method': 'PUT',
               '_token': token
             },
             success: function(data) {

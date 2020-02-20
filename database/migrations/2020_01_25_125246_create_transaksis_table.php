@@ -23,11 +23,11 @@ class CreateTransaksisTable extends Migration
             $table->string('barcode')->nullable();
             $table->enum('trip', ['n', 'y']);
             $table->string('bukti_transfer')->nullable();
-            $table->bigInteger('canceled_by')->unsigned()->nullable();
+            $table->bigInteger('admin')->unsigned()->nullable();
             $table->timestamps();
             $table->foreign('id_jadwal')->references('id')->on('jadwals');
             $table->foreign('id_customer')->references('id')->on('users');
-            $table->foreign('canceled_by')->references('id')->on('users');
+            $table->foreign('admin')->references('id')->on('users');
         });
     }
 

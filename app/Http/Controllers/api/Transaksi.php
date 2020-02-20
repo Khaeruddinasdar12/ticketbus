@@ -41,7 +41,7 @@ class Transaksi extends Controller
         //end ubah status di tabel kursis
         return response()->json([
                 'status' => true, 
-                'message' => 'Transaksi berhasil', 
+                'message' => 'Transaksi berhasil, Data Anda akan terhapus jika tidak mengupload bukti transfer dalam jangka 1', 
                 'code' => 201,
                 'data' => $data
             ]);

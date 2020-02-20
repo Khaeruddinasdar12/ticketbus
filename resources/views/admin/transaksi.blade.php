@@ -43,16 +43,155 @@ Transaksi
             <div class="col-5 col-sm-3">
               <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
 
-                <a class="nav-link active" id="vert-tabs-add-tab" data-toggle="pill" href="#vert-tabs-add" role="tab" aria-controls="vert-tabs-add" aria-selected="true">Tambah Data Customer</a>
+                <a class="nav-link active" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-home" role="tab" aria-controls="vert-tabs-home" aria-selected="false">Belum Bayar</a>
 
-                <a class="nav-link" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-home" role="tab" aria-controls="vert-tabs-home" aria-selected="false">Belum Bayar</a>
+                <a class="nav-link" id="vert-tabs-add-tab" data-toggle="pill" href="#vert-tabs-add" role="tab" aria-controls="vert-tabs-add" aria-selected="true">Jadwal Keberangkatan Bus</a>
 
               </div>
             </div>
             <div class="col-7 col-sm-9">
               <div class="tab-content" id="vert-tabs-tabContent">
 
-                <div class="tab-pane text-left fade show active" id="vert-tabs-add" role="tabpanel" aria-labelledby="vert-tabs-add-tab">
+                <div class="tab-pane fade show active" id="vert-tabs-home" role="tabpanel" aria-labelledby="vert-tabs-home-tab">
+                  <table id="example2" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Nama Customer</th>
+                        <th>Nama Bus</th>
+                        <th>Tgl Berangkat</th>
+                        <th>Jam Berangkat</th>
+                        <th>Bukti</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach($belum as $belumbayar)
+                      <tr>
+                        <td>{{$belumbayar->name}}</td>
+                        <td>{{$belumbayar->namabus}}</td>
+                        <td>{{$belumbayar->tanggal}}</td>
+                        <td>{{$belumbayar->jam}}</td>
+
+                        <td>
+                          <button class="btn btn-outline-danger" data-toggle="modal" data-target="#verif" title="belum bayar" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-bukti="{{ asset('storage/'.$belumbayar->bukti_transfer) }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class="fab fa-creative-commons-nc"></i></button>
+                        </td>
+
+                        <td>
+                          <button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#showdetail1" title="lihat detail" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-bukti="{{ asset('storage/'.$belumbayar->bukti_transfer) }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class=" far fa-eye"></i></button>
+
+                          <button title="Verifikasi Pembayaran" class="btn btn-outline-success btn-sm" id-transaksi="{{$belumbayar->id}}" id-user="{{$belumbayar->id_user}}" onclick="verified('verified')" id="verified"><i class="fas fa-check"></i></button>
+
+                          <button title="Batalkan Transaksi" class="btn btn-outline-danger btn-sm" id-transaksi="{{$belumbayar->id}}" id-user="{{$belumbayar->id_user}}" onclick="cancel('cancel')" id="cancel"><i class="fas fa-window-close"></i></button>
+                        </td>
+
+
+                      </tr>
+                      @endforeach
+                    </tbody>
+                    <!-- Modal Bukti Transfer -->
+                    <div class="modal fade" id="verif" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <h6>Order Code</h6>
+                                  <h5 id="order"></h5>
+                                  <hr>
+                                  <h6>Bukti Pembayaran</h6>
+                                  <div class="text-center">
+                                    <img src="" alt="bukti transfer" id="bukti-transfer" width="70px" height="100px">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End modal bukti transfer -->
+
+                    <div class="modal fade" id="showdetail1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-md-4" style="border-right: 1px solid #c7c9ca">
+                                  <h6>Order Code</h6>
+                                  <h5 id="order"></h5>
+                                  <hr>
+                                  <h6>Status</h6>
+                                  <h5 id="status"></h5>
+                                </div>
+                                <div class="col-md-7 offset-md-1" style="margin: auto">
+                                  <div class="row">
+
+                                    <div class="col-md-5">
+                                      <h6>Nama Customer</h6>
+                                      <h6>Tanggal Berangkat</h6>
+                                      <h6>Jam Berangkat</h6>
+                                      <h6>Nama Bus</h6>
+                                      <h6>Rute Bus</h6>
+                                      <h6>Nomor Kursi</h6>
+                                      <h6>Harga</h6>
+                                      <h6>Tipe Bus</h6>
+                                      <h6>Deskripsi</h6>
+                                    </div>
+
+                                    <div class="col-md-1">
+                                      <h6>:</h6>
+                                      <h6>:</h6>
+                                      <h6>:</h6>
+                                      <h6>:</h6>
+                                      <h6>:</h6>
+                                      <h6>:</h6>
+                                      <h6>:</h6>
+                                      <h6>:</h6>
+                                      <h6>:</h6>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                      <h6 id="nama"></h6>
+                                      <h6 id="tanggal"></h6>
+                                      <h6 id="jam"></h6>
+                                      <h6 id="namabus"></h6>
+                                      <h6 id="rutebus"></h6>
+                                      <h6 id="nokursi"></h6>
+                                      <h6 id="harga"></h6>
+                                      <h6 id="tipebus"></h6>
+                                      <h6 id="deskripsi"></h6>
+                                    </div>
+
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </table>
+                </div>
+
+                <div class="tab-pane text-left fade show" id="vert-tabs-add" role="tabpanel" aria-labelledby="vert-tabs-add-tab">
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -74,7 +213,7 @@ Transaksi
                         <td>{{ $datajadwal -> namabus }}</td>
                         <td>{{ $datajadwal -> tipebus }}</td>
                         <td>Rp. {{ format_uang($datajadwal -> harga) }}</td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" id="pesankursi" data-target="#pesan" title="pesan kursi" onclick="kursi()" data-id="{{$datajadwal->id}}"><i class="fas fa-shopping-cart"></i></button> </td>
+                        <td> <button class="btn btn-outline-primary" data-toggle="modal" id="pesankursi" data-target="#pesan" title="pesan kursi" onclick="kursi()" data-id="{{$datajadwal->id}}"><i class="fas fa-shopping-cart"></i></button> </td>
                       </tr>
                       @endforeach
                     </tbody>
@@ -141,148 +280,6 @@ Transaksi
                   </table>
                 </div>
 
-                <div class="tab-pane fade show" id="vert-tabs-home" role="tabpanel" aria-labelledby="vert-tabs-home-tab">
-                  <table id="example2" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Nama Customer</th>
-                        <th>Nama Bus</th>
-                        <th>Tgl Berangkat</th>
-                        <th>Jam Berangkat</th>
-                        <th>Bukti</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @foreach($belum as $belumbayar)
-                      <tr>
-                        <td>{{$belumbayar->name}}</td>
-                        <td>{{$belumbayar->namabus}}</td>
-                        <td>{{$belumbayar->tanggal}}</td>
-                        <td>{{$belumbayar->jam}}</td>
-
-                        <td>
-                          <button class="btn btn-danger" data-toggle="modal" data-target="#verif" title="belum bayar" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-bukti="{{ asset('storage/'.$belumbayar->bukti_transfer) }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class="fab fa-creative-commons-nc"></i></button>
-                        </td>
-
-                        <td>
-                          <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail1" title="lihat detail" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-bukti="{{ asset('storage/'.$belumbayar->bukti_transfer) }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class=" far fa-eye"></i></button>
-
-                          <button title="Verifikasi Pembayaran" class="btn btn-success" id-transaksi="{{$belumbayar->id}}" id-user="{{$belumbayar->id_user}}" onclick="verified('verified')" id="verified"><i class="fas fa-check"></i></button>
-
-                          <button title="Batalkan Transaksi" class="btn btn-danger" id-transaksi="{{$belumbayar->id}}" id-user="{{$belumbayar->id_user}}" onclick="cancel('cancel')" id="cancel"><i class="fas fa-window-close"></i></button>
-                        </td>
-
-
-                      </tr>
-                      @endforeach
-                    </tbody>
-                    <!-- Modal Bukti Transfer -->
-                    <div class="modal fade" id="verif" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <div class="container">
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <h6>Order Code</h6>
-                                  <h5 id="order"></h5>
-                                  <hr>
-                                  <h6>Bukti Pembayaran</h6>
-                                  <div class="text-center">
-                                    <img src="" alt="bukti transfer" id="bukti-transfer" width="70px" height="100px">
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- End modal bukti transfer -->
-
-                    <div class="modal fade" id="showdetail1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <div class="container">
-                              <div class="row">
-                                <div class="col-md-4" style="border-right: 1px solid #c7c9ca">
-                                  <h6>Order Code</h6>
-                                  <h5 id="order"></h5>
-                                  <hr>
-                                </div>
-                                <div class="col-md-7 offset-md-1" style="margin: auto">
-                                  <div class="row">
-
-                                    <div class="col-md-5">
-                                      <h6>Nama Customer</h6>
-                                      <h6>Tanggal Berangkat</h6>
-                                      <h6>Jam Berangkat</h6>
-                                      <h6>Nama Bus</h6>
-                                      <h6>Rute Bus</h6>
-                                      <h6>Nomor Kursi</h6>
-                                      <h6>Harga</h6>
-                                      <h6>Tipe Bus</h6>
-                                      <h6>Deskripsi</h6>
-                                      <br>
-                                      <h6>Status</h6>
-                                    </div>
-
-                                    <div class="col-md-1">
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <h6>:</h6>
-                                      <br>
-                                      <h6>:</h6>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                      <h6 id="nama"></h6>
-                                      <h6 id="tanggal"></h6>
-                                      <h6 id="jam"></h6>
-                                      <h6 id="namabus"></h6>
-                                      <h6 id="rutebus"></h6>
-                                      <h6 id="nokursi"></h6>
-                                      <h6 id="harga"></h6>
-                                      <h6 id="tipebus"></h6>
-                                      <h6 id="deskripsi"></h6>
-                                      <h6 id="status"></h6>
-                                    </div>
-
-
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </table>
-                </div>
-
               </div>
             </div>
           </div>
@@ -319,7 +316,7 @@ Transaksi
         if (result.value) {
           var me = $(this),
             id = me.attr('id-transaksi');
-            url = 'verifikasi-bayar/verified/' + id,
+          url = 'verifikasi-bayar/verified/' + id,
             token = $('meta[name="csrf-token"]').attr('content');
           $.ajax({
             url: url,
@@ -360,7 +357,7 @@ Transaksi
         if (result.value) {
           var me = $(this),
             id = me.attr('id-transaksi');
-            url = 'verifikasi-bayar/cancel/' + id,
+          url = 'verifikasi-bayar/cancel/' + id,
             token = $('meta[name="csrf-token"]').attr('content');
           $.ajax({
             url: url,

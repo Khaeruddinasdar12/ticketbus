@@ -77,11 +77,11 @@ Data Bus
                           <td>{{ $databus->nama }}</td>
                           <td>{{ $databus->tipebus }}</td>
                           <td>{{ $databus->jumlah_kursi }}</td>
-                          <td> <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail0" title="lihat detail" data-id="{{ $databus->id }}" data-nama="{{ $databus->nama }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class=" far fa-eye"></i></button> </td>
+                          <td> <button class="btn btn-outline-primary" data-toggle="modal" data-target="#showdetail0" title="lihat detail" data-id="{{ $databus->id }}" data-nama="{{ $databus->nama }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class=" far fa-eye"></i></button> </td>
                           <td>
-                            <button class="btn btn-success" data-toggle="modal" data-target="#editbus" title="edit data" data-nama="{{ $databus->nama }}" data-id="{{ $databus->id }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class="fas fa-pencil-alt"></i></button>
+                            <button class="btn btn-outline-success" data-toggle="modal" data-target="#editbus" title="edit data" data-nama="{{ $databus->nama }}" data-id="{{ $databus->id }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class="fas fa-pencil-alt"></i></button>
 
-                            <button class="btn btn-danger" title="hapus data" href="managemen-bus/delete-bus/{{$databus->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-outline-danger" title="hapus data" href="managemen-bus/delete-bus/{{$databus->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
                           </td>
                         </tr>
                         @endforeach
@@ -192,7 +192,7 @@ Data Bus
                     <table id="example1" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th>Nama Tipe Bus</th>
+                          <th>Tipe Bus</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -201,8 +201,8 @@ Data Bus
                         <tr>
                           <td>{{ $tipe->nama }}</td>
                           <td>
-                            <button class="btn btn-success" data-toggle="modal" data-target="#edittipe" title="edit data" data-id="{{ $tipe->id }}" data-tipe="{{ $tipe->nama }}"><i class="fas fa-pencil-alt"></i></button>
-                            <button class="btn btn-danger" title="hapus data" href="managemen-bus/delete-tipe-bus/{{$tipe->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-outline-success" data-toggle="modal" data-target="#edittipe" title="edit data" data-id="{{ $tipe->id }}" data-tipe="{{ $tipe->nama }}"><i class="fas fa-pencil-alt"></i></button>
+                            <button class="btn btn-outline-danger" title="hapus data" href="managemen-bus/delete-tipe-bus/{{$tipe->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
                           </td>
                         </tr>
                         @endforeach
@@ -253,7 +253,7 @@ Data Bus
                     <table id="example3" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th>Nama</th>
+                          <th>Rute</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -262,8 +262,8 @@ Data Bus
                         <tr>
                           <td>{{ $rutes->rute }}</td>
                           <td>
-                            <button class="btn btn-success" data-toggle="modal" data-target="#editrute" title="edit data" data-id="{{ $rutes->id }}" data-rute="{{ $rutes->rute }}"><i class="fas fa-pencil-alt"></i></button>
-                            <button class="btn btn-danger" title="hapus data" href="managemen-bus/delete-rute/{{$rutes->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-outline-success" data-toggle="modal" data-target="#editrute" title="edit data" data-id="{{ $rutes->id }}" data-rute="{{ $rutes->rute }}"><i class="fas fa-pencil-alt"></i></button>
+                            <button class="btn btn-outline-danger" title="hapus data" href="managemen-bus/delete-rute/{{$rutes->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
                           </td>
                         </tr>
                         @endforeach
@@ -328,10 +328,10 @@ Data Bus
                           <td>{{ $datapivot->rute_bus }}</td>
                           <td>Rp. {{ format_uang($datapivot->harga) }}</td>
                           <td>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#showdetailpivot" title="lihat detail" data-nama="{{ $datapivot->nama_bus }}" data-tipe="{{ $datapivot->tipebus }}" data-rute="{{ $datapivot->rute_bus }}" data-harga="{{ $datapivot->harga }}" data-desc="{{ $datapivot->deskripsi }}"><i class="far fa-eye"></i></button>
+                            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#showdetailpivot" title="lihat detail" data-nama="{{ $datapivot->nama_bus }}" data-tipe="{{ $datapivot->tipebus }}" data-rute="{{ $datapivot->rute_bus }}" data-harga="{{ $datapivot->harga }}" data-desc="{{ $datapivot->deskripsi }}"><i class="far fa-eye"></i></button>
                           </td>
                           <td>
-                            <button class="btn btn-danger" title="hapus data" href="managemen-bus/delete-pivot/{{$tipe->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-outline-danger" title="hapus data" href="managemen-bus/delete-pivot/{{$tipe->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
                           </td>
                         </tr>
                         @endforeach

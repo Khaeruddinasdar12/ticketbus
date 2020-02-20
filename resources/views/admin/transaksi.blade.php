@@ -43,7 +43,7 @@ Transaksi
             <div class="col-5 col-sm-3">
               <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
 
-                <a class="nav-link active" id="vert-tabs-add-tab" data-toggle="pill" href="#vert-tabs-add" role="tab" aria-controls="vert-tabs-add" aria-selected="true">Tambah Data Customer</a>
+                <a class="nav-link active" id="vert-tabs-add-tab" data-toggle="pill" href="#vert-tabs-add" role="tab" aria-controls="vert-tabs-add" aria-selected="true">Jadwal Keberangkatan Bus</a>
 
                 <a class="nav-link" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-home" role="tab" aria-controls="vert-tabs-home" aria-selected="false">Belum Bayar</a>
 
@@ -74,7 +74,7 @@ Transaksi
                         <td>{{ $datajadwal -> namabus }}</td>
                         <td>{{ $datajadwal -> tipebus }}</td>
                         <td>Rp. {{ format_uang($datajadwal -> harga) }}</td>
-                        <td> <button class="btn btn-primary" data-toggle="modal" id="pesankursi" data-target="#pesan" title="pesan kursi" onclick="kursi()" data-id="{{$datajadwal->id}}"><i class="fas fa-shopping-cart"></i></button> </td>
+                        <td> <button class="btn btn-outline-primary" data-toggle="modal" id="pesankursi" data-target="#pesan" title="pesan kursi" onclick="kursi()" data-id="{{$datajadwal->id}}"><i class="fas fa-shopping-cart"></i></button> </td>
                       </tr>
                       @endforeach
                     </tbody>
@@ -162,15 +162,15 @@ Transaksi
                         <td>{{$belumbayar->jam}}</td>
 
                         <td>
-                          <button class="btn btn-danger" data-toggle="modal" data-target="#verif" title="belum bayar" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-bukti="{{ asset('storage/'.$belumbayar->bukti_transfer) }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class="fab fa-creative-commons-nc"></i></button>
+                          <button class="btn btn-outline-danger" data-toggle="modal" data-target="#verif" title="belum bayar" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-bukti="{{ asset('storage/'.$belumbayar->bukti_transfer) }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class="fab fa-creative-commons-nc"></i></button>
                         </td>
 
                         <td>
-                          <button class="btn btn-primary" data-toggle="modal" data-target="#showdetail1" title="lihat detail" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-bukti="{{ asset('storage/'.$belumbayar->bukti_transfer) }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class=" far fa-eye"></i></button>
+                          <button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#showdetail1" title="lihat detail" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-bukti="{{ asset('storage/'.$belumbayar->bukti_transfer) }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class=" far fa-eye"></i></button>
 
-                          <button title="Verifikasi Pembayaran" class="btn btn-success" id-transaksi="{{$belumbayar->id}}" id-user="{{$belumbayar->id_user}}" onclick="verified('verified')" id="verified"><i class="fas fa-check"></i></button>
+                          <button title="Verifikasi Pembayaran" class="btn btn-outline-success btn-sm" id-transaksi="{{$belumbayar->id}}" id-user="{{$belumbayar->id_user}}" onclick="verified('verified')" id="verified"><i class="fas fa-check"></i></button>
 
-                          <button title="Batalkan Transaksi" class="btn btn-danger" id-transaksi="{{$belumbayar->id}}" id-user="{{$belumbayar->id_user}}" onclick="cancel('cancel')" id="cancel"><i class="fas fa-window-close"></i></button>
+                          <button title="Batalkan Transaksi" class="btn btn-outline-danger btn-sm" id-transaksi="{{$belumbayar->id}}" id-user="{{$belumbayar->id_user}}" onclick="cancel('cancel')" id="cancel"><i class="fas fa-window-close"></i></button>
                         </td>
 
 
@@ -319,7 +319,7 @@ Transaksi
         if (result.value) {
           var me = $(this),
             id = me.attr('id-transaksi');
-            url = 'verifikasi-bayar/verified/' + id,
+          url = 'verifikasi-bayar/verified/' + id,
             token = $('meta[name="csrf-token"]').attr('content');
           $.ajax({
             url: url,
@@ -360,7 +360,7 @@ Transaksi
         if (result.value) {
           var me = $(this),
             id = me.attr('id-transaksi');
-            url = 'verifikasi-bayar/cancel/' + id,
+          url = 'verifikasi-bayar/cancel/' + id,
             token = $('meta[name="csrf-token"]').attr('content');
           $.ajax({
             url: url,

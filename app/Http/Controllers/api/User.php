@@ -67,7 +67,7 @@ class User extends Controller
                 'code' => 401,
                 'message' => 'Ada Kesalahan Registrasi',
                 'data' => $errors
-            ],401);
+            ]);
         }
 
         $data = new \App\User();

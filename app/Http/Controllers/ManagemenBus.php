@@ -18,7 +18,7 @@ class ManagemenBus extends Controller
             ->join('bus', 'bus.id', '=', 'pivot_bus_rutes.id_bus')
             ->join('rutes', 'rutes.id', '=', 'pivot_bus_rutes.id_rute')
             ->join('tipebus', 'tipebus.id', '=', 'bus.id_tipebus')
-            ->select('pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama as tipebus')
+            ->select('pivot_bus_rutes.id', 'pivot_bus_rutes.harga', 'bus.nama as nama_bus', 'rutes.rute as rute_bus', 'bus.deskripsi', 'tipebus.nama as tipebus')
             ->get();
 
         $bus = DB::table('bus')

@@ -39,7 +39,7 @@ class Kernel extends ConsoleKernel
 
                     $delete = DB::table('transaksis')->where('id', $datas->id)->delete();
                 }
-        })->everyMinute();
+        });
     }
 
     /**

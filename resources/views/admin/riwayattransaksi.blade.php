@@ -86,6 +86,12 @@ Riwayat Transaksi
                                 <hr>
                                 <h6>BarCode</h6>
                                 <img alt="" id="img-barcode">
+                                <hr>
+                                <h6>Status</h6>
+                                <h5 id="statuss"></h5>
+                                <hr>
+                                <h6>Admin</h6>
+                                <h5 id="admin"></h5>
                               </div>
                               <div class="col-md-7 offset-md-1" style="margin: auto">
                                 <div class="row">
@@ -100,9 +106,6 @@ Riwayat Transaksi
                                     <h6>Harga</h6>
                                     <h6>Tipe Bus</h6>
                                     <h6>Deskripsi</h6>
-                                    <br>
-                                    <h6>Status</h6>
-                                    <h6>Admin</h6>
                                   </div>
 
                                   <div class="col-md-1">
@@ -113,9 +116,6 @@ Riwayat Transaksi
                                     <h6>:</h6>
                                     <h6>:</h6>
                                     <h6>:</h6>
-                                    <h6>:</h6>
-                                    <h6>:</h6>
-                                    <br>
                                     <h6>:</h6>
                                     <h6>:</h6>
                                   </div>
@@ -130,9 +130,6 @@ Riwayat Transaksi
                                     <h6 id="hargas"></h6>
                                     <h6 id="tipebuss"></h6>
                                     <h6 id="deskripsis"></h6>
-
-                                    <h6 id="statuss"></h6>
-                                    <h6 id="admin"></h6>
                                   </div>
 
 

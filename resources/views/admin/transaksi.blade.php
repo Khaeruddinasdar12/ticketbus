@@ -226,6 +226,8 @@ Transaksi
                                   <h6>Order Code</h6>
                                   <h5 id="order"></h5>
                                   <hr>
+                                  <h6>Status</h6>
+                                  <h5 id="status"></h5>
                                 </div>
                                 <div class="col-md-7 offset-md-1" style="margin: auto">
                                   <div class="row">
@@ -240,8 +242,6 @@ Transaksi
                                       <h6>Harga</h6>
                                       <h6>Tipe Bus</h6>
                                       <h6>Deskripsi</h6>
-                                      <br>
-                                      <h6>Status</h6>
                                     </div>
 
                                     <div class="col-md-1">
@@ -253,8 +253,6 @@ Transaksi
                                       <h6>:</h6>
                                       <h6>:</h6>
                                       <h6>:</h6>
-                                      <h6>:</h6>
-                                      <br>
                                       <h6>:</h6>
                                     </div>
 
@@ -268,7 +266,6 @@ Transaksi
                                       <h6 id="harga"></h6>
                                       <h6 id="tipebus"></h6>
                                       <h6 id="deskripsi"></h6>
-                                      <h6 id="status"></h6>
                                     </div>
 
 

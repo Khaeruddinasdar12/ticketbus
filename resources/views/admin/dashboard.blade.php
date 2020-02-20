@@ -127,7 +127,7 @@ Dashboard
         <!-- Info Boxes Style 2 -->
         @foreach($tipe as $tipes)
         <div class="info-box">
-          <span class="info-box-icon bg-custom-1 elevation-1"><i class="fas fa-cog"></i></span>
+          <span class="info-box-icon bg-custom-1 elevation-1"><i class="fas fa-bus"></i></span>
           <div class="info-box-content">
             <span class="info-box-text">Jumlah Bus {{$tipes->nama}}</span>
             <span class="info-box-number">

@@ -128,7 +128,7 @@ Manajemen Bus
               @csrf
               <div class="form-group">
                 <label for="exampleInputEmail1">Nama Bus - Nomor Polisi (DD)</label>
-                <input type="text" class="form-control" name="nama" required placeholder="ex: Bintang Timur - DD 12345 AA">
+                <input type="text" class="form-control" name="nama" required placeholder="ex: Bintang Prima - DD 1234 AA">
               </div>
               <div class="form-group">
                 <label>Deskripsi Bus</label>

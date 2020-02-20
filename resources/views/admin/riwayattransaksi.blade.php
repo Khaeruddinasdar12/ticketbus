@@ -62,7 +62,7 @@ Riwayat Transaksi
                       </td>
 
                       <td>
-                        <button class="btn btn-outline-primary" data-toggle="modal" data-target="#showdetail2" title="lihat detail" data-id="{{ $sudahbyr->id }}" data-order="{{ $sudahbyr->order_code }}" data-barcode="{{ asset('storage/'.$sudahbyr->barcode) }}" data-nama="{{ $sudahbyr->name }}" data-tgl="{{ $sudahbyr->tanggal }}" data-jam="{{ $sudahbyr->jam }}" data-bus="{{ $sudahbyr->namabus }}" data-desc="{{ $sudahbyr->deskripsi }}" data-rute="{{ $sudahbyr->rute }}" data-tipe="{{ $sudahbyr->tipebus }}" data-harga="Rp. {{ format_uang($sudahbyr->harga) }}" data-kursi="{{ $sudahbyr->no_kursi }}" data-status="{{ $sudahbyr->status_bayar }}" data-admin="{{$sudahbyr->canceledby}}"><i class=" far fa-eye"></i></button>
+                        <button class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#showdetail2" title="lihat detail" data-id="{{ $sudahbyr->id }}" data-order="{{ $sudahbyr->order_code }}" data-barcode="{{ asset('storage/'.$sudahbyr->barcode) }}" data-nama="{{ $sudahbyr->name }}" data-tgl="{{ $sudahbyr->tanggal }}" data-jam="{{ $sudahbyr->jam }}" data-bus="{{ $sudahbyr->namabus }}" data-desc="{{ $sudahbyr->deskripsi }}" data-rute="{{ $sudahbyr->rute }}" data-tipe="{{ $sudahbyr->tipebus }}" data-harga="Rp. {{ format_uang($sudahbyr->harga) }}" data-kursi="{{ $sudahbyr->no_kursi }}" data-status="{{ $sudahbyr->status_bayar }}" data-admin="{{$sudahbyr->canceledby}}"><i class=" far fa-eye"></i></button>
                       </td>
                     </tr>
                     @endforeach
@@ -84,7 +84,7 @@ Riwayat Transaksi
                                 <h6>Order Code</h6>
                                 <h5 id="orders"></h5>
                                 <hr>
-                                <h6>BarCode</h6>
+                                <h6>Aztec Code</h6>
                                 <img alt="" id="img-barcode">
                                 <hr>
                                 <h6>Status</h6>

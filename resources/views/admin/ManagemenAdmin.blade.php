@@ -143,7 +143,7 @@ Manajemen Admin
                 <tr>
                   <td>{{$datas->name}}</td>
                   <td>{{$datas->role}}</td>
-                  <td> <button class="btn btn-primary" data-toggle="modal" data-target="#detailadmin" data-name="{{$datas->name}}" data-email="{{$datas->email}}" data-role="{{$datas->role}}" data-alamat="{{$datas->alamat}}"><i class=" far fa-eye"></i></button> </td>
+                  <td> <button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#detailadmin" data-name="{{$datas->name}}" data-email="{{$datas->email}}" data-role="{{$datas->role}}" data-alamat="{{$datas->alamat}}"><i class=" far fa-eye"></i></button> </td>
                 </tr>
                 @endforeach
               </tbody>

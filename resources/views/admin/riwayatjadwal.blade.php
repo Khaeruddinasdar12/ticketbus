@@ -58,7 +58,7 @@ Riwayat Jadwal
                       <td>{{ $riwayat->tanggal }}</td>
                       <td>{{ $riwayat->jam }}</td>
                       <td>
-                        <button class="btn btn-outline-primary" data-toggle="modal" data-target="#showjadwal" title="lihat detail" data-id="{{ $riwayat->id }}" data-nama="{{ $riwayat->namabus }}" data-tipe="{{ $riwayat->tipebus }}" data-rute="{{ $riwayat->rute }}" data-tgl="{{ $riwayat->tanggal }}" data-jam="{{ $riwayat->jam }}" data-desc="{{ $riwayat->deskripsi }}" data-harga="Rp. {{ format_uang($riwayat->harga) }}"><i class=" far fa-eye"></i></button>
+                        <button class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#showjadwal" title="lihat detail" data-id="{{ $riwayat->id }}" data-nama="{{ $riwayat->namabus }}" data-tipe="{{ $riwayat->tipebus }}" data-rute="{{ $riwayat->rute }}" data-tgl="{{ $riwayat->tanggal }}" data-jam="{{ $riwayat->jam }}" data-desc="{{ $riwayat->deskripsi }}" data-harga="Rp. {{ format_uang($riwayat->harga) }}"><i class=" far fa-eye"></i></button>
                       </td>
                     </tr>
                     @endforeach

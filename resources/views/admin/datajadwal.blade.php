@@ -63,14 +63,14 @@ Data Jadwal
                         <td>{{ $jadwal->jam }}</td>
                         <td>{{ $jadwal->kursi_kosong }}</td>
                         <td>
-                          <button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#showjadwal" title="lihat detail" data-id="{{ $jadwal->id }}" data-nama="{{ $jadwal->namabus }}" data-tipe="{{ $jadwal->tipebus }}" data-rute="{{ $jadwal->rute }}" data-tgl="{{ $jadwal->tanggal }}" data-jam="{{ $jadwal->jam }}" data-desc="{{ $jadwal->deskripsi }}" data-harga="Rp. {{ format_uang($jadwal->harga) }}"><i class=" far fa-eye"></i></button>
+                          <button class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#showjadwal" title="lihat detail" data-id="{{ $jadwal->id }}" data-nama="{{ $jadwal->namabus }}" data-tipe="{{ $jadwal->tipebus }}" data-rute="{{ $jadwal->rute }}" data-tgl="{{ $jadwal->tanggal }}" data-jam="{{ $jadwal->jam }}" data-desc="{{ $jadwal->deskripsi }}" data-harga="Rp. {{ format_uang($jadwal->harga) }}"><i class=" far fa-eye"></i></button>
                         </td>
                         <td>
                           <button class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#editjadwal" title="edit data" data-id="{{ $jadwal->id }}" data-nama="{{ $jadwal->namabus }}" data-tipe="{{ $jadwal->tipebus }}" data-rute="{{ $jadwal->rute }}" data-tgl="{{ $jadwal->tanggal }}" data-jam="{{ $jadwal->jam }}" data-desc="{{ $jadwal->deskripsi }}" data-harga="Rp. {{ format_uang($jadwal->harga) }}"><i class="fas fa-pencil-alt"></i></button>
 
                           <button class="btn btn-outline-danger btn-sm" title="hapus data" href="managemen-jadwal/delete-jadwal/{{$jadwal->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
 
-                          <button class="btn btn-outline-info btn-sm" title="Bus Dalam Perjalanan" href="managemen-jadwal/edit-status/{{$jadwal->status}}/{{$jadwal->id}}" onclick="status('Bus yang anda pilih akan di berangkatkan ?')" id="status_perjalanan"><i class="fas fa-road"></i></button>
+                          <button class="btn btn-outline-dark btn-sm" title="Bus Dalam Perjalanan" href="managemen-jadwal/edit-status/{{$jadwal->status}}/{{$jadwal->id}}" onclick="status('Bus yang anda pilih akan di berangkatkan ?')" id="status_perjalanan"><i class="fas fa-road"></i></button>
                         </td>
                       </tr>
                       @endforeach

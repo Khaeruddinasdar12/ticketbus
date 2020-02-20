@@ -61,9 +61,9 @@ Dalam Perjalanan
                         <td>{{ $jadwal->tanggal }}</td>
                         <td>{{ $jadwal->jam }}</td>
                         <td>{{ $jadwal->kursi_terisi }}</td>
-                        <td> <button class="btn btn-outline-primary" data-toggle="modal" data-target="#detail" title="lihat detail" data-nama="{{$jadwal->namabus}}" data-tipe="{{$jadwal->tipebus}}" data-rute="{{$jadwal->rute}}" data-tanggal="{{$jadwal->tanggal}}" data-jam="{{$jadwal->jam}}" data-kursi="{{$jadwal->kursi_terisi}}" data-harga="Rp. {{format_uang($jadwal->harga)}}" data-deskripsi="{{$jadwal->deskripsi}}"><i class=" far fa-eye"></i></button> </td>
+                        <td> <button class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#detail" title="lihat detail" data-nama="{{$jadwal->namabus}}" data-tipe="{{$jadwal->tipebus}}" data-rute="{{$jadwal->rute}}" data-tanggal="{{$jadwal->tanggal}}" data-jam="{{$jadwal->jam}}" data-kursi="{{$jadwal->kursi_terisi}}" data-harga="Rp. {{format_uang($jadwal->harga)}}" data-deskripsi="{{$jadwal->deskripsi}}"><i class=" far fa-eye"></i></button> </td>
                         <td>
-                          <button class="btn btn-outline-danger" title="Bus Telah Sampai" href="edit-status/{{$jadwal->status}}/{{$jadwal->id}}" onclick="status('Perjalanan bus ini telah selesai ?')" id="status_perjalanan"><i class="fas fa-clipboard-check"></i></button>
+                          <button class="btn btn-outline-dark btn-sm" title="Bus Telah Sampai" href="edit-status/{{$jadwal->status}}/{{$jadwal->id}}" onclick="status('Perjalanan bus ini telah selesai ?')" id="status_perjalanan"><i class="fas fa-clipboard-check"></i></button>
                         </td>
                       </tr>
                       @endforeach

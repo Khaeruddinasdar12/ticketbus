@@ -73,7 +73,7 @@ Transaksi
                         <td>{{$belumbayar->jam}}</td>
 
                         <td>
-                          <button class="btn btn-outline-danger" data-toggle="modal" data-target="#verif" title="belum bayar" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-bukti="{{ asset('storage/'.$belumbayar->bukti_transfer) }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class="fab fa-creative-commons-nc"></i></button>
+                          <button class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#verif" title="belum bayar" data-id="{{ $belumbayar->id }}" data-order="{{ $belumbayar->order_code }}" data-bukti="{{ asset('storage/'.$belumbayar->bukti_transfer) }}" data-nama="{{ $belumbayar->name }}" data-tgl="{{ $belumbayar->tanggal }}" data-jam="{{ $belumbayar->jam }}" data-bus="{{ $belumbayar->namabus }}" data-desc="{{ $belumbayar->deskripsi }}" data-rute="{{ $belumbayar->rute }}" data-tipe="{{ $belumbayar->tipebus }}" data-harga="Rp. {{ format_uang($belumbayar->harga) }}" data-kursi="{{ $belumbayar->no_kursi }}" data-status="{{ $belumbayar->status_bayar }}"><i class="fab fa-creative-commons-nc"></i></button>
                         </td>
 
                         <td>
@@ -213,7 +213,7 @@ Transaksi
                         <td>{{ $datajadwal -> namabus }}</td>
                         <td>{{ $datajadwal -> tipebus }}</td>
                         <td>Rp. {{ format_uang($datajadwal -> harga) }}</td>
-                        <td> <button class="btn btn-outline-primary" data-toggle="modal" id="pesankursi" data-target="#pesan" title="pesan kursi" onclick="kursi()" data-id="{{$datajadwal->id}}"><i class="fas fa-shopping-cart"></i></button> </td>
+                        <td> <button class="btn btn-outline-primary btn-sm" data-toggle="modal" id="pesankursi" data-target="#pesan" title="pesan kursi" onclick="kursi()" data-id="{{$datajadwal->id}}"><i class="fas fa-shopping-cart"></i></button> </td>
                       </tr>
                       @endforeach
                     </tbody>
@@ -237,9 +237,18 @@ Transaksi
                                 <!-- <input type="hidden" name="_method" value="PUT"> -->
                                 <div class="row">
                                   <div class="col-md-5 offset-md-1" style="border-right: 1px solid #c7c9ca">
-                                    <div class="btn-group-toggle" data-toggle="buttons" id="pilih-kursi"></div>
+                                    <span class="badge badge-light" style="width: 77% !important">Barisan supir</span>
+                                    <div class="btn-group-toggle" data-toggle="buttons" id="pilih-kursi">
+                                      <!-- content PERULANGAN JUMLAH KURSI content -->
+                                    </div>
                                   </div>
                                   <div class="col-md-5 m-auto">
+                                    <div class="form-group">
+                                      <label for="exampleInputEmail1">Keterangan : </label>
+                                      <span class="badge badge-danger">kosong</span>
+                                      <span class="badge badge-primary">keranjang</span>
+                                      <span class="badge badge-secondary">terisi</span>
+                                    </div>
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Nomor Kursi</label>
                                       <input type="text" class="form-control" id="nmrkursi" name="no_kursi" readonly>

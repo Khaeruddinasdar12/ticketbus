@@ -30,6 +30,7 @@
   <link href="{{ asset('css/sweetalert2.min.css') }}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
@@ -207,7 +208,7 @@
         <!-- /.sidebar-menu -->
       </div>
       <!-- /.sidebar -->
-      
+
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
@@ -266,21 +267,21 @@
 
   @yield('js')
   @if(session('success'))
-<script>
-  var pesan = '{{session("success")}}';
-  loginSukses();
-  function loginSukses() {
-    Swal.fire({
-    position: 'top-end',
-    type: 'success',
-    title: 'Selamat Datang ' + pesan ,
-    showConfirmButton: false,
-    timer: 2500
-  })
+  <script>
+    var pesan = '{{session("success")}}';
+    loginSukses();
 
-  }
+    function loginSukses() {
+      Swal.fire({
+        type: 'success',
+        title: 'Selamat Datang ' + pesan,
+        showConfirmButton: false,
+        timer: 2500
+      })
+
+    }
   </script>
-@endif
+  @endif
   <script type="text/javascript">
     function hapus() {
       $(document).on('click', "#del_data", function() {

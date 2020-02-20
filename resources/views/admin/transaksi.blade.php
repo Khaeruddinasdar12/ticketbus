@@ -43,105 +43,16 @@ Transaksi
             <div class="col-5 col-sm-3">
               <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
 
-                <a class="nav-link active" id="vert-tabs-add-tab" data-toggle="pill" href="#vert-tabs-add" role="tab" aria-controls="vert-tabs-add" aria-selected="true">Jadwal Keberangkatan Bus</a>
+                <a class="nav-link active" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-home" role="tab" aria-controls="vert-tabs-home" aria-selected="false">Belum Bayar</a>
 
-                <a class="nav-link" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-home" role="tab" aria-controls="vert-tabs-home" aria-selected="false">Belum Bayar</a>
+                <a class="nav-link" id="vert-tabs-add-tab" data-toggle="pill" href="#vert-tabs-add" role="tab" aria-controls="vert-tabs-add" aria-selected="true">Jadwal Keberangkatan Bus</a>
 
               </div>
             </div>
             <div class="col-7 col-sm-9">
               <div class="tab-content" id="vert-tabs-tabContent">
 
-                <div class="tab-pane text-left fade show active" id="vert-tabs-add" role="tabpanel" aria-labelledby="vert-tabs-add-tab">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Rute</th>
-                        <th>Jam Berangkat</th>
-                        <th>Tanggal Berangkat</th>
-                        <th>Nama Bus</th>
-                        <th>Tipe Bus</th>
-                        <th>Harga Perkursi</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @foreach($data as $datajadwal)
-                      <tr>
-                        <td>{{ $datajadwal -> rute }}</td>
-                        <td>{{ $datajadwal -> jam }}</td>
-                        <td>{{ $datajadwal -> tanggal }}</td>
-                        <td>{{ $datajadwal -> namabus }}</td>
-                        <td>{{ $datajadwal -> tipebus }}</td>
-                        <td>Rp. {{ format_uang($datajadwal -> harga) }}</td>
-                        <td> <button class="btn btn-outline-primary" data-toggle="modal" id="pesankursi" data-target="#pesan" title="pesan kursi" onclick="kursi()" data-id="{{$datajadwal->id}}"><i class="fas fa-shopping-cart"></i></button> </td>
-                      </tr>
-                      @endforeach
-                    </tbody>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="pesan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Pesan Kursi</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-
-                          <div class="modal-body">
-                            <div class="container">
-                              <form id="transaksi-customer" method="POST">
-                                @csrf
-                                <input type="hidden" id="jadwal-id" name="id_jadwal">
-                                <!-- <input type="hidden" name="_method" value="PUT"> -->
-                                <div class="row">
-                                  <div class="col-md-5 offset-md-1" style="border-right: 1px solid #c7c9ca">
-                                    <div class="btn-group-toggle" data-toggle="buttons" id="pilih-kursi"></div>
-                                  </div>
-                                  <div class="col-md-5 m-auto">
-                                    <div class="form-group">
-                                      <label for="exampleInputEmail1">Nomor Kursi</label>
-                                      <input type="text" class="form-control" id="nmrkursi" name="no_kursi" readonly>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="exampleInputEmail1">Nama Customer</label>
-                                      <input type="text" class="form-control" id="namabus" name="name" required>
-                                    </div>
-                                    <div class="form-group">
-                                      <label>Jenis Kelamin</label>
-                                      <div class="row">
-                                        <div class="col-md-6">
-                                          <div class="icheck-primary d-inline">
-                                            <input type="radio" id="radioPrimary1" name="jkel" value="L" checked>
-                                            <label for="radioPrimary1">Laki-laki</label>
-                                          </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                          <div class="icheck-primary d-inline">
-                                            <input type="radio" id="radioPrimary2" name="jkel" value="P">
-                                            <label for="radioPrimary2">Perempuan</label>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="form-group" style="margin-top: 20px;">
-                                  <button type="reset" class="btn btn-default float-left" data-dismiss="modal">Close</button>
-                                  <button type="submit" class="btn btn-primary float-right">Pesan</button>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </table>
-                </div>
-
-                <div class="tab-pane fade show" id="vert-tabs-home" role="tabpanel" aria-labelledby="vert-tabs-home-tab">
+                <div class="tab-pane fade show active" id="vert-tabs-home" role="tabpanel" aria-labelledby="vert-tabs-home-tab">
                   <table id="example2" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -272,6 +183,95 @@ Transaksi
                                   </div>
                                 </div>
                               </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </table>
+                </div>
+
+                <div class="tab-pane text-left fade show" id="vert-tabs-add" role="tabpanel" aria-labelledby="vert-tabs-add-tab">
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Rute</th>
+                        <th>Jam Berangkat</th>
+                        <th>Tanggal Berangkat</th>
+                        <th>Nama Bus</th>
+                        <th>Tipe Bus</th>
+                        <th>Harga Perkursi</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach($data as $datajadwal)
+                      <tr>
+                        <td>{{ $datajadwal -> rute }}</td>
+                        <td>{{ $datajadwal -> jam }}</td>
+                        <td>{{ $datajadwal -> tanggal }}</td>
+                        <td>{{ $datajadwal -> namabus }}</td>
+                        <td>{{ $datajadwal -> tipebus }}</td>
+                        <td>Rp. {{ format_uang($datajadwal -> harga) }}</td>
+                        <td> <button class="btn btn-outline-primary" data-toggle="modal" id="pesankursi" data-target="#pesan" title="pesan kursi" onclick="kursi()" data-id="{{$datajadwal->id}}"><i class="fas fa-shopping-cart"></i></button> </td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="pesan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Pesan Kursi</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-body">
+                            <div class="container">
+                              <form id="transaksi-customer" method="POST">
+                                @csrf
+                                <input type="hidden" id="jadwal-id" name="id_jadwal">
+                                <!-- <input type="hidden" name="_method" value="PUT"> -->
+                                <div class="row">
+                                  <div class="col-md-5 offset-md-1" style="border-right: 1px solid #c7c9ca">
+                                    <div class="btn-group-toggle" data-toggle="buttons" id="pilih-kursi"></div>
+                                  </div>
+                                  <div class="col-md-5 m-auto">
+                                    <div class="form-group">
+                                      <label for="exampleInputEmail1">Nomor Kursi</label>
+                                      <input type="text" class="form-control" id="nmrkursi" name="no_kursi" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="exampleInputEmail1">Nama Customer</label>
+                                      <input type="text" class="form-control" id="namabus" name="name" required>
+                                    </div>
+                                    <div class="form-group">
+                                      <label>Jenis Kelamin</label>
+                                      <div class="row">
+                                        <div class="col-md-6">
+                                          <div class="icheck-primary d-inline">
+                                            <input type="radio" id="radioPrimary1" name="jkel" value="L" checked>
+                                            <label for="radioPrimary1">Laki-laki</label>
+                                          </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <div class="icheck-primary d-inline">
+                                            <input type="radio" id="radioPrimary2" name="jkel" value="P">
+                                            <label for="radioPrimary2">Perempuan</label>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group" style="margin-top: 20px;">
+                                  <button type="reset" class="btn btn-default float-left" data-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-primary float-right">Pesan</button>
+                                </div>
+                              </form>
                             </div>
                           </div>
                         </div>

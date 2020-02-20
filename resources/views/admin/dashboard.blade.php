@@ -91,7 +91,7 @@ Dashboard
         <div class="row">
           <div class="col-md-6">
             <!-- small box -->
-            <a href="#">
+            <a href="{{route('index.transaksi')}}">
               <div class="small-box bg-custom1">
                 <div class="inner">
                   <div class="container">
@@ -107,7 +107,7 @@ Dashboard
           </div>
           <div class="col-md-6">
             <!-- small box -->
-            <a href="#">
+            <a href="{{route('index.bus')}}">
               <div class="small-box bg-custom3">
                 <div class="inner">
                   <div class="container">

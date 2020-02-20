@@ -77,7 +77,7 @@ Jalur Bus
               </div>
               <div class="form-group">
                 <label for="inputStatus">Harga Rp. Perkursi</label>
-                <input type="text" class="form-control" name="harga">
+                <input type="text" class="form-control" name="harga" onkeypress="return hanyaAngka(event)">
               </div>
 
               <div class="form-group">
@@ -101,6 +101,15 @@ Jalur Bus
 @section('js')
 <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+<script>
+  function hanyaAngka(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+
+      return false;
+    return true;
+  }
+</script>
 <script>
   $(function() {
     $("#example4").DataTable();

@@ -79,10 +79,7 @@ Tambah Jadwal
                         <div class="form-group">
                           <label>Jam</label>
                           <div class="input-group date" id="timepicker" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#timepicker" name="jam" id="jam" />
-                            <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
-                              <div class="input-group-text"><i class="far fa-clock"></i></div>
-                            </div>
+                            <input type="text" class="form-control datetimepicker-input" data-target="#timepicker" name="jam" id="jam" data-toggle="datetimepicker" onkeypress="return hanyaAngka(event)" placeholder="00:00 WITA"/>
                           </div>
                         </div>
                       </div>
@@ -125,6 +122,15 @@ Tambah Jadwal
 @section('js')
 <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+<script>
+  function hanyaAngka(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+
+      return false;
+    return true;
+  }
+</script>
 <script>
   $(function() {
     $("#example1").DataTable();

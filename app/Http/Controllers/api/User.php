@@ -57,27 +57,6 @@ class User extends Controller
             'jkel.required' => 'jkel field tidak boleh kosong'
         );
 
-        // $validasi = $this->validate($request, [
-        //     'name'      => 'required|min:2',
-        //     'username'  => 'required|unique:users',
-        //     'password'  => 'required',
-        //     'email'     => 'required|email|unique:users',
-        //     'jkel'      => 'required',
-        //     'alamat'    => 'required'
-        // ],[
-        //     'name.required'     => 'name field tidak boleh kosong',
-        //     'username.required' => 'username field tidak boleh kosong',
-        //     'password.required' => 'password field tidak boleh kosong',
-        //     'email.required'    => 'email field tidak boleh kosong',
-        //     'jkel.required'     => 'jkel field tidak boleh kosong',
-        //     'alamat.required'   => 'alamat field tidak boleh kosong',
-        //     'username.unique'   => 'username sudah ada',
-        //     'email.email'       => 'email field harus format email',
-        //     'email.unique'      => 'email sudah ada',
-        //     'alamat.unique'     => 'email sudah ada'
-            
-        // ]);
-
         $validator=Validator::make($request->all(),$rules,$messages);
         if($validator->fails())
         {
@@ -86,8 +65,9 @@ class User extends Controller
             return response()->json([
                 'status' => false,
                 'code' => 401,
-                'message' => $errors
-            ]);
+                'message' => 'Ada Kesalahan Registrasi',
+                'data' => $errors
+            ],401);
         }
 
         $data = new \App\User();

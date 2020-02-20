@@ -13,7 +13,9 @@ Transaksi
           <h5><i class="fas fa-info"></i> Note:</h5>
           This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.
         </div>
-
+        @foreach($data as $datas)
+{{$datas->name}}
+@endforeach
 
         <!-- Main content -->
         <div class="invoice p-3 mb-3">

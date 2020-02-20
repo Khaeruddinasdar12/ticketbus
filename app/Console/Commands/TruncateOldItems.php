@@ -37,7 +37,18 @@ class TruncateOldItems extends Command
      */
     public function handle()
     {
-        DB::table('users')->where('role', 'customer')->delete();
-        // return view('admin.transaksi');
+        $data = DB::table('transaksis')
+        ->where('status_bayar', 'belum')
+        ->where('created_at', '<=', \Carbon\Carbon::now()->subMinutes(1)->toDateTimeString())
+        ->get();
+        
+        foreach ($data as $datas) {
+            $set_kursis = \App\Kursi::where('id_jadwal', $datas->id_jadwal)->where('kursi', $datas->no_kursi)
+            ->update([
+                'status' => 'kosong',
+            ]);
+
+            $delete = DB::table('transaksis')->where('id', $datas->id)->delete();
+        }
     }
 }

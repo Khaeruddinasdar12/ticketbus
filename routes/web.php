@@ -1,9 +1,30 @@
 <?php
 
 Auth::routes();
-
+// use DB;
 // INVOICE
 Route::get('invoice/{id}', 'Invoice@invoice');
+
+Route::get('test', function(){
+	return \Carbon\Carbon::now();
+	$data = DB::table('transaksis')
+        ->where('status_bayar', 'belum')
+        ->where('created_at', '<=', \Carbon\Carbon::now()->subMinutes(1)->toDateTimeString())
+        ->get();
+        echo \Carbon\Carbon::now(). '<br>';
+
+        foreach ($data as $datas) {
+            $set_kursis = \App\Kursi::where('id_jadwal', $datas->id_jadwal)->where('kursi', $datas->no_kursi)
+            ->update([
+                'status' => 'kosong',
+            ]);
+
+            $delete = DB::table('transaksis')->where('id', $datas->id)->delete();
+        }
+        return 'berhasil';
+});
+
+// ->where('timestamp', '>=', DB::raw('DATE_SUB(NOW(), INTERVAL 1 DAY)'))
 
 // print invoice
 Route::get('invoice-print/{id}', 'Invoice@print')->name('print');

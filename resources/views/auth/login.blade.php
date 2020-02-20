@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
+    <div class="row mt-5">
       <div class="col-md-6">
-        <img src="{{ asset('bintangprima.png') }}" alt="Logo Bintang Prima">
+        <img src="{{ asset('bintangprimadashboard.png') }}" alt="Logo Bintang Prima" width="500px;">
       </div>
         <div class="col-md-6">
-            <div class="card">
+            <div class="card card-primary">
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">

@@ -163,8 +163,5 @@ class Transaksi extends Controller
                 'data' => $data
             ]);
     }
-
-    
-
     
 }

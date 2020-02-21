@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Validator;
 class Transaksi extends Controller
 {
     public function cekKursi($id) // cek kursi berdasarkan id jadwal
@@ -21,6 +22,42 @@ class Transaksi extends Controller
 
     public function store(Request $request) // bertransaksi di android
     {
+        $rules=array(
+            'id_jadwal' => 'required',
+            'id_customer' => 'required',
+            'no_kursi' => 'required'
+        );
+        $messages=array(
+            'id_jadwal.required' => 'id jadwal field tidak boleh kosong',
+            'id_customer.required' => 'id customer field tidak boleh kosong',
+            'no_kursi.required' => 'nomor kursi field tidak boleh kosong'
+        );
+
+        $validator=Validator::make($request->all(),$rules,$messages);
+        if($validator->fails())
+        {
+            $messages=$validator->messages();
+            $errors=$messages->all();
+            return response()->json([
+                'status' => false,
+                'code' => 401,
+                'message' => 'Ada Kesalahan Pemesanan',
+                'data' => $errors
+            ]);
+        }
+
+        $cek_kursi = \App\Kursi::where('id_jadwal', $request->id_jadwal)
+                        ->where('kursi', $request->no_kursi)
+                        ->count();
+        if($cek_kursi >= 1) {
+            return response()->json([
+                'status' => false, 
+                'message' => 'Transaksi Gagal, Kursi telah terisi', 
+                'code' => 401
+            ]);
+        }
+
+
         $data = new \App\Transaksi();
         $data->id_jadwal = $request->id_jadwal;
         $data->id_customer = $request->id_customer;

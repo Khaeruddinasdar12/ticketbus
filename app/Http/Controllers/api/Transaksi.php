@@ -48,6 +48,7 @@ class Transaksi extends Controller
 
         $cek_kursi = \App\Kursi::where('id_jadwal', $request->id_jadwal)
                         ->where('kursi', $request->no_kursi)
+                        ->where('status', '!=', 'kosong')
                         ->count();
         if($cek_kursi >= 1) {
             return response()->json([

@@ -50,6 +50,7 @@ class Transaksi extends Controller
                         ->where('kursi', $request->no_kursi)
                         ->where('status', '!=', 'kosong')
                         ->count();
+
         if($cek_kursi >= 1) {
             return response()->json([
                 'status' => false, 
@@ -109,6 +110,27 @@ class Transaksi extends Controller
 
     public function buktiStore(Request $request, $id) // menginput bukti transfer berdasarkan id transaksi
     {
+        $rules=array(
+            'bukti' => 'required|image|max:3072|mimes:jpeg,png,jpg'
+        );
+        $messages=array(
+            'bukti.required' => 'gambar bukti field tidak boleh kosong',
+            'bukti.max' => 'gambar maximal 3MB'
+        );
+
+        $validator=Validator::make($request->all(),$rules,$messages);
+        if($validator->fails())
+        {
+            $messages=$validator->messages();
+            $errors=$messages->all();
+            return response()->json([
+                'status' => false,
+                'code' => 401,
+                'message' => 'Ada Kesalahan Pengiriman Bukti Transfer',
+                'data' => $errors
+            ]);
+        }
+
         $data = \App\Transaksi::find($id);
             // Upload Foto Bukti Transfer
                 $bukti = $request->file('bukti');

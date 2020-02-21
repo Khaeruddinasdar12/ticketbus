@@ -66,6 +66,6 @@ Route::get('riwayat/{id}', 'api\Transaksi@riwayat');// menampilkan riwayat trans
 	Route::put('verif/{id}', 'api\Kernet@verif'); // verifikasi aztec code
 	Route::get('kernet/jadwals/belum-berangkat', 'api\Kernet@jadwal'); // menampilkan semua data jadwal belum berangkat
 	Route::get('kernet/jadwals/dalam-perjalanan', 'api\Kernet@perjalanan'); // menampilkan semua data jadwal dalam perjalanan
-	Route::put('kernet/{status}/{id}', 'api\Kernet@editStatus'); // menampilkan semua data jadwal dalam perjalanan
+	Route::put('kernet/{status}/{id}', 'api\Kernet@editStatus'); // mengubah transaksi menjadi 'y'
 
 // Akhir Area KERNET

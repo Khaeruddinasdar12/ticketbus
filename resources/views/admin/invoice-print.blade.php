@@ -54,7 +54,7 @@
             <div class="row">
               <div class="col-12">
                 <h4>
-                  <i class="fas fa-bus-alt"></i> Bintang Prima.
+                  <img src="{{ asset('bintangprima.png') }}" alt="Logo Bintang Prima" width="250px">
                   @foreach($data as $datas)
                   <small class="float-right">Date: {{ $datas->tanggal }}</small>
                 </h4>

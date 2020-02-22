@@ -95,7 +95,7 @@ class Kernet extends Controller
                 'message' => 'Berhasil mengubah status menjadi berangkat', 
                 'code' => 201
             ]);
-        } else if ($status == 'perjalanan') {
+        } else if ($status == 'sampai') {
           $query = \App\Jadwal::findOrFail($id);
           $query->status = 'selesai';
           $query->save();

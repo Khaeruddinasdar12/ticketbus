@@ -111,11 +111,11 @@ class Transaksi extends Controller
     public function buktiStore(Request $request, $id) // menginput bukti transfer berdasarkan id transaksi
     {
         $rules=array(
-            'bukti' => 'required|image|max:3072|mimes:jpeg,png,jpg'
+            'bukti' => 'required|image|max:8192|mimes:jpeg,png,jpg'
         );
         $messages=array(
-            'bukti.required' => 'gambar bukti field tidak boleh kosong',
-            'bukti.max' => 'gambar maximal 3MB'
+            'bukti.required' => 'gambar field tidak boleh kosong',
+            'bukti.max' => 'gambar maximal 8MB'
         );
 
         $validator=Validator::make($request->all(),$rules,$messages);

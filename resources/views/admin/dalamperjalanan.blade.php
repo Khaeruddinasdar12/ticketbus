@@ -93,52 +93,73 @@ Dalam Perjalanan
       </div>
       <div class="modal-body">
         <div class="container">
+          <!-- Konten -->
           <div class="row">
-            <div class="col-md-12 offset-md-1" style="margin: auto">
-              <div class="row">
-
-                <div class="col-md-5">
-                  <h6>Nama Bus</h6>
-                  <h6>Tipe Bus</h6>
-                  <h6>Rute Bus</h6>
-                  <h6>Tanggal Berangkat</h6>
-                  <h6>Jam Berangkat</h6>
-                  <h6>Kursi Terisi</h6>
-                  <h6>Harga Per kursi</h6>
-                  <h6>Deskripsi</h6>
-                </div>
-
-                <div class="col-md-1">
-                  <h6>:</h6>
-                  <h6>:</h6>
-                  <h6>:</h6>
-                  <h6>:</h6>
-                  <h6>:</h6>
-                  <h6>:</h6>
-                  <h6>:</h6>
-                  <h6>:</h6>
-                </div>
-
-                <div class="col-md-6">
-                  <h6 id="namabus"></h6>
-                  <h6 id="tipebus"></h6>
-                  <h6 id="rutebus"></h6>
-                  <h6 id="tanggal"></h6>
-                  <h6 id="jam"></h6>
-                  <h6 id="kursi"></h6>
-                  <h6 id="harga"></h6>
-                  <h6 id="deskripsi"></h6>
-                </div>
-
-
-              </div>
+            <div class="col-md-10 offset-1">
+              <table class="table-modal">
+                <tr>
+                  <th>Nama Bus</th>
+                  <td class="width-1">:</td>
+                  <td id="namabus"></td>
+                </tr>
+                <tr>
+                  <th>Tipe Bus</th>
+                  <td class="width-1">:</td>
+                  <td id="tipebus"></td>
+                </tr>
+                <tr>
+                  <th>Rute</th>
+                  <td class="width-1">:</td>
+                  <td id="rutebus"></td>
+                </tr>
+                <tr>
+                  <th>Tanggal Berangkat</th>
+                  <td class="width-1">:</td>
+                  <td id="tanggal"></td>
+                </tr>
+                <tr>
+                  <th>Jam Berangkat</th>
+                  <td class="width-1">:</td>
+                  <td id="jam"></td>
+                </tr>
+                <tr>
+                  <th>Kursi Terisi</th>
+                  <td class="width-1">:</td>
+                  <td id="kursi"></td>
+                </tr>
+                <tr>
+                  <th>Harga Per Kursi </th>
+                  <td class="width-1">:</td>
+                  <td id="harga"></td>
+                </tr>
+                <tr>
+                  <th>Deskripsi Bus</th>
+                  <td class="width-1">:</td>
+                  <td id="deskripsi"></td>
+                </tr>
+              </table>
             </div>
           </div>
+          <!-- End Konten -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  .table-modal {
+    line-height: 40px !important;
+    width: 700px;
+  }
+
+  .width-1 {
+    width: 50px !important;
+  }
+</style>
 <!-- End Modal Detail -->
 @endsection
 

@@ -66,10 +66,11 @@ class Jadwal extends Controller
       ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
       ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
       ->rightJoin('kursis', 'jadwals.id', 'kursis.id_jadwal')
-      ->select('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', DB::raw('count(case when kursis.status = "terisi" then 1 end)as kursi_terisi'))
+      ->select('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', DB::raw('count(case when kursis.status = "terisi" then 1 end)as kursi_terisi'), 'jadwals.arrived_at')
       ->where('jadwals.status', 'selesai')
-      ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus', 'pivot_bus_rutes.harga')
+      ->groupBy('jadwals.id', 'jadwals.tanggal', 'jadwals.jam', 'namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus', 'pivot_bus_rutes.harga', 'arrived_at')
       ->get();
+      // return date('d/m/Y H:i', strtotime($data->arrived_at));
     // return $data;
     return view('admin.riwayatjadwal', ['data' => $data]);
   }
@@ -151,16 +152,16 @@ class Jadwal extends Controller
 
   public function editStatus($status, $id) //mengubah status jadwal menjadi perjalanan atau selesai
   {
+    $query = \App\Jadwal::findOrFail($id);
     if ($status == 'belum') {
-      $query = \App\Jadwal::findOrFail($id);
       $query->status = 'perjalanan';
       $query->save();
-      $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Mengubah Data');
+      $arrayName = array('status' => 'success', 'pesan' => 'Berhasil mengubah status menjadi berangkat');
     } else if ($status == 'perjalanan') {
-      $query = \App\Jadwal::findOrFail($id);
       $query->status = 'selesai';
+      $query->arrived_at = \Carbon\Carbon::now();
       $query->save();
-      $arrayName = array('status' => 'success', 'pesan' => 'Berhasil Mengubah Data');
+      $arrayName = array('status' => 'success', 'pesan' => 'Berhasil mengubah status menjadi selesai');
     } else {
       exit();
     }

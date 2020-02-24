@@ -86,8 +86,8 @@ class Kernet extends Controller
 
     public function editStatus($status, $id) //mengubah status jadwal menjadi perjalanan atau selesai
       {
+        $query = \App\Jadwal::findOrFail($id);
         if ($status == 'belum') {
-          $query = \App\Jadwal::findOrFail($id);
           $query->status = 'perjalanan';
           $query->save();
           return response()->json([
@@ -96,8 +96,8 @@ class Kernet extends Controller
                 'code' => 201
             ]);
         } else if ($status == 'sampai') {
-          $query = \App\Jadwal::findOrFail($id);
           $query->status = 'selesai';
+          $query->arrived_at = \Carbon\Carbon::now();
           $query->save();
           return response()->json([
                 'status' => true, 

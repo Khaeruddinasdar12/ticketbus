@@ -20,6 +20,7 @@ class CreateJadwalsTable extends Migration
             $table->string('jam');
             $table->enum('status', ['belum', 'perjalanan', 'selesai']);
             $table->bigInteger('created_by')->unsigned();
+            $table->dateTime('arrived_at')->nullable();
             $table->timestamps();
             $table->foreign('id_bus_rute')->references('id')->on('pivot_bus_rutes');
             $table->foreign('created_by')->references('id')->on('users');

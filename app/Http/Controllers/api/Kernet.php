@@ -31,6 +31,13 @@ class Kernet extends Controller
     public function verif($id)
     {
     	$data = \App\Transaksi::find($id);
+      if($data->trip == 'y') {
+          return response()->json([
+                'status' => true, 
+                'message' => 'Customer ini sudah di scan verifikasi', 
+                'code' => 200
+            ]);
+      }
     	$data->trip = 'y';
     	$data->save();
     	

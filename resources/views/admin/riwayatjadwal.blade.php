@@ -140,75 +140,88 @@ Riwayat Jadwal
 </section>
 
 <!-- Modal detail -->
-                  <div class="modal fade bd-example-modal-lg" id="showjadwal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Detail Transaksi Anda</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true"> &times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <!-- Konten -->
-                        <div class="row">
-                          <table>
-                            <tr>
-                              <td>Nama Bus</td>
-                              <td>:</td>
-                              <td id="namabus"></td>
-                            </tr>
-                            <tr>
-                              <td>Tipe Bus</td>
-                              <td>:</td>
-                              <td id="tipebus"></td>
-                            </tr>
-                            <tr>
-                              <td>Harga Perkursi</td>
-                              <td>:</td>
-                              <td id="harga"></td>
-                            </tr>
-                            <tr> 
-                              <td>Rute</td>
-                              <td>:</td>
-                              <td id="rutebus"></td>
-                            </tr>
-                            <tr>
-                              <td>Tanggal Berangkat</td>
-                              <td>:</td>
-                              <td id="tanggalberangkat"></td>
-                            </tr>
-                            <tr>
-                              <td>Jam Berangkat</td>
-                              <td>:</td>
-                              <td id="jamberangkat"></td>
-                            </tr>
-                            <tr>
-                              <td>Tanggal Sampai</td>
-                              <td>:</td>
-                              <td id="tanggalsampai"></td>
-                            </tr>
-                            <tr>
-                              <td>Jam Sampai</td>
-                              <td>:</td>
-                              <td id="jamsampai"></td>
-                            </tr>
-                            <tr>
-                              <td>Deskripsi Bus</td>
-                              <td>:</td>
-                              <td id="deskripsi"></td>
-                            </tr>
-                          </table>
-                        </div>
-                        <!-- End Konten -->
-                      </div>
+<div class="modal fade" id="showjadwal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detail Transaksi Anda</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"> &times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Konten -->
+        <div class="row">
+          <div class="col-md-10 offset-1">
+            <table class="table-modal">
+              <tr>
+                <th>Nama Bus</th>
+                <td class="width-1">:</td>
+                <td id="namabus"></td>
+              </tr>
+              <tr>
+                <th>Tipe Bus</th>
+                <td class="width-1">:</td>
+                <td id="tipebus"></td>
+              </tr>
+              <tr>
+                <th>Harga Perkursi</th>
+                <td class="width-1">:</td>
+                <td id="harga"></td>
+              </tr>
+              <tr>
+                <th>Rute</th>
+                <td class="width-1">:</td>
+                <td id="rutebus"></td>
+              </tr>
+              <tr>
+                <th>Tanggal Berangkat</th>
+                <td class="width-1">:</td>
+                <td id="tanggalberangkat"></td>
+              </tr>
+              <tr>
+                <th>Jam Berangkat</th>
+                <td class="width-1">:</td>
+                <td id="jamberangkat"></td>
+              </tr>
+              <tr>
+                <th>Tanggal Sampai</th>
+                <td class="width-1">:</td>
+                <td id="tanggalsampai"></td>
+              </tr>
+              <tr>
+                <th>Jam Sampai</th>
+                <td class="width-1">:</td>
+                <td id="jamsampai"></td>
+              </tr>
+              <tr>
+                <th>Deskripsi Bus</th>
+                <td class="width-1">:</td>
+                <td id="deskripsi"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <!-- End Konten -->
+      </div>
 
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .table-modal {
+    line-height: 40px !important;
+    width: 700px;
+  }
+
+  .width-1 {
+    width: 50px !important;
+  }
+</style>
 <!-- End Modal detail -->
 @endsection
 

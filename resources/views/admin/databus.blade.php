@@ -87,44 +87,6 @@ Data Bus
                         @endforeach
                       </tbody>
 
-                      <!-- Modal detail -->
-                      <div class="modal fade" id="showdetail0" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Detail Bus (Nama Bus)</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="container">
-                                <form role="form">
-                                  <div class="form-group">
-                                    <label for="exampleInputEmail1">Nama Bus</label>
-                                    <input type="text" class="form-control" id="namabuss" readonly>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="exampleInputEmail1">Tipe Bus</label>
-                                    <input type="text" class="form-control" id="tipebuss" readonly>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="exampleInputEmail1">Jumlah Kursi</label>
-                                    <input type="text" class="form-control" id="kursis" readonly>
-                                  </div>
-                                  <div class="form-group">
-                                    <label>Deskripsi Bus</label>
-                                    <textarea name="desc" class="form-control" id="deskripsis" rows="4" readonly></textarea>
-                                  </div>
-
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- End Modal detail -->
-
                       <!-- Modal edit bus -->
                       <div class="modal fade" id="editbus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -341,47 +303,7 @@ Data Bus
                 </div>
                 <!-- end tab data pivot -->
 
-                <!-- Modal detail -->
-                <div class="modal fade" id="showdetailpivot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Detail Bus</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="container">
-                          <form role="form">
-                            <div class="form-group">
-                              <label for="exampleInputEmail1">Nama Bus</label>
-                              <input type="text" class="form-control" id="namabus" readonly>
-                            </div>
-                            <div class="form-group">
-                              <label for="exampleInputEmail1">Tipe Bus</label>
-                              <input type="text" class="form-control" id="tipebus" readonly>
-                            </div>
-                            <div class="form-group">
-                              <label for="exampleInputEmail1">Rute</label>
-                              <input type="text" class="form-control" id="rutebus" readonly>
-                            </div>
-                            <div class="form-group">
-                              <label for="exampleInputEmail1">Harga Rp. Perkursi</label>
-                              <input type="text" class="form-control" id="hargabus" readonly>
-                            </div>
-                            <div class="form-group">
-                              <label>Deskripsi Bus</label>
-                              <textarea name="desc" class="form-control" id="deskripsi" rows="4" readonly></textarea>
-                            </div>
 
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Modal detail -->
               </div>
             </div>
           </div>
@@ -392,6 +314,119 @@ Data Bus
 
   </div>
 </section>
+
+<!-- Modal detail bus -->
+<div class="modal fade" id="showdetail0" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detail Bus (Nama Bus)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Konten -->
+        <div class="row">
+          <div class="col-md-10 offset-1">
+            <table class="table-modal">
+              <tr>
+                <th>Nama Bus</th>
+                <td class="width-1">:</td>
+                <td id="namabuss"></td>
+              </tr>
+              <tr>
+                <th>Tipe Bus</th>
+                <td class="width-1">:</td>
+                <td id="tipebuss"></td>
+              </tr>
+              <tr>
+                <th>Jumlah Kursi</th>
+                <td class="width-1">:</td>
+                <td id="kursis"></td>
+              </tr>
+              <tr>
+                <th>Deskripsi Bus</th>
+                <td class="width-1">:</td>
+                <td id="deskripsis"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <!-- End Konten -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal detail bus -->
+
+<!-- Modal detail pivot -->
+<div class="modal fade" id="showdetailpivot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detail Bus</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Konten -->
+        <div class="row">
+          <div class="col-md-10 offset-1">
+            <table class="table-modal">
+              <tr>
+                <th>Nama Bus</th>
+                <td class="width-1">:</td>
+                <td id="namabus"></td>
+              </tr>
+              <tr>
+                <th>Tipe Bus</th>
+                <td class="width-1">:</td>
+                <td id="tipebus"></td>
+              </tr>
+              <tr>
+                <th>Rute</th>
+                <td class="width-1">:</td>
+                <td id="rutebus"></td>
+              </tr>
+              <tr>
+                <th>Harga Perkursi</th>
+                <td class="width-1">:</td>
+                <td id="hargabus"></td>
+              </tr>
+              <tr>
+                <th>Deskripsi Bus</th>
+                <td class="width-1">:</td>
+                <td id="deskripsi"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <!-- End Konten -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal detail pivot -->
+
+
+<style>
+  .table-modal {
+    line-height: 40px !important;
+    width: 700px;
+  }
+
+  .width-1 {
+    width: 50px !important;
+  }
+</style>
 @endsection
 
 @section('js')
@@ -414,11 +449,11 @@ Data Bus
 
     var modal = $(this)
     modal.find('.modal-title').text('Detail Bus ' + nama)
-    modal.find('.modal-body #namabus').val(nama)
-    modal.find('.modal-body #tipebus').val(tipe)
-    modal.find('.modal-body #rutebus').val(rute)
-    modal.find('.modal-body #hargabus').val(harga)
-    modal.find('.modal-body #deskripsi').val(desc)
+    modal.find('.modal-body #namabus').text(nama)
+    modal.find('.modal-body #tipebus').text(tipe)
+    modal.find('.modal-body #rutebus').text(rute)
+    modal.find('.modal-body #hargabus').text(harga)
+    modal.find('.modal-body #deskripsi').text(desc)
   })
   // end detail pivot
 
@@ -432,10 +467,10 @@ Data Bus
 
     var modal = $(this)
     modal.find('.modal-title').text('Detail Bus ' + nama)
-    modal.find('.modal-body #namabuss').val(nama)
-    modal.find('.modal-body #tipebuss').val(tipe)
-    modal.find('.modal-body #kursis').val(kursi)
-    modal.find('.modal-body #deskripsis').val(desc)
+    modal.find('.modal-body #namabuss').text(nama)
+    modal.find('.modal-body #tipebuss').text(tipe)
+    modal.find('.modal-body #kursis').text(kursi)
+    modal.find('.modal-body #deskripsis').text(desc)
   })
   // end detail bus
 

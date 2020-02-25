@@ -76,62 +76,6 @@ Data Jadwal
                       @endforeach
                     </tbody>
 
-                    <!-- Modal detail -->
-                    <div class="modal fade" id="showjadwal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Detail Bus</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <div class="container">
-                              <form role="form">
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Nama Bus</label>
-                                  <input type="text" class="form-control" id="namabus" readonly>
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Tipe Bus</label>
-                                  <input type="text" class="form-control" id="tipebus" readonly>
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Harga Per kursi</label>
-                                  <input type="text" class="form-control" id="harga" readonly>
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Rute</label>
-                                  <input type="text" class="form-control" id="rutebus" readonly>
-                                </div>
-                                <div class="row">
-                                  <div class="col-md-6">
-                                    <div class="form-group">
-                                      <label for="exampleInputEmail1">Tanggal Berangkat</label>
-                                      <input type="text" class="form-control" id="tanggal" readonly>
-                                    </div>
-                                  </div>
-                                  <div class="col-md-6">
-                                    <div class="form-group">
-                                      <label for="exampleInputEmail1">Jam Berangkat</label>
-                                      <input type="text" class="form-control" id="jam" readonly>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <label>Deskripsi Bus</label>
-                                  <textarea name="desc" class="form-control" id="deskripsi" rows="4" readonly></textarea>
-                                </div>
-
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- End Modal detail -->
-
                     <!-- Modal edit -->
                     <div class="modal fade" id="editjadwal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
@@ -212,6 +156,79 @@ Data Jadwal
     </div>
   </div>
 </section>
+<!-- Modal detail -->
+<div class="modal fade" id="showjadwal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detail Bus</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Konten -->
+        <div class="row">
+          <div class="col-md-10 offset-1">
+            <table class="table-modal">
+              <tr>
+                <th>Nama Bus</th>
+                <td class="width-1">:</td>
+                <td id="namabus"></td>
+              </tr>
+              <tr>
+                <th>Tipe Bus</th>
+                <td class="width-1">:</td>
+                <td id="tipebus"></td>
+              </tr>
+              <tr>
+                <th>Harga Perkursi</th>
+                <td class="width-1">:</td>
+                <td id="harga"></td>
+              </tr>
+              <tr>
+                <th>Rute</th>
+                <td class="width-1">:</td>
+                <td id="rutebus"></td>
+              </tr>
+              <tr>
+                <th>Tanggal Berangkat</th>
+                <td class="width-1">:</td>
+                <td id="tanggal"></td>
+              </tr>
+              <tr>
+                <th>Jam Berangkat</th>
+                <td class="width-1">:</td>
+                <td id="jam"></td>
+              </tr>
+              <tr>
+                <th>Deskripsi Bus</th>
+                <td class="width-1">:</td>
+                <td id="deskripsi"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <!-- End Konten -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .table-modal {
+    line-height: 40px !important;
+    width: 700px;
+  }
+
+  .width-1 {
+    width: 50px !important;
+  }
+</style>
+<!-- End Modal detail -->
 @endsection
 
 @section('js')
@@ -242,13 +259,13 @@ Data Jadwal
 
     var modal = $(this)
     modal.find('.modal-title').text('Detail Jadwal Bus ' + nama)
-    modal.find('.modal-body #namabus').val(nama)
-    modal.find('.modal-body #tipebus').val(tipe)
-    modal.find('.modal-body #rutebus').val(rute)
-    modal.find('.modal-body #tanggal').val(tgl)
-    modal.find('.modal-body #jam').val(jam)
-    modal.find('.modal-body #deskripsi').val(desc)
-    modal.find('.modal-body #harga').val(harga)
+    modal.find('.modal-body #namabus').text(nama)
+    modal.find('.modal-body #tipebus').text(tipe)
+    modal.find('.modal-body #rutebus').text(rute)
+    modal.find('.modal-body #tanggal').text(tgl)
+    modal.find('.modal-body #jam').text(jam)
+    modal.find('.modal-body #deskripsi').text(desc)
+    modal.find('.modal-body #harga').text(harga)
   })
   // end detail jadwal
 

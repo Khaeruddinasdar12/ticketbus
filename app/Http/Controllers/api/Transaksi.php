@@ -170,7 +170,6 @@ class Transaksi extends Controller
             ->select('transaksis.id as transaksi_id', 'transaksis.order_code', 'transaksis.barcode', 'users.id as user_id','users.name', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', 'transaksis.no_kursi', 'transaksis.status_bayar')
             ->where('jadwals.status', 'belum')
             ->where('transaksis.status_bayar', 'sudah')
-            ->where('trip', 'n')
             ->where('users.id', $id)
             ->get();
 
@@ -192,6 +191,7 @@ class Transaksi extends Controller
             ->join('bus', 'pivot_bus_rutes.id_bus', '=', 'bus.id')
             ->join('tipebus', 'bus.id_tipebus', '=', 'tipebus.id')
             ->select('transaksis.id as transaksi_id', 'transaksis.order_code', 'transaksis.barcode', 'users.id as user_id','users.name', 'jadwals.tanggal', 'jadwals.jam', 'bus.nama as namabus', 'bus.deskripsi', 'rutes.rute', 'tipebus.nama as tipebus', 'pivot_bus_rutes.harga', 'transaksis.no_kursi', 'transaksis.status_bayar')
+            ->where('jadwals.status', 'belum')
             ->where('users.id', $id)
             ->get();
 

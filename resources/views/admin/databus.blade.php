@@ -79,7 +79,7 @@ Data Bus
                           <td>{{ $databus->jumlah_kursi }}</td>
                           <td> <button class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#showdetail0" title="lihat detail" data-id="{{ $databus->id }}" data-nama="{{ $databus->nama }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class=" far fa-eye"></i></button> </td>
                           <td>
-                            <button class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#editbus" title="edit data" data-nama="{{ $databus->nama }}" data-id="{{ $databus->id_tipebus }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class="fas fa-pencil-alt"></i></button>
+                            <button class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#editbus" title="edit data" data-nama="{{ $databus->nama }}" data-id="{{ $databus->id }}" data-tipe="{{ $databus->tipebus }}" data-kursi="{{ $databus->jumlah_kursi }}" data-desc="{{ $databus->deskripsi }}"><i class="fas fa-pencil-alt"></i></button>
 
                             <button class="btn btn-outline-danger btn-sm" title="hapus data" href="managemen-bus/delete-bus/{{$databus->id}}" onclick="hapus()" id="del_data"><i class="fas fa-trash"></i></button>
                           </td>

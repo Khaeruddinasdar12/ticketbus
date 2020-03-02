@@ -172,37 +172,37 @@ Data Jadwal
           <div class="col-md-10 offset-1">
             <table class="table-modal">
               <tr>
-                <th>Nama Bus</th>
+                <th class="width-0">Nama Bus</th>
                 <td class="width-1">:</td>
                 <td id="namabus"></td>
               </tr>
               <tr>
-                <th>Tipe Bus</th>
+                <th class="width-0">Tipe Bus</th>
                 <td class="width-1">:</td>
                 <td id="tipebus"></td>
               </tr>
               <tr>
-                <th>Harga Perkursi</th>
+                <th class="width-0">Harga Perkursi</th>
                 <td class="width-1">:</td>
                 <td id="harga"></td>
               </tr>
               <tr>
-                <th>Rute</th>
+                <th class="width-0">Rute</th>
                 <td class="width-1">:</td>
                 <td id="rutebus"></td>
               </tr>
               <tr>
-                <th>Tanggal Berangkat</th>
+                <th class="width-0">Tanggal Berangkat</th>
                 <td class="width-1">:</td>
                 <td id="tanggal"></td>
               </tr>
               <tr>
-                <th>Jam Berangkat</th>
+                <th class="width-0">Jam Berangkat</th>
                 <td class="width-1">:</td>
                 <td id="jam"></td>
               </tr>
               <tr>
-                <th>Deskripsi Bus</th>
+                <th class="width-0">Deskripsi Bus</th>
                 <td class="width-1">:</td>
                 <td id="deskripsi"></td>
               </tr>
@@ -219,6 +219,10 @@ Data Jadwal
 </div>
 
 <style>
+  .width-0 {
+    width: 120px !important;
+  }
+
   .table-modal {
     line-height: 40px !important;
     width: 700px;

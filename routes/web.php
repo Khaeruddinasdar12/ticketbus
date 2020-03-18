@@ -5,27 +5,6 @@ Auth::routes();
 // INVOICE
 Route::get('invoice/{id}', 'Invoice@invoice');
 
-Route::get('test', function(){
-	return \Carbon\Carbon::now();
-	$data = DB::table('transaksis')
-        ->where('status_bayar', 'belum')
-        ->where('created_at', '<=', \Carbon\Carbon::now()->subMinutes(1)->toDateTimeString())
-        ->get();
-        echo \Carbon\Carbon::now(). '<br>';
-
-        foreach ($data as $datas) {
-            $set_kursis = \App\Kursi::where('id_jadwal', $datas->id_jadwal)->where('kursi', $datas->no_kursi)
-            ->update([
-                'status' => 'kosong',
-            ]);
-
-            $delete = DB::table('transaksis')->where('id', $datas->id)->delete();
-        }
-        return 'berhasil';
-});
-
-// ->where('timestamp', '>=', DB::raw('DATE_SUB(NOW(), INTERVAL 1 DAY)'))
-
 // print invoice
 Route::get('invoice-print/{id}', 'Invoice@print')->name('print');
 
@@ -95,4 +74,11 @@ Route::prefix('managemen-jadwal')->group(function () {
 Route::prefix('managemen-admin')->group(function () {
 	Route::get('/', 'ManagemenAdmin@index')->name('index.admin');
 	Route::post('/', 'ManagemenAdmin@store')->name('store.admin'); // input data admin
+});
+
+// RUTE LAPORAN
+Route::prefix('laporan')->group(function () {
+	Route::get('/', 'Laporan@index')->name('index.laporan');
+	Route::get('download', 'Laporan@download')->name('download.laporan');
+	Route::get('test', 'Laporan@test');
 });

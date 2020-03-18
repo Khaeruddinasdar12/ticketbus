@@ -195,6 +195,15 @@
             </li>
 
             <li class="nav-item">
+              <a href="{{route('index.laporan')}}" class="nav-link {{ request()->is('laporan') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-file-alt"></i>
+                <p>
+                  Laporan
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
               <a href="{{route('index.admin')}}" class="nav-link {{ request()->is('managemen-admin') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-user-cog"></i>
                 <p>

@@ -46,6 +46,8 @@ Riwayat Jadwal
                       <th>Rute</th>
                       <th>Tanggal Berangkat</th>
                       <th>Jam Berangkat</th>
+                      <th>Tanggal Sampai</th>
+                      <th>Jam Sampai</th>
                       <th>Detail</th>
                     </tr>
                   </thead>
@@ -56,7 +58,9 @@ Riwayat Jadwal
                       <td>{{ $riwayat->tipebus }}</td>
                       <td>{{ $riwayat->rute }}</td>
                       <td>{{ $riwayat->tanggal }}</td>
-                      <td>{{ $riwayat->jam }}</td>
+                      <td>{{ $riwayat->jam }} WITA</td>
+                      <td>{{ date('Y-m-d', strtotime($riwayat->arrived_at)) }}</td>
+                      <td>{{ date('H:i', strtotime($riwayat->arrived_at)) }} WITA</td>
                       <td>
                         <button class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#showjadwal" title="lihat detail" data-id="{{ $riwayat->id }}" data-nama="{{ $riwayat->namabus }}" data-tipe="{{ $riwayat->tipebus }}" data-rute="{{ $riwayat->rute }}" data-tgl="{{ $riwayat->tanggal }}" data-jam="{{ $riwayat->jam }} WITA" data-desc="{{ $riwayat->deskripsi }}" data-harga="Rp. {{ format_uang($riwayat->harga) }}" data-tglsampai="{{ date('Y-m-d', strtotime($riwayat->arrived_at)) }}" data-jamsampai="{{ date('H:i', strtotime($riwayat->arrived_at)) }} WITA"><i class=" far fa-eye"></i></button>
                       </td>
